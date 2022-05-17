@@ -1,0 +1,349 @@
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{92A9B0C3-30B0-490E-9839-4FF707C63F8F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TMV.UI</RootNamespace>
+    <AssemblyName>TMV.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.BonusSkins.v21.2" />
+    <Reference Include="DevExpress.Data.Desktop.v21.2" />
+    <Reference Include="DevExpress.Data.v21.2" />
+    <Reference Include="DevExpress.Utils.v21.2" />
+    <Reference Include="DevExpress.Sparkline.v21.2.Core" />
+    <Reference Include="DevExpress.XtraBars.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v21.2" />
+    <Reference Include="DevExpress.Printing.v21.2.Core" />
+    <Reference Include="DevExpress.XtraGrid.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraScheduler.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraScheduler.v21.2.Core, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraScheduler.v21.2.Core.Desktop, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraScheduler.v21.2.Extensions, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraTreeList.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\frmChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\frmChangePassword.Designer.cs">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\frmFunctionEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\frmFunctionEdit.Designer.cs">
+      <DependentUpon>frmFunctionEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\frmGroupEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\frmGroupEdit.Designer.cs">
+      <DependentUpon>frmGroupEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\frmLogBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\frmLogBook.Designer.cs">
+      <DependentUpon>frmLogBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\frmSystemDomain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\frmSystemDomain.Designer.cs">
+      <DependentUpon>frmSystemDomain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\frmSystemDomainEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\frmSystemDomainEdit.Designer.cs">
+      <DependentUpon>frmSystemDomainEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\frmUserEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\frmUserEdit.Designer.cs">
+      <DependentUpon>frmUserEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\frmUserRightList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\frmUserRightList.Designer.cs">
+      <DependentUpon>frmUserRightList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\mdlAdmin.cs" />
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RP\Common\CyberColor.cs" />
+    <Compile Include="RP\Common\CyberTimeScaleDay.cs" />
+    <Compile Include="RP\Common\TimeScaleLessThanDay.cs" />
+    <Compile Include="RP\CW\frmCW.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RP\CW\frmCW.Designer.cs">
+      <DependentUpon>frmCW.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RP\CW\frmCW2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RP\CW\frmCW2.Designer.cs">
+      <DependentUpon>frmCW2.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Admin\frmChangePassword.resx">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\frmFunctionEdit.resx">
+      <DependentUpon>frmFunctionEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\frmGroupEdit.resx">
+      <DependentUpon>frmGroupEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\frmLogBook.resx">
+      <DependentUpon>frmLogBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\frmSystemDomain.resx">
+      <DependentUpon>frmSystemDomain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\frmSystemDomainEdit.resx">
+      <DependentUpon>frmSystemDomainEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\frmUserEdit.resx">
+      <DependentUpon>frmUserEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\frmUserRightList.resx">
+      <DependentUpon>frmUserRightList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="RP\CW\frmCW.resx">
+      <DependentUpon>frmCW.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RP\CW\frmCW2.resx">
+      <DependentUpon>frmCW2.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="AutoUpdate.csv" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="RP\BP\" />
+    <Folder Include="RP\GJ\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TMV.AutoUpdate\TMV.AutoUpdate.csproj">
+      <Project>{09e62a7c-56f8-4432-8bd1-82e94423f598}</Project>
+      <Name>TMV.AutoUpdate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TMV.BusinessObject\TMV.BusinessObject.csproj">
+      <Project>{1fbaa6ad-b571-4bb7-903b-2ba7f513d230}</Project>
+      <Name>TMV.BusinessObject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TMV.Common\TMV.Common.csproj">
+      <Project>{c554fee1-f2ba-45f1-bb49-55938c5dfc10}</Project>
+      <Name>TMV.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TMV.ObjectInfo\TMV.ObjectInfo.csproj">
+      <Project>{8e16b8dd-016c-4be0-b1ce-ac51111f6635}</Project>
+      <Name>TMV.ObjectInfo</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\File and Edit\attach-16x16.png" />
+    <Content Include="Resources\File and Edit\attach-32x32.png" />
+    <Content Include="Resources\File and Edit\close-16x16.png" />
+    <Content Include="Resources\File and Edit\close-32x32.png" />
+    <Content Include="Resources\File and Edit\copy-16x16.png" />
+    <Content Include="Resources\File and Edit\copy-32x32.png" />
+    <Content Include="Resources\File and Edit\cut-16x16.png" />
+    <Content Include="Resources\File and Edit\cut-32x32.png" />
+    <Content Include="Resources\File and Edit\delete-16x16.png" />
+    <Content Include="Resources\File and Edit\delete-32x32.png" />
+    <Content Include="Resources\File and Edit\edit-16x16.png" />
+    <Content Include="Resources\File and Edit\edit-32x32.png" />
+    <Content Include="Resources\File and Edit\find-16x16.png" />
+    <Content Include="Resources\File and Edit\find-32x32.png" />
+    <Content Include="Resources\File and Edit\mail-16x16.png" />
+    <Content Include="Resources\File and Edit\mail-32x32.png" />
+    <Content Include="Resources\File and Edit\new-16x16.png" />
+    <Content Include="Resources\File and Edit\new-32x32.png" />
+    <Content Include="Resources\File and Edit\new-via-wizard-16x16.png" />
+    <Content Include="Resources\File and Edit\new-via-wizard-32x32.png" />
+    <Content Include="Resources\File and Edit\open-16x16.png" />
+    <Content Include="Resources\File and Edit\open-32x32.png" />
+    <Content Include="Resources\File and Edit\options-16x16.png" />
+    <Content Include="Resources\File and Edit\paste-16x16.png" />
+    <Content Include="Resources\File and Edit\paste-32x32.png" />
+    <Content Include="Resources\File and Edit\preview-16x16.png" />
+    <Content Include="Resources\File and Edit\preview-32x32.png" />
+    <Content Include="Resources\File and Edit\preview-chart-16x16.png" />
+    <Content Include="Resources\File and Edit\preview-chart-32x32.png" />
+    <Content Include="Resources\File and Edit\print-16x16.png" />
+    <Content Include="Resources\File and Edit\print-32x32.png" />
+    <Content Include="Resources\File and Edit\redo-16x16.png" />
+    <Content Include="Resources\File and Edit\redo-32x32.png" />
+    <Content Include="Resources\File and Edit\refresh-16x16.png" />
+    <Content Include="Resources\File and Edit\refresh-32x32.png" />
+    <Content Include="Resources\File and Edit\replace-16x16.png" />
+    <Content Include="Resources\File and Edit\replace-32x32.png" />
+    <Content Include="Resources\File and Edit\save-16x16.png" />
+    <Content Include="Resources\File and Edit\save-32x32.png" />
+    <Content Include="Resources\File and Edit\save-all-16x16.png" />
+    <Content Include="Resources\File and Edit\save-all-32x32.png" />
+    <Content Include="Resources\File and Edit\save-and-close-16x16.png" />
+    <Content Include="Resources\File and Edit\save-and-close-32x32.png" />
+    <Content Include="Resources\File and Edit\save-as-16x16.png" />
+    <Content Include="Resources\File and Edit\save-as-32x32.png" />
+    <Content Include="Resources\File and Edit\undo-16x16.png" />
+    <Content Include="Resources\File and Edit\undo-32x32.png" />
+    <Content Include="Resources\Icon\car.ico" />
+    <Content Include="Resources\Icon\devenv.ico" />
+    <Content Include="Resources\Icon\Menu\brush4.ico" />
+    <Content Include="Resources\Icon\Menu\column-chart.ico" />
+    <Content Include="Resources\Icon\Menu\cube_molecule.ico" />
+    <Content Include="Resources\Icon\Menu\currency_dollar.ico" />
+    <Content Include="Resources\Icon\Menu\monitor_rgb.ico" />
+    <Content Include="Resources\Icon\Menu\remotecontrol_preferences.ico" />
+    <Content Include="Resources\Icon\Menu\shoppingbasket_add.ico" />
+    <Content Include="Resources\Icon\Menu\stop.ico" />
+    <Content Include="Resources\Icon\Menu\trafficlight_green.ico" />
+    <Content Include="Resources\Icon\Menu\user1_lock.ico" />
+    <Content Include="Resources\Icon\Menu\user1_monitor.ico" />
+    <Content Include="Resources\Icon\Menu\user1_new.ico" />
+    <Content Include="Resources\Icon\Menu\users_family.ico" />
+    <Content Include="Resources\Icon\Menu\wrench.ico" />
+    <Content Include="Resources\Icon\news.ico" />
+    <Content Include="Resources\Images\Add.bmp" />
+    <Content Include="Resources\Images\BO_Note.png" />
+    <Content Include="Resources\Images\BO_ProductGroup.png" />
+    <Content Include="Resources\Images\BtnPrevPageDisabled.png" />
+    <Content Include="Resources\Images\BtnPrint.png" />
+    <Content Include="Resources\Images\BtnPrintDisabled.png" />
+    <Content Include="Resources\Images\BtnPrintPage.png" />
+    <Content Include="Resources\Images\BtnPrintPageDisabled.png" />
+    <Content Include="Resources\Images\BtnSave.png" />
+    <Content Include="Resources\Images\BtnSaveDisabled.png" />
+    <Content Include="Resources\Images\BtnSaveWindow.png" />
+    <Content Include="Resources\Images\BtnSaveWindowDisabled.png" />
+    <Content Include="Resources\Images\BtnSearch.png" />
+    <Content Include="Resources\Images\ButtonBack.png" />
+    <Content Include="Resources\Images\ButtonForward.png" />
+    <Content Include="Resources\Images\ButtonHome.png" />
+    <Content Include="Resources\Images\ButtonRefresh.png" />
+    <Content Include="Resources\Images\ButtonSave.png" />
+    <Content Include="Resources\Images\ButtonSaveAndClose.png" />
+    <Content Include="Resources\Images\ButtonSearch.png" />
+    <Content Include="Resources\Images\Close.png" />
+    <Content Include="Resources\Images\delete-16x16.png" />
+    <Content Include="Resources\Images\EDITITEM.GIF" />
+    <Content Include="Resources\Images\edtError.png" />
+    <Content Include="Resources\Images\Error.png" />
+    <Content Include="Resources\Images\fcgroupremove.png" />
+    <Content Include="Resources\Images\find-32x32.png" />
+    <Content Include="Resources\Images\Information.png" />
+    <Content Include="Resources\Images\mail.png" />
+    <Content Include="Resources\Images\Main.png" />
+    <Content Include="Resources\Images\open-32x32.png" />
+    <Content Include="Resources\Images\pcCloseButton.png" />
+    <Content Include="Resources\Images\pgCollapsedButton.png" />
+    <Content Include="Resources\Images\pgFilterButtonActive.png" />
+    <Content Include="Resources\Images\save-32x32.png" />
+    <Content Include="Resources\Images\Warning.png" />
+    <Content Include="Resources\Png\Basket.png" />
+    <Content Include="Resources\Png\Check.png" />
+    <Content Include="Resources\Png\Customer.png" />
+    <Content Include="Resources\Png\Folder.png" />
+    <Content Include="Resources\Png\Home.png" />
+    <Content Include="Resources\Png\Key.png" />
+    <Content Include="Resources\Png\Mail.png" />
+    <Content Include="Resources\Png\Printing.png" />
+    <Content Include="Resources\Png\Product.png" />
+    <Content Include="Resources\Png\Products.png" />
+    <Content Include="Resources\Png\Report.png" />
+    <Content Include="Resources\Png\Scheduller.png" />
+    <Content Include="Resources\Png\Security Folder.png" />
+    <Content Include="Resources\Png\Task.png" />
+    <Content Include="Resources\Png\User Folder.png" />
+    <Content Include="Resources\Png\User.png" />
+    <Content Include="Resources\Png\UserKey.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

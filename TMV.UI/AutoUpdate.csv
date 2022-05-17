@@ -1,0 +1,149 @@
+﻿1.0.0.0;
+Resources\File and Edit\attach-16x16.png,1.0.0.0
+Resources\File and Edit\attach-32x32.png,1.0.0.0
+Resources\File and Edit\close-16x16.png,1.0.0.0
+Resources\File and Edit\close-32x32.png,1.0.0.0
+Resources\File and Edit\copy-16x16.png,1.0.0.0
+Resources\File and Edit\copy-32x32.png,1.0.0.0
+Resources\File and Edit\cut-16x16.png,1.0.0.0
+Resources\File and Edit\cut-32x32.png,1.0.0.0
+Resources\File and Edit\delete-16x16.png,1.0.0.0
+Resources\File and Edit\delete-32x32.png,1.0.0.0
+Resources\File and Edit\edit-16x16.png,1.0.0.0
+Resources\File and Edit\edit-32x32.png,1.0.0.0
+Resources\File and Edit\find-16x16.png,1.0.0.0
+Resources\File and Edit\find-32x32.png,1.0.0.0
+Resources\File and Edit\mail-16x16.png,1.0.0.0
+Resources\File and Edit\mail-32x32.png,1.0.0.0
+Resources\File and Edit\new-16x16.png,1.0.0.0
+Resources\File and Edit\new-32x32.png,1.0.0.0
+Resources\File and Edit\new-via-wizard-16x16.png,1.0.0.0
+Resources\File and Edit\new-via-wizard-32x32.png,1.0.0.0
+Resources\File and Edit\open-16x16.png,1.0.0.0
+Resources\File and Edit\open-32x32.png,1.0.0.0
+Resources\File and Edit\options-16x16.png,1.0.0.0
+Resources\File and Edit\paste-16x16.png,1.0.0.0
+Resources\File and Edit\paste-32x32.png,1.0.0.0
+Resources\File and Edit\preview-16x16.png,1.0.0.0
+Resources\File and Edit\preview-32x32.png,1.0.0.0
+Resources\File and Edit\preview-chart-16x16.png,1.0.0.0
+Resources\File and Edit\preview-chart-32x32.png,1.0.0.0
+Resources\File and Edit\print-16x16.png,1.0.0.0
+Resources\File and Edit\print-32x32.png,1.0.0.0
+Resources\File and Edit\redo-16x16.png,1.0.0.0
+Resources\File and Edit\redo-32x32.png,1.0.0.0
+Resources\File and Edit\refresh-16x16.png,1.0.0.0
+Resources\File and Edit\refresh-32x32.png,1.0.0.0
+Resources\File and Edit\replace-16x16.png,1.0.0.0
+Resources\File and Edit\replace-32x32.png,1.0.0.0
+Resources\File and Edit\save-16x16.png,1.0.0.0
+Resources\File and Edit\save-32x32.png,1.0.0.0
+Resources\File and Edit\save-all-16x16.png,1.0.0.0
+Resources\File and Edit\save-all-32x32.png,1.0.0.0
+Resources\File and Edit\save-and-close-16x16.png,1.0.0.0
+Resources\File and Edit\save-and-close-32x32.png,1.0.0.0
+Resources\File and Edit\save-as-16x16.png,1.0.0.0
+Resources\File and Edit\save-as-32x32.png,1.0.0.0
+Resources\File and Edit\undo-16x16.png,1.0.0.0
+Resources\File and Edit\undo-32x32.png,1.0.0.0
+Resources\Icon\news.ico,1.0.0.0
+Resources\Icon\Menu\brush4.ico,1.0.0.0
+Resources\Icon\Menu\column-chart.ico,1.0.0.0
+Resources\Icon\Menu\cube_molecule.ico,1.0.0.0
+Resources\Icon\Menu\currency_dollar.ico,1.0.0.0
+Resources\Icon\Menu\monitor_rgb.ico,1.0.0.0
+Resources\Icon\Menu\remotecontrol_preferences.ico,1.0.0.0
+Resources\Icon\Menu\shoppingbasket_add.ico,1.0.0.0
+Resources\Icon\Menu\stop.ico,1.0.0.0
+Resources\Icon\Menu\trafficlight_green.ico,1.0.0.0
+Resources\Icon\Menu\user1_lock.ico,1.0.0.0
+Resources\Icon\Menu\user1_monitor.ico,1.0.0.0
+Resources\Icon\Menu\user1_new.ico,1.0.0.0
+Resources\Icon\Menu\users_family.ico,1.0.0.0
+Resources\Icon\Menu\wrench.ico,1.0.0.0
+Resources\Images\Add.bmp,1.0.0.0
+Resources\Images\BO_Note.png,1.0.0.0
+Resources\Images\BO_ProductGroup.png,1.0.0.0
+Resources\Images\BtnPrevPageDisabled.png,1.0.0.0
+Resources\Images\BtnPrint.png,1.0.0.0
+Resources\Images\BtnPrintDisabled.png,1.0.0.0
+Resources\Images\BtnPrintPage.png,1.0.0.0
+Resources\Images\BtnPrintPageDisabled.png,1.0.0.0
+Resources\Images\BtnSave.png,1.0.0.0
+Resources\Images\BtnSaveDisabled.png,1.0.0.0
+Resources\Images\BtnSaveWindow.png,1.0.0.0
+Resources\Images\BtnSaveWindowDisabled.png,1.0.0.0
+Resources\Images\BtnSearch.png,1.0.0.0
+Resources\Images\ButtonBack.png,1.0.0.0
+Resources\Images\ButtonForward.png,1.0.0.0
+Resources\Images\ButtonHome.png,1.0.0.0
+Resources\Images\ButtonRefresh.png,1.0.0.0
+Resources\Images\ButtonSave.png,1.0.0.0
+Resources\Images\ButtonSaveAndClose.png,1.0.0.0
+Resources\Images\ButtonSearch.png,1.0.0.0
+Resources\Images\Close.png,1.0.0.0
+Resources\Images\delete-16x16.png,1.0.0.0
+Resources\Images\EDITITEM.GIF,1.0.0.0
+Resources\Images\edtError.png,1.0.0.0
+Resources\Images\Error.png,1.0.0.0
+Resources\Images\fcgroupremove.png,1.0.0.0
+Resources\Images\find-32x32.png,1.0.0.0
+Resources\Images\Information.png,1.0.0.0
+Resources\Images\mail.png,1.0.0.0
+Resources\Images\Main.png,1.0.0.0
+Resources\Images\open-32x32.png,1.0.0.0
+Resources\Images\pcCloseButton.png,1.0.0.0
+Resources\Images\pgCollapsedButton.png,1.0.0.0
+Resources\Images\pgFilterButtonActive.png,1.0.0.0
+Resources\Images\save-32x32.png,1.0.0.0
+Resources\Images\Warning.png,1.0.0.0
+Resources\Png\Basket.png,1.0.0.0
+Resources\Png\Check.png,1.0.0.0
+Resources\Png\Customer.png,1.0.0.0
+Resources\Png\Folder.png,1.0.0.0
+Resources\Png\Home.png,1.0.0.0
+Resources\Png\Key.png,1.0.0.0
+Resources\Png\Mail.png,1.0.0.0
+Resources\Png\Printing.png,1.0.0.0
+Resources\Png\Product.png,1.0.0.0
+Resources\Png\Products.png,1.0.0.0
+Resources\Png\Report.png,1.0.0.0
+Resources\Png\Scheduller.png,1.0.0.0
+Resources\Png\Security Folder.png,1.0.0.0
+Resources\Png\Task.png,1.0.0.0
+Resources\Png\User Folder.png,1.0.0.0
+Resources\Png\User.png,1.0.0.0
+Resources\Png\UserKey.png,1.0.0.0
+Andon.ico,1.0.0.0
+DevExpress.Charts.v21.2.Core.dll,1.0.0.0
+DevExpress.Data.v21.2.dll,1.0.0.0
+DevExpress.OfficeSkins.v21.2.dll,1.0.0.0
+DevExpress.Utils.v21.2.dll,1.0.0.0
+DevExpress.Xpo.v21.2.dll,1.0.0.0
+DevExpress.XtraBars.v21.2.dll,1.0.0.0
+DevExpress.XtraCharts.v21.2.dll,1.0.0.0
+DevExpress.XtraEditors.v21.2.dll,1.0.0.0
+DevExpress.XtraGauges.v21.2.Core.dll,1.0.0.0
+DevExpress.XtraGauges.v21.2.Win.dll,1.0.0.0
+DevExpress.XtraGrid.v21.2.dll,1.0.0.0
+DevExpress.XtraLayout.v21.2.dll,1.0.0.0
+DevExpress.XtraNavBar.v21.2.dll,1.0.0.0
+DevExpress.XtraPivotGrid.v21.2.Core.dll,1.0.0.0
+DevExpress.XtraPivotGrid.v21.2.dll,1.0.0.0
+DevExpress.XtraPrinting.v21.2.dll,1.0.0.0
+DevExpress.XtraReports.v21.2.dll,1.0.0.0
+DevExpress.XtraRichEdit.v21.2.dll,1.0.0.0
+DevExpress.XtraTreeList.v21.2.dll,1.0.0.0
+DevExpress.XtraVerticalGrid.v21.2.dll,1.0.0.0
+GemBox.Spreadsheet.dll,1.0.0.0
+Interop.ADOX.dll,1.0.0.0
+LoadingCircle.dll,1.0.0.0
+MdiClientController.dll,1.0.0.0
+TabStrip.dll,1.0.0.0
+TMV.UI.exe,1.0.0.0
+TMV.UI.exe.config,1.0.0.0
+TMV.AutoUpdate.dll,1.0.0.0
+TMV.BusinessObject.dll,1.0.0.0
+TMV.Common.dll,1.0.0.0
+TMV.DataAccess.dll,1.0.0.0
+TMV.ObjectInfo.dll,1.0.0.0
