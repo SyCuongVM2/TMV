@@ -125,6 +125,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RP\Common\CyberColor.cs" />
+    <Compile Include="RP\Common\CyberColumnGridView.cs" />
+    <Compile Include="RP\Common\CyberMenuPopup.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="RP\Common\CyberTimeScaleDay.cs" />
     <Compile Include="RP\Common\TimeScaleLessThanDay.cs" />
     <Compile Include="RP\CW\frmCW.cs">
@@ -178,6 +182,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="RP\CW\frmCW.resx">
       <DependentUpon>frmCW.cs</DependentUpon>
@@ -267,6 +272,7 @@
     <Content Include="Resources\File and Edit\save-as-32x32.png" />
     <Content Include="Resources\File and Edit\undo-16x16.png" />
     <Content Include="Resources\File and Edit\undo-32x32.png" />
+    <None Include="Resources\Flag1.ico" />
     <Content Include="Resources\Icon\car.ico" />
     <Content Include="Resources\Icon\devenv.ico" />
     <Content Include="Resources\Icon\Menu\brush4.ico" />

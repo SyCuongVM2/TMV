@@ -1,0 +1,6 @@
+D:\WIP\TMV\TMV.ObjectInfo\bin\Debug\TMV.ObjectInfo.dll
+D:\WIP\TMV\TMV.ObjectInfo\bin\Debug\TMV.ObjectInfo.pdb
+D:\WIP\TMV\TMV.ObjectInfo\obj\Debug\TMV.ObjectInfo.csproj.AssemblyReference.cache
+D:\WIP\TMV\TMV.ObjectInfo\obj\Debug\TMV.ObjectInfo.csproj.CoreCompileInputs.cache
+D:\WIP\TMV\TMV.ObjectInfo\obj\Debug\TMV.ObjectInfo.dll
+D:\WIP\TMV\TMV.ObjectInfo\obj\Debug\TMV.ObjectInfo.pdb
