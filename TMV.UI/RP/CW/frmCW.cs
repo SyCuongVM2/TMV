@@ -15,7 +15,7 @@ using TMV.Common;
 using TMV.UI.RP.Common;
 
 namespace TMV.UI.RP.CW
-{
+{ 
   public partial class frmCW : DevExpress.XtraEditors.XtraForm
   {
     #region "variables"
@@ -77,45 +77,35 @@ namespace TMV.UI.RP.CW
     private DataTable Dt_Rua_Xong_H;
     private DataTable Dt_Xe_H;
     private CyberColor CyberColor = new CyberColor();
-    private DataView Dv_Cho_Rua_H;
-    private DataView Dv_Dang_Rua_H;
-    private DataView Dv_Rua_Xong_H;
-    private DataView Dv_Xe_H;
     private bool _Bold_Cho_KH = false;
     private bool _BackColor_Cho_KH = false;
     private bool _BackColor2_Cho_KH = false;
     private bool _ForeColor_Cho_KH = false;
-    private bool _BorderColor_Cho_KH = false;
     private bool _Underline_Cho_KH = false;
     private string _FieldBold_Cho_KH = "";
     private string _FieldBackColor_Cho_KH = "";
     private string _FieldBackColor2_Cho_KH = "";
     private string _FieldForeColor_Cho_KH = "";
-    private string _FieldBorderColor_Cho_KH = "";
     private string _FieldUnderline_Cho_KH = "";
     private bool _Bold_Dang_Rua_KH = false;
     private bool _BackColor_Dang_Rua_KH = false;
     private bool _BackColor2_Dang_Rua_KH = false;
     private bool _ForeColor_Dang_Rua_KH = false;
-    private bool _BorderColor_Dang_Rua_KH = false;
     private bool _Underline_Dang_Rua_KH = false;
     private string _FieldBold_Dang_Rua_KH = "";
     private string _FieldBackColor_Dang_Rua_KH = "";
     private string _FieldBackColor2_Dang_Rua_KH = "";
     private string _FieldForeColor_Dang_Rua_KH = "";
-    private string _FieldBorderColor_Dang_Rua_KH = "";
     private string _FieldUnderline_Dang_Rua_KH = "";
     private bool _Bold_Rua_Xong_KH = false;
     private bool _BackColor_Rua_Xong_KH = false;
     private bool _BackColor2_Rua_Xong_KH = false;
     private bool _ForeColor_Rua_Xong_KH = false;
-    private bool _BorderColor_Rua_Xong_KH = false;
     private bool _Underline_Rua_Xong_KH = false;
     private string _FieldBold_Rua_Xong_KH = "";
     private string _FieldBackColor_Rua_Xong_KH = "";
     private string _FieldBackColor2_Rua_Xong_KH = "";
     private string _FieldForeColor_Rua_Xong_KH = "";
-    private string _FieldBorderColor_Rua_Xong_KH = "";
     private string _FieldUnderline_Rua_Xong_KH = "";
     #endregion
 
@@ -240,27 +230,27 @@ namespace TMV.UI.RP.CW
     }
     private void V_Load() 
     {
-      DataSet dataSet1 = new DataSet(); // CP_RO_CW_ConFig
-      Dt_ConFigColor_KH_SCC = dataSet1.Tables[0];
-      Dt_Set_SCC = dataSet1.Tables[1];
-      Dt_Buoc_Nhay_KH_SCC = dataSet1.Tables[2];
-      Dt_Do_Rong_KH_SCC = dataSet1.Tables[3];
-      DmKhoang_Loc_KH_SCC = dataSet1.Tables[4];
-      DmKhoang_KH_SCC = DmKhoang_Loc_KH_SCC;
+      DataSet dataSet1 = CP_RO_CW_ConFig.CreateData(); // CP_RO_CW_ConFig
+      Dt_ConFigColor_KH_SCC = dataSet1.Tables[0].Copy();
+      Dt_Set_SCC = dataSet1.Tables[1].Copy();
+      Dt_Buoc_Nhay_KH_SCC = dataSet1.Tables[2].Copy();
+      Dt_Do_Rong_KH_SCC = dataSet1.Tables[3].Copy();
+      DmKhoang_Loc_KH_SCC = dataSet1.Tables[4].Copy();
+      DmKhoang_KH_SCC = DmKhoang_Loc_KH_SCC.Copy();
 
       V_DeleteRowEmpty(DmKhoang_KH_SCC, "Ma_Khoang");
 
       Dv_DmKhoang_KH_SCC = new DataView(DmKhoang_KH_SCC);
-      DmCVDV_Loc_KH_SCC = dataSet1.Tables[5];
-      DmCVDV_KH_SCC = DmCVDV_Loc_KH_SCC;
+      DmCVDV_Loc_KH_SCC = dataSet1.Tables[5].Copy();
+      DmCVDV_KH_SCC = DmCVDV_Loc_KH_SCC.Copy();
 
       V_DeleteRowEmpty(DmCVDV_KH_SCC, "Ma_HS");
 
       Dv_DmCVDV_KH_SCC = new DataView(DmCVDV_KH_SCC);
-      Dt_Kieu_Xem = dataSet1.Tables[6];
+      Dt_Kieu_Xem = dataSet1.Tables[6].Copy();
       if (Dt_Set_SCC == null)
       {
-        DataSet dataSet2 = new DataSet(); // CP_RO_CW_Ngay_Ngam_Dinh
+        DataSet dataSet2 = CP_RO_CW_Ngay_Ngam_Dinh.CreateData(); // CP_RO_CW_Ngay_Ngam_Dinh
         Dt_Set_SCC.Clear();
         Dt_Set_SCC.ImportRow(dataSet2.Tables[0].Rows[0]);
         dataSet2.Dispose();
@@ -294,12 +284,12 @@ namespace TMV.UI.RP.CW
     }
     private void V_AddHander()
     {
-      EditMa_Xe_Cho.EditColumn.Click -= new EventHandler(V_Ma_Xe_Cho);
-      EditMa_Xe_Cho.EditColumn.Click += new EventHandler(V_Ma_Xe_Cho);
-      EditMa_Xe_Dang_Rua.EditColumn.Click -= new EventHandler(V_Ma_Xe_Dang_Rua);
-      EditMa_Xe_Dang_Rua.EditColumn.Click += new EventHandler(V_Ma_Xe_Dang_Rua);
-      EditMa_Xe_Rua_Xong.EditColumn.Click -= new EventHandler(V_Ma_Xe_Rua_Xong);
-      EditMa_Xe_Rua_Xong.EditColumn.Click += new EventHandler(V_Ma_Xe_Rua_Xong);
+      //EditMa_Xe_Cho.EditColumn.Click -= new EventHandler(V_Ma_Xe_Cho);
+      //EditMa_Xe_Cho.EditColumn.Click += new EventHandler(V_Ma_Xe_Cho);
+      //EditMa_Xe_Dang_Rua.EditColumn.Click -= new EventHandler(V_Ma_Xe_Dang_Rua);
+      //EditMa_Xe_Dang_Rua.EditColumn.Click += new EventHandler(V_Ma_Xe_Dang_Rua);
+      //EditMa_Xe_Rua_Xong.EditColumn.Click -= new EventHandler(V_Ma_Xe_Rua_Xong);
+      //EditMa_Xe_Rua_Xong.EditColumn.Click += new EventHandler(V_Ma_Xe_Rua_Xong);
 
       MasterCho_RuaGRV.PopupMenuShowing -= new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(MasterCho_RuaGRV_PopupMenuShowing);
       MasterCho_RuaGRV.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(MasterCho_RuaGRV_PopupMenuShowing);
@@ -951,7 +941,7 @@ namespace TMV.UI.RP.CW
       V_GetFromSetScheduler_RXOld(ref _ma_khoangOld, _Appointment);
 
       DataSet dataSet = new DataSet(); // CP_RO_CW_Save_Keo_Tha
-      bool flag = (dataSet.Tables[0] == null);
+      bool flag = (dataSet.Tables[0] != null);
       dataSet.Dispose();
       if (flag)
         V_LoadDatabases("0", _Stt_Rec);
@@ -1271,7 +1261,7 @@ namespace TMV.UI.RP.CW
       V_GetFromSetScheduler(ref start, ref end, ref _Ma_khoang);
 
       int integer = Convert.ToInt32(CbbMa_BN.SelectedValue);
-      DataTable dataTable = new DataTable(); // TODO
+      DataTable dataTable = CP_RO_CW_Execute.CreateData().Tables[0]; // TODO: Ma_Xe, So_Ro, Stt_Rec, Ma_Ct (CyberProgress.V_KH_CW)
       if (dataTable == null || dataTable.Rows.Count == 0 || !dataTable.Columns.Contains("Stt_Rec") || dataTable.Rows[0]["Stt_Rec"].ToString().Trim() == "")
         return;
 
@@ -1306,7 +1296,7 @@ namespace TMV.UI.RP.CW
         _Ngay_KT = Convert.ToDateTime(dataRowArray[0]["Ngay_KT"]);
       }
       int integer = Convert.ToInt32(CbbMa_BN.SelectedValue);
-      DataTable dataTable = new DataTable(); // TODO
+      DataTable dataTable = CP_RO_CW_Execute.CreateData().Tables[0]; // TODO: Ma_Xe, So_Ro, Stt_Rec, Ma_Ct (CyberProgress.V_KH_CW)
       if (dataTable == null || dataTable.Rows.Count == 0 || !dataTable.Columns.Contains("Stt_Rec") || dataTable.Rows[0]["Stt_Rec"].ToString().Trim() == "")
         return;
 
@@ -1410,7 +1400,7 @@ namespace TMV.UI.RP.CW
       DateTime now = DateTime.Now;
       DateTime _Ngay_KT2 = now.AddMinutes(10.0);
       int integer = Convert.ToInt32(CbbMa_BN.SelectedValue);
-      DataTable dataTable = new DataTable(); // TODO
+      DataTable dataTable = CP_RO_CW_Execute.CreateData().Tables[0]; // TODO: Ma_Xe, So_Ro, Stt_Rec, Ma_Ct (CyberProgress.V_KH_CW)
       if (dataTable == null || dataTable.Rows.Count == 0 || !dataTable.Columns.Contains("Stt_Rec") || (dataTable.Rows[0]["Stt_Rec"].ToString().Trim() == ""))
         return;
       V_LoadDatabases("0", dataTable.Rows[0]["Stt_Rec"].ToString().Trim());
@@ -1440,7 +1430,7 @@ namespace TMV.UI.RP.CW
         _Ngay_KT = Convert.ToDateTime(dataRowArray[0]["Ngay_KT"]);
       }
       int integer = Convert.ToInt32(CbbMa_BN.SelectedValue);
-      DataTable dataTable = new DataTable(); // TODO
+      DataTable dataTable = CP_RO_CW_Execute.CreateData().Tables[0]; // TODO: Ma_Xe, So_Ro, Stt_Rec, Ma_Ct (CyberProgress.V_KH_CW)
       if (dataTable == null || dataTable.Rows.Count == 0 || !dataTable.Columns.Contains("Stt_Rec") || (dataTable.Rows[0]["Stt_Rec"].ToString().Trim() == ""))
         return;
 
@@ -1504,7 +1494,8 @@ namespace TMV.UI.RP.CW
       if (_Stt_Rec.Trim() == "")
         return false;
 
-      bool flag = true; // TODO: CP_RO_CW_BD_KT
+      DataSet dataSet = CP_RO_CW_Execute.CreateData(); // TODO: CP_RO_CW_BD_KT: status (Y/N), Msg (Y/N), Note
+      bool flag = (dataSet.Tables[0] != null);
       if (flag)
         V_LoadDatabases("0", _Stt_Rec);
 
@@ -1638,7 +1629,7 @@ namespace TMV.UI.RP.CW
       DateTime date = Convert.ToDateTime(TxtM_Ngay_Ct.EditValue);
       string str = CbbCa_Ngay.SelectedValue.ToString();
 
-      DataSet dataSet = new DataSet(); // CP_RO_CW_Data
+      DataSet dataSet = CP_RO_CW_Data.CreateData(); // CP_RO_CW_Data
       int num = checked(dataSet.Tables.Count - 1);
       int index = 0;
       while (index <= num)
@@ -1683,18 +1674,12 @@ namespace TMV.UI.RP.CW
           Dv_Data_Xe.Sort = Dt_Cho_Rua.Columns["Stt"].ColumnName;
 
         Dt_Cho_Rua_H = dataSet.Tables[5].Copy();
-        Dv_Cho_Rua_H = new DataView(Dt_Cho_Rua_H);
-
         Dt_Dang_Rua_H = dataSet.Tables[6].Copy();
-        Dv_Dang_Rua_H = new DataView(Dt_Dang_Rua_H);
-
         Dt_Rua_Xong_H = dataSet.Tables[7].Copy();
-        Dv_Rua_Xong_H = new DataView(Dt_Rua_Xong_H);
 
         if (dataSet.Tables.Count > 8)
         {
           Dt_Xe_H = dataSet.Tables[8].Copy();
-          Dv_Xe_H = new DataView(Dt_Xe_H);
         }
         if (dataSet.Tables.Count > 9)
           V_SetSortView(ref Dv_Cho_Rua, dataSet.Tables[9]);
@@ -2074,9 +2059,12 @@ namespace TMV.UI.RP.CW
       int num2 = 0;
       while (num2 <= num1)
       {
-        SchedulerStorage.Appointments.Labels[num2].Color = CyberColor.GetBackColor(Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["BackColor"]));
-        SchedulerStorage.Appointments.Labels[num2].DisplayName = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
-        SchedulerStorage.Appointments.Labels[num2].MenuCaption = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
+        // SchedulerStorage.Appointments.Labels[num2].Color = CyberColor.GetBackColor(Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["BackColor"]));
+        // SchedulerStorage.Appointments.Labels[num2].DisplayName = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
+        // SchedulerStorage.Appointments.Labels[num2].MenuCaption = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
+        SchedulerStorage.Appointments.Labels.GetByIndex(num2).Color = CyberColor.GetBackColor(Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["BackColor"]));
+        SchedulerStorage.Appointments.Labels.GetByIndex(num2).DisplayName = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
+        SchedulerStorage.Appointments.Labels.GetByIndex(num2).MenuCaption = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
         V_SetColorlabel_RX(num2, Dt_ConFigColor_KH_SCC.Rows[num2]);
         checked { ++num2; }
       }

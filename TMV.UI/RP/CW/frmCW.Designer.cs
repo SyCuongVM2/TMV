@@ -612,7 +612,7 @@ namespace TMV.UI.RP.CW
       this.LabKQ_RX.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
       this.LabKQ_RX.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.LabKQ_RX.ForeColor = System.Drawing.Color.White;
-      this.LabKQ_RX.Location = new System.Drawing.Point(881, 5);
+      this.LabKQ_RX.Location = new System.Drawing.Point(928, 5);
       this.LabKQ_RX.Name = "LabKQ_RX";
       this.LabKQ_RX.Size = new System.Drawing.Size(127, 29);
       this.LabKQ_RX.TabIndex = 13;
@@ -626,7 +626,7 @@ namespace TMV.UI.RP.CW
       this.LabKQ_DR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
       this.LabKQ_DR.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.LabKQ_DR.ForeColor = System.Drawing.Color.White;
-      this.LabKQ_DR.Location = new System.Drawing.Point(807, 6);
+      this.LabKQ_DR.Location = new System.Drawing.Point(854, 6);
       this.LabKQ_DR.Name = "LabKQ_DR";
       this.LabKQ_DR.Size = new System.Drawing.Size(39, 29);
       this.LabKQ_DR.TabIndex = 12;
@@ -640,7 +640,7 @@ namespace TMV.UI.RP.CW
       this.LabKQ_CR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
       this.LabKQ_CR.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.LabKQ_CR.ForeColor = System.Drawing.Color.White;
-      this.LabKQ_CR.Location = new System.Drawing.Point(734, 5);
+      this.LabKQ_CR.Location = new System.Drawing.Point(781, 5);
       this.LabKQ_CR.Name = "LabKQ_CR";
       this.LabKQ_CR.Size = new System.Drawing.Size(39, 29);
       this.LabKQ_CR.TabIndex = 11;
@@ -652,7 +652,7 @@ namespace TMV.UI.RP.CW
       this.CmdRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.CmdRefresh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("CmdRefresh.ImageOptions.Image")));
       this.CmdRefresh.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-      this.CmdRefresh.Location = new System.Drawing.Point(659, -2);
+      this.CmdRefresh.Location = new System.Drawing.Point(706, -2);
       this.CmdRefresh.Name = "CmdRefresh";
       this.CmdRefresh.Size = new System.Drawing.Size(35, 35);
       this.CmdRefresh.TabIndex = 10;
@@ -662,7 +662,7 @@ namespace TMV.UI.RP.CW
       this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.label4.AutoSize = true;
       this.label4.ForeColor = System.Drawing.Color.Red;
-      this.label4.Location = new System.Drawing.Point(851, 12);
+      this.label4.Location = new System.Drawing.Point(898, 12);
       this.label4.Name = "label4";
       this.label4.Size = new System.Drawing.Size(28, 19);
       this.label4.TabIndex = 9;
@@ -673,7 +673,7 @@ namespace TMV.UI.RP.CW
       this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.label2.AutoSize = true;
       this.label2.ForeColor = System.Drawing.Color.Red;
-      this.label2.Location = new System.Drawing.Point(776, 12);
+      this.label2.Location = new System.Drawing.Point(823, 12);
       this.label2.Name = "label2";
       this.label2.Size = new System.Drawing.Size(30, 19);
       this.label2.TabIndex = 8;
@@ -684,7 +684,7 @@ namespace TMV.UI.RP.CW
       this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.label1.AutoSize = true;
       this.label1.ForeColor = System.Drawing.Color.Red;
-      this.label1.Location = new System.Drawing.Point(703, 12);
+      this.label1.Location = new System.Drawing.Point(750, 12);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(29, 19);
       this.label1.TabIndex = 7;
@@ -694,7 +694,7 @@ namespace TMV.UI.RP.CW
       // 
       this.CbbGio_Xem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.CbbGio_Xem.FormattingEnabled = true;
-      this.CbbGio_Xem.Location = new System.Drawing.Point(539, 6);
+      this.CbbGio_Xem.Location = new System.Drawing.Point(588, 6);
       this.CbbGio_Xem.Name = "CbbGio_Xem";
       this.CbbGio_Xem.Size = new System.Drawing.Size(114, 27);
       this.CbbGio_Xem.TabIndex = 6;
@@ -703,7 +703,7 @@ namespace TMV.UI.RP.CW
       // 
       this.CbbCa_Ngay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.CbbCa_Ngay.FormattingEnabled = true;
-      this.CbbCa_Ngay.Location = new System.Drawing.Point(417, 6);
+      this.CbbCa_Ngay.Location = new System.Drawing.Point(466, 6);
       this.CbbCa_Ngay.Name = "CbbCa_Ngay";
       this.CbbCa_Ngay.Size = new System.Drawing.Size(116, 27);
       this.CbbCa_Ngay.TabIndex = 5;
@@ -712,7 +712,7 @@ namespace TMV.UI.RP.CW
       // 
       this.CbbKieu_Xem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.CbbKieu_Xem.FormattingEnabled = true;
-      this.CbbKieu_Xem.Location = new System.Drawing.Point(295, 6);
+      this.CbbKieu_Xem.Location = new System.Drawing.Point(343, 6);
       this.CbbKieu_Xem.Name = "CbbKieu_Xem";
       this.CbbKieu_Xem.Size = new System.Drawing.Size(116, 27);
       this.CbbKieu_Xem.TabIndex = 4;
@@ -721,18 +721,18 @@ namespace TMV.UI.RP.CW
       // 
       this.CbbDo_Rong.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.CbbDo_Rong.FormattingEnabled = true;
-      this.CbbDo_Rong.Location = new System.Drawing.Point(221, 6);
+      this.CbbDo_Rong.Location = new System.Drawing.Point(258, 6);
       this.CbbDo_Rong.Name = "CbbDo_Rong";
-      this.CbbDo_Rong.Size = new System.Drawing.Size(61, 27);
+      this.CbbDo_Rong.Size = new System.Drawing.Size(80, 27);
       this.CbbDo_Rong.TabIndex = 3;
       // 
       // CbbMa_BN
       // 
       this.CbbMa_BN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.CbbMa_BN.FormattingEnabled = true;
-      this.CbbMa_BN.Location = new System.Drawing.Point(154, 6);
+      this.CbbMa_BN.Location = new System.Drawing.Point(172, 6);
       this.CbbMa_BN.Name = "CbbMa_BN";
-      this.CbbMa_BN.Size = new System.Drawing.Size(61, 27);
+      this.CbbMa_BN.Size = new System.Drawing.Size(80, 27);
       this.CbbMa_BN.TabIndex = 2;
       // 
       // CbbTime_Data
@@ -741,7 +741,7 @@ namespace TMV.UI.RP.CW
       this.CbbTime_Data.FormattingEnabled = true;
       this.CbbTime_Data.Location = new System.Drawing.Point(87, 6);
       this.CbbTime_Data.Name = "CbbTime_Data";
-      this.CbbTime_Data.Size = new System.Drawing.Size(61, 27);
+      this.CbbTime_Data.Size = new System.Drawing.Size(80, 27);
       this.CbbTime_Data.TabIndex = 1;
       // 
       // ChkAuto_Data
