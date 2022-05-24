@@ -8,6 +8,7 @@ namespace TMV.UI.RP.Common
   {
     public Color GetBackColorDefault() => Color.White;
     public Color GetForeColorDefault() => Color.Navy;
+    public Color GetBackColorReportsDefault() => Color.White;
     public Color GetBackColor(string ColorName)
     {
       Color color = GetBackColorDefault();
@@ -33,7 +34,7 @@ namespace TMV.UI.RP.Common
         {
           try
           {
-            color = System.Drawing.Color.FromName(ColorName);
+            color = Color.FromName(ColorName);
           }
           catch
           {
@@ -68,7 +69,7 @@ namespace TMV.UI.RP.Common
         {
           try
           {
-            color = System.Drawing.Color.FromName(ColorName);
+            color = Color.FromName(ColorName);
           }
           catch
           {
@@ -150,6 +151,43 @@ namespace TMV.UI.RP.Common
         return;
       _Underline = true;
       _FieldUnderLine = _Dt.Columns["UnderLine"].ColumnName;
+    }
+
+    public Color GetBacColorkReports(string ColorName)
+    {
+      Color color = GetBackColorReportsDefault();
+      Color bacColorkReports;
+
+      if (ColorName == "")
+        bacColorkReports = GetBackColorReportsDefault();
+      else
+      {
+        if (ColorName.Contains(","))
+        {
+          try
+          {
+            string str1 = ColorName.Trim().Split(',')[0];
+            string str2 = ColorName.Trim().Split(',')[1];
+            string str3 = ColorName.Trim().Split(',')[2];
+            color = Color.FromArgb((int)Convert.ToByte(str1), (int)Convert.ToByte(str2), (int)Convert.ToByte(str3));
+          }
+          catch
+          {
+          }
+        }
+        else
+        {
+          try
+          {
+            color = Color.FromName(ColorName);
+          }
+          catch
+          {
+          }
+        }
+        bacColorkReports = color;
+      }
+      return bacColorkReports;
     }
   }
 }

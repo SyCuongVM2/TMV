@@ -190,7 +190,7 @@ namespace TMV.UI
       // 
       // barSubItem1
       // 
-      this.barSubItem1.Caption = "&Repair Progress";
+      this.barSubItem1.Caption = "&JCB";
       this.barSubItem1.Id = 16;
       this.barSubItem1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.siCW),
@@ -374,12 +374,12 @@ namespace TMV.UI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.picBackGround.EditValue = ((object)(resources.GetObject("picBackGround.EditValue")));
-      this.picBackGround.Location = new System.Drawing.Point(0, 51);
+      this.picBackGround.Location = new System.Drawing.Point(0, 35);
       this.picBackGround.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.picBackGround.MenuManager = this.bamBarMain;
       this.picBackGround.Name = "picBackGround";
       this.picBackGround.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
-      this.picBackGround.Size = new System.Drawing.Size(1536, 895);
+      this.picBackGround.Size = new System.Drawing.Size(1536, 911);
       this.picBackGround.TabIndex = 4;
       // 
       // tblMdiManageMain

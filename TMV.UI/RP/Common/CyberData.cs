@@ -147,9 +147,8 @@ namespace TMV.UI.RP.Common
 
       Dt_ConFigColor_KH_SCC.Rows.Add(new object[] { 1, "19, 230, 255", "Red" });
 
-      Dt_Set_SCC.Rows.Add(new object[] { 
-        1, 8, 17, 0, 0, DateTime.Today, DateTime.Today.AddMonths(12), DateTime.Today.AddDays(30), "0", "1",
-        20, 2, 50, 
+      Dt_Set_SCC.Rows.Add(new object[] {
+        1, 8, 17, 0, 0, DateTime.Today, DateTime.Today, DateTime.Today, "0", "1", 20, 2, 50,
         null, null, null, null, null, null, null, null, null, null, null, null
       });
 
@@ -206,6 +205,7 @@ namespace TMV.UI.RP.Common
       Dt_Data.Columns.Add("ID", typeof(Int32));
       Dt_Data.Columns.Add("Stt", typeof(string));
       Dt_Data.Columns.Add("Stt_Rec", typeof(string));
+      Dt_Data.Columns.Add("AllDay", typeof(string));
       Dt_Data.Columns.Add("Border", typeof(string));
       Dt_Data.Columns.Add("BorderColor", typeof(string));
       Dt_Data.Columns.Add("SizeBorder", typeof(string));
@@ -255,14 +255,14 @@ namespace TMV.UI.RP.Common
       DataTable Dt_Rua_Xong = ds.Tables["Dt_Rua_Xong"];
 
       Dt_Data.Rows.Add(new object[] { 
-        1, "1", "1", null, "12, 23, 78", null, null, "30H11111", "1T1", "DESC", "2022-05-23", 
-        "2022-05-23", null, "30H11111" });
+        1, "1", "1", false, null, "12, 23, 78", 1, 1, "30H11111", "1T1", "DESC", "2022-05-24T10:13:00",
+        "2022-05-24T11:21:00", null, "30H11111" });
       Dt_Data.Rows.Add(new object[] {
-        1, "1", "1", null, null, null, null, "30H22222", "1T1", "DESC", "2022-05-23",
-        "2022-05-23", null, "30H22222" });
+        2, "2", "2", false, null, null, 1, 1, "30H22222", "1T1", "DESC", "2022-05-24T11:13:00",
+        "2022-05-24T11:50:00", null, "30H22222" });
       Dt_Data.Rows.Add(new object[] {
-        1, "1", "1", null, "12, 23, 78", null, null, "30H33333", "2T1", "DESC", "2022-05-23",
-        "2022-05-23", null, "30H33333" });
+        3, "3", "3", false, null, "12, 23, 78", 1, 1, "30H33333", "2T1", "DESC", "2022-05-24T13:13:00",
+        "2022-05-24T13:55:00", null, "30H33333" });
 
       Dt_Cho_Rua.Rows.Add(new object[] { 1, "1", "1", "HDK", "30H26603" });
       Dt_Cho_Rua.Rows.Add(new object[] { 2, "2", "2", "HDP", "29H46603" });
@@ -298,6 +298,8 @@ namespace TMV.UI.RP.Common
       Dt_Set_SCC.Columns.Add("Ngay_Ct", typeof(DateTime));
       Dt_Set_SCC.Columns.Add("Thu_Bay", typeof(string));
       Dt_Set_SCC.Columns.Add("Chu_Nhat", typeof(string));
+      Dt_Set_SCC.Columns.Add("HourWidth", typeof(Int32));
+      Dt_Set_SCC.Columns.Add("RowPage", typeof(Int32));
 
       Tables.AddRange(new DataTable[] { Dt_Set_SCC });
     }
@@ -306,7 +308,7 @@ namespace TMV.UI.RP.Common
       CP_RO_CW_Ngay_Ngam_Dinh ds = new CP_RO_CW_Ngay_Ngam_Dinh();
       DataTable dt = ds.Tables["Dt_Set_SCC"];
 
-      dt.Rows.Add(new object[] { 1, 8, 17, 0, 0, DateTime.Today, DateTime.Today.AddMonths(12), DateTime.Today.AddDays(30), "0", "1" });
+      dt.Rows.Add(new object[] { 1, 8, 17, 0, 0, DateTime.Today, DateTime.Today.AddMonths(12), DateTime.Today.AddDays(30), "0", "1", 20, 2 });
       return ds;
     }
   }
@@ -315,7 +317,7 @@ namespace TMV.UI.RP.Common
   {
     public CP_RO_CW_Execute()
     {
-      DataTable Dt = new DataTable();
+      DataTable Dt = new DataTable("CP_RO_CW_Execute");
       Dt.Columns.Add("ID", typeof(Int32));
       Dt.Columns.Add("Status", typeof(string));
       Dt.Columns.Add("Msg", typeof(string));
@@ -329,6 +331,30 @@ namespace TMV.UI.RP.Common
       DataTable dt = ds.Tables["CP_RO_CW_Execute"];
 
       dt.Rows.Add(new object[] { 1, "Y", "Y", "CuongVM test cyber data" });
+
+      return ds;
+    }
+  }
+
+  public class CP_RO_CW_Tinh_Hieu_suat : DataSet
+  {
+    public CP_RO_CW_Tinh_Hieu_suat()
+    {
+      DataTable Dt = new DataTable("CP_RO_CW_Tinh_Hieu_suat");
+      Dt.Columns.Add("ID", typeof(Int32));
+      Dt.Columns.Add("VISIBLE", typeof(string));
+      Dt.Columns.Add("Hieusuat", typeof(string));
+      Dt.Columns.Add("BackColor", typeof(string));
+      Dt.Columns.Add("ForeColor", typeof(string));
+
+      Tables.AddRange(new DataTable[] { Dt });
+    }
+    public static CP_RO_CW_Tinh_Hieu_suat CreateData()
+    {
+      CP_RO_CW_Tinh_Hieu_suat ds = new CP_RO_CW_Tinh_Hieu_suat();
+      DataTable dt = ds.Tables["CP_RO_CW_Tinh_Hieu_suat"];
+
+      dt.Rows.Add(new object[] { 1, "1", "90", "231, 24, 162", "89, 39, 20" });
 
       return ds;
     }

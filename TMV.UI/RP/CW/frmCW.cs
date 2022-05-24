@@ -21,9 +21,6 @@ namespace TMV.UI.RP.CW
     #region "variables"
     public string M_Loai_SC = "1";
     public string M_Tang = "1";
-    private string _Cp_Load_Config = "CP_RO_CW_ConFig";
-    private string _Cp_Load_Data = "CP_RO_CW_Data";
-    private string _Cp_Load_Ngay_Ngam_Dinh = "CP_RO_CW_Ngay_Ngam_Dinh";
     private CyberColumnGridView EditMa_Xe_Cho = new CyberColumnGridView();
     private CyberColumnGridView EditMa_Xe_Dang_Rua = new CyberColumnGridView();
     private CyberColumnGridView EditMa_Xe_Rua_Xong = new CyberColumnGridView();
@@ -702,7 +699,7 @@ namespace TMV.UI.RP.CW
     }
     private void V_Ngay_Ct_KH(object sender, EventArgs e)
     {
-      DataSet dataSet = new DataSet(); // CP_RO_CW_Ngay_Ngam_Dinh
+      DataSet dataSet = CP_RO_CW_Ngay_Ngam_Dinh.CreateData(); // CP_RO_CW_Ngay_Ngam_Dinh
       Dt_Set_SCC.Clear();
       Dt_Set_SCC.ImportRow(dataSet.Tables[0].Rows[0]);
       dataSet.Dispose();
@@ -756,19 +753,27 @@ namespace TMV.UI.RP.CW
       }
       catch (Exception ex)
       {
-        MessageBox.Show(ex.Message);
+        MessageBox.Show("SchedulerControl_InitAppointmentImages: " + ex.Message);
       }
     }
     private void SchedulerControl_CustomDrawTimeIndicator_RX(object sender, DevExpress.XtraScheduler.CustomDrawObjectEventArgs e)
     {
-      TimeIndicatorViewInfo objectInfo = (TimeIndicatorViewInfo)e.ObjectInfo;
-      int num = checked(objectInfo.Items.Count - 1);
-      int index = 0;
-      while (index <= num)
+      TimeIndicatorViewInfo info = e.ObjectInfo as TimeIndicatorViewInfo;
+      SchedulerControl scheduler = sender as SchedulerControl;
+      e.DrawDefault();
+      foreach (var item in info.Items)
       {
-        TimeIndicatorBaseItem indicatorBaseItem = (TimeIndicatorBaseItem)objectInfo.Items[index];
-        e.Cache.FillRectangle(Brushes.Red, indicatorBaseItem.Bounds);
-        checked { ++index; }
+        HorizontalTimeIndicatorCircleItem timeIndicatorItem = item as HorizontalTimeIndicatorCircleItem;
+        if (timeIndicatorItem != null)
+        {
+          Rectangle boundsText = Rectangle.Empty;
+          if (scheduler.ActiveView is DayView)
+          {
+            boundsText = Rectangle.Inflate(new Rectangle(item.Bounds.X + 5, item.Bounds.Y - 3, scheduler.ActiveView.ViewInfo.Bounds.Width - 5, 10), 0, 5);
+            boundsText.Offset(((int)e.Graphics.ClipBounds.Width / 2), -10);
+          }
+          e.Cache.FillRectangle(Brushes.Red, new Rectangle(item.Bounds.X + 5, item.Bounds.Y, scheduler.ActiveView.ViewInfo.Bounds.Width - 5, 2));
+        }
       }
       e.Handled = true;
     }
@@ -799,7 +804,7 @@ namespace TMV.UI.RP.CW
       }
       catch (Exception ex)
       {
-        MessageBox.Show(ex.Message);
+        MessageBox.Show("SchedulerControl_CustomDrawAppointmentBackground: " + ex.Message);
       }
     }
     private void V_AppointmentViewInfoCustomizing(object sender, AppointmentViewInfoCustomizingEventArgs e)
@@ -817,7 +822,7 @@ namespace TMV.UI.RP.CW
       }
       catch (Exception ex)
       {
-        MessageBox.Show(ex.Message);
+        MessageBox.Show("V_AppointmentViewInfoCustomizing1: " + ex.Message);
       }
       if (str1.Trim() == "" || dataRowArray == null || dataRowArray.Length == 0)
         return;
@@ -882,7 +887,7 @@ namespace TMV.UI.RP.CW
       }
       catch (Exception ex)
       {
-        MessageBox.Show(ex.Message);
+        MessageBox.Show("V_AppointmentViewInfoCustomizing2: " + ex.Message);
       }
     }
     private void schedulerControl_CustomDrawDayHeader(object sender, DevExpress.XtraScheduler.CustomDrawObjectEventArgs e)
@@ -927,7 +932,7 @@ namespace TMV.UI.RP.CW
         }
         catch (Exception ex)
         {
-          MessageBox.Show(ex.Message);
+          MessageBox.Show("V_Update_Keo_Tha_KH_RX: " + ex.Message);
         }
       }
       if (_Stt_Rec.ToString().Trim() == "")
@@ -940,7 +945,7 @@ namespace TMV.UI.RP.CW
       V_GetFromSetScheduler_RX(ref _Ma_khoang, ref start, ref end, _Appointment);
       V_GetFromSetScheduler_RXOld(ref _ma_khoangOld, _Appointment);
 
-      DataSet dataSet = new DataSet(); // CP_RO_CW_Save_Keo_Tha
+      DataSet dataSet = CP_RO_CW_Execute.CreateData(); // CP_RO_CW_Save_Keo_Tha
       bool flag = (dataSet.Tables[0] != null);
       dataSet.Dispose();
       if (flag)
@@ -960,7 +965,7 @@ namespace TMV.UI.RP.CW
       }
       catch (Exception ex)
       {
-        MessageBox.Show(ex.Message);
+        MessageBox.Show("V_GetFromSetScheduler_RXOld: " + ex.Message);
       }
       if (dataRowView == null || !Dt_Data.Columns.Contains("ma_khoang"))
         return;
@@ -995,7 +1000,7 @@ namespace TMV.UI.RP.CW
       }
       catch (Exception ex)
       {
-        MessageBox.Show(ex.Message);
+        MessageBox.Show("GetvalueSelectedResource_RX: " + ex.Message);
       }
       if (str.ToUpper().Trim() == "DevExpress.XtraScheduler.EmptyResourceId".ToUpper().Trim())
         str = "";
@@ -1017,7 +1022,7 @@ namespace TMV.UI.RP.CW
         }
         catch (Exception ex)
         {
-          MessageBox.Show(ex.Message);
+          MessageBox.Show("V_PopupMenu_RX: " + ex.Message);
         }
       }
 
@@ -1102,7 +1107,39 @@ namespace TMV.UI.RP.CW
         _FieldBackColor2_Rua_Xong_KH, _FieldForeColor_Rua_Xong_KH, _FieldUnderline_Rua_Xong_KH);
     private void GRV_RowCellStyle2(object sender, RowCellStyleEventArgs e, GridView _GRV, bool _Bold, bool _BackColor, bool _BackColor2, bool _Forecolor, bool _UnderLine, string _FieldBold, string _FieldBackColor, string _FieldBackColor2, string _FieldForecolor, string _FieldUnderline)
     {
-      e.Appearance.BackColor = System.Drawing.Color.Silver;
+      string str1 = "";
+      bool flag1 = false;
+      bool flag2 = false;
+      string str2 = "";
+
+      if (_UnderLine)
+        str1 = _GRV.GetRowCellDisplayText(e.RowHandle, _FieldUnderline).ToString().Trim();
+      if (_UnderLine & str1.Trim() == "1")
+        flag1 = true;
+      if (_Bold)
+        str2 = _GRV.GetRowCellDisplayText(e.RowHandle, _FieldBold).ToString().Trim();
+      if (_Bold & str2.Trim() == "1")
+        flag2 = true;
+      e.Appearance.Font = !flag2 ? (!flag1 ? new Font(Font.FontFamily, Font.Size, FontStyle.Regular) : 
+                                             new Font(Font.FontFamily, Font.Size, FontStyle.Underline)) :
+                                             (!flag1 ? new Font(Font.FontFamily, Font.Size, FontStyle.Bold) : 
+                                             new Font(Font.FontFamily, Font.Size, FontStyle.Bold | FontStyle.Underline));
+      if (_BackColor)
+      {
+        string ColorName = _GRV.GetRowCellDisplayText(e.RowHandle, _FieldBackColor).ToString().Trim();
+        e.Appearance.BackColor = CyberColor.GetBacColorkReports(ColorName);
+      }
+      if (_BackColor2)
+      {
+        string ColorName = _GRV.GetRowCellDisplayText(e.RowHandle, _FieldBackColor2).ToString().Trim();
+        if (ColorName.Trim() != "")
+          e.Appearance.BackColor2 = CyberColor.GetBacColorkReports(ColorName);
+      }
+      if (!_Forecolor)
+        return;
+
+      string ColorName1 = _GRV.GetRowCellDisplayText(e.RowHandle, _FieldForecolor).ToString().Trim();
+      e.Appearance.ForeColor = CyberColor.GetForeColor(ColorName1);
     }
     private void ResourcesTree1_CustomDrawNodeCell(object sender, CustomDrawNodeCellEventArgs e)
     {
@@ -1185,7 +1222,7 @@ namespace TMV.UI.RP.CW
       }
       catch (Exception ex)
       {
-        MessageBox.Show(ex.Message);
+        MessageBox.Show("ResourcesTree1_DoubleClick: " + ex.Message);
       }
 
       string _Stt_Rec = "";
@@ -1219,7 +1256,7 @@ namespace TMV.UI.RP.CW
       }
       catch (Exception ex)
       {
-        MessageBox.Show(ex.Message);
+        MessageBox.Show("V_Nhap_Mau_Xe_Tree: " + ex.Message);
       }
       string str1 = "";
       string str2 = "";
@@ -1242,7 +1279,7 @@ namespace TMV.UI.RP.CW
         }
         catch (Exception ex)
         {
-          MessageBox.Show(ex.Message);
+          MessageBox.Show("V_BD_KT: " + ex.Message);
         }
       }
 
@@ -1279,7 +1316,7 @@ namespace TMV.UI.RP.CW
         }
         catch (Exception ex)
         {
-          MessageBox.Show(ex.Message);
+          MessageBox.Show("V_Sua_KH_Scheduler: " + ex.Message);
         }
       }
       if (_Stt_Rec.ToString().Trim() == "")
@@ -1313,13 +1350,13 @@ namespace TMV.UI.RP.CW
         }
         catch (Exception ex)
         {
-          MessageBox.Show(ex.Message);
+          MessageBox.Show("V_Xoa_KH_Scheduler: " + ex.Message);
         }
       }
       if (Right.ToString().Trim() == "" || !FormGlobals.Message_Confirm("Bạn có chắc chắn xóa không?", false))
         return;
 
-      DataSet dataSet = new DataSet(); // CP_RO_CW_Delete
+      DataSet dataSet = CP_RO_CW_Execute.CreateData(); // CP_RO_CW_Delete
       if (dataSet.Tables[0] == null || dataSet.Tables[0].Rows.Count == 0)
         dataSet.Dispose();
       else
@@ -1449,7 +1486,7 @@ namespace TMV.UI.RP.CW
       if (Right.ToString().Trim() == "" || !FormGlobals.Message_Confirm("Bạn có chắc chắn xóa không?", false))
         return;
 
-      DataSet dataSet = new DataSet(); // CP_RO_CW_Delete"
+      DataSet dataSet = CP_RO_CW_Execute.CreateData(); // CP_RO_CW_Delete"
       if (dataSet.Tables[0] == null || dataSet.Tables[0].Rows.Count == 0)
         dataSet.Dispose();
       else
@@ -1602,7 +1639,7 @@ namespace TMV.UI.RP.CW
       if (_Stt_Rec.ToString().Trim() == "")
         return;
 
-      DataSet dataSet = new DataSet(); // CP_RO_CW_Giai_phong
+      DataSet dataSet = CP_RO_CW_Execute.CreateData(); // CP_RO_CW_Giai_phong
       if (dataSet.Tables[0] == null || dataSet.Tables[0].Rows.Count == 0)
         dataSet.Dispose();
       else
@@ -1852,7 +1889,7 @@ namespace TMV.UI.RP.CW
     {
       LabTy_Hieusuat.Text = "";
 
-      DataSet dataSet = new DataSet(); // CP_RO_CW_Tinh_Hieu_suat
+      DataSet dataSet = CP_RO_CW_Tinh_Hieu_suat.CreateData(); // CP_RO_CW_Tinh_Hieu_suat
       if (dataSet.Tables.Count == 0)
         dataSet.Dispose();
       else if (dataSet.Tables[0].Rows.Count == 0)
@@ -2059,9 +2096,6 @@ namespace TMV.UI.RP.CW
       int num2 = 0;
       while (num2 <= num1)
       {
-        // SchedulerStorage.Appointments.Labels[num2].Color = CyberColor.GetBackColor(Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["BackColor"]));
-        // SchedulerStorage.Appointments.Labels[num2].DisplayName = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
-        // SchedulerStorage.Appointments.Labels[num2].MenuCaption = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
         SchedulerStorage.Appointments.Labels.GetByIndex(num2).Color = CyberColor.GetBackColor(Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["BackColor"]));
         SchedulerStorage.Appointments.Labels.GetByIndex(num2).DisplayName = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
         SchedulerStorage.Appointments.Labels.GetByIndex(num2).MenuCaption = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
@@ -2174,9 +2208,9 @@ namespace TMV.UI.RP.CW
       int num2 = 0;
       while (num2 <= num1)
       {
-        SchedulerStorage.Appointments.Labels[num2].Color = CyberColor.GetBackColor(Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["BackColor"]));
-        SchedulerStorage.Appointments.Labels[num2].DisplayName = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
-        SchedulerStorage.Appointments.Labels[num2].MenuCaption = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
+        SchedulerStorage.Appointments.Labels.GetByIndex(num2).Color = CyberColor.GetBackColor(Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["BackColor"]));
+        SchedulerStorage.Appointments.Labels.GetByIndex(num2).DisplayName = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
+        SchedulerStorage.Appointments.Labels.GetByIndex(num2).MenuCaption = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
         V_SetColorlabel_RX(num2, Dt_ConFigColor_KH_SCC.Rows[num2]);
         checked { ++num2; }
       }
@@ -2231,7 +2265,7 @@ namespace TMV.UI.RP.CW
       }
       catch(Exception ex)
       {
-        MessageBox.Show(ex.Message);
+        MessageBox.Show("V_StringToNumeric: " + ex.Message);
       }
       return numeric;
     }
@@ -2244,7 +2278,7 @@ namespace TMV.UI.RP.CW
       }
       catch (Exception ex)
       {
-        MessageBox.Show(ex.Message);
+        MessageBox.Show("V_GetvalueCombox: " + ex.Message);
       }
       return str;
     }
