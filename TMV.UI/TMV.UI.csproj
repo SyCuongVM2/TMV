@@ -141,12 +141,6 @@
     <Compile Include="RP\CW\frmCW.Designer.cs">
       <DependentUpon>frmCW.cs</DependentUpon>
     </Compile>
-    <Compile Include="RP\CW\frmCW2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RP\CW\frmCW2.Designer.cs">
-      <DependentUpon>frmCW2.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Admin\frmChangePassword.resx">
       <DependentUpon>frmChangePassword.cs</DependentUpon>
     </EmbeddedResource>
@@ -190,9 +184,6 @@
     </Compile>
     <EmbeddedResource Include="RP\CW\frmCW.resx">
       <DependentUpon>frmCW.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RP\CW\frmCW2.resx">
-      <DependentUpon>frmCW2.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="AutoUpdate.csv" />

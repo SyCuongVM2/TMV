@@ -140,7 +140,6 @@ D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.Admin.frmUserRightList.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.frmMain.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.Properties.Resources.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.RP.CW.frmCW.resources
-D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.RP.CW.frmCW2.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.csproj.GenerateResource.cache
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.exe.licenses
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.csproj.CoreCompileInputs.cache
