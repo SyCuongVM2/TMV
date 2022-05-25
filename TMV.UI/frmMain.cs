@@ -80,7 +80,7 @@ namespace TMV.UI
     private void setDefaultSkin()
     {
       lookanhFeelMain = new DevExpress.LookAndFeel.DefaultLookAndFeel();
-      lookanhFeelMain.LookAndFeel.SkinName = SkinStyle.Office2010Blue;
+      lookanhFeelMain.LookAndFeel.SkinName = SkinStyle.DevExpress;
     }
     private void InitSkins()
     {

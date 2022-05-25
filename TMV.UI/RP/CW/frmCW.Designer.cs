@@ -100,6 +100,7 @@ namespace TMV.UI.RP.CW
       this.PopupMenuDang_Rua = new DevExpress.XtraBars.PopupMenu(this.components);
       this.PopupMenuRua_Xong = new DevExpress.XtraBars.PopupMenu(this.components);
       this.PopupMenuSchedulerControl = new DevExpress.XtraBars.PopupMenu(this.components);
+      this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
       ((System.ComponentModel.ISupportInitialize)(this.BarManagerCho_Rua)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
       this.splitContainer1.Panel1.SuspendLayout();
@@ -333,6 +334,17 @@ namespace TMV.UI.RP.CW
       // 
       this.MasterCho_RuaGRV.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
       this.MasterCho_RuaGRV.Appearance.FocusedRow.Options.UseBackColor = true;
+      this.MasterCho_RuaGRV.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
+      this.MasterCho_RuaGRV.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Blue;
+      this.MasterCho_RuaGRV.Appearance.HeaderPanel.Options.UseFont = true;
+      this.MasterCho_RuaGRV.Appearance.HeaderPanel.Options.UseForeColor = true;
+      this.MasterCho_RuaGRV.Appearance.HeaderPanel.Options.UseTextOptions = true;
+      this.MasterCho_RuaGRV.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      this.MasterCho_RuaGRV.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+      this.MasterCho_RuaGRV.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
+      this.MasterCho_RuaGRV.Appearance.Row.ForeColor = System.Drawing.Color.Blue;
+      this.MasterCho_RuaGRV.Appearance.Row.Options.UseFont = true;
+      this.MasterCho_RuaGRV.Appearance.Row.Options.UseForeColor = true;
       this.MasterCho_RuaGRV.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
       this.MasterCho_RuaGRV.Appearance.SelectedRow.Options.UseBackColor = true;
       this.MasterCho_RuaGRV.Appearance.ViewCaption.Options.UseTextOptions = true;
@@ -342,6 +354,7 @@ namespace TMV.UI.RP.CW
       this.MasterCho_RuaGRV.AppearancePrint.EvenRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.MasterCho_RuaGRV.AppearancePrint.EvenRow.Options.UseFont = true;
       this.MasterCho_RuaGRV.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
+      this.MasterCho_RuaGRV.ColumnPanelRowHeight = 50;
       this.MasterCho_RuaGRV.GridControl = this.MasterCho_Rua;
       this.MasterCho_RuaGRV.GroupRowHeight = 30;
       this.MasterCho_RuaGRV.Name = "MasterCho_RuaGRV";
@@ -351,7 +364,7 @@ namespace TMV.UI.RP.CW
       this.MasterCho_RuaGRV.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
       this.MasterCho_RuaGRV.OptionsView.ColumnAutoWidth = false;
       this.MasterCho_RuaGRV.OptionsView.ShowGroupPanel = false;
-      this.MasterCho_RuaGRV.RowHeight = 35;
+      this.MasterCho_RuaGRV.RowHeight = 40;
       // 
       // LabWait
       // 
@@ -513,6 +526,19 @@ namespace TMV.UI.RP.CW
       // 
       this.MasterDang_RuaGRV.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
       this.MasterDang_RuaGRV.Appearance.FocusedRow.Options.UseBackColor = true;
+      this.MasterDang_RuaGRV.Appearance.GroupPanel.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+      this.MasterDang_RuaGRV.Appearance.GroupPanel.Options.UseFont = true;
+      this.MasterDang_RuaGRV.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
+      this.MasterDang_RuaGRV.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Blue;
+      this.MasterDang_RuaGRV.Appearance.HeaderPanel.Options.UseFont = true;
+      this.MasterDang_RuaGRV.Appearance.HeaderPanel.Options.UseForeColor = true;
+      this.MasterDang_RuaGRV.Appearance.HeaderPanel.Options.UseTextOptions = true;
+      this.MasterDang_RuaGRV.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      this.MasterDang_RuaGRV.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+      this.MasterDang_RuaGRV.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
+      this.MasterDang_RuaGRV.Appearance.Row.ForeColor = System.Drawing.Color.Blue;
+      this.MasterDang_RuaGRV.Appearance.Row.Options.UseFont = true;
+      this.MasterDang_RuaGRV.Appearance.Row.Options.UseForeColor = true;
       this.MasterDang_RuaGRV.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
       this.MasterDang_RuaGRV.Appearance.SelectedRow.Options.UseBackColor = true;
       this.MasterDang_RuaGRV.Appearance.ViewCaption.Options.UseTextOptions = true;
@@ -522,6 +548,7 @@ namespace TMV.UI.RP.CW
       this.MasterDang_RuaGRV.AppearancePrint.EvenRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.MasterDang_RuaGRV.AppearancePrint.EvenRow.Options.UseFont = true;
       this.MasterDang_RuaGRV.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
+      this.MasterDang_RuaGRV.ColumnPanelRowHeight = 50;
       this.MasterDang_RuaGRV.GridControl = this.MasterDang_Rua;
       this.MasterDang_RuaGRV.GroupRowHeight = 30;
       this.MasterDang_RuaGRV.Name = "MasterDang_RuaGRV";
@@ -531,7 +558,7 @@ namespace TMV.UI.RP.CW
       this.MasterDang_RuaGRV.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
       this.MasterDang_RuaGRV.OptionsView.ColumnAutoWidth = false;
       this.MasterDang_RuaGRV.OptionsView.ShowGroupPanel = false;
-      this.MasterDang_RuaGRV.RowHeight = 35;
+      this.MasterDang_RuaGRV.RowHeight = 40;
       // 
       // LabWash
       // 
@@ -564,6 +591,17 @@ namespace TMV.UI.RP.CW
       // 
       this.MasterRua_XongGRV.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
       this.MasterRua_XongGRV.Appearance.FocusedRow.Options.UseBackColor = true;
+      this.MasterRua_XongGRV.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
+      this.MasterRua_XongGRV.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Blue;
+      this.MasterRua_XongGRV.Appearance.HeaderPanel.Options.UseFont = true;
+      this.MasterRua_XongGRV.Appearance.HeaderPanel.Options.UseForeColor = true;
+      this.MasterRua_XongGRV.Appearance.HeaderPanel.Options.UseTextOptions = true;
+      this.MasterRua_XongGRV.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      this.MasterRua_XongGRV.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+      this.MasterRua_XongGRV.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
+      this.MasterRua_XongGRV.Appearance.Row.ForeColor = System.Drawing.Color.Blue;
+      this.MasterRua_XongGRV.Appearance.Row.Options.UseFont = true;
+      this.MasterRua_XongGRV.Appearance.Row.Options.UseForeColor = true;
       this.MasterRua_XongGRV.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
       this.MasterRua_XongGRV.Appearance.SelectedRow.Options.UseBackColor = true;
       this.MasterRua_XongGRV.Appearance.ViewCaption.Options.UseTextOptions = true;
@@ -573,6 +611,7 @@ namespace TMV.UI.RP.CW
       this.MasterRua_XongGRV.AppearancePrint.EvenRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.MasterRua_XongGRV.AppearancePrint.EvenRow.Options.UseFont = true;
       this.MasterRua_XongGRV.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
+      this.MasterRua_XongGRV.ColumnPanelRowHeight = 50;
       this.MasterRua_XongGRV.GridControl = this.MasterRua_Xong;
       this.MasterRua_XongGRV.GroupRowHeight = 30;
       this.MasterRua_XongGRV.Name = "MasterRua_XongGRV";
@@ -582,7 +621,7 @@ namespace TMV.UI.RP.CW
       this.MasterRua_XongGRV.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
       this.MasterRua_XongGRV.OptionsView.ColumnAutoWidth = false;
       this.MasterRua_XongGRV.OptionsView.ShowGroupPanel = false;
-      this.MasterRua_XongGRV.RowHeight = 35;
+      this.MasterRua_XongGRV.RowHeight = 40;
       // 
       // LabTy_Hieusuat
       // 
@@ -787,11 +826,13 @@ namespace TMV.UI.RP.CW
       // CbbMa_BN
       // 
       this.CbbMa_BN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.CbbMa_BN.Cursor = System.Windows.Forms.Cursors.IBeam;
       this.CbbMa_BN.FormattingEnabled = true;
       this.CbbMa_BN.Location = new System.Drawing.Point(172, -3);
       this.CbbMa_BN.Name = "CbbMa_BN";
       this.CbbMa_BN.Size = new System.Drawing.Size(80, 27);
       this.CbbMa_BN.TabIndex = 2;
+      this.CbbMa_BN.Tag = "";
       // 
       // CbbTime_Data
       // 
@@ -978,7 +1019,6 @@ namespace TMV.UI.RP.CW
       this.Controls.Add(this.barDockControl10);
       this.Controls.Add(this.barDockControl9);
       this.IconOptions.ShowIcon = false;
-      this.MaximizeBox = false;
       this.Name = "frmCW";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "BẢNG KẾ HOẠCH RỬA XE";
@@ -1097,5 +1137,6 @@ namespace TMV.UI.RP.CW
     private DevExpress.XtraBars.PopupMenu PopupMenuDang_Rua;
     private DevExpress.XtraBars.PopupMenu PopupMenuRua_Xong;
     private DevExpress.XtraBars.PopupMenu PopupMenuSchedulerControl;
+    private System.Windows.Forms.ToolTip toolTip1;
   }
 }

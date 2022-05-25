@@ -1,4 +1,5 @@
-﻿using DevExpress.Utils;
+﻿using DevExpress.Images;
+using DevExpress.Utils;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
@@ -357,6 +358,14 @@ namespace TMV.UI.RP.CW
       resourcesTree1.DoubleClick += new EventHandler(ResourcesTree1_DoubleClick);
       resourcesTree1.PopupMenuShowing -= new DevExpress.XtraTreeList.PopupMenuShowingEventHandler(ResourcesTree1_PopupMenuShowing);
       resourcesTree1.PopupMenuShowing += new DevExpress.XtraTreeList.PopupMenuShowingEventHandler(ResourcesTree1_PopupMenuShowing);
+
+      CbbTime_Data.MouseHover += new EventHandler(Options_MouseHover);
+      CbbMa_BN.MouseHover += new EventHandler(Options_MouseHover);
+      CbbDo_Rong.MouseHover += new EventHandler(Options_MouseHover);
+      CbbCa_Ngay.MouseHover += new EventHandler(Options_MouseHover);
+      CbbKieu_Xem.MouseHover += new EventHandler(Options_MouseHover);
+      CbbGio_Xem.MouseHover += new EventHandler(Options_MouseHover);
+      CbbMa_HS.MouseHover += new EventHandler(Options_MouseHover);
     }
     private void V_SetScheduler_RXControl_KH_RX()
     {
@@ -740,15 +749,22 @@ namespace TMV.UI.RP.CW
           str2 = dataRowArray[0]["Flag"].ToString().Trim();
         if (Dt_Data.Columns.Contains("Uu_Tien"))
           str3 = dataRowArray[0]["Uu_Tien"].ToString().Trim();
+
         if (!(str2.Trim() == "1" | str2.Trim() == "2" | str2.Trim() == "3" | str2.Trim() == "4"))
           return;
 
         AppointmentImageInfo appointmentImageInfo = new AppointmentImageInfo();
         string Left = str2;
-        appointmentImageInfo.Image = (Left != "1") ? Properties.Resources.Warning : 
-                                     ((Left != "2") ? Properties.Resources.Warning : 
-                                     ((Left != "3") ? Properties.Resources.Warning : 
-                                     ((Left != "4") ? Properties.Resources.Warning : null))); // TODO
+        appointmentImageInfo.Image = (Left == "1") ? ImageResourceCache.Default.GetImage("images/communication/wifi_16x16.png") : 
+                                     (
+                                       Left == "2" ? ImageResourceCache.Default.GetImage("images/communication/radio_16x16.png") : 
+                                       (
+                                         Left == "3" ? ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png") : 
+                                         (
+                                           Left == "4" ? ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png") : null
+                                         )
+                                       )
+                                     );
         e.ImageInfoList.Add(appointmentImageInfo);
       }
       catch (Exception ex)
@@ -1029,21 +1045,35 @@ namespace TMV.UI.RP.CW
       e.Menu.Items.Clear();
       int rowHandle = 0;
       PopupMenuSchedulerControl.ItemLinks.Clear();
-      PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Bắt đầu/Kết thúc rửa xe", new EventHandler(V_BD_KT), Shortcut.F10, null, true), false);
-      PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Tạo KH rửa", new EventHandler(V_Tao_KH_Scheduler), Shortcut.F4, null, true), true);
-      PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Sửa KH rửa", new EventHandler(V_Sua_KH_Scheduler), Shortcut.F3, null, true), false);
-      PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Xóa KH", new EventHandler(V_Xoa_KH_Scheduler), Shortcut.F8, null, true), false);
-      PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Xem lệnh", new EventHandler(V_Preview_RX), Shortcut.F7, null, true), true);
-      PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Làm tươi dữ liệu", new EventHandler(V_RefreshData_KH_RX), Shortcut.F5, null, true), false);
+      PopupMenuSchedulerControl.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Bắt đầu/Kết thúc rửa xe", 
+        new EventHandler(V_BD_KT), Shortcut.F10, ImageResourceCache.Default.GetImage("images/scheduling/time_16x16.png"), true), false);
+      PopupMenuSchedulerControl.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Tạo KH rửa", 
+        new EventHandler(V_Tao_KH_Scheduler), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), true);
+      PopupMenuSchedulerControl.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Sửa KH rửa", 
+        new EventHandler(V_Sua_KH_Scheduler), Shortcut.F3, ImageResourceCache.Default.GetImage("images/edit/edit_16x16.png"), true), false);
+      PopupMenuSchedulerControl.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Xóa KH", 
+        new EventHandler(V_Xoa_KH_Scheduler), Shortcut.F8, ImageResourceCache.Default.GetImage("images/data/deletedatasource_16x16.png"), true), false);
+      PopupMenuSchedulerControl.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Xem lệnh", 
+        new EventHandler(V_Preview_RX), Shortcut.F7, ImageResourceCache.Default.GetImage("images/print/preview_16x16.png"), true), true);
+      PopupMenuSchedulerControl.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Làm tươi dữ liệu", 
+        new EventHandler(V_RefreshData_KH_RX), Shortcut.F5, ImageResourceCache.Default.GetImage("images/actions/refresh2_16x16.png"), true), false);
       
-      CyberBarSubMenuPopup cyberBarSubMenuPopup = new CyberBarSubMenuPopup(sender, rowHandle, "Tùy chọn", (EventHandler)null, null);
+      CyberBarSubMenuPopup cyberBarSubMenuPopup = new CyberBarSubMenuPopup(sender, rowHandle, "Tùy chọn", null, ImageResourceCache.Default.GetImage("images/data/managedatasource_16x16.png"));
       PopupMenuSchedulerControl.ItemLinks.Add(cyberBarSubMenuPopup, true);
       CyberMenuPopup cyberMenuPopup1 = new CyberMenuPopup(sender, rowHandle, "Theo cầu", new EventHandler(V_ActiView_Day_RX));
       CyberMenuPopup cyberMenuPopup2 = new CyberMenuPopup(sender, rowHandle, "Thời gian", new EventHandler(V_ActiView_Gantt_RX));
       cyberBarSubMenuPopup.AddItem(cyberMenuPopup1).BeginGroup = false;
       cyberBarSubMenuPopup.AddItem(cyberMenuPopup2).BeginGroup = false;
 
-      PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Quay ra", new EventHandler(V_Quay_Ra), Shortcut.None, null, true), true);
+      PopupMenuSchedulerControl.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Quay ra", 
+        new EventHandler(V_Quay_Ra), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true), true);
 
       if (e == null)
         return;
@@ -1053,13 +1083,27 @@ namespace TMV.UI.RP.CW
     {
       int rowHandle = e != null ? e.HitInfo.RowHandle : -1;
       PopupMenuCho_Rua.ItemLinks.Clear();
-      PopupMenuCho_Rua.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Bắt đầu/Kết thúc rửa xe", new EventHandler(V_BD_KT_Cho_Rua), Shortcut.F10, null, true), false);
-      PopupMenuCho_Rua.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Tạo KH rửa", new EventHandler(V_Tao_Cho_Rua), Shortcut.F4, null, true), true);
-      PopupMenuCho_Rua.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Sửa KH rửa", new EventHandler(V_Sua_Cho_Rua), Shortcut.F3, null, true), false);
-      PopupMenuCho_Rua.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Xóa KH", new EventHandler(V_Xoa_Cho_Rua), Shortcut.F8, null, true), false);
-      PopupMenuCho_Rua.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Xem lệnh", new EventHandler(V_Preview_Cho_Rua), Shortcut.F7, null, true), true);
-      PopupMenuCho_Rua.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Làm tươi dữ liệu", new EventHandler(V_RefreshData_KH_RX), Shortcut.F5, null, true), false);
-      PopupMenuCho_Rua.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Quay ra", new EventHandler(V_Quay_Ra), null, true), true);
+      PopupMenuCho_Rua.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Bắt đầu/Kết thúc rửa xe", 
+        new EventHandler(V_BD_KT_Cho_Rua), Shortcut.F10, ImageResourceCache.Default.GetImage("images/scheduling/time_16x16.png"), true), false);
+      PopupMenuCho_Rua.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Tạo KH rửa", 
+        new EventHandler(V_Tao_Cho_Rua), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), true);
+      PopupMenuCho_Rua.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Sửa KH rửa", 
+        new EventHandler(V_Sua_Cho_Rua), Shortcut.F3, ImageResourceCache.Default.GetImage("images/edit/edit_16x16.png"), true), false);
+      PopupMenuCho_Rua.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Xóa KH", 
+        new EventHandler(V_Xoa_Cho_Rua), Shortcut.F8, ImageResourceCache.Default.GetImage("images/data/deletedatasource_16x16.png"), true), false);
+      PopupMenuCho_Rua.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Xem lệnh", 
+        new EventHandler(V_Preview_Cho_Rua), Shortcut.F7, ImageResourceCache.Default.GetImage("images/print/preview_16x16.png"), true), true);
+      PopupMenuCho_Rua.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Làm tươi dữ liệu", 
+        new EventHandler(V_RefreshData_KH_RX), Shortcut.F5, ImageResourceCache.Default.GetImage("images/actions/refresh2_16x16.png"), true), false);
+      PopupMenuCho_Rua.ItemLinks.Add(
+        new CyberMenuPopup(sender, rowHandle, "Quay ra", 
+        new EventHandler(V_Quay_Ra), ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true), true);
       PopupMenuCho_Rua.ShowPopup(MousePosition);
       if (e == null)
         return;
@@ -1069,10 +1113,18 @@ namespace TMV.UI.RP.CW
     {
       int rowHandle = e != null ? e.HitInfo.RowHandle : -1;
       PopupMenuDang_Rua.ItemLinks.Clear();
-      PopupMenuDang_Rua.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Bắt đầu/Kết thúc rửa xe", new EventHandler(V_BD_KT_Dang_Rua), Shortcut.F10, null, true), false);
-      PopupMenuDang_Rua.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Xem lệnh", new EventHandler(V_Preview_Dang_Rua), Shortcut.F7, null, true), true);
-      PopupMenuDang_Rua.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Làm tươi dữ liệu", new EventHandler(V_RefreshData_KH_RX), Shortcut.F5, null, true), false);
-      PopupMenuDang_Rua.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Quay ra", new EventHandler(V_Quay_Ra), null, true), true);
+      PopupMenuDang_Rua.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Bắt đầu/Kết thúc rửa xe", 
+        new EventHandler(V_BD_KT_Dang_Rua), Shortcut.F10, ImageResourceCache.Default.GetImage("images/scheduling/time_16x16.png"), true), false);
+      PopupMenuDang_Rua.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Xem lệnh", 
+        new EventHandler(V_Preview_Dang_Rua), Shortcut.F7, ImageResourceCache.Default.GetImage("images/print/preview_16x16.png"), true), true);
+      PopupMenuDang_Rua.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Làm tươi dữ liệu", 
+        new EventHandler(V_RefreshData_KH_RX), Shortcut.F5, ImageResourceCache.Default.GetImage("images/actions/refresh2_16x16.png"), true), false);
+      PopupMenuDang_Rua.ItemLinks.Add(
+        new CyberMenuPopup(sender, rowHandle, "Quay ra", 
+        new EventHandler(V_Quay_Ra), ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true), true);
       PopupMenuDang_Rua.ShowPopup(MousePosition);
       if (e == null)
         return;
@@ -1082,12 +1134,24 @@ namespace TMV.UI.RP.CW
     {
       int rowHandle = e != null ? e.HitInfo.RowHandle : -1;
       PopupMenuRua_Xong.ItemLinks.Clear();
-      PopupMenuRua_Xong.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Đặt vị trí xe", new EventHandler(V_Vi_Tri_Xe), Shortcut.F4, null, true), false);
-      PopupMenuRua_Xong.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Xem vị trí xe", new EventHandler(V_Vi_Tri_Xe_Load), Shortcut.F10, null, true), false);
-      PopupMenuRua_Xong.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Giao xe", new EventHandler(V_Giao_Xe), Shortcut.F3, null, true), false);
-      PopupMenuRua_Xong.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Xem lệnh", new EventHandler(V_Preview_Rua_Xong), Shortcut.F7, null, true), true);
-      PopupMenuRua_Xong.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Làm tươi dữ liệu", new EventHandler(V_RefreshData_KH_RX), Shortcut.F5, null, true), false);
-      PopupMenuRua_Xong.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Quay ra", new EventHandler(V_Quay_Ra), null, true), true);
+      PopupMenuRua_Xong.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Đặt vị trí xe", 
+        new EventHandler(V_Vi_Tri_Xe), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
+      PopupMenuRua_Xong.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Xem vị trí xe", 
+        new EventHandler(V_Vi_Tri_Xe_Load), Shortcut.F10, ImageResourceCache.Default.GetImage("images/print/preview_16x16.png"), true), false);
+      PopupMenuRua_Xong.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Giao xe", 
+        new EventHandler(V_Giao_Xe), Shortcut.F3, ImageResourceCache.Default.GetImage("images/people/customer_16x16.png"), true), false);
+      PopupMenuRua_Xong.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Xem lệnh", 
+        new EventHandler(V_Preview_Rua_Xong), Shortcut.F7, ImageResourceCache.Default.GetImage("images/print/preview_16x16.png"), true), true);
+      PopupMenuRua_Xong.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Làm tươi dữ liệu", 
+        new EventHandler(V_RefreshData_KH_RX), Shortcut.F5, ImageResourceCache.Default.GetImage("images/actions/refresh2_16x16.png"), true), false);
+      PopupMenuRua_Xong.ItemLinks.Add(
+        new CyberMenuPopup(sender, rowHandle, "Quay ra", 
+        new EventHandler(V_Quay_Ra), ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true), true);
       PopupMenuRua_Xong.ShowPopup(MousePosition);
       if (e == null)
         return;
@@ -1236,9 +1300,15 @@ namespace TMV.UI.RP.CW
     private void ResourcesTree1_PopupMenuShowing(object sender, DevExpress.XtraTreeList.PopupMenuShowingEventArgs e)
     {
       PopupMenuCho_Rua.ItemLinks.Clear();
-      PopupMenuCho_Rua.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Cập nhập màu xe/Kiểu xe", new EventHandler(V_Nhap_Mau_Xe_Tree), Shortcut.F4, null, true), false);
-      PopupMenuCho_Rua.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Làm tươi dữ liệu", new EventHandler(V_RefreshData_KH_RX), Shortcut.F5, null, true), false);
-      PopupMenuCho_Rua.ItemLinks.Add(new CyberMenuPopup(sender, 0, "Quay ra", new EventHandler(V_Quay_Ra), null, true));
+      PopupMenuCho_Rua.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Cập nhập màu xe/Kiểu xe", 
+        new EventHandler(V_Nhap_Mau_Xe_Tree), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
+      PopupMenuCho_Rua.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Làm tươi dữ liệu", 
+        new EventHandler(V_RefreshData_KH_RX), Shortcut.F5, ImageResourceCache.Default.GetImage("images/actions/refresh2_16x16.png"), true), false);
+      PopupMenuCho_Rua.ItemLinks.Add(
+        new CyberMenuPopup(sender, 0, "Quay ra", 
+        new EventHandler(V_Quay_Ra), ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true));
       PopupMenuCho_Rua.ShowPopup(MousePosition);
       if (e == null)
         return;
@@ -1264,6 +1334,11 @@ namespace TMV.UI.RP.CW
         str1 = dataSource[recordIndex]["Stt_Rec"].ToString().Trim();
       if (recordIndex >= 0)
         str2 = dataSource[recordIndex]["Ma_Xe"].ToString().Trim();
+    }
+
+    private void Options_MouseHover(object sender, EventArgs e)
+    {
+      toolTip1.Show((sender as Control).Name, (sender as Control));
     }
     #endregion
 
@@ -1710,14 +1785,6 @@ namespace TMV.UI.RP.CW
         if (Dt_Data_Xe.Columns.Contains("Stt"))
           Dv_Data_Xe.Sort = Dt_Cho_Rua.Columns["Stt"].ColumnName;
 
-        Dt_Cho_Rua_H = dataSet.Tables[5].Copy();
-        Dt_Dang_Rua_H = dataSet.Tables[6].Copy();
-        Dt_Rua_Xong_H = dataSet.Tables[7].Copy();
-
-        if (dataSet.Tables.Count > 8)
-        {
-          Dt_Xe_H = dataSet.Tables[8].Copy();
-        }
         if (dataSet.Tables.Count > 9)
           V_SetSortView(ref Dv_Cho_Rua, dataSet.Tables[9]);
         if (dataSet.Tables.Count > 10)
@@ -1847,40 +1914,14 @@ namespace TMV.UI.RP.CW
       try
       {
         Dv_Cho_Rua.RowFilter = filterKhScc1;
-      }
-      catch (Exception ex)
-      {
-      }
-
-      try
-      {
         Dv_Data.RowFilter = filterKhScc2;
-      }
-      catch (Exception ex)
-      {
-      }
-
-      try
-      {
         Dv_Rua_Xong.RowFilter = filterKhScc3;
-      }
-      catch (Exception ex)
-      {
-      }
-
-      try
-      {
         Dv_Data_Xe.RowFilter = filterKhScc4;
-      }
-      catch (Exception ex)
-      {
-      }
-      try
-      {
         Dv_Dang_Rua.RowFilter = filterKhScc5;
       }
       catch (Exception ex)
       {
+        MessageBox.Show("V_Filter_KH_RX: " + ex.Message);
       }
 
       T_tinh_So_Xe_RX();
@@ -1951,7 +1992,7 @@ namespace TMV.UI.RP.CW
     #region "V_Buoc_Nhay_KH_RX"
     private void V_CyberSetTime_KH_RX()
     {
-      string Left = V_GetvalueCombox(CbbCa_Ngay);
+      string Left = V_GetvalueCombox(CbbCa_Ngay); // 01: Ca ngay, 02: Sang, 03: Chieu
       decimal num1 = new decimal(M_StartHour);
       decimal num2 = new decimal(M_StartMINUTE);
       decimal num3 = new decimal(M_FinishHour);
@@ -1959,7 +2000,7 @@ namespace TMV.UI.RP.CW
       DateTime Startdate1 = M_Ngay_LimitInterval_Min;
       DateTime limitIntervalMaxRx = M_Ngay_LimitInterval_Max_RX;
 
-      if (Left == "02")
+      if (Left == "02") // Sang
       {
         num1 = Convert.ToDecimal(Dt_Set_SCC.Rows[0]["H_Sang1"]);
         num2 = Convert.ToDecimal(Dt_Set_SCC.Rows[0]["M_Sang1"]);
@@ -1968,8 +2009,7 @@ namespace TMV.UI.RP.CW
         Startdate1 = Convert.ToDateTime(Dt_Set_SCC.Rows[0]["Ngay_Sang1"]);
         M_Ngay_LimitInterval_Max_RX = Convert.ToDateTime(Dt_Set_SCC.Rows[0]["Ngay_Sang2"]);
       }
-
-      if (Left == "03")
+      if (Left == "03") // Chieu
       {
         num1 = Convert.ToDecimal(Dt_Set_SCC.Rows[0]["H_Chieu1"]);
         num2 = Convert.ToDecimal(Dt_Set_SCC.Rows[0]["M_Chieu1"]);
@@ -1986,25 +2026,29 @@ namespace TMV.UI.RP.CW
         try
         {
           scales.Clear();
-          TimeScaleLessThanDay scaleLessThanDay1 = new TimeScaleLessThanDay(TimeSpan.FromHours(1.0), Convert.ToInt32(num1), Convert.ToInt32(num3), Startdate1, limitIntervalMaxRx, M_Thu_Bay, M_Chu_Nhat);
-          TimeScaleLessThanDay scaleLessThanDay2 = new TimeScaleLessThanDay(TimeSpan.FromMinutes(Convert.ToDouble(V_GetvalueCombox(CbbMa_BN))), Convert.ToInt32(num1), Convert.ToInt32(num3), Startdate1, limitIntervalMaxRx, M_Thu_Bay, M_Chu_Nhat);
+          int integer = Convert.ToInt32(CbbMa_BN.SelectedValue.ToString().Trim());
+          TimeScaleLessThanDay scaleLessThanDay1 = new TimeScaleLessThanDay(TimeSpan.FromHours(1.0), M_StartHour, M_FinishHour, Startdate1, limitIntervalMaxRx, M_Thu_Bay, M_Chu_Nhat);
+          TimeScaleLessThanDay scaleLessThanDay2 = new TimeScaleLessThanDay(TimeSpan.FromMinutes((double)integer), M_StartHour, M_FinishHour, Startdate1, limitIntervalMaxRx, M_Thu_Bay, M_Chu_Nhat);
           scales.Add(new TimeScaleYear());
           scales.Add(new TimeScaleQuarter());
           scales.Add(new TimeScaleMonth());
           scales.Add(new TimeScaleWeek());
-          scales.Add(new CyberTimeScaleDay(Convert.ToInt32(num1), Convert.ToInt32(num3), Startdate1, limitIntervalMaxRx));
-          scales.Add(scaleLessThanDay1);
-          scales.Add(scaleLessThanDay2);
+          scales.Add(new CyberTimeScaleDay(M_StartHour, M_FinishHour, Startdate1, limitIntervalMaxRx));  // TimeScaleDay: dd/MM
+          scales.Add(scaleLessThanDay1);  // TimeScaleHour
+          //scales.Add(scaleLessThanDay2);  // TimeScale15Minutes: TODO
+          //scales.Add(new TimeScaleDay());
+          //scales.Add(new TimeScaleHour());
+          scales.Add(new TimeScale15Minutes());
         }
         finally
         {
-          SchedulerControl.GanttView.Scales[0].Visible = false;
-          SchedulerControl.GanttView.Scales[1].Visible = false;
-          SchedulerControl.GanttView.Scales[2].Visible = false;
-          SchedulerControl.GanttView.Scales[3].Visible = false;
-          SchedulerControl.GanttView.Scales[4].Visible = true;
-          SchedulerControl.GanttView.Scales[5].Visible = true;
-          SchedulerControl.Views.GanttView.Scales[6].DisplayFormat = "mm";
+          SchedulerControl.GanttView.Scales[0].Visible = false; // Year
+          SchedulerControl.GanttView.Scales[1].Visible = false; // Quarter
+          SchedulerControl.GanttView.Scales[2].Visible = false; // Month
+          SchedulerControl.GanttView.Scales[3].Visible = false; // Week
+          SchedulerControl.GanttView.Scales[4].Visible = true;  // dd/MM
+          SchedulerControl.GanttView.Scales[5].Visible = true;  // 01:00:00
+          SchedulerControl.Views.GanttView.Scales[6].DisplayFormat = "mm";  // 08:00:00
           if (CbbMa_BN.SelectedValue.ToString() == "60")
             SchedulerControl.GanttView.Scales[6].Visible = false;
           else
@@ -2050,8 +2094,10 @@ namespace TMV.UI.RP.CW
         }
         while (index <= 6);
       }
+
       if (SchedulerControl.ActiveViewType != SchedulerViewType.Day)
         return;
+
       SchedulerControl.DayView.RowHeight = Convert.ToInt32(V_GetvalueCombox(CbbDo_Rong));
     }
     #endregion

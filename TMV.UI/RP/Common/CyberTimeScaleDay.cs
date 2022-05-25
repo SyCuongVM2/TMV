@@ -25,11 +25,13 @@ namespace TMV.UI.RP.Common
     public override DateTime Floor(DateTime date)
     {
       if (DateTime.Compare(date, DateTime.MinValue) == 0 || DateTime.Compare(date, DateTime.MaxValue) == 0)
-        return date.AddHours((double)FinishHour);
+        return date.AddHours(FinishHour);
+
       DateTime dateTime = base.Floor(date);
       if (date.Hour < StartHour)
         dateTime = dateTime.AddDays(-1.0);
-      return dateTime.AddHours((double)StartHour);
+
+      return dateTime.AddHours(StartHour);
     }
   }
 }

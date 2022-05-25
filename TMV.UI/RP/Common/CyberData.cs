@@ -149,16 +149,17 @@ namespace TMV.UI.RP.Common
 
       Dt_Set_SCC.Rows.Add(new object[] {
         1, 8, 17, 0, 0, DateTime.Today, DateTime.Today, DateTime.Today, "0", "1", 20, 2, 50,
-        null, null, null, null, null, null, null, null, null, null, null, null
+        8, 0, 12, 0, DateTime.Today, DateTime.Today, 
+        13, 0, 17, 0, DateTime.Today, DateTime.Today
       });
 
-      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 1, "300", "5 Phút", "0" });
-      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 2, "480", "8 Phút", "1" });
-      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 3, "600", "10 Phút", "0" });
-      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 4, "900", "15 Phút", "0" });
-      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 5, "1200", "20 Phút", "0" });
-      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 6, "1800", "30 Phút", "0" });
-      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 7, "3600", "60 Phút", "0" });
+      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 1, "5", "5 Phút", "0" });
+      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 2, "8", "8 Phút", "1" });
+      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 3, "10", "10 Phút", "0" });
+      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 4, "15", "15 Phút", "0" });
+      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 5, "20", "20 Phút", "0" });
+      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 6, "30", "30 Phút", "0" });
+      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 7, "60", "60 Phút", "0" });
 
       Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 1, "10", "10", "1" });
       Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 2, "15", "15", "0" });
@@ -176,11 +177,13 @@ namespace TMV.UI.RP.Common
       DmKhoang_Loc_KH_SCC.Rows.Add(new object[] { 1, "10, 123, 255", "", "1T1", "Khoang rửa xe ướt 1T1" });
       DmKhoang_Loc_KH_SCC.Rows.Add(new object[] { 2, "14, 15, 200", "", "2T1", "Khoang rửa xe ướt 2T1" });
 
-      DmCVDV_Loc_KH_SCC.Rows.Add(new object[] { 1, "05.00044", "Bùi Ngọc Khánh", "0" });
-      DmCVDV_Loc_KH_SCC.Rows.Add(new object[] { 2, "05.00045", "Nguyễn Tiến Thắng", "0" });
-      DmCVDV_Loc_KH_SCC.Rows.Add(new object[] { 3, "05.00046", "Trần Duy Tiến", "0" });
-      DmCVDV_Loc_KH_SCC.Rows.Add(new object[] { 4, "05.00049", "Vũ Văn Phong", "0" });
-      DmCVDV_Loc_KH_SCC.Rows.Add(new object[] { 5, "05.00048", "Ngô Văn Nam", "0" });
+      DmCVDV_Loc_KH_SCC.Rows.Add(new object[] { 0, "", "Chọn CVDV", "1" });
+      DmCVDV_Loc_KH_SCC.Rows.Add(new object[] { 1, "100010", "Bùi Ngọc Khánh", "0" });
+      DmCVDV_Loc_KH_SCC.Rows.Add(new object[] { 2, "100020", "Nguyễn Tiến Thắng", "0" });
+      DmCVDV_Loc_KH_SCC.Rows.Add(new object[] { 3, "100040", "Trần Duy Tiến", "0" });
+      DmCVDV_Loc_KH_SCC.Rows.Add(new object[] { 4, "100050", "Vũ Văn Phong", "0" });
+      DmCVDV_Loc_KH_SCC.Rows.Add(new object[] { 5, "100070", "Ngô Văn Nam", "0" });
+      DmCVDV_Loc_KH_SCC.Rows.Add(new object[] { 6, "100090", "Công Tuấn Dương", "0" });
 
       Dt_Kieu_Xem.Rows.Add(new object[] { 1, "01", "Khoang", "1", 1 });
       Dt_Kieu_Xem.Rows.Add(new object[] { 2, "02", "BKS", "0", 0 });
@@ -212,29 +215,39 @@ namespace TMV.UI.RP.Common
       Dt_Data.Columns.Add("Size_Border", typeof(string));
       Dt_Data.Columns.Add("Ma_Xe", typeof(string));
       Dt_Data.Columns.Add("ma_khoang", typeof(string));
-      Dt_Data.Columns.Add("Dien_Giai", typeof(string));
+      //Dt_Data.Columns.Add("Dien_Giai", typeof(string));
       Dt_Data.Columns.Add("Ngay_BD", typeof(string));
       Dt_Data.Columns.Add("Ngay_KT", typeof(string));
       Dt_Data.Columns.Add("Type", typeof(string));
-      Dt_Data.Columns.Add("Tootip", typeof(string));
+      //Dt_Data.Columns.Add("Tootip", typeof(string));
+      Dt_Data.Columns.Add("Ma_Hs", typeof(string));
+      Dt_Data.Columns.Add("So_RO", typeof(string));
+      Dt_Data.Columns.Add("Uu_Tien", typeof(string));
+      Dt_Data.Columns.Add("Flag", typeof(string));
 
       Dt_Cho_Rua.Columns.Add("ID", typeof(Int32));
       Dt_Cho_Rua.Columns.Add("Stt", typeof(string));
       Dt_Cho_Rua.Columns.Add("Stt_Rec", typeof(string));
       Dt_Cho_Rua.Columns.Add("Ma_Ct", typeof(string)); // !HDK,HDP,HDM 
       Dt_Cho_Rua.Columns.Add("Ma_Xe", typeof(string));
+      Dt_Cho_Rua.Columns.Add("Ma_Hs", typeof(string));
+      Dt_Cho_Rua.Columns.Add("So_RO", typeof(string));
 
       Dt_Dang_Rua.Columns.Add("ID", typeof(Int32));
       Dt_Dang_Rua.Columns.Add("Stt", typeof(string));
       Dt_Dang_Rua.Columns.Add("Stt_Rec", typeof(string));
       Dt_Dang_Rua.Columns.Add("Ma_Ct", typeof(string)); // !HDK,HDP,HDM 
       Dt_Dang_Rua.Columns.Add("Ma_Xe", typeof(string));
+      Dt_Dang_Rua.Columns.Add("Ma_Hs", typeof(string));
+      Dt_Dang_Rua.Columns.Add("So_RO", typeof(string));
 
       Dt_Rua_Xong.Columns.Add("ID", typeof(Int32));
       Dt_Rua_Xong.Columns.Add("Stt", typeof(string));
       Dt_Rua_Xong.Columns.Add("Stt_Rec", typeof(string));
       Dt_Rua_Xong.Columns.Add("Ma_Ct", typeof(string)); // !HDK,HDP,HDM 
       Dt_Rua_Xong.Columns.Add("Ma_Xe", typeof(string));
+      Dt_Rua_Xong.Columns.Add("Ma_Hs", typeof(string));
+      Dt_Rua_Xong.Columns.Add("So_RO", typeof(string));
 
       Dt_Data_Xe.Columns.Add("ID", typeof(Int32));
       Dt_Data_Xe.Columns.Add("Stt", typeof(string));
@@ -243,6 +256,8 @@ namespace TMV.UI.RP.Common
       Dt_Data_Xe.Columns.Add("Backcolor", typeof(string));
       Dt_Data_Xe.Columns.Add("Backcolor2", typeof(string));
       Dt_Data_Xe.Columns.Add("Forecolor", typeof(string));
+      Dt_Data_Xe.Columns.Add("Ma_Hs", typeof(string));
+      Dt_Data_Xe.Columns.Add("So_RO", typeof(string));
 
       Tables.AddRange(new DataTable[] { Dt_Cho_Rua, Dt_Data, Dt_Dang_Rua, Dt_Rua_Xong, Dt_Data_Xe, Dt_Cho_Rua_H, Dt_Dang_Rua_H, Dt_Rua_Xong_H });
     }
@@ -255,29 +270,36 @@ namespace TMV.UI.RP.Common
       DataTable Dt_Rua_Xong = ds.Tables["Dt_Rua_Xong"];
 
       Dt_Data.Rows.Add(new object[] { 
-        1, "1", "1", false, null, "12, 23, 78", 1, 1, "30H11111", "1T1", "DESC", "2022-05-24T10:13:00",
-        "2022-05-24T11:21:00", null, "30H11111" });
+        1, "1", "1", false, null, "12, 23, 78", 0, 1, "29A12345", "1T1", "2022-05-25T10:00:00",
+        "2022-05-25T10:10:00", null, "100010", "S2022052501" });
       Dt_Data.Rows.Add(new object[] {
-        2, "2", "2", false, null, null, 1, 1, "30H22222", "1T1", "DESC", "2022-05-24T11:13:00",
-        "2022-05-24T11:50:00", null, "30H22222" });
+        2, "2", "2", false, null, null, 1, 0, "29A67890", "1T1", "2022-05-25T10:13:00",
+        "2022-05-25T10:23:00", null, "100020", "S2022052502", "1", "2" });
       Dt_Data.Rows.Add(new object[] {
-        3, "3", "3", false, null, "12, 23, 78", 1, 1, "30H33333", "2T1", "DESC", "2022-05-24T13:13:00",
-        "2022-05-24T13:55:00", null, "30H33333" });
+        3, "3", "3", false, null, null, 1, 1, "29A54321", "2T1", "2022-05-25T11:45:00",
+        "2022-05-25T11:55:00", null, "100010", "S2022052503", "1", "3" });
+      Dt_Data.Rows.Add(new object[] {
+        4, "4", "4", false, null, "12, 23, 78", 0, 1, "29A54321", "2T1", "2022-05-25T13:00:00",
+        "2022-05-25T13:10:00", null, "100040", "S2022052504" });
+      Dt_Data.Rows.Add(new object[] {
+        5, "5", "5", false, null, "12, 23, 78", 0, 1, "30H11111", "1T1", "2022-05-25T13:05:00",
+        "2022-05-25T13:15:00", null, "100050", "S2022052505", "1", "1" });
+      Dt_Data.Rows.Add(new object[] {
+        6, "6", "6", false, null, "12, 23, 78", 0, 1, "29H22222", "2T1", "2022-05-25T13:13:00",
+        "2022-05-25T13:23:00", null, "100010", "S2022052506" });
 
-      Dt_Cho_Rua.Rows.Add(new object[] { 1, "1", "1", "HDK", "30H26603" });
-      Dt_Cho_Rua.Rows.Add(new object[] { 2, "2", "2", "HDP", "29H46603" });
-      Dt_Cho_Rua.Rows.Add(new object[] { 3, "3", "3", "HDM", "30M53201" });
-      Dt_Cho_Rua.Rows.Add(new object[] { 4, "4", "4", "HDK", "30H96604" });
+      Dt_Cho_Rua.Rows.Add(new object[] { 1, "1", "1", "HDK", "29A12345", "100010", "S2022052501" });
+      Dt_Cho_Rua.Rows.Add(new object[] { 2, "2", "2", "HDP", "29A67890", "100020", "S2022052502" });
+      Dt_Cho_Rua.Rows.Add(new object[] { 3, "3", "3", "HDM", "29A54321", "100010", "S2022052503" });
+      Dt_Cho_Rua.Rows.Add(new object[] { 4, "4", "4", "HDK", "29A45678", "100040", "S2022052504" });
 
-      Dt_Dang_Rua.Rows.Add(new object[] { 1, "1", "1", "HDK", "30H11111" });
-      Dt_Dang_Rua.Rows.Add(new object[] { 2, "2", "2", "HDP", "29H22222" });
-      Dt_Dang_Rua.Rows.Add(new object[] { 3, "3", "3", "HDM", "30M33333" });
-      Dt_Dang_Rua.Rows.Add(new object[] { 4, "4", "4", "HDK", "30H44444" });
+      Dt_Dang_Rua.Rows.Add(new object[] { 1, "1", "1", "HDK", "30H11111", "100050", "S2022052505" });
+      Dt_Dang_Rua.Rows.Add(new object[] { 2, "2", "2", "HDP", "29H22222", "100010", "S2022052506" });
 
-      Dt_Rua_Xong.Rows.Add(new object[] { 1, "1", "1", "HDK", "30H55555" });
-      Dt_Rua_Xong.Rows.Add(new object[] { 2, "2", "2", "HDP", "29H66666" });
-      Dt_Rua_Xong.Rows.Add(new object[] { 3, "3", "3", "HDM", "30M77777" });
-      Dt_Rua_Xong.Rows.Add(new object[] { 4, "4", "4", "HDK", "30H88888" });
+      Dt_Rua_Xong.Rows.Add(new object[] { 1, "1", "1", "HDK", "30H55555", "100010", "S2022052509" });
+      Dt_Rua_Xong.Rows.Add(new object[] { 2, "2", "2", "HDP", "29H66666", "100070", "S2022052510" });
+      Dt_Rua_Xong.Rows.Add(new object[] { 3, "3", "3", "HDM", "30M77777", "100020", "S2022052511" });
+      Dt_Rua_Xong.Rows.Add(new object[] { 4, "4", "4", "HDK", "30H88888", "100090", "S2022052512" });
 
       return ds;
     }
