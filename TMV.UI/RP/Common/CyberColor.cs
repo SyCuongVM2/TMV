@@ -9,10 +9,12 @@ namespace TMV.UI.RP.Common
     public Color GetBackColorDefault() => Color.White;
     public Color GetForeColorDefault() => Color.Navy;
     public Color GetBackColorReportsDefault() => Color.White;
+
     public Color GetBackColor(string ColorName)
     {
       Color color = GetBackColorDefault();
       Color backColor;
+
       if (ColorName == "")
         backColor = GetBackColorDefault();
       else
@@ -79,80 +81,6 @@ namespace TMV.UI.RP.Common
       }
       return foreColor;
     }
-    public void V_GetColorBold(
-      DataTable _Dt,
-      ref bool _Bold,
-      ref bool _BackColor,
-      ref bool _BackColor2,
-      ref bool _ForeColor,
-      ref string _FieldBold,
-      ref string _FieldBackColor,
-      ref string _FieldBackColor2,
-      ref string _FieldForeColor)
-    {
-      if (_Dt == null)
-        return;
-      if (_Dt.Columns.Contains("Bold"))
-      {
-        _Bold = true;
-        _FieldBold = _Dt.Columns["Bold"].ColumnName;
-      }
-      if (_Dt.Columns.Contains("Backcolor"))
-      {
-        _BackColor = true;
-        _FieldBackColor = _Dt.Columns["Backcolor"].ColumnName;
-      }
-      if (_Dt.Columns.Contains("Backcolor2"))
-      {
-        _BackColor2 = true;
-        _FieldBackColor2 = _Dt.Columns["Backcolor2"].ColumnName;
-      }
-      if (!_Dt.Columns.Contains("Forecolor"))
-        return;
-      _ForeColor = true;
-      _FieldForeColor = _Dt.Columns["Forecolor"].ColumnName;
-    }
-    public void V_GetColorBold2(
-      DataTable _Dt,
-      ref bool _Bold,
-      ref bool _BackColor,
-      ref bool _BackColor2,
-      ref bool _ForeColor,
-      ref bool _Underline,
-      ref string _FieldBold,
-      ref string _FieldBackColor,
-      ref string _FieldBackColor2,
-      ref string _FieldForeColor,
-      ref string _FieldUnderLine)
-    {
-      if (_Dt == null)
-        return;
-      if (_Dt.Columns.Contains("Bold"))
-      {
-        _Bold = true;
-        _FieldBold = _Dt.Columns["Bold"].ColumnName;
-      }
-      if (_Dt.Columns.Contains("Backcolor"))
-      {
-        _BackColor = true;
-        _FieldBackColor = _Dt.Columns["Backcolor"].ColumnName;
-      }
-      if (_Dt.Columns.Contains("Backcolor2"))
-      {
-        _BackColor2 = true;
-        _FieldBackColor2 = _Dt.Columns["Backcolor2"].ColumnName;
-      }
-      if (_Dt.Columns.Contains("Forecolor"))
-      {
-        _ForeColor = true;
-        _FieldForeColor = _Dt.Columns["Forecolor"].ColumnName;
-      }
-      if (!_Dt.Columns.Contains("UnderLine"))
-        return;
-      _Underline = true;
-      _FieldUnderLine = _Dt.Columns["UnderLine"].ColumnName;
-    }
-
     public Color GetBacColorkReports(string ColorName)
     {
       Color color = GetBackColorReportsDefault();
@@ -188,6 +116,65 @@ namespace TMV.UI.RP.Common
         bacColorkReports = color;
       }
       return bacColorkReports;
+    }
+    public void V_GetColorBold(DataTable _Dt, ref bool _Bold, ref bool _BackColor, ref bool _BackColor2, ref bool _ForeColor, ref string _FieldBold, ref string _FieldBackColor, ref string _FieldBackColor2, ref string _FieldForeColor)
+    {
+      if (_Dt == null)
+        return;
+      if (_Dt.Columns.Contains("Bold"))
+      {
+        _Bold = true;
+        _FieldBold = _Dt.Columns["Bold"].ColumnName;
+      }
+      if (_Dt.Columns.Contains("Backcolor"))
+      {
+        _BackColor = true;
+        _FieldBackColor = _Dt.Columns["Backcolor"].ColumnName;
+      }
+      if (_Dt.Columns.Contains("Backcolor2"))
+      {
+        _BackColor2 = true;
+        _FieldBackColor2 = _Dt.Columns["Backcolor2"].ColumnName;
+      }
+      if (!_Dt.Columns.Contains("Forecolor"))
+        return;
+      _ForeColor = true;
+      _FieldForeColor = _Dt.Columns["Forecolor"].ColumnName;
+    }
+    public void V_GetColorBold2(DataTable _Dt, ref bool _Bold, ref bool _BackColor, ref bool _BackColor2, ref bool _ForeColor, ref bool _Underline, ref string _FieldBold, ref string _FieldBackColor, ref string _FieldBackColor2, ref string _FieldForeColor, ref string _FieldUnderLine)
+    {
+      if (_Dt == null)
+        return;
+
+      if (_Dt.Columns.Contains("Bold"))
+      {
+        _Bold = true;
+        _FieldBold = _Dt.Columns["Bold"].ColumnName;
+      }
+
+      if (_Dt.Columns.Contains("Backcolor"))
+      {
+        _BackColor = true;
+        _FieldBackColor = _Dt.Columns["Backcolor"].ColumnName;
+      }
+
+      if (_Dt.Columns.Contains("Backcolor2"))
+      {
+        _BackColor2 = true;
+        _FieldBackColor2 = _Dt.Columns["Backcolor2"].ColumnName;
+      }
+
+      if (_Dt.Columns.Contains("Forecolor"))
+      {
+        _ForeColor = true;
+        _FieldForeColor = _Dt.Columns["Forecolor"].ColumnName;
+      }
+
+      if (!_Dt.Columns.Contains("UnderLine"))
+        return;
+
+      _Underline = true;
+      _FieldUnderLine = _Dt.Columns["UnderLine"].ColumnName;
     }
   }
 }

@@ -216,14 +216,15 @@ namespace TMV.UI.RP.Common
       Dt_Data.Columns.Add("Ma_Xe", typeof(string));
       Dt_Data.Columns.Add("ma_khoang", typeof(string));
       //Dt_Data.Columns.Add("Dien_Giai", typeof(string));
-      Dt_Data.Columns.Add("Ngay_BD", typeof(string));
-      Dt_Data.Columns.Add("Ngay_KT", typeof(string));
+      Dt_Data.Columns.Add("Ngay_BD", typeof(DateTime));
+      Dt_Data.Columns.Add("Ngay_KT", typeof(DateTime));
       Dt_Data.Columns.Add("Type", typeof(string));
       //Dt_Data.Columns.Add("Tootip", typeof(string));
       Dt_Data.Columns.Add("Ma_Hs", typeof(string));
       Dt_Data.Columns.Add("So_RO", typeof(string));
       Dt_Data.Columns.Add("Uu_Tien", typeof(string));
       Dt_Data.Columns.Add("Flag", typeof(string));
+      Dt_Data.Columns.Add("Backcolor", typeof(string));
 
       Dt_Cho_Rua.Columns.Add("ID", typeof(Int32));
       Dt_Cho_Rua.Columns.Add("Stt", typeof(string));
@@ -270,23 +271,23 @@ namespace TMV.UI.RP.Common
       DataTable Dt_Rua_Xong = ds.Tables["Dt_Rua_Xong"];
 
       Dt_Data.Rows.Add(new object[] { 
-        1, "1", "1", false, null, "12, 23, 78", 0, 1, "29A12345", "1T1", "2022-05-25T10:00:00",
-        "2022-05-25T10:10:00", null, "100010", "S2022052501" });
+        1, "1", "1", false, null, "12, 23, 78", 0, 1, "29A12345", "1T1", DateTime.Now.Date.Add(new TimeSpan(10, 0, 0)),
+        DateTime.Now.Date.Add(new TimeSpan(10, 10, 0)), null, "100010", "S2022052501", null, null, "0,255,128" });
       Dt_Data.Rows.Add(new object[] {
-        2, "2", "2", false, null, null, 1, 0, "29A67890", "1T1", "2022-05-25T10:13:00",
-        "2022-05-25T10:23:00", null, "100020", "S2022052502", "1", "2" });
+        2, "2", "2", false, null, null, 1, 0, "29A67890", "1T1", DateTime.Now.Date.Add(new TimeSpan(10, 13, 0)),
+        DateTime.Now.Date.Add(new TimeSpan(10, 23, 0)), null, "100020", "S2022052502", "1", "2", "0,255,128" });
       Dt_Data.Rows.Add(new object[] {
-        3, "3", "3", false, null, null, 1, 1, "29A54321", "2T1", "2022-05-25T11:45:00",
-        "2022-05-25T11:55:00", null, "100010", "S2022052503", "1", "3" });
+        3, "3", "3", false, null, null, 1, 1, "29A54321", "2T1", DateTime.Now.Date.Add(new TimeSpan(11, 45, 0)),
+        DateTime.Now.Date.Add(new TimeSpan(11, 55, 0)), null, "100010", "S2022052503", "1", "3", "0,255,128" });
       Dt_Data.Rows.Add(new object[] {
-        4, "4", "4", false, null, "12, 23, 78", 0, 1, "29A54321", "2T1", "2022-05-25T13:00:00",
-        "2022-05-25T13:10:00", null, "100040", "S2022052504" });
+        4, "4", "4", false, null, "12, 23, 78", 0, 1, "29A54321", "2T1", DateTime.Now.Date.Add(new TimeSpan(13, 0, 0)),
+        DateTime.Now.Date.Add(new TimeSpan(13, 10, 0)), null, "100040", "S2022052504", null, null, "0,255,128" });
       Dt_Data.Rows.Add(new object[] {
-        5, "5", "5", false, null, "12, 23, 78", 0, 1, "30H11111", "1T1", "2022-05-25T13:05:00",
-        "2022-05-25T13:15:00", null, "100050", "S2022052505", "1", "1" });
+        5, "5", "5", false, null, "12, 23, 78", 0, 1, "30H11111", "1T1", DateTime.Now.Date.Add(new TimeSpan(13, 5, 0)),
+        DateTime.Now.Date.Add(new TimeSpan(13, 15, 0)), null, "100050", "S2022052505", "1", "1", "0,128,255" });
       Dt_Data.Rows.Add(new object[] {
-        6, "6", "6", false, null, "12, 23, 78", 0, 1, "29H22222", "2T1", "2022-05-25T13:13:00",
-        "2022-05-25T13:23:00", null, "100010", "S2022052506" });
+        6, "6", "6", false, null, "12, 23, 78", 0, 1, "29H22222", "2T1", DateTime.Now.Date.Add(new TimeSpan(13, 15, 0)),
+        DateTime.Now.Date.Add(new TimeSpan(13, 23, 0)), null, "100010", "S2022052506", null, null, "0,128,255" });
 
       Dt_Cho_Rua.Rows.Add(new object[] { 1, "1", "1", "HDK", "29A12345", "100010", "S2022052501" });
       Dt_Cho_Rua.Rows.Add(new object[] { 2, "2", "2", "HDP", "29A67890", "100020", "S2022052502" });

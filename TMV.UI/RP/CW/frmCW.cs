@@ -599,39 +599,39 @@ namespace TMV.UI.RP.CW
           if (Left3 == "1")
           {
             Graphics graphics = e.Graphics;
-            Bitmap flag1_1 = Properties.Resources.Warning;
+            Image flag1_1 = ImageResourceCache.Default.GetImage("images/communication/wifi_16x16.png");
             rectangle1 = new Rectangle(objectInfo.ImageBounds.X, objectInfo.ImageBounds.Y, num, num);
             Rectangle rect = rectangle1;
-            graphics.DrawImage((Image)flag1_1, rect);
+            graphics.DrawImage(flag1_1, rect);
           }
           else if (Left3 == "2")
           {
             Graphics graphics = e.Graphics;
-            Bitmap flag2_1 = Properties.Resources.Warning;
+            Image flag2_1 = ImageResourceCache.Default.GetImage("images/communication/radio_16x16.png");
             rectangle1 = new Rectangle(objectInfo.ImageBounds.X, objectInfo.ImageBounds.Y, num, num);
             Rectangle rect = rectangle1;
-            graphics.DrawImage((Image)flag2_1, rect);
+            graphics.DrawImage(flag2_1, rect);
           }
           else if (Left3 == "3")
           {
             Graphics graphics = e.Graphics;
-            Bitmap flag3_1 = Properties.Resources.Warning;
+            Image flag3_1 = ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png");
             rectangle1 = new Rectangle(objectInfo.ImageBounds.X, objectInfo.ImageBounds.Y, num, num);
             Rectangle rect = rectangle1;
-            graphics.DrawImage((Image)flag3_1, rect);
+            graphics.DrawImage(flag3_1, rect);
           }
           else if (Left3 == "4")
           {
             Graphics graphics = e.Graphics;
-            Bitmap flag4_1 = Properties.Resources.Warning;
+            Image flag4_1 = ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png");
             rectangle1 = new Rectangle(objectInfo.ImageBounds.X, objectInfo.ImageBounds.Y, num, num);
             Rectangle rect = rectangle1;
-            graphics.DrawImage((Image)flag4_1, rect);
+            graphics.DrawImage(flag4_1, rect);
           }
           else
           {
             Graphics graphics = e.Graphics;
-            Bitmap flag1_2 = Properties.Resources.Warning;
+            Image flag1_2 = ImageResourceCache.Default.GetImage("images/tasks/status_16x16.png");
             rectangle1 = new Rectangle(objectInfo.ImageBounds.X, objectInfo.ImageBounds.Y, num, num);
             Rectangle rect = rectangle1;
             graphics.DrawImage(flag1_2, rect);
@@ -840,6 +840,7 @@ namespace TMV.UI.RP.CW
       {
         MessageBox.Show("V_AppointmentViewInfoCustomizing1: " + ex.Message);
       }
+
       if (str1.Trim() == "" || dataRowArray == null || dataRowArray.Length == 0)
         return;
 
@@ -850,6 +851,7 @@ namespace TMV.UI.RP.CW
         flag = (dataRowArray[0]["Italic"].ToString().Trim() == "1");
       if (!_BackColor_Data & !_BackColor2_Data & !_ForeColor_Data & !_BorderColor_Data & !_Bold_Data & !_Underline_Data & !flag)
         return;
+
       try
       {
         if (_BackColor_Data)
@@ -1158,7 +1160,8 @@ namespace TMV.UI.RP.CW
       PopupMenuRua_Xong.ShowPopup(MousePosition);
     }
     private void MasterCho_RuaGRV_RowCellStyle(object sender, RowCellStyleEventArgs e) => 
-      GRV_RowCellStyle2(sender, e, MasterCho_RuaGRV, _Bold_Cho_KH, _BackColor_Cho_KH, _BackColor2_Cho_KH, _ForeColor_Cho_KH, 
+      GRV_RowCellStyle2(
+        sender, e, MasterCho_RuaGRV, _Bold_Cho_KH, _BackColor_Cho_KH, _BackColor2_Cho_KH, _ForeColor_Cho_KH, 
         _Underline_Cho_KH, _FieldBold_Cho_KH, _FieldBackColor_Cho_KH, _FieldBackColor2_Cho_KH, 
         _FieldForeColor_Cho_KH, _FieldUnderline_Cho_KH);
     private void MasterDang_Rua_KHGRV_RowCellStyle(object sender, RowCellStyleEventArgs e) => 
@@ -1184,6 +1187,7 @@ namespace TMV.UI.RP.CW
         str2 = _GRV.GetRowCellDisplayText(e.RowHandle, _FieldBold).ToString().Trim();
       if (_Bold & str2.Trim() == "1")
         flag2 = true;
+
       e.Appearance.Font = !flag2 ? (!flag1 ? new Font(Font.FontFamily, Font.Size, FontStyle.Regular) : 
                                              new Font(Font.FontFamily, Font.Size, FontStyle.Underline)) :
                                              (!flag1 ? new Font(Font.FontFamily, Font.Size, FontStyle.Bold) : 
@@ -1799,24 +1803,34 @@ namespace TMV.UI.RP.CW
         MasterCho_RuaGRV.OptionsView.ShowViewCaption = false;
         MasterCho_RuaGRV.OptionsSelection.MultiSelect = false;
         MasterCho_RuaGRV.Appearance.SelectedRow.BackColor = Color.YellowGreen;
-        CyberColor.V_GetColorBold2(Dt_Cho_Rua, ref _Bold_Cho_KH, ref _BackColor_Cho_KH, ref _BackColor2_Cho_KH, ref _ForeColor_Cho_KH, ref _Underline_Cho_KH, ref _FieldBold_Cho_KH, ref _FieldBackColor_Cho_KH, ref _FieldBackColor2_Cho_KH, ref _FieldForeColor_Cho_KH, ref _FieldUnderline_Cho_KH);
-        CyberColor.V_GetColorBold2(Dt_Data, ref _Bold_Data, ref _BackColor_Data, ref _BackColor2_Data, ref _ForeColor_Data, ref _Underline_Data, ref _FieldBold_Data, ref _FieldBackColor_Data, ref _FieldBackColor2_Data, ref _FieldForeColor_Data, ref _FieldUnderline_Data);
+        CyberColor.V_GetColorBold2(
+          Dt_Cho_Rua, ref _Bold_Cho_KH, ref _BackColor_Cho_KH, ref _BackColor2_Cho_KH, ref _ForeColor_Cho_KH, ref _Underline_Cho_KH, 
+          ref _FieldBold_Cho_KH, ref _FieldBackColor_Cho_KH, ref _FieldBackColor2_Cho_KH, ref _FieldForeColor_Cho_KH, ref _FieldUnderline_Cho_KH);
+
+        CyberColor.V_GetColorBold2(
+          Dt_Data, ref _Bold_Data, ref _BackColor_Data, ref _BackColor2_Data, ref _ForeColor_Data, ref _Underline_Data, 
+          ref _FieldBold_Data, ref _FieldBackColor_Data, ref _FieldBackColor2_Data, ref _FieldForeColor_Data, ref _FieldUnderline_Data);
+       
         if (Dt_Data.Columns.Contains("Border") & Dt_Data.Columns.Contains("BorderColor") & Dt_Data.Columns.Contains("SizeBorder"))
           _BorderColor_Data = true;
         if (_BorderColor_Data)
           _FieldBorderColor_Data = Dt_Data.Columns["BorderColor"].ColumnName;
+
         MasterDang_Rua.DataSource = Dv_Dang_Rua;
         MasterDang_RuaGRV.GridControl = MasterDang_Rua;
-
         MasterDang_RuaGRV.Appearance.SelectedRow.BackColor = Color.YellowGreen;
         MasterDang_RuaGRV.OptionsSelection.MultiSelect = false;
-        CyberColor.V_GetColorBold2(Dt_Dang_Rua, ref _Bold_Dang_Rua_KH, ref _BackColor_Dang_Rua_KH, ref _BackColor2_Dang_Rua_KH, ref _ForeColor_Dang_Rua_KH, ref _Underline_Dang_Rua_KH, ref _FieldBold_Dang_Rua_KH, ref _FieldBackColor_Dang_Rua_KH, ref _FieldBackColor2_Dang_Rua_KH, ref _FieldForeColor_Dang_Rua_KH, ref _FieldUnderline_Dang_Rua_KH);
+        CyberColor.V_GetColorBold2(
+          Dt_Dang_Rua, ref _Bold_Dang_Rua_KH, ref _BackColor_Dang_Rua_KH, ref _BackColor2_Dang_Rua_KH, ref _ForeColor_Dang_Rua_KH, 
+          ref _Underline_Dang_Rua_KH, ref _FieldBold_Dang_Rua_KH, ref _FieldBackColor_Dang_Rua_KH, ref _FieldBackColor2_Dang_Rua_KH, ref _FieldForeColor_Dang_Rua_KH, ref _FieldUnderline_Dang_Rua_KH);
+        
         MasterRua_Xong.DataSource = Dv_Rua_Xong;
         MasterRua_XongGRV.GridControl = MasterRua_Xong;
-
         MasterRua_XongGRV.Appearance.SelectedRow.BackColor = Color.YellowGreen;
         MasterRua_XongGRV.OptionsSelection.MultiSelect = false;
-        CyberColor.V_GetColorBold2(Dt_Rua_Xong, ref _Bold_Rua_Xong_KH, ref _BackColor_Rua_Xong_KH, ref _BackColor2_Rua_Xong_KH, ref _ForeColor_Rua_Xong_KH, ref _Underline_Rua_Xong_KH, ref _FieldBold_Rua_Xong_KH, ref _FieldBackColor_Rua_Xong_KH, ref _FieldBackColor2_Rua_Xong_KH, ref _FieldForeColor_Rua_Xong_KH, ref _FieldUnderline_Rua_Xong_KH);
+        CyberColor.V_GetColorBold2(
+          Dt_Rua_Xong, ref _Bold_Rua_Xong_KH, ref _BackColor_Rua_Xong_KH, ref _BackColor2_Rua_Xong_KH, ref _ForeColor_Rua_Xong_KH, 
+          ref _Underline_Rua_Xong_KH, ref _FieldBold_Rua_Xong_KH, ref _FieldBackColor_Rua_Xong_KH, ref _FieldBackColor2_Rua_Xong_KH, ref _FieldForeColor_Rua_Xong_KH, ref _FieldUnderline_Rua_Xong_KH);
       }
       else if (_Stt_Rec.Trim() == "")
       {
