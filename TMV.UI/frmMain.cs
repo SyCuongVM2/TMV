@@ -13,6 +13,7 @@ using TMV.BusinessObject.Admin;
 using TMV.Common;
 using TMV.UI.Admin;
 using TMV.UI.RP.CW;
+using TMV.UI.RP.GJ;
 
 namespace TMV.UI
 {
@@ -170,6 +171,9 @@ namespace TMV.UI
             break;
           case "siCW":
             AddForm(new frmCW(), true);
+            break;
+          case "siGJ":
+            AddForm(new frmGJ(), true);
             break;
         }
       }

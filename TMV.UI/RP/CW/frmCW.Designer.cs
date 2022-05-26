@@ -670,6 +670,7 @@ namespace TMV.UI.RP.CW
       // CbbMa_HS
       // 
       this.CbbMa_HS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.CbbMa_HS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbMa_HS.FormattingEnabled = true;
       this.CbbMa_HS.Location = new System.Drawing.Point(1418, -5);
       this.CbbMa_HS.Name = "CbbMa_HS";
@@ -688,6 +689,7 @@ namespace TMV.UI.RP.CW
       this.TxtMa_Xe.Size = new System.Drawing.Size(145, 27);
       this.TxtMa_Xe.TabIndex = 15;
       this.TxtMa_Xe.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      this.toolTip1.SetToolTip(this.TxtMa_Xe, "Tìm kiếm theo biển số");
       // 
       // TxtSo_RO
       // 
@@ -701,6 +703,7 @@ namespace TMV.UI.RP.CW
       this.TxtSo_RO.Size = new System.Drawing.Size(145, 27);
       this.TxtSo_RO.TabIndex = 14;
       this.TxtSo_RO.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      this.toolTip1.SetToolTip(this.TxtSo_RO, "Tìm kiếm theo RO");
       // 
       // LabKQ_RX
       // 
@@ -790,6 +793,7 @@ namespace TMV.UI.RP.CW
       // CbbGio_Xem
       // 
       this.CbbGio_Xem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.CbbGio_Xem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbGio_Xem.FormattingEnabled = true;
       this.CbbGio_Xem.Location = new System.Drawing.Point(588, -3);
       this.CbbGio_Xem.Name = "CbbGio_Xem";
@@ -799,6 +803,7 @@ namespace TMV.UI.RP.CW
       // CbbCa_Ngay
       // 
       this.CbbCa_Ngay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.CbbCa_Ngay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbCa_Ngay.FormattingEnabled = true;
       this.CbbCa_Ngay.Location = new System.Drawing.Point(466, -3);
       this.CbbCa_Ngay.Name = "CbbCa_Ngay";
@@ -808,6 +813,7 @@ namespace TMV.UI.RP.CW
       // CbbKieu_Xem
       // 
       this.CbbKieu_Xem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.CbbKieu_Xem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbKieu_Xem.FormattingEnabled = true;
       this.CbbKieu_Xem.Location = new System.Drawing.Point(343, -3);
       this.CbbKieu_Xem.Name = "CbbKieu_Xem";
@@ -817,6 +823,7 @@ namespace TMV.UI.RP.CW
       // CbbDo_Rong
       // 
       this.CbbDo_Rong.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.CbbDo_Rong.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbDo_Rong.FormattingEnabled = true;
       this.CbbDo_Rong.Location = new System.Drawing.Point(258, -3);
       this.CbbDo_Rong.Name = "CbbDo_Rong";
@@ -827,6 +834,7 @@ namespace TMV.UI.RP.CW
       // 
       this.CbbMa_BN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.CbbMa_BN.Cursor = System.Windows.Forms.Cursors.IBeam;
+      this.CbbMa_BN.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbMa_BN.FormattingEnabled = true;
       this.CbbMa_BN.Location = new System.Drawing.Point(172, -3);
       this.CbbMa_BN.Name = "CbbMa_BN";
@@ -837,6 +845,7 @@ namespace TMV.UI.RP.CW
       // CbbTime_Data
       // 
       this.CbbTime_Data.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.CbbTime_Data.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbTime_Data.FormattingEnabled = true;
       this.CbbTime_Data.Location = new System.Drawing.Point(87, -3);
       this.CbbTime_Data.Name = "CbbTime_Data";

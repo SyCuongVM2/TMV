@@ -141,6 +141,12 @@
     <Compile Include="RP\CW\frmCW.Designer.cs">
       <DependentUpon>frmCW.cs</DependentUpon>
     </Compile>
+    <Compile Include="RP\GJ\frmGJ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RP\GJ\frmGJ.Designer.cs">
+      <DependentUpon>frmGJ.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Admin\frmChangePassword.resx">
       <DependentUpon>frmChangePassword.cs</DependentUpon>
     </EmbeddedResource>
@@ -185,6 +191,9 @@
     <EmbeddedResource Include="RP\CW\frmCW.resx">
       <DependentUpon>frmCW.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RP\GJ\frmGJ.resx">
+      <DependentUpon>frmGJ.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config" />
     <None Include="AutoUpdate.csv" />
     <None Include="Properties\Settings.settings">
@@ -199,7 +208,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="RP\BP\" />
-    <Folder Include="RP\GJ\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TMV.AutoUpdate\TMV.AutoUpdate.csproj">
