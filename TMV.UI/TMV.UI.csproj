@@ -123,28 +123,42 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="JPCB\Common\CyberFuncs.cs" />
+    <Compile Include="JPCB\Common\GridviewDragDrop.cs" />
+    <Compile Include="JPCB\JP\frmJP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JPCB\JP\frmJP.Designer.cs">
+      <DependentUpon>frmJP.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RP\Common\CyberColor.cs" />
-    <Compile Include="RP\Common\CyberColumnGridView.cs" />
-    <Compile Include="RP\Common\CyberData.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="RP\Common\CyberMenuPopup.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="RP\Common\CyberTimeScaleDay.cs" />
-    <Compile Include="RP\Common\TimeScaleLessThanDay.cs" />
-    <Compile Include="RP\CW\frmCW.cs">
+    <Compile Include="JPCB\BP\frmBP.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RP\CW\frmCW.Designer.cs">
+    <Compile Include="JPCB\BP\frmBP.Designer.cs">
+      <DependentUpon>frmBP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="JPCB\Common\CyberColor.cs" />
+    <Compile Include="JPCB\Common\CyberColumnGridView.cs" />
+    <Compile Include="JPCB\Common\CyberData.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="JPCB\Common\CyberMenuPopup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="JPCB\Common\CyberTimeScaleDay.cs" />
+    <Compile Include="JPCB\Common\TimeScaleLessThanDay.cs" />
+    <Compile Include="JPCB\CW\frmCW.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JPCB\CW\frmCW.Designer.cs">
       <DependentUpon>frmCW.cs</DependentUpon>
     </Compile>
-    <Compile Include="RP\GJ\frmGJ.cs">
+    <Compile Include="JPCB\GJ\frmGJ.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RP\GJ\frmGJ.Designer.cs">
+    <Compile Include="JPCB\GJ\frmGJ.Designer.cs">
       <DependentUpon>frmGJ.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Admin\frmChangePassword.resx">
@@ -177,6 +191,9 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="JPCB\JP\frmJP.resx">
+      <DependentUpon>frmJP.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -188,10 +205,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="RP\CW\frmCW.resx">
+    <EmbeddedResource Include="JPCB\BP\frmBP.resx">
+      <DependentUpon>frmBP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JPCB\CW\frmCW.resx">
       <DependentUpon>frmCW.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RP\GJ\frmGJ.resx">
+    <EmbeddedResource Include="JPCB\GJ\frmGJ.resx">
       <DependentUpon>frmGJ.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
@@ -206,9 +226,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="RP\BP\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\TMV.AutoUpdate\TMV.AutoUpdate.csproj">
       <Project>{09e62a7c-56f8-4432-8bd1-82e94423f598}</Project>

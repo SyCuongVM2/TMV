@@ -139,11 +139,13 @@ D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.Admin.frmUserEdit.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.Admin.frmUserRightList.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.frmMain.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.Properties.Resources.resources
-D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.RP.CW.frmCW.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.csproj.GenerateResource.cache
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.exe.licenses
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.csproj.CoreCompileInputs.cache
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.csproj.CopyComplete
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.exe
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.pdb
-D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.RP.GJ.frmGJ.resources
+D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.BP.frmBP.resources
+D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.CW.frmCW.resources
+D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.GJ.frmGJ.resources
+D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.JP.frmJP.resources

@@ -13,9 +13,9 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using TMV.Common;
-using TMV.UI.RP.Common;
+using TMV.UI.JPCB.Common;
 
-namespace TMV.UI.RP.CW
+namespace TMV.UI.JPCB.CW
 { 
   public partial class frmCW : DevExpress.XtraEditors.XtraForm
   {
@@ -75,6 +75,7 @@ namespace TMV.UI.RP.CW
     private DataTable Dt_Rua_Xong_H;
     private DataTable Dt_Xe_H;
     private CyberColor CyberColor = new CyberColor();
+    private CyberFuncs CyberFunc = new CyberFuncs();
     private bool _Bold_Cho_KH = false;
     private bool _BackColor_Cho_KH = false;
     private bool _BackColor2_Cho_KH = false;
@@ -140,7 +141,7 @@ namespace TMV.UI.RP.CW
     {
       resourcesTree1.VertScrollVisibility = ScrollVisibility.Never;
       resourcesTree1.OptionsView.ShowIndicator = false;
-      resourcesTree1.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.None;
+      resourcesTree1.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.RowFocus;
       resourcesTree1.TreeLineStyle = LineStyle.None;
       resourcesTree1.OptionsView.ShowHorzLines = false;
       resourcesTree1.Visible = false;
@@ -222,9 +223,9 @@ namespace TMV.UI.RP.CW
         }
       };
 
-      V_FillComBoxDefaul(CbbTime_Data, Dt_Time, "Tg", "Ten_Tg");
-      V_FillComBoxDefaul(CbbCa_Ngay, Dt_Ca_Ngay, "Ca_Ngay", "Ten");
-      V_FillComBoxDefaul(CbbGio_Xem, Dt_Gio_Xem, "Gio_Xem", "Ten");
+      CyberFunc.V_FillComBoxDefaul(CbbTime_Data, Dt_Time, "Tg", "Ten_Tg");
+      CyberFunc.V_FillComBoxDefaul(CbbCa_Ngay, Dt_Ca_Ngay, "Ca_Ngay", "Ten");
+      CyberFunc.V_FillComBoxDefaul(CbbGio_Xem, Dt_Gio_Xem, "Gio_Xem", "Ten");
     }
     private void V_Load() 
     {
@@ -236,13 +237,13 @@ namespace TMV.UI.RP.CW
       DmKhoang_Loc_KH_SCC = dataSet1.Tables[4].Copy();
       DmKhoang_KH_SCC = DmKhoang_Loc_KH_SCC.Copy();
 
-      V_DeleteRowEmpty(DmKhoang_KH_SCC, "Ma_Khoang");
+      CyberFunc.V_DeleteRowEmpty(DmKhoang_KH_SCC, "Ma_Khoang");
 
       Dv_DmKhoang_KH_SCC = new DataView(DmKhoang_KH_SCC);
       DmCVDV_Loc_KH_SCC = dataSet1.Tables[5].Copy();
       DmCVDV_KH_SCC = DmCVDV_Loc_KH_SCC.Copy();
 
-      V_DeleteRowEmpty(DmCVDV_KH_SCC, "Ma_HS");
+      CyberFunc.V_DeleteRowEmpty(DmCVDV_KH_SCC, "Ma_HS");
 
       Dv_DmCVDV_KH_SCC = new DataView(DmCVDV_KH_SCC);
       Dt_Kieu_Xem = dataSet1.Tables[6].Copy();
@@ -266,12 +267,12 @@ namespace TMV.UI.RP.CW
       SchedulerControl.LimitInterval.End = M_Ngay_LimitInterval_Max_RX;
       SchedulerControl.Start = Convert.ToDateTime(Dt_Set_SCC.Rows[0]["Ngay_Ct"]);
 
-      V_FillComBoxDefaul(CbbMa_HS, DmCVDV_Loc_KH_SCC, "Ma_Hs", "Ten_Hs", "Ngam_Dinh");
-      V_FillComBoxDefaul(CbbMa_BN, Dt_Buoc_Nhay_KH_SCC, "Ma_BN", "Ten_BN", "Ngam_Dinh");
-      V_FillComBoxDefaul(CbbDo_Rong, Dt_Do_Rong_KH_SCC, "Ma_Width", "Ten_Width", "Ngam_Dinh");
-      V_FillComBoxDefaul(CbbKieu_Xem, Dt_Kieu_Xem, "Kieu_Xem", "Ten_Kieu", "Ngam_Dinh");
+      CyberFunc.V_FillComBoxDefaul(CbbMa_HS, DmCVDV_Loc_KH_SCC, "Ma_Hs", "Ten_Hs", "Ngam_Dinh");
+      CyberFunc.V_FillComBoxDefaul(CbbMa_BN, Dt_Buoc_Nhay_KH_SCC, "Ma_BN", "Ten_BN", "Ngam_Dinh");
+      CyberFunc.V_FillComBoxDefaul(CbbDo_Rong, Dt_Do_Rong_KH_SCC, "Ma_Width", "Ten_Width", "Ngam_Dinh");
+      CyberFunc.V_FillComBoxDefaul(CbbKieu_Xem, Dt_Kieu_Xem, "Kieu_Xem", "Ten_Kieu", "Ngam_Dinh");
 
-      V_Kieu_Xem(V_GetvalueCombox(CbbKieu_Xem));
+      V_Kieu_Xem(CyberFunc.V_GetvalueCombox(CbbKieu_Xem));
       V_LoadDatabases("1", "");
     }
     private void V_GetColumn()
@@ -371,7 +372,7 @@ namespace TMV.UI.RP.CW
     {
       SchedulerControl.DateNavigationBar.Visible = false;
 
-      if (V_GetvalueCombox(CbbGio_Xem) == "01")
+      if (CyberFunc.V_GetvalueCombox(CbbGio_Xem) == "01")
       {
         SchedulerControl.ActiveViewType = SchedulerViewType.Gantt;
         SchedulerControl.OptionsView.ResourceHeaders.Height = 80;
@@ -436,7 +437,7 @@ namespace TMV.UI.RP.CW
     {
       Timer_Data.Enabled = ChkAuto_Data.Checked;
       CbbTime_Data.Enabled = ChkAuto_Data.Checked;
-      decimal d1 = V_StringToNumeric(CbbTime_Data);
+      decimal d1 = CyberFunc.V_StringToNumeric(CbbTime_Data);
       if (d1 <= 0M)
         d1 = 3000M;
       Timer_Data.Interval = Convert.ToInt32(d1);
@@ -454,7 +455,7 @@ namespace TMV.UI.RP.CW
       ResourceHeader objectInfo = (ResourceHeader)e.ObjectInfo;
       string str1 = objectInfo.Resource.Id.ToString().Trim();
       int emSize = 0;
-      string Left1 = V_GetvalueCombox(CbbKieu_Xem);
+      string Left1 = CyberFunc.V_GetvalueCombox(CbbKieu_Xem);
       bool _Bold = false;
       bool _BackColor = false;
       bool _BackColor2 = false;
@@ -698,7 +699,7 @@ namespace TMV.UI.RP.CW
     }
     private void V_Gio_Xem_RX(object sender, EventArgs e)
     {
-      string Left = V_GetvalueCombox(CbbGio_Xem);
+      string Left = CyberFunc.V_GetvalueCombox(CbbGio_Xem);
       if (Left == "01")
         V_ActiView_Gantt_RX(sender, e);
       if (Left != "02")
@@ -1339,7 +1340,6 @@ namespace TMV.UI.RP.CW
       if (recordIndex >= 0)
         str2 = dataSource[recordIndex]["Ma_Xe"].ToString().Trim();
     }
-
     private void Options_MouseHover(object sender, EventArgs e)
     {
       toolTip1.Show((sender as Control).Name, (sender as Control));
@@ -1619,7 +1619,7 @@ namespace TMV.UI.RP.CW
     }
     private void V_GetFromSetScheduler(ref DateTime _Ngay_BD, ref DateTime _Ngay_KT, ref string _Ma_khoang, Appointment _Appointment = null)
     {
-      string Left = V_GetvalueCombox(CbbKieu_Xem);
+      string Left = CyberFunc.V_GetvalueCombox(CbbKieu_Xem);
       _Ngay_BD = DateTime.Now.Date;
       _Ngay_KT = DateTime.Now.Date;
       _Ma_khoang = "";
@@ -1750,7 +1750,7 @@ namespace TMV.UI.RP.CW
       int index = 0;
       while (index <= num)
       {
-        SetNotNullTable(dataSet.Tables[index]);
+        CyberFunc.SetNotNullTable(dataSet.Tables[index]);
         checked { ++index; }
       }
 
@@ -1790,13 +1790,13 @@ namespace TMV.UI.RP.CW
           Dv_Data_Xe.Sort = Dt_Cho_Rua.Columns["Stt"].ColumnName;
 
         if (dataSet.Tables.Count > 9)
-          V_SetSortView(ref Dv_Cho_Rua, dataSet.Tables[9]);
+          CyberFunc.V_SetSortView(ref Dv_Cho_Rua, dataSet.Tables[9]);
         if (dataSet.Tables.Count > 10)
-          V_SetSortView(ref Dv_Data, dataSet.Tables[10]);
+          CyberFunc.V_SetSortView(ref Dv_Data, dataSet.Tables[10]);
         if (dataSet.Tables.Count > 11)
-          V_SetSortView(ref Dv_Dang_Rua, dataSet.Tables[11]);
+          CyberFunc.V_SetSortView(ref Dv_Dang_Rua, dataSet.Tables[11]);
         if (dataSet.Tables.Count > 12)
-          V_SetSortView(ref Dv_Rua_Xong, dataSet.Tables[12]);
+          CyberFunc.V_SetSortView(ref Dv_Rua_Xong, dataSet.Tables[12]);
 
         MasterCho_Rua.DataSource = Dv_Cho_Rua;
         MasterCho_RuaGRV.GridControl = MasterCho_Rua;
@@ -1971,7 +1971,7 @@ namespace TMV.UI.RP.CW
       if (_DT_Filter == null)
         return filterKhScc;
 
-      string Left = V_GetvalueCombox(CbbMa_HS);
+      string Left = CyberFunc.V_GetvalueCombox(CbbMa_HS);
       if (_DT_Filter.Columns.Contains("Ma_Hs") & Left != "")
         filterKhScc = filterKhScc + " AND Ma_Hs = '" + Left.Trim() + "'";
 
@@ -2006,7 +2006,7 @@ namespace TMV.UI.RP.CW
     #region "V_Buoc_Nhay_KH_RX"
     private void V_CyberSetTime_KH_RX()
     {
-      string Left = V_GetvalueCombox(CbbCa_Ngay); // 01: Ca ngay, 02: Sang, 03: Chieu
+      string Left = CyberFunc.V_GetvalueCombox(CbbCa_Ngay); // 01: Ca ngay, 02: Sang, 03: Chieu
       decimal num1 = new decimal(M_StartHour);
       decimal num2 = new decimal(M_StartMINUTE);
       decimal num3 = new decimal(M_FinishHour);
@@ -2103,7 +2103,7 @@ namespace TMV.UI.RP.CW
         do
         {
           if (SchedulerControl.GanttView.Scales[index].Visible)
-            SchedulerControl.Views.GanttView.Scales[index].Width = Convert.ToInt32(V_GetvalueCombox(CbbDo_Rong));
+            SchedulerControl.Views.GanttView.Scales[index].Width = Convert.ToInt32(CyberFunc.V_GetvalueCombox(CbbDo_Rong));
           checked { ++index; }
         }
         while (index <= 6);
@@ -2112,16 +2112,16 @@ namespace TMV.UI.RP.CW
       if (SchedulerControl.ActiveViewType != SchedulerViewType.Day)
         return;
 
-      SchedulerControl.DayView.RowHeight = Convert.ToInt32(V_GetvalueCombox(CbbDo_Rong));
+      SchedulerControl.DayView.RowHeight = Convert.ToInt32(CyberFunc.V_GetvalueCombox(CbbDo_Rong));
     }
     #endregion
 
     #region "V_SetScheduler_RXControl_KH_RX"
     private void V_SetScheduler_SetValue_RX()
     {
-      string Left1 = V_GetvalueCombox(CbbKieu_Xem);
-      string Left2 = V_GetvalueCombox(CbbCa_Ngay);
-      string Left3 = V_GetvalueCombox(CbbGio_Xem);
+      string Left1 = CyberFunc.V_GetvalueCombox(CbbKieu_Xem);
+      string Left2 = CyberFunc.V_GetvalueCombox(CbbCa_Ngay);
+      string Left3 = CyberFunc.V_GetvalueCombox(CbbGio_Xem);
       decimal _Do_Rong = 50M;
 
       if (Left2 == "02")
@@ -2277,151 +2277,6 @@ namespace TMV.UI.RP.CW
     }
     private void V_SetColorlabel_RX(int _i, DataRow _Dr)
     {
-    }
-    #endregion
-
-    #region "from others"
-    private void V_FillComBoxDefaul(ComboBox ComBoxName, DataTable Dt, string FieldValue, string FieldDispLay, string FieldDefault = "Default")
-    {
-      if (Dt == null)
-        return;
-
-      ComBoxName.DataSource = Dt;
-      ComBoxName.DisplayMember = Dt.Columns[FieldDispLay].ColumnName;
-      ComBoxName.ValueMember = Dt.Columns[FieldValue].ColumnName;
-      if (!Dt.Columns.Contains(FieldDefault))
-      {
-        if (Dt.Rows.Count == 0)
-          return;
-        string str = Dt.Rows[0][Dt.Columns[FieldValue].ColumnName].ToString();
-        ComBoxName.SelectedValue = str;
-      }
-      else
-      {
-        int num = checked(Dt.Rows.Count - 1);
-        int index = 0;
-        while (index <= num)
-        {
-          if (Dt.Rows[index][Dt.Columns[FieldDefault].ColumnName].ToString().Trim().ToUpper() == "1" || 
-              Dt.Rows[index][Dt.Columns[FieldDefault].ColumnName].ToString().Trim().ToUpper() == "TRUE")
-          {
-            string str = Dt.Rows[index][Dt.Columns[FieldValue].ColumnName].ToString();
-            ComBoxName.SelectedValue = str;
-            break;
-          }
-          checked { ++index; }
-        }
-      }
-    }
-    private decimal V_StringToNumeric(ComboBox _Cbb)
-    {
-      decimal numeric = 0M;
-      string str = V_GetvalueCombox(_Cbb);
-      if (str.Trim() == "")
-        str = "0";
-      try
-      {
-        numeric = Convert.ToDecimal(str);
-      }
-      catch(Exception ex)
-      {
-        MessageBox.Show("V_StringToNumeric: " + ex.Message);
-      }
-      return numeric;
-    }
-    private string V_GetvalueCombox(ComboBox _Cbb)
-    {
-      string str = "";
-      try
-      {
-        str = _Cbb.SelectedValue.ToString().Trim();
-      }
-      catch (Exception ex)
-      {
-        MessageBox.Show("V_GetvalueCombox: " + ex.Message);
-      }
-      return str;
-    }
-    private void V_DeleteRowEmpty(DataTable _Dt, string _Fieldname)
-    {
-      if (_Dt == null)
-        return;
-
-      _Fieldname = _Fieldname.Trim();
-      if (!_Dt.Columns.Contains(_Fieldname))
-        return;
-
-      _Fieldname = _Dt.Columns[_Fieldname].ColumnName;
-      int index = checked(_Dt.Rows.Count - 1);
-      while (index >= 0)
-      {
-        if (_Dt.Rows[index][_Fieldname].ToString().Trim() == "")
-          _Dt.Rows[index].Delete();
-        checked { index += -1; }
-      }
-      _Dt.AcceptChanges();
-    }
-    private void SetNotNullTable(DataTable tb)
-    {
-      int num1 = checked(tb.Rows.Count - 1);
-      int index = 0;
-      while (index <= num1)
-      {
-        tb.Rows[index].BeginEdit();
-        int num2 = checked(tb.Columns.Count - 1);
-        int num3 = 0;
-        while (num3 <= num2)
-        {
-          if (tb.Rows[index][num3] == null)
-          {
-            string upper = tb.Columns[num3].DataType.Name.Trim().ToUpper();
-            if (upper == "STRING")
-              tb.Rows[index][num3] = "";
-            else if (upper == "DATETIME")
-              tb.Rows[index][num3] = new DateTime(1900, 1, 1);
-            else if (upper == "DECIMAL")
-              tb.Rows[index][num3] = 0;
-            else if (upper == "DOUBLE")
-              tb.Rows[index][num3] = (object)0;
-            else if (upper == "BOOLEAN")
-              tb.Rows[index][num3] = "1";
-          }
-          checked { ++num3; }
-        }
-        tb.Rows[index].EndEdit();
-        checked { ++index; }
-      }
-      tb.AcceptChanges();
-    }
-    private void V_SetSortView(ref DataView _Dv, DataTable _Dt)
-    {
-      string sortView = V_GetSortView(_Dv, _Dt);
-      if (sortView.Trim() == "")
-        return;
-
-      _Dv.Sort = sortView;
-    }
-    private string V_GetSortView(DataView _Dv, DataTable _Dt)
-    {
-      if (_Dv == null | _Dt == null || !_Dt.Columns.Contains("FieldSort"))
-        return "";
-      string sortView = "";
-      int num = checked(_Dt.Rows.Count - 1);
-      int index = 0;
-      while (index <= num)
-      {
-        string name = _Dt.Rows[index]["FieldSort"].ToString().Trim();
-        string Left = (!_Dt.Columns.Contains("Is_DESC") ? "0" : _Dt.Rows[index]["Is_DESC"].ToString().Trim()).Trim();
-        if (_Dv.Table.Columns.Contains(name))
-        {
-          string columnName = _Dv.Table.Columns[name].ColumnName;
-          if (Left == "1")
-            columnName += " DESC";
-          sortView = sortView.Trim() != "" ? sortView + "," + columnName : columnName;
-        }
-        checked { ++index; }
-      }
-      return sortView;
     }
     #endregion
   }

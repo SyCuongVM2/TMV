@@ -3,7 +3,7 @@ using DevExpress.XtraScheduler.Native;
 using System;
 using System.Collections.Generic;
 
-namespace TMV.UI.RP.Common
+namespace TMV.UI.JPCB.Common
 {
   public class TimeScaleLessThanDay : TimeScaleFixedInterval
   {

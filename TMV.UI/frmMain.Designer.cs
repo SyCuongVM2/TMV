@@ -190,7 +190,7 @@ namespace TMV.UI
       // 
       // barSubItem1
       // 
-      this.barSubItem1.Caption = "&JCB";
+      this.barSubItem1.Caption = "&JPCB";
       this.barSubItem1.Id = 16;
       this.barSubItem1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.siCW),

@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TMV.UI.RP.GJ
+namespace TMV.UI.JPCB.GJ
 {
   public partial class frmGJ : DevExpress.XtraEditors.XtraForm
   {

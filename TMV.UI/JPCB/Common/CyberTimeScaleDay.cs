@@ -1,7 +1,7 @@
 ﻿using DevExpress.XtraScheduler;
 using System;
 
-namespace TMV.UI.RP.Common
+namespace TMV.UI.JPCB.Common
 {
   public class CyberTimeScaleDay : TimeScaleDay
   {

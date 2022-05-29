@@ -4,7 +4,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using System;
 using System.Windows.Forms;
 
-namespace TMV.UI.RP.Common
+namespace TMV.UI.JPCB.Common
 {
   public class CyberColumnGridView
   {
