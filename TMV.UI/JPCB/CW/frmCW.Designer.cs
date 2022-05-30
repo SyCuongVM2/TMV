@@ -297,7 +297,7 @@ namespace TMV.UI.JPCB.CW
       this.splitContainer1.Panel2.Controls.Add(this.ChkAuto_Data);
       this.splitContainer1.Panel2MinSize = 15;
       this.splitContainer1.Size = new System.Drawing.Size(1752, 692);
-      this.splitContainer1.SplitterDistance = 668;
+      this.splitContainer1.SplitterDistance = 663;
       this.splitContainer1.TabIndex = 4;
       // 
       // splitContainer2
@@ -314,7 +314,7 @@ namespace TMV.UI.JPCB.CW
       // splitContainer2.Panel2
       // 
       this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-      this.splitContainer2.Size = new System.Drawing.Size(1752, 668);
+      this.splitContainer2.Size = new System.Drawing.Size(1752, 663);
       this.splitContainer2.SplitterDistance = 337;
       this.splitContainer2.TabIndex = 0;
       // 
@@ -325,7 +325,7 @@ namespace TMV.UI.JPCB.CW
       this.MasterCho_Rua.MainView = this.MasterCho_RuaGRV;
       this.MasterCho_Rua.MenuManager = this.BarManagerCho_Rua;
       this.MasterCho_Rua.Name = "MasterCho_Rua";
-      this.MasterCho_Rua.Size = new System.Drawing.Size(337, 636);
+      this.MasterCho_Rua.Size = new System.Drawing.Size(337, 631);
       this.MasterCho_Rua.TabIndex = 1;
       this.MasterCho_Rua.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.MasterCho_RuaGRV});
@@ -395,7 +395,7 @@ namespace TMV.UI.JPCB.CW
       // splitContainer3.Panel2
       // 
       this.splitContainer3.Panel2.Controls.Add(this.splitContainer4);
-      this.splitContainer3.Size = new System.Drawing.Size(1411, 668);
+      this.splitContainer3.Size = new System.Drawing.Size(1411, 663);
       this.splitContainer3.SplitterDistance = 1017;
       this.splitContainer3.TabIndex = 0;
       // 
@@ -414,7 +414,7 @@ namespace TMV.UI.JPCB.CW
       // 
       this.splitContainer5.Panel2.Controls.Add(this.SchedulerControl);
       this.splitContainer5.Panel2MinSize = 0;
-      this.splitContainer5.Size = new System.Drawing.Size(1017, 636);
+      this.splitContainer5.Size = new System.Drawing.Size(1017, 631);
       this.splitContainer5.SplitterDistance = 339;
       this.splitContainer5.TabIndex = 2;
       // 
@@ -433,7 +433,7 @@ namespace TMV.UI.JPCB.CW
       this.resourcesTree1.OptionsView.ShowVertLines = true;
       this.resourcesTree1.SchedulerControl = this.SchedulerControl;
       this.resourcesTree1.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-      this.resourcesTree1.Size = new System.Drawing.Size(339, 636);
+      this.resourcesTree1.Size = new System.Drawing.Size(339, 631);
       this.resourcesTree1.TabIndex = 0;
       // 
       // SchedulerControl
@@ -458,7 +458,7 @@ namespace TMV.UI.JPCB.CW
       this.SchedulerControl.OptionsView.ResourceHeaders.ImageSizeMode = DevExpress.XtraScheduler.HeaderImageSizeMode.ZoomImage;
       this.SchedulerControl.OptionsView.ResourceHeaders.RotateCaption = false;
       this.SchedulerControl.OptionsView.ToolTipVisibility = DevExpress.XtraScheduler.ToolTipVisibility.Always;
-      this.SchedulerControl.Size = new System.Drawing.Size(674, 636);
+      this.SchedulerControl.Size = new System.Drawing.Size(674, 631);
       this.SchedulerControl.Start = new System.DateTime(2022, 5, 17, 0, 0, 0, 0);
       this.SchedulerControl.TabIndex = 0;
       this.SchedulerControl.Text = "schedulerControl1";
@@ -506,8 +506,8 @@ namespace TMV.UI.JPCB.CW
       this.splitContainer4.Panel2.Controls.Add(this.MasterRua_Xong);
       this.splitContainer4.Panel2.Controls.Add(this.LabTy_Hieusuat);
       this.splitContainer4.Panel2.Controls.Add(this.LabFinish);
-      this.splitContainer4.Size = new System.Drawing.Size(390, 668);
-      this.splitContainer4.SplitterDistance = 337;
+      this.splitContainer4.Size = new System.Drawing.Size(390, 663);
+      this.splitContainer4.SplitterDistance = 334;
       this.splitContainer4.TabIndex = 0;
       // 
       // MasterDang_Rua
@@ -517,7 +517,7 @@ namespace TMV.UI.JPCB.CW
       this.MasterDang_Rua.MainView = this.MasterDang_RuaGRV;
       this.MasterDang_Rua.MenuManager = this.BarManagerCho_Rua;
       this.MasterDang_Rua.Name = "MasterDang_Rua";
-      this.MasterDang_Rua.Size = new System.Drawing.Size(390, 305);
+      this.MasterDang_Rua.Size = new System.Drawing.Size(390, 302);
       this.MasterDang_Rua.TabIndex = 3;
       this.MasterDang_Rua.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.MasterDang_RuaGRV});
@@ -582,7 +582,7 @@ namespace TMV.UI.JPCB.CW
       this.MasterRua_Xong.MainView = this.MasterRua_XongGRV;
       this.MasterRua_Xong.MenuManager = this.BarManagerCho_Rua;
       this.MasterRua_Xong.Name = "MasterRua_Xong";
-      this.MasterRua_Xong.Size = new System.Drawing.Size(390, 263);
+      this.MasterRua_Xong.Size = new System.Drawing.Size(390, 261);
       this.MasterRua_Xong.TabIndex = 5;
       this.MasterRua_Xong.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.MasterRua_XongGRV});
@@ -630,7 +630,7 @@ namespace TMV.UI.JPCB.CW
       this.LabTy_Hieusuat.Dock = System.Windows.Forms.DockStyle.Bottom;
       this.LabTy_Hieusuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
       this.LabTy_Hieusuat.ForeColor = System.Drawing.Color.White;
-      this.LabTy_Hieusuat.Location = new System.Drawing.Point(0, 295);
+      this.LabTy_Hieusuat.Location = new System.Drawing.Point(0, 293);
       this.LabTy_Hieusuat.Name = "LabTy_Hieusuat";
       this.LabTy_Hieusuat.Size = new System.Drawing.Size(390, 32);
       this.LabTy_Hieusuat.TabIndex = 4;

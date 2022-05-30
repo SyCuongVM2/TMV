@@ -131,6 +131,12 @@
     <Compile Include="JPCB\JP\frmJP.Designer.cs">
       <DependentUpon>frmJP.cs</DependentUpon>
     </Compile>
+    <Compile Include="JPCB\Common\frmLoading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JPCB\Common\frmLoading.Designer.cs">
+      <DependentUpon>frmLoading.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="JPCB\BP\frmBP.cs">
@@ -193,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="JPCB\JP\frmJP.resx">
       <DependentUpon>frmJP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JPCB\Common\frmLoading.resx">
+      <DependentUpon>frmLoading.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

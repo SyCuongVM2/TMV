@@ -756,16 +756,15 @@ namespace TMV.UI.JPCB.CW
 
         AppointmentImageInfo appointmentImageInfo = new AppointmentImageInfo();
         string Left = str2;
-        appointmentImageInfo.Image = (Left == "1") ? ImageResourceCache.Default.GetImage("images/communication/wifi_16x16.png") : 
-                                     (
-                                       Left == "2" ? ImageResourceCache.Default.GetImage("images/communication/radio_16x16.png") : 
-                                       (
-                                         Left == "3" ? ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png") : 
-                                         (
-                                           Left == "4" ? ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png") : null
-                                         )
-                                       )
-                                     );
+        appointmentImageInfo.Image = (Left == "1") ?
+                                     (Left == "2") ?
+                                     (Left == "3") ?
+                                     (Left == "4") ?
+                                     ImageResourceCache.Default.GetImage("images/communication/wifi_16x16.png") :
+                                     ImageResourceCache.Default.GetImage("images/communication/radio_16x16.png") :
+                                     ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png") :
+                                     ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png") :
+                                     ImageResourceCache.Default.GetImage("images/communication/wifi_16x16.png");
         e.ImageInfoList.Add(appointmentImageInfo);
       }
       catch (Exception ex)
@@ -1175,40 +1174,46 @@ namespace TMV.UI.JPCB.CW
         _FieldBackColor2_Rua_Xong_KH, _FieldForeColor_Rua_Xong_KH, _FieldUnderline_Rua_Xong_KH);
     private void GRV_RowCellStyle2(object sender, RowCellStyleEventArgs e, GridView _GRV, bool _Bold, bool _BackColor, bool _BackColor2, bool _Forecolor, bool _UnderLine, string _FieldBold, string _FieldBackColor, string _FieldBackColor2, string _FieldForecolor, string _FieldUnderline)
     {
-      string str1 = "";
-      bool flag1 = false;
-      bool flag2 = false;
-      string str2 = "";
-
-      if (_UnderLine)
-        str1 = _GRV.GetRowCellDisplayText(e.RowHandle, _FieldUnderline).ToString().Trim();
-      if (_UnderLine & str1.Trim() == "1")
-        flag1 = true;
-      if (_Bold)
-        str2 = _GRV.GetRowCellDisplayText(e.RowHandle, _FieldBold).ToString().Trim();
-      if (_Bold & str2.Trim() == "1")
-        flag2 = true;
-
-      e.Appearance.Font = !flag2 ? (!flag1 ? new Font(Font.FontFamily, Font.Size, FontStyle.Regular) : 
-                                             new Font(Font.FontFamily, Font.Size, FontStyle.Underline)) :
-                                             (!flag1 ? new Font(Font.FontFamily, Font.Size, FontStyle.Bold) : 
-                                             new Font(Font.FontFamily, Font.Size, FontStyle.Bold | FontStyle.Underline));
-      if (_BackColor)
+      GridView view = sender as GridView;
+      if (!view.IsCellSelected(e.RowHandle, e.Column))
       {
-        string ColorName = _GRV.GetRowCellDisplayText(e.RowHandle, _FieldBackColor).ToString().Trim();
-        e.Appearance.BackColor = CyberColor.GetBacColorkReports(ColorName);
-      }
-      if (_BackColor2)
-      {
-        string ColorName = _GRV.GetRowCellDisplayText(e.RowHandle, _FieldBackColor2).ToString().Trim();
-        if (ColorName.Trim() != "")
-          e.Appearance.BackColor2 = CyberColor.GetBacColorkReports(ColorName);
-      }
-      if (!_Forecolor)
-        return;
+        string str1 = "";
+        bool flag1 = false;
+        bool flag2 = false;
+        string str2 = "";
 
-      string ColorName1 = _GRV.GetRowCellDisplayText(e.RowHandle, _FieldForecolor).ToString().Trim();
-      e.Appearance.ForeColor = CyberColor.GetForeColor(ColorName1);
+        if (_UnderLine)
+          str1 = _GRV.GetRowCellDisplayText(e.RowHandle, _FieldUnderline).ToString().Trim();
+        if (_UnderLine & str1.Trim() == "1")
+          flag1 = true;
+        if (_Bold)
+          str2 = _GRV.GetRowCellDisplayText(e.RowHandle, _FieldBold).ToString().Trim();
+        if (_Bold & str2.Trim() == "1")
+          flag2 = true;
+
+        e.Appearance.Font = !flag2 ? (!flag1 ? new Font(Font.FontFamily, Font.Size, FontStyle.Regular) :
+                                               new Font(Font.FontFamily, Font.Size, FontStyle.Underline)) :
+                                               (!flag1 ? new Font(Font.FontFamily, Font.Size, FontStyle.Bold) :
+                                               new Font(Font.FontFamily, Font.Size, FontStyle.Bold | FontStyle.Underline));
+        if (_BackColor)
+        {
+          string ColorName = _GRV.GetRowCellDisplayText(e.RowHandle, _FieldBackColor).ToString().Trim();
+          e.Appearance.BackColor = CyberColor.GetBacColorkReports(ColorName);
+        }
+        if (_BackColor2)
+        {
+          string ColorName = _GRV.GetRowCellDisplayText(e.RowHandle, _FieldBackColor2).ToString().Trim();
+          if (ColorName.Trim() != "")
+            e.Appearance.BackColor2 = CyberColor.GetBacColorkReports(ColorName);
+        }
+        if (!_Forecolor)
+          return;
+
+        string ColorName1 = _GRV.GetRowCellDisplayText(e.RowHandle, _FieldForecolor).ToString().Trim();
+        e.Appearance.ForeColor = CyberColor.GetForeColor(ColorName1);
+      }
+      else
+        e.Appearance.BackColor = System.Drawing.Color.Silver;
     }
     private void ResourcesTree1_CustomDrawNodeCell(object sender, CustomDrawNodeCellEventArgs e)
     {
@@ -1685,6 +1690,7 @@ namespace TMV.UI.JPCB.CW
     #region "MasterRua_Xong_PopupMenuShowing"
     private void V_Vi_Tri_Xe(object sender, EventArgs e)
     {
+      // TODO
     }
     private void V_Vi_Tri_Xe_Load(object sender, EventArgs e)
     {

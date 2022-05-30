@@ -31,9 +31,9 @@ namespace TMV.UI.JPCB.JP
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmJP));
-      DevExpress.XtraScheduler.TimeRuler timeRuler1 = new DevExpress.XtraScheduler.TimeRuler();
-      DevExpress.XtraScheduler.TimeRuler timeRuler2 = new DevExpress.XtraScheduler.TimeRuler();
-      DevExpress.XtraScheduler.TimeRuler timeRuler3 = new DevExpress.XtraScheduler.TimeRuler();
+      DevExpress.XtraScheduler.TimeRuler timeRuler4 = new DevExpress.XtraScheduler.TimeRuler();
+      DevExpress.XtraScheduler.TimeRuler timeRuler5 = new DevExpress.XtraScheduler.TimeRuler();
+      DevExpress.XtraScheduler.TimeRuler timeRuler6 = new DevExpress.XtraScheduler.TimeRuler();
       this.BarManager1 = new DevExpress.XtraBars.BarManager(this.components);
       this.bsStatus = new DevExpress.XtraBars.Bar();
       this.barWSUser = new DevExpress.XtraBars.BarStaticItem();
@@ -164,6 +164,9 @@ namespace TMV.UI.JPCB.JP
       this.Timer_Data_honHop = new System.Windows.Forms.Timer(this.components);
       this.Timer_Data_Dung = new System.Windows.Forms.Timer(this.components);
       this.Timer_FlassTab = new System.Windows.Forms.Timer(this.components);
+      this.PopupMenu = new DevExpress.XtraBars.PopupMenu(this.components);
+      this.PopupMenuSchedulerControl = new DevExpress.XtraBars.PopupMenu(this.components);
+      this.Timer_Data_hen = new System.Windows.Forms.Timer(this.components);
       ((System.ComponentModel.ISupportInitialize)(this.BarManager1)).BeginInit();
       this.TabCVDV.SuspendLayout();
       this.Tab3.SuspendLayout();
@@ -205,6 +208,8 @@ namespace TMV.UI.JPCB.JP
       ((System.ComponentModel.ISupportInitialize)(this.Master_Dung)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.Master_DungGRV)).BeginInit();
       this.GroupBox2.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.PopupMenu)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.PopupMenuSchedulerControl)).BeginInit();
       this.SuspendLayout();
       // 
       // BarManager1
@@ -511,11 +516,11 @@ namespace TMV.UI.JPCB.JP
       this.SchedulerControl_KH_SCC.TabIndex = 0;
       this.SchedulerControl_KH_SCC.Text = "SchedulerControl1";
       this.SchedulerControl_KH_SCC.ToolTipController = this.ToolTipController1;
-      this.SchedulerControl_KH_SCC.Views.DayView.TimeRulers.Add(timeRuler1);
+      this.SchedulerControl_KH_SCC.Views.DayView.TimeRulers.Add(timeRuler4);
       this.SchedulerControl_KH_SCC.Views.FullWeekView.Enabled = true;
-      this.SchedulerControl_KH_SCC.Views.FullWeekView.TimeRulers.Add(timeRuler2);
+      this.SchedulerControl_KH_SCC.Views.FullWeekView.TimeRulers.Add(timeRuler5);
       this.SchedulerControl_KH_SCC.Views.WeekView.Enabled = false;
-      this.SchedulerControl_KH_SCC.Views.WorkWeekView.TimeRulers.Add(timeRuler3);
+      this.SchedulerControl_KH_SCC.Views.WorkWeekView.TimeRulers.Add(timeRuler6);
       this.SchedulerControl_KH_SCC.Views.YearView.UseOptimizedScrolling = false;
       // 
       // SchedulerStorage_KH_SCC
@@ -1236,7 +1241,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkSBD_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkSBD_KH_SCC.AutoSize = true;
       this.ChkSBD_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkSBD_KH_SCC.Location = new System.Drawing.Point(137, 855);
+      this.ChkSBD_KH_SCC.Location = new System.Drawing.Point(137, 849);
       this.ChkSBD_KH_SCC.Name = "ChkSBD_KH_SCC";
       this.ChkSBD_KH_SCC.Size = new System.Drawing.Size(55, 23);
       this.ChkSBD_KH_SCC.TabIndex = 14;
@@ -1249,7 +1254,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkIs_GJ_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkIs_GJ_KH_SCC.AutoSize = true;
       this.ChkIs_GJ_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkIs_GJ_KH_SCC.Location = new System.Drawing.Point(26, 855);
+      this.ChkIs_GJ_KH_SCC.Location = new System.Drawing.Point(26, 849);
       this.ChkIs_GJ_KH_SCC.Name = "ChkIs_GJ_KH_SCC";
       this.ChkIs_GJ_KH_SCC.Size = new System.Drawing.Size(53, 23);
       this.ChkIs_GJ_KH_SCC.TabIndex = 13;
@@ -1262,7 +1267,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkIs_EM_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkIs_EM_KH_SCC.AutoSize = true;
       this.ChkIs_EM_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkIs_EM_KH_SCC.Location = new System.Drawing.Point(137, 826);
+      this.ChkIs_EM_KH_SCC.Location = new System.Drawing.Point(137, 820);
       this.ChkIs_EM_KH_SCC.Name = "ChkIs_EM_KH_SCC";
       this.ChkIs_EM_KH_SCC.Size = new System.Drawing.Size(56, 23);
       this.ChkIs_EM_KH_SCC.TabIndex = 12;
@@ -1275,7 +1280,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkDung_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkDung_KH_SCC.AutoSize = true;
       this.ChkDung_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkDung_KH_SCC.Location = new System.Drawing.Point(26, 826);
+      this.ChkDung_KH_SCC.Location = new System.Drawing.Point(26, 820);
       this.ChkDung_KH_SCC.Name = "ChkDung_KH_SCC";
       this.ChkDung_KH_SCC.Size = new System.Drawing.Size(74, 23);
       this.ChkDung_KH_SCC.TabIndex = 11;
@@ -1288,7 +1293,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkSDS_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkSDS_KH_SCC.AutoSize = true;
       this.ChkSDS_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkSDS_KH_SCC.Location = new System.Drawing.Point(137, 797);
+      this.ChkSDS_KH_SCC.Location = new System.Drawing.Point(137, 791);
       this.ChkSDS_KH_SCC.Name = "ChkSDS_KH_SCC";
       this.ChkSDS_KH_SCC.Size = new System.Drawing.Size(55, 23);
       this.ChkSDS_KH_SCC.TabIndex = 10;
@@ -1301,7 +1306,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkFV_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkFV_KH_SCC.AutoSize = true;
       this.ChkFV_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkFV_KH_SCC.Location = new System.Drawing.Point(26, 797);
+      this.ChkFV_KH_SCC.Location = new System.Drawing.Point(26, 791);
       this.ChkFV_KH_SCC.Name = "ChkFV_KH_SCC";
       this.ChkFV_KH_SCC.Size = new System.Drawing.Size(53, 23);
       this.ChkFV_KH_SCC.TabIndex = 9;
@@ -1314,7 +1319,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkCho_Rua_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkCho_Rua_KH_SCC.AutoSize = true;
       this.ChkCho_Rua_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkCho_Rua_KH_SCC.Location = new System.Drawing.Point(137, 768);
+      this.ChkCho_Rua_KH_SCC.Location = new System.Drawing.Point(137, 762);
       this.ChkCho_Rua_KH_SCC.Name = "ChkCho_Rua_KH_SCC";
       this.ChkCho_Rua_KH_SCC.Size = new System.Drawing.Size(92, 23);
       this.ChkCho_Rua_KH_SCC.TabIndex = 8;
@@ -1327,7 +1332,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkDang_Rua_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkDang_Rua_KH_SCC.AutoSize = true;
       this.ChkDang_Rua_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkDang_Rua_KH_SCC.Location = new System.Drawing.Point(26, 768);
+      this.ChkDang_Rua_KH_SCC.Location = new System.Drawing.Point(26, 762);
       this.ChkDang_Rua_KH_SCC.Name = "ChkDang_Rua_KH_SCC";
       this.ChkDang_Rua_KH_SCC.Size = new System.Drawing.Size(101, 23);
       this.ChkDang_Rua_KH_SCC.TabIndex = 7;
@@ -1340,7 +1345,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkCho_Giao_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkCho_Giao_KH_SCC.AutoSize = true;
       this.ChkCho_Giao_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkCho_Giao_KH_SCC.Location = new System.Drawing.Point(137, 739);
+      this.ChkCho_Giao_KH_SCC.Location = new System.Drawing.Point(137, 733);
       this.ChkCho_Giao_KH_SCC.Name = "ChkCho_Giao_KH_SCC";
       this.ChkCho_Giao_KH_SCC.Size = new System.Drawing.Size(98, 23);
       this.ChkCho_Giao_KH_SCC.TabIndex = 6;
@@ -1353,7 +1358,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkEM60_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkEM60_KH_SCC.AutoSize = true;
       this.ChkEM60_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkEM60_KH_SCC.Location = new System.Drawing.Point(26, 739);
+      this.ChkEM60_KH_SCC.Location = new System.Drawing.Point(26, 733);
       this.ChkEM60_KH_SCC.Name = "ChkEM60_KH_SCC";
       this.ChkEM60_KH_SCC.Size = new System.Drawing.Size(74, 23);
       this.ChkEM60_KH_SCC.TabIndex = 5;
@@ -1366,7 +1371,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkPM90_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkPM90_KH_SCC.AutoSize = true;
       this.ChkPM90_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkPM90_KH_SCC.Location = new System.Drawing.Point(137, 710);
+      this.ChkPM90_KH_SCC.Location = new System.Drawing.Point(137, 704);
       this.ChkPM90_KH_SCC.Name = "ChkPM90_KH_SCC";
       this.ChkPM90_KH_SCC.Size = new System.Drawing.Size(74, 23);
       this.ChkPM90_KH_SCC.TabIndex = 4;
@@ -1379,7 +1384,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkSCL_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkSCL_KH_SCC.AutoSize = true;
       this.ChkSCL_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkSCL_KH_SCC.Location = new System.Drawing.Point(26, 710);
+      this.ChkSCL_KH_SCC.Location = new System.Drawing.Point(26, 704);
       this.ChkSCL_KH_SCC.Name = "ChkSCL_KH_SCC";
       this.ChkSCL_KH_SCC.Size = new System.Drawing.Size(62, 23);
       this.ChkSCL_KH_SCC.TabIndex = 3;
@@ -1392,7 +1397,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkGiao_Ngay_Kh_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkGiao_Ngay_Kh_SCC.AutoSize = true;
       this.ChkGiao_Ngay_Kh_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkGiao_Ngay_Kh_SCC.Location = new System.Drawing.Point(137, 681);
+      this.ChkGiao_Ngay_Kh_SCC.Location = new System.Drawing.Point(137, 675);
       this.ChkGiao_Ngay_Kh_SCC.Name = "ChkGiao_Ngay_Kh_SCC";
       this.ChkGiao_Ngay_Kh_SCC.Size = new System.Drawing.Size(106, 23);
       this.ChkGiao_Ngay_Kh_SCC.TabIndex = 2;
@@ -1405,7 +1410,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkUu_Tien.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkUu_Tien.AutoSize = true;
       this.ChkUu_Tien.ForeColor = System.Drawing.Color.Blue;
-      this.ChkUu_Tien.Location = new System.Drawing.Point(26, 681);
+      this.ChkUu_Tien.Location = new System.Drawing.Point(26, 675);
       this.ChkUu_Tien.Name = "ChkUu_Tien";
       this.ChkUu_Tien.Size = new System.Drawing.Size(87, 23);
       this.ChkUu_Tien.TabIndex = 1;
@@ -1905,6 +1910,16 @@ namespace TMV.UI.JPCB.JP
       this.CmdChayThu.UseVisualStyleBackColor = false;
       this.CmdChayThu.Visible = false;
       // 
+      // PopupMenu
+      // 
+      this.PopupMenu.Manager = this.BarManager1;
+      this.PopupMenu.Name = "PopupMenu";
+      // 
+      // PopupMenuSchedulerControl
+      // 
+      this.PopupMenuSchedulerControl.Manager = this.BarManager1;
+      this.PopupMenuSchedulerControl.Name = "PopupMenuSchedulerControl";
+      // 
       // frmJP
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
@@ -1971,6 +1986,8 @@ namespace TMV.UI.JPCB.JP
       ((System.ComponentModel.ISupportInitialize)(this.Master_DungGRV)).EndInit();
       this.GroupBox2.ResumeLayout(false);
       this.GroupBox2.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.PopupMenu)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.PopupMenuSchedulerControl)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -2108,5 +2125,8 @@ namespace TMV.UI.JPCB.JP
     private System.Windows.Forms.Timer Timer_Data_Dung;
     private System.Windows.Forms.ComboBox CbbMuc_SBD_KH_SCC;
     private System.Windows.Forms.Timer Timer_FlassTab;
+    private DevExpress.XtraBars.PopupMenu PopupMenu;
+    private DevExpress.XtraBars.PopupMenu PopupMenuSchedulerControl;
+    private System.Windows.Forms.Timer Timer_Data_hen;
   }
 }
