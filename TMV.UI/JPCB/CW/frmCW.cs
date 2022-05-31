@@ -74,6 +74,10 @@ namespace TMV.UI.JPCB.CW
     private DataTable Dt_Dang_Rua_H;
     private DataTable Dt_Rua_Xong_H;
     private DataTable Dt_Xe_H;
+    private DataView Dv_Xe_H;
+    private DataView Dv_Cho_Rua_H;
+    private DataView Dv_Dang_Rua_H;
+    private DataView Dv_Rua_Xong_H;
     private CyberColor CyberColor = new CyberColor();
     private CyberFuncs CyberFunc = new CyberFuncs();
     private bool _Bold_Cho_KH = false;
@@ -1795,6 +1799,19 @@ namespace TMV.UI.JPCB.CW
         if (Dt_Data_Xe.Columns.Contains("Stt"))
           Dv_Data_Xe.Sort = Dt_Cho_Rua.Columns["Stt"].ColumnName;
 
+        Dt_Cho_Rua_H = dataSet.Tables[5].Copy();
+        Dv_Cho_Rua_H = new DataView(Dt_Cho_Rua_H);
+        Dt_Dang_Rua_H = dataSet.Tables[6].Copy();
+        Dv_Dang_Rua_H = new DataView(Dt_Dang_Rua_H);
+        Dt_Rua_Xong_H = dataSet.Tables[7].Copy();
+        Dv_Rua_Xong_H = new DataView(Dt_Rua_Xong_H);
+
+        if (dataSet.Tables.Count > 8)
+        {
+          Dt_Xe_H = dataSet.Tables[8].Copy();
+          Dv_Xe_H = new DataView(Dt_Xe_H);
+        }
+
         if (dataSet.Tables.Count > 9)
           CyberFunc.V_SetSortView(ref Dv_Cho_Rua, dataSet.Tables[9]);
         if (dataSet.Tables.Count > 10)
@@ -1804,6 +1821,11 @@ namespace TMV.UI.JPCB.CW
         if (dataSet.Tables.Count > 12)
           CyberFunc.V_SetSortView(ref Dv_Rua_Xong, dataSet.Tables[12]);
 
+        GridView masterChoRuaGrv = MasterCho_RuaGRV;
+        DataView dvChoRuaH = Dv_Cho_Rua_H;
+        DataView dvChoRua = Dv_Cho_Rua;
+        CyberFunc.V_FillReports(ref masterChoRuaGrv, dvChoRuaH, dvChoRua);
+        MasterCho_RuaGRV = masterChoRuaGrv;
         MasterCho_Rua.DataSource = Dv_Cho_Rua;
         MasterCho_RuaGRV.GridControl = MasterCho_Rua;
         MasterCho_RuaGRV.OptionsView.ShowViewCaption = false;
@@ -1822,6 +1844,11 @@ namespace TMV.UI.JPCB.CW
         if (_BorderColor_Data)
           _FieldBorderColor_Data = Dt_Data.Columns["BorderColor"].ColumnName;
 
+        GridView masterDangRuaGrv = MasterDang_RuaGRV;
+        DataView dvDangRuaH = Dv_Dang_Rua_H;
+        DataView dvDangRua = Dv_Dang_Rua;
+        CyberFunc.V_FillReports(ref masterDangRuaGrv, dvDangRuaH, dvDangRua);
+        MasterDang_RuaGRV = masterDangRuaGrv;
         MasterDang_Rua.DataSource = Dv_Dang_Rua;
         MasterDang_RuaGRV.GridControl = MasterDang_Rua;
         MasterDang_RuaGRV.Appearance.SelectedRow.BackColor = Color.YellowGreen;
@@ -1829,7 +1856,12 @@ namespace TMV.UI.JPCB.CW
         CyberColor.V_GetColorBold2(
           Dt_Dang_Rua, ref _Bold_Dang_Rua_KH, ref _BackColor_Dang_Rua_KH, ref _BackColor2_Dang_Rua_KH, ref _ForeColor_Dang_Rua_KH, 
           ref _Underline_Dang_Rua_KH, ref _FieldBold_Dang_Rua_KH, ref _FieldBackColor_Dang_Rua_KH, ref _FieldBackColor2_Dang_Rua_KH, ref _FieldForeColor_Dang_Rua_KH, ref _FieldUnderline_Dang_Rua_KH);
-        
+
+        GridView masterRuaXongGrv = MasterRua_XongGRV;
+        DataView dvRuaXongH = Dv_Rua_Xong_H;
+        DataView dvRuaXong = Dv_Rua_Xong;
+        CyberFunc.V_FillReports(ref masterRuaXongGrv, dvRuaXongH, dvRuaXong);
+        MasterRua_XongGRV = masterRuaXongGrv;
         MasterRua_Xong.DataSource = Dv_Rua_Xong;
         MasterRua_XongGRV.GridControl = MasterRua_Xong;
         MasterRua_XongGRV.Appearance.SelectedRow.BackColor = Color.YellowGreen;

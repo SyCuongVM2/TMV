@@ -9,7 +9,13 @@ namespace TMV.UI.JPCB.Common
     public Color GetBackColorDefault() => Color.White;
     public Color GetForeColorDefault() => Color.Navy;
     public Color GetBackColorReportsDefault() => Color.White;
+    public Color GetForeColorReportsDefault() => Color.Navy;
 
+    public Color GetBackColorPrintGrid()
+    {
+      return Color.FromArgb(192, 255, 192);
+    }
+    public Color GetForeColorPrintGrid() => Color.Navy;
     public Color GetBackColor(string ColorName)
     {
       Color color = GetBackColorDefault();
@@ -116,6 +122,42 @@ namespace TMV.UI.JPCB.Common
         bacColorkReports = color;
       }
       return bacColorkReports;
+    }
+    public Color GetForeColorReports(string ColorName)
+    {
+      Color color = GetForeColorReportsDefault();
+      Color foreColorReports;
+
+      if (ColorName == "")
+        foreColorReports = GetForeColorReportsDefault();
+      else
+      {
+        if (ColorName.Contains(","))
+        {
+          try
+          {
+            string str1 = ColorName.Trim().Split(',')[0];
+            string str2 = ColorName.Trim().Split(',')[1];
+            string str3 = ColorName.Trim().Split(',')[2];
+            color = Color.FromArgb((int)Convert.ToByte(str1), (int)Convert.ToByte(str2), (int)Convert.ToByte(str3));
+          }
+          catch
+          {
+          }
+        }
+        else
+        {
+          try
+          {
+            color = Color.FromName(ColorName);
+          }
+          catch
+          {
+          }
+        }
+        foreColorReports = color;
+      }
+      return foreColorReports;
     }
     public void V_GetColorBold(DataTable _Dt, ref bool _Bold, ref bool _BackColor, ref bool _BackColor2, ref bool _ForeColor, ref string _FieldBold, ref string _FieldBackColor, ref string _FieldBackColor2, ref string _FieldForeColor)
     {

@@ -149,3 +149,4 @@ D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.BP.frmBP.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.CW.frmCW.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.GJ.frmGJ.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.JP.frmJP.resources
+D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.JP.frmLoading.resources
