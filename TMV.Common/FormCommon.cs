@@ -1742,114 +1742,122 @@ namespace TMV.Common
 
     public static bool Panel_CheckError(Control objControl, bool bSilent)
     {
-      bool bReturn = true;
-      Control mControl = null;
-      string sControlType = null;
-      string sError = null;
-      bool bError = false;
-      string sCaption = null;
-
-      for (int i = 0; i <= objControl.Controls.Count - 1; i++)
+      try
       {
-        mControl = objControl.Controls[i];
-        sControlType = mControl.GetType().Name;
-        if ((mControl.Controls.Count > 0) && (mControl.Enabled) && (sControlType.IndexOf("Panel") > -1 || sControlType.IndexOf("Tab") > -1 || sControlType.IndexOf("Group") > -1))
+        bool bReturn = true;
+        Control mControl = null;
+        string sControlType = null;
+        string sError = null;
+        bool bError = false;
+        string sCaption = null;
+
+        for (int i = 0; i <= objControl.Controls.Count - 1; i++)
         {
-          bReturn = Panel_CheckError(mControl, bSilent);
-          if (!bReturn)
-            return bReturn;
-        }
-        else
-        {
-          if (mControl.Tag is FormControlExt)
+          mControl = objControl.Controls[i];
+          sControlType = mControl.GetType().Name;
+          if ((mControl.Controls.Count > 0) && (mControl.Enabled) && (sControlType.IndexOf("Panel") > -1 || sControlType.IndexOf("Tab") > -1 || sControlType.IndexOf("Group") > -1))
           {
-            FormControlExt objControlExt = (FormControlExt)mControl.Tag;
-            switch (sControlType)
-            {
-              case "TextBox":
-                if (objControlExt.Required)
-                  bReturn = (mControl.Text.Trim() != "");
-                break;
-              case "TextEdit":
-                if (objControlExt.Required)
-                  bReturn = (mControl.Text.Trim() != "");
-                break;
-              case "DateEdit":
-                if (objControlExt.Required)
-                  bReturn = (mControl.Text.Trim() != "");
-                break;
-              case "TimeEdit":
-                if (objControlExt.Required)
-                  bReturn = (mControl.Text.Trim() != "");
-                break;
-              case "CheckEdit":
-                bReturn = true;
-                break;
-              case "ComboBox":
-                if (objControlExt.Required)
-                  bReturn = !Null.IsNull(Combo_GetValue((System.Windows.Forms.ComboBox)mControl));
-                break;
-              case "HtmlEditorControl":
-                if (objControlExt.Required)
-                {
-                }
-                break;
-              default:
-                if (objControlExt.Required)
-                  bReturn = (mControl.Text.Trim() != "");
-                break;
-            }
+            bReturn = Panel_CheckError(mControl, bSilent);
+            if (!bReturn)
+              return bReturn;
           }
           else
-            continue;
-        }
-        if ((sControlType == "TextBox") && !((TextBox)mControl).ReadOnly)
-        {
-          sError = Control_GetError(mControl);
-          bError = !string.IsNullOrEmpty(sError);
-        }
-        if ((sControlType == "TextEdit") && !((TextEdit)mControl).Properties.ReadOnly)
-        {
-          sError = Control_GetError(mControl);
-          bError = !string.IsNullOrEmpty(sError);
-        }
-        if (!bReturn || bError)
-        {
-          if (!bSilent)
           {
-            Control ctlParent = mControl.Parent;
-            while (!(ctlParent is Form))
+            if (mControl.Tag is FormControlExt)
             {
-              if ((ctlParent is TabPage) && (((TabControl)ctlParent.Parent).SelectedIndex != ((TabPage)ctlParent).TabIndex))
+              FormControlExt objControlExt = (FormControlExt)mControl.Tag;
+              switch (sControlType)
               {
-                ((TabControl)ctlParent.Parent).SelectedIndex = ((TabPage)ctlParent).TabIndex;
-                break;
+                case "TextBox":
+                  if (objControlExt.Required)
+                    bReturn = (mControl.Text.Trim() != "");
+                  break;
+                case "TextEdit":
+                  if (objControlExt.Required)
+                    bReturn = (mControl.Text.Trim() != "");
+                  break;
+                case "DateEdit":
+                  if (objControlExt.Required)
+                    bReturn = (mControl.Text.Trim() != "");
+                  break;
+                case "TimeEdit":
+                  if (objControlExt.Required)
+                    bReturn = (mControl.Text.Trim() != "");
+                  break;
+                case "CheckEdit":
+                  bReturn = true;
+                  break;
+                case "ComboBox":
+                  if (objControlExt.Required)
+                    bReturn = !Null.IsNull(Combo_GetValue((System.Windows.Forms.ComboBox)mControl));
+                  break;
+                case "HtmlEditorControl":
+                  if (objControlExt.Required)
+                  {
+                  }
+                  break;
+                default:
+                  if (objControlExt.Required)
+                    bReturn = (mControl.Text.Trim() != "");
+                  break;
               }
-              ctlParent = ctlParent.Parent;
             }
-            mControl.Focus();
-            sCaption = Control_GetLabel(mControl).ToString();
-            if (string.IsNullOrEmpty(sCaption))
-              sCaption = "required field";
             else
-              sCaption = "'" + sCaption + "'";
-
-            if (!bReturn)
-              sCaption = sCaption + " is required field";
-
-            if (bError)
+              continue;
+          }
+          if ((sControlType == "TextBox") && !((TextBox)mControl).ReadOnly)
+          {
+            sError = Control_GetError(mControl);
+            bError = !string.IsNullOrEmpty(sError);
+          }
+          if ((sControlType == "TextEdit") && !((TextEdit)mControl).Properties.ReadOnly)
+          {
+            sError = Control_GetError(mControl);
+            bError = !string.IsNullOrEmpty(sError);
+          }
+          if (!bReturn || bError)
+          {
+            if (!bSilent)
             {
-              if (sCaption == "required field")
-                sCaption = sError;
+              Control ctlParent = mControl.Parent;
+              while (!(ctlParent is Form))
+              {
+                if ((ctlParent is TabPage) && (((TabControl)ctlParent.Parent).SelectedIndex != ((TabPage)ctlParent).TabIndex))
+                {
+                  ((TabControl)ctlParent.Parent).SelectedIndex = ((TabPage)ctlParent).TabIndex;
+                  break;
+                }
+                ctlParent = ctlParent.Parent;
+              }
+              mControl.Focus();
+              sCaption = Control_GetLabel(mControl).ToString();
+              if (string.IsNullOrEmpty(sCaption))
+                sCaption = "required field";
               else
-                sCaption = sError + " for " + sCaption;
-              bReturn = false;
+                sCaption = "'" + sCaption + "'";
+
+              if (!bReturn)
+                sCaption = sCaption + " is required field";
+
+              if (bError)
+              {
+                if (sCaption == "required field")
+                  sCaption = sError;
+                else
+                  sCaption = sError + " for " + sCaption;
+                bReturn = false;
+              }
+              Message_Information(sCaption);
             }
-            Message_Information(sCaption);
           }
         }
+        return bReturn;
       }
-      return bReturn;
+      catch(Exception ex)
+      {
+        string exM = ex.Message;
+        return false;
+      }
     }
 
     public static void Panel_GetControlValue(Control objPanel, object objInfo)

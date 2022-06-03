@@ -169,7 +169,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\AppHashPassword.cs" />
     <Compile Include="Admin\APP_DomainBO.cs" />
     <Compile Include="Admin\APP_FormbuttonsBO.cs" />
     <Compile Include="Admin\APP_FormfunctionsBO.cs" />

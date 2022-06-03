@@ -1,9 +1,7 @@
-﻿using System;
-using System.Security.Cryptography;
-using System.Text;
-using System.Data;
+﻿using System.Data;
 using TMV.ObjectInfo.Admin;
 using TMV.DataAccess.Admin;
+using TMV.Common;
 
 namespace TMV.BusinessObject.Admin
 {
@@ -64,7 +62,7 @@ namespace TMV.BusinessObject.Admin
 
       //return Convert.ToBase64String(bRet);
 
-      return AppHashPassword.HashPassword(pass);
+      return AppSecurity.HashPassword(pass);
     }
     public string EncryptPassword(string UserName, string Password)
     {
@@ -74,7 +72,7 @@ namespace TMV.BusinessObject.Admin
     }
     public bool VerifiedPassword(string hashedPassword, string Password)
     {
-      return AppHashPassword.VerifyHashedPassword(hashedPassword, Password);
+      return AppSecurity.VerifyHashedPassword(hashedPassword, Password);
     }
     public DataSet GetAccountPolicy(decimal USERID)
     {

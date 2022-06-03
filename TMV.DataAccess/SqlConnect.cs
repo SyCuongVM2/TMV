@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using TMV.Common;
 
 namespace TMV.DataAccess
 {
@@ -102,7 +103,11 @@ namespace TMV.DataAccess
         if (!string.IsNullOrEmpty(_ConnectionString))
           return _ConnectionString;
 
-        return ConfigurationManager.AppSettings["ConnectSQL"];
+        string conn = ConfigurationManager.AppSettings["ConnectSQL"];
+        //string encodedConn = AppSecurity.Base64Encode("Server=(local);Database=tmss_v1;User Id=sa;Password=Abc!23$5;");
+        string decodedConn = AppSecurity.Base64Decode(conn);
+
+        return decodedConn;
       }
       set
       {

@@ -1,12 +1,27 @@
 ﻿using System;
+using System.Text;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using System.IO;
+using System.Configuration;
+using System.Windows.Forms;
 
-namespace TMV.BusinessObject.Admin
+namespace TMV.Common
 {
-  public static class AppHashPassword
+  public static class AppSecurity
   {
     private static readonly RandomNumberGenerator _defaultRng = RandomNumberGenerator.Create();
+
+    public static string Base64Encode(string plainText)
+    {
+      var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
+      return Convert.ToBase64String(plainTextBytes);
+    }
+    public static string Base64Decode(string base64EncodedData)
+    {
+      var base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
+      return Encoding.UTF8.GetString(base64EncodedBytes);
+    }
 
     public static string HashPassword(string password)
     {
@@ -53,7 +68,7 @@ namespace TMV.BusinessObject.Admin
     private static byte[] HashPasswordV3(string password, RandomNumberGenerator rng)
     {
       return HashPasswordV3(
-        password, 
+        password,
         rng,
         prf: KeyDerivationPrf.HMACSHA256,
         iterCount: 10000,
@@ -107,6 +122,44 @@ namespace TMV.BusinessObject.Admin
             | ((uint)(buffer[offset + 1]) << 16)
             | ((uint)(buffer[offset + 2]) << 8)
             | ((uint)(buffer[offset + 3]));
+    }
+
+    public static string AppPath
+    {
+      get
+      {
+        System.Reflection.Module[] modules = System.Reflection.Assembly.GetExecutingAssembly().GetModules();
+        string aPath = Path.GetDirectoryName(modules[0].FullyQualifiedName);
+        if ((aPath != "") && (aPath[aPath.Length - 1] != '\\'))
+          aPath += '\\';
+        return aPath;
+      }
+    }
+    public static void EncryptConnectionString(bool encrypt)
+    {
+      // Open the configuration file and retrieve the connectionStrings section.
+      Configuration configuration = ConfigurationManager.OpenExeConfiguration(AppPath + "\\" + Application.ProductName + ".exe");
+      AppSettingsSection configSection = configuration.GetSection("appSettings") as AppSettingsSection;
+      if ((!(configSection.ElementInformation.IsLocked)) && (!(configSection.SectionInformation.IsLocked)))
+      {
+        if (encrypt && !configSection.SectionInformation.IsProtected)
+        {
+          //this line will encrypt the file
+          configSection.SectionInformation.ProtectSection("DataProtectionConfigurationProvider");
+
+          //re-save the configuration file section
+          configSection.SectionInformation.ForceSave = true;
+          // Save the current configuration
+
+          configuration.Save();
+        }
+
+        if (!encrypt && configSection.SectionInformation.IsProtected)//encrypt is true so encrypt
+        {
+          //this line will decrypt the file. 
+          configSection.SectionInformation.UnprotectSection();
+        }
+      }
     }
   }
 }

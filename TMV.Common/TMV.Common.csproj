@@ -64,6 +64,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\MdiClientController.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNetCore.Cryptography.Internal, Version=6.0.5.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.Internal.6.0.5\lib\net461\Microsoft.AspNetCore.Cryptography.Internal.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation, Version=6.0.5.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.KeyDerivation.6.0.5\lib\net461\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -81,6 +87,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppSecurity.cs" />
     <Compile Include="CBO.cs" />
     <Compile Include="CEcxelLib.cs" />
     <Compile Include="CLookUpEdit.cs" />
@@ -119,7 +126,9 @@
     <Content Include="Library\MdiClientController.dll" />
     <Content Include="Library\TabStrip.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\frmGridFilter.resx">
       <DependentUpon>frmGridFilter.cs</DependentUpon>

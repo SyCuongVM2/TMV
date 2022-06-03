@@ -51,18 +51,12 @@ namespace TMV.UI.Admin
       bool bRet = false;
       try
       {
-        // 5YTTn6wFMHmYoNSVLsRIAE8Uv2c=
         APP_UsersInfo ObjInfo = APP_UsersBO.Instance().GetByUserName(txtUser_Name.Text.Trim());
         if (ObjInfo != null)
         {
           if ((ObjInfo.ISLOCKED == 0) || (ObjInfo.PASSWORDCHANGEAFTER < 0))
           {
-            bool verified = false;
-            if (m_UserPassword != "") // Remember password
-              verified = (ObjInfo.USER_PASSWORD == m_UserPassword) ? true : false;
-            else
-              verified = APP_UsersBO.Instance().VerifiedPassword(ObjInfo.USER_PASSWORD, txtUser_Password.Text.Trim());
-
+            bool verified = APP_UsersBO.Instance().VerifiedPassword(ObjInfo.USER_PASSWORD, txtUser_Password.Text.Trim());
             if (verified)
             {
               bRet = true;
@@ -73,7 +67,7 @@ namespace TMV.UI.Admin
                 mdlAdmin.WriteSetting("LastLoginUser", ObjInfo.USER_NAME);
 
               if (Convert.ToBoolean(speRememberPassword.EditValue.ToString()))
-                mdlAdmin.WriteSetting("LastLoginPassword", ObjInfo.USER_PASSWORD);
+                mdlAdmin.WriteSetting("LastLoginPassword", AppSecurity.Base64Encode(txtUser_Password.Text.Trim()));
               else
                 mdlAdmin.WriteSetting("LastLoginPassword", "");
 
@@ -110,10 +104,13 @@ namespace TMV.UI.Admin
       {
         m_Dealer = ConfigurationManager.AppSettings["LastLoginDealer"];
         txtDealer.Text = m_Dealer;
+
         m_UserName = ConfigurationManager.AppSettings["LastLoginUser"];
         txtUser_Name.Text = m_UserName;
+
         m_UserPassword = ConfigurationManager.AppSettings["LastLoginPassword"];
-        txtUser_Password.Text = m_UserPassword;
+        txtUser_Password.Text = string.IsNullOrEmpty(m_UserPassword) ? string.Empty : AppSecurity.Base64Decode(m_UserPassword);
+
         if (m_UserPassword != "")
           speRememberPassword.EditValue = true;
       }

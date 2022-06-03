@@ -32,7 +32,7 @@ namespace TMV.UI.Admin
       txtFull_Name.Properties.ReadOnly = true;
       FormGlobals.Control_SetRequire(txtOld_Password, true);
       SetUserData();
-      m_OldPassword = txtUser_Password.Text;
+      m_OldPassword = txtUser_Password.Text; // get old hashed password
       txtRetype.Text = "";
       txtUser_Password.Text = "";
     }
@@ -55,7 +55,8 @@ namespace TMV.UI.Admin
     }
     private bool ValidOldPassword()
     {
-      return (APP_UsersBO.Instance().EncryptPassword(txtUser_Name.Text, txtOld_Password.Text) == m_OldPassword);
+      return APP_UsersBO.Instance().VerifiedPassword(m_OldPassword, txtOld_Password.Text.Trim());
+      //return (APP_UsersBO.Instance().EncryptPassword(txtUser_Name.Text, txtOld_Password.Text) == m_OldPassword);
     }
     private bool ValidPasswordHistory()
     {
@@ -90,6 +91,7 @@ namespace TMV.UI.Admin
         APP_UsersInfo ObjInfo = new APP_UsersInfo();
         FormGlobals.Panel_GetControlValue(grpUserInfo, ObjInfo, "APP_USERS");
         ObjInfo.USER_ID = m_UserID;
+        ObjInfo.USER_PASSWORD = APP_UsersBO.Instance().EncryptPassword(txtUser_Name.Text.Trim(), txtUser_Password.Text.Trim());
         ObjInfo.PASSWORD_HISTORY = APP_UsersBO.Instance().GetAccountPolicy(Globals.LoginUserID).Tables[0].Rows[0]["PASSWORD_HISTORY"].ToString();
         APP_UsersBO.Instance().UserChangePassword(ObjInfo);
       }
@@ -161,11 +163,11 @@ namespace TMV.UI.Admin
           return;
         }
 
-        if (!ValidPasswordHistory())
-        {
-          FormGlobals.Message_Warning_Error("Password cannot repeat any of the previous" + iNOPASSWORDHISTORY.ToString() + " passwords they had used before");
-          return;
-        }
+        //if (!ValidPasswordHistory())
+        //{
+        //  FormGlobals.Message_Warning_Error("Password cannot repeat any of the previous" + iNOPASSWORDHISTORY.ToString() + " passwords they had used before");
+        //  return;
+        //}
 
         if (txtUser_Password.Text != txtRetype.Text)
         {
