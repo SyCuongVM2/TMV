@@ -35,7 +35,11 @@ namespace TMV.Common
     public static decimal LoginUserID { get; set; }
     public static string LoginUserName { get; set; }
     public static string LoginFullName { get; set; }
-    public static string DataPLC { get; set; }
+    public static string LoginUserCode { get; set; }
+    public static string LoginDlrId { get; set; }
+    public static string LoginDealerCode { get; set; }
+    public static string LoginDealerName { get; set; }
+
     public static object DB_GetNull(object objField)
     {
       return Null.GetNull(objField, DBNull.Value);

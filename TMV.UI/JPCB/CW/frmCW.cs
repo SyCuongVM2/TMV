@@ -1766,12 +1766,12 @@ namespace TMV.UI.JPCB.CW
 
       if (status == "1")
       {
-        Dt_Cho_Rua = null;
         Dt_Data = null;
-        Dt_Dang_Rua = null;
-        Dt_Rua_Xong = null;
+        Dt_Cho_Rua = null;
         Dt_Cho_Rua_H = null;
+        Dt_Dang_Rua = null;
         Dt_Dang_Rua_H = null;
+        Dt_Rua_Xong = null;
         Dt_Rua_Xong_H = null;
 
         Dt_Cho_Rua = dataSet.Tables[0].Copy();

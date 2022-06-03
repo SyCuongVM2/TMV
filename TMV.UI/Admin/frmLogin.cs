@@ -11,6 +11,7 @@ namespace TMV.UI.Admin
   public partial class frmLogin : DevExpress.XtraEditors.XtraForm
   {
     private decimal m_UserID = 0;
+    private string m_Dealer;
     private string m_UserName;
     private string m_UserPassword;
 
@@ -18,7 +19,6 @@ namespace TMV.UI.Admin
     {
       InitializeComponent();
     }
-
     public bool ShowForm()
     {
       FormGlobals.Form_InitDialog(this);
@@ -51,16 +51,19 @@ namespace TMV.UI.Admin
       bool bRet = false;
       try
       {
+        // 5YTTn6wFMHmYoNSVLsRIAE8Uv2c=
         APP_UsersInfo ObjInfo = APP_UsersBO.Instance().GetByUserName(txtUser_Name.Text.Trim());
         if (ObjInfo != null)
         {
           if ((ObjInfo.ISLOCKED == 0) || (ObjInfo.PASSWORDCHANGEAFTER < 0))
           {
-            string sPassword = APP_UsersBO.Instance().EncryptPassword(txtUser_Name.Text.Trim(), txtUser_Password.Text);
-            if ((m_UserPassword != "") && (ObjInfo.USER_PASSWORD == m_UserPassword))
-              sPassword = m_UserPassword;
+            bool verified = false;
+            if (m_UserPassword != "") // Remember password
+              verified = (ObjInfo.USER_PASSWORD == m_UserPassword) ? true : false;
+            else
+              verified = APP_UsersBO.Instance().VerifiedPassword(ObjInfo.USER_PASSWORD, txtUser_Password.Text.Trim());
 
-            if (ObjInfo.USER_PASSWORD == sPassword)
+            if (verified)
             {
               bRet = true;
               Globals.LoginUserID = ObjInfo.USER_ID;
@@ -105,6 +108,8 @@ namespace TMV.UI.Admin
     {
       try
       {
+        m_Dealer = ConfigurationManager.AppSettings["LastLoginDealer"];
+        txtDealer.Text = m_Dealer;
         m_UserName = ConfigurationManager.AppSettings["LastLoginUser"];
         txtUser_Name.Text = m_UserName;
         m_UserPassword = ConfigurationManager.AppSettings["LastLoginPassword"];
@@ -121,6 +126,11 @@ namespace TMV.UI.Admin
     {
       try
       {
+        if (txtDealer.Text.Trim() == "")
+        {
+          FormGlobals.Message_Information("Dealer cannot be empty!");
+          txtDealer.Focus();
+        }
         if (txtUser_Name.Text.Trim() == "")
         {
           FormGlobals.Message_Information("User Name cannot be empty!");

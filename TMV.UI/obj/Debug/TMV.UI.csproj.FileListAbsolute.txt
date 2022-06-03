@@ -150,3 +150,7 @@ D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.CW.frmCW.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.GJ.frmGJ.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.JP.frmJP.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.JP.frmLoading.resources
+D:\WIP\TMV\TMV.UI\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\WIP\TMV\TMV.UI\bin\Debug\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\WIP\TMV\TMV.UI\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.xml
+D:\WIP\TMV\TMV.UI\bin\Debug\Microsoft.AspNetCore.Cryptography.Internal.xml

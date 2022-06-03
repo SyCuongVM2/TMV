@@ -971,6 +971,33 @@ namespace TMV.UI.JPCB.JP
     }
     private void GRV_RowCellStyle(object sender, RowCellStyleEventArgs e, GridView _GRV, bool _Bold, bool _BackColor, bool _BackColor2, bool _Forecolor, string _FieldBold, string _FieldBackColor, string _FieldBackColor2, string _FieldForecolor)
     {
+      //NewLateBinding.LateGet(
+      //  sender, 
+      //  (System.Type)null, 
+      //  "IsCellSelected", 
+      //  new object[2]
+      //  {
+      //    (object) e.RowHandle,
+      //    (object) e.Column
+      //  }, 
+      //  (string[])null, 
+      //  (System.Type[])null, 
+      //  (bool[])null
+      //)
+
+      //NewLateBinding.LateGet(
+      //  (object)_Dv_DataSource.Table.Columns, 
+      //  (System.Type)null, 
+      //  "Item", 
+      //  new object[1]
+      //  {
+      //    RuntimeHelpers.GetObjectValue(row["Field_Name"])
+      //  }, 
+      //  (string[])null, 
+      //  (System.Type[])null, 
+      //  (bool[])null
+      //)
+
       GridView view = sender as GridView;
       if (!view.IsCellSelected(e.RowHandle, e.Column))
       {
