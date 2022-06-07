@@ -36,9 +36,13 @@ namespace TMV.Common
     public static string LoginUserName { get; set; }
     public static string LoginFullName { get; set; }
     public static string LoginUserCode { get; set; }
-    public static string LoginDlrId { get; set; }
+    public static int LoginDlrId { get; set; }
     public static string LoginDealerCode { get; set; }
+    public static string LoginDealerAbbr { get; set; }
     public static string LoginDealerName { get; set; }
+    public static int LoginTitleId { get; set; }
+    public static string LoginTitleCode { get; set; }
+    public static string LoginTitleName { get; set; }
 
     public static object DB_GetNull(object objField)
     {

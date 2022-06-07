@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Data;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using TMV.BusinessObject.Admin;
+using TMV.BusinessObject.Auth;
 using TMV.Common;
 using TMV.Common.Forms;
-using TMV.ObjectInfo.Admin;
+using TMV.ObjectInfo.Auth;
 
 namespace TMV.UI.Admin
 {
@@ -28,19 +27,24 @@ namespace TMV.UI.Admin
     private void InitForm()
     {
       InitControl();
-      txtUser_Name.Properties.ReadOnly = true;
-      txtFull_Name.Properties.ReadOnly = true;
-      FormGlobals.Control_SetRequire(txtOld_Password, true);
+      txtUserName.Properties.ReadOnly = true;
+      txtName.Properties.ReadOnly = true;
+      FormGlobals.Control_SetRequire(txtOldPassword, true);
       SetUserData();
-      m_OldPassword = txtUser_Password.Text; // get old hashed password
+      m_OldPassword = txtPassword.Text; // get old hashed password
       txtRetype.Text = "";
-      txtUser_Password.Text = "";
+      txtPassword.Text = "";
+    }
+    private void InitControl()
+    {
+      FormGlobals.Control_SetFont(this, FormGlobals.CS_FONT_NAME);
+      FormGlobals.Panel_InitControl(grpUserInfo, "AbpUsers");
     }
     private void SetUserData()
     {
       try
       {
-        APP_UsersInfo oUserInfo = APP_UsersBO.Instance().GetById(m_UserID);
+        AppUsersInfo oUserInfo = AppUsersBO.Instance().GetById(m_UserID);
         FormGlobals.Panel_SetControlValue(grpUserInfo, oUserInfo);
       }
       catch (Exception ex)
@@ -48,52 +52,19 @@ namespace TMV.UI.Admin
         FormGlobals.Message_Error(ex);
       }
     }
-    private void InitControl()
-    {
-      FormGlobals.Control_SetFont(this, FormGlobals.CS_FONT_NAME);
-      FormGlobals.Panel_InitControl(grpUserInfo, "APP_USERS");
-    }
     private bool ValidOldPassword()
     {
-      return APP_UsersBO.Instance().VerifiedPassword(m_OldPassword, txtOld_Password.Text.Trim());
-      //return (APP_UsersBO.Instance().EncryptPassword(txtUser_Name.Text, txtOld_Password.Text) == m_OldPassword);
-    }
-    private bool ValidPasswordHistory()
-    {
-      int iNOPASSWORDHISTORY = Convert.ToInt32(APP_UsersBO.Instance().GetAccountPolicy(Globals.LoginUserID).Tables[0].Rows[0]["NOPASSWORDHISTORY"].ToString());
-      bool result = true;
-      string sType = APP_UsersBO.Instance().EncryptPassword(txtUser_Name.Text, txtUser_Password.Text);
-      string sHistory = APP_UsersBO.Instance().GetAccountPolicy(Globals.LoginUserID).Tables[0].Rows[0]["PASSWORD_HISTORY"].ToString();
-      int I = 0;
-      string[] sArray = sHistory.Split(";;;##".ToCharArray());
-      if (sArray.Length > iNOPASSWORDHISTORY)
-      {
-        for (I = sArray.Length - iNOPASSWORDHISTORY; I <= sArray.Length - 1; I++)
-        {
-          if (sType.ToString() == sArray[I].ToString())
-            result = false;
-        }
-      }
-      else
-      {
-        for (I = 0; I <= sArray.Length - 1; I++)
-        {
-          if (sType.ToString() == sArray[I].ToString())
-            result = false;
-        }
-      }
-      return result;
+      return AppUsersBO.Instance().VerifiedPassword(m_OldPassword, txtOldPassword.Text.Trim());
     }
     private void SaveData()
     {
       try
       {
-        APP_UsersInfo ObjInfo = new APP_UsersInfo();
-        FormGlobals.Panel_GetControlValue(grpUserInfo, ObjInfo, "APP_USERS");
-        ObjInfo.USER_ID = m_UserID;
-        ObjInfo.USER_PASSWORD = APP_UsersBO.Instance().EncryptPassword(txtUser_Name.Text.Trim(), txtUser_Password.Text.Trim());
-        ObjInfo.PASSWORD_HISTORY = APP_UsersBO.Instance().GetAccountPolicy(Globals.LoginUserID).Tables[0].Rows[0]["PASSWORD_HISTORY"].ToString();
-        APP_UsersBO.Instance().UserChangePassword(ObjInfo);
+        AppUsersInfo ObjInfo = new AppUsersInfo();
+        FormGlobals.Panel_GetControlValue(grpUserInfo, ObjInfo, "AbpUsers");
+        ObjInfo.Id = m_UserID;
+        ObjInfo.Password = txtPassword.Text.Trim();
+        AppUsersBO.Instance().UserChangePassword(ObjInfo);
       }
       catch (Exception ex)
       {
@@ -108,48 +79,43 @@ namespace TMV.UI.Admin
     }
     private void btnSave_Click(object sender, EventArgs e)
     {
-      int iNOPASSWORDHISTORY = 0;
-      string passwordMinimum = "";
-
       try
       {
-        iNOPASSWORDHISTORY = Convert.ToInt32(APP_UsersBO.Instance().GetAccountPolicy(Globals.LoginUserID).Tables[0].Rows[0]["NOPASSWORDHISTORY"].ToString());
-
-        if (FormGlobals.Panel_CheckError(grpUserInfo))
-          return;
+        //if (FormGlobals.Panel_CheckError(grpUserInfo))
+        //  return;
 
         if (!ValidOldPassword())
         {
-          FormGlobals.Message_Warning_Error("Old Password not valid!");
+          FormGlobals.Message_Warning_Error("Current Password is invalid!");
           return;
         }
 
-        if (txtUser_Password.Text.Trim() == txtUser_Name.Text.Trim())
+        if (txtPassword.Text.Trim() == txtUserName.Text.Trim())
           FormGlobals.Message_Warning_Error("Password cannot be the same as the User ID");
 
-        if ((txtUser_Password.Text.Trim() == string.Empty) || (txtRetype.Text.Trim() == string.Empty))
+        if ((txtPassword.Text.Trim() == string.Empty) || (txtRetype.Text.Trim() == string.Empty))
         {
           FormGlobals.Message_Information("Please enter New Password and Retype Password before change password!");
           return;
         }
 
-        DataTable tbUserInfor = APP_DomainBO.Instance().GetByDomainAndItem("USER_INFOR", "PASSWORD_LENGTH");
-        if (txtUser_Password.Text.Length < Convert.ToInt32(tbUserInfor.Rows[0]["ITEM_VALUE"].ToString()))
+        if (txtPassword.Text.Length < 6)
         {
-          passwordMinimum = "Password must be a minimum of " + tbUserInfor.Rows[0]["ITEM_VALUE"].ToString() + " characters";
-          FormGlobals.Message_Warning_Error(passwordMinimum);
+          FormGlobals.Message_Warning_Error("Password must be a minimum of 6 characters");
           return;
         }
+
         string sPattern = @"\d";
         Regex oReg = new Regex(sPattern, RegexOptions.IgnoreCase);
-        if (!oReg.IsMatch(txtUser_Password.Text))
+        if (!oReg.IsMatch(txtPassword.Text))
         {
           FormGlobals.Message_Warning_Error("Password should contain mimimum one numeric character. Ex: 1,2 ,3 ...");
           return;
         }
+
         string sPatternNonAlphabet = "[a-zA-Z]";
         Regex oRegNonAlphabet = new Regex(sPatternNonAlphabet, RegexOptions.IgnoreCase);
-        if (!oRegNonAlphabet.IsMatch(txtUser_Password.Text))
+        if (!oRegNonAlphabet.IsMatch(txtPassword.Text))
         {
           FormGlobals.Message_Warning_Error("Password should contain mimimum one non-alphanumeric character. Ex: a, b,c, A, B, C ...");
           return;
@@ -157,19 +123,13 @@ namespace TMV.UI.Admin
 
         string sPatternAlphabet = "[^a-zA-Z_0-9]";
         Regex oRegAlphabet = new Regex(sPatternAlphabet, RegexOptions.IgnoreCase);
-        if (!oRegAlphabet.IsMatch(txtUser_Password.Text))
+        if (!oRegAlphabet.IsMatch(txtPassword.Text))
         {
           FormGlobals.Message_Warning_Error("Password should contain mimimum one alphabet character. Ex:@, #,$,%...");
           return;
         }
 
-        //if (!ValidPasswordHistory())
-        //{
-        //  FormGlobals.Message_Warning_Error("Password cannot repeat any of the previous" + iNOPASSWORDHISTORY.ToString() + " passwords they had used before");
-        //  return;
-        //}
-
-        if (txtUser_Password.Text != txtRetype.Text)
+        if (txtPassword.Text != txtRetype.Text)
         {
           FormGlobals.Message_Information("Password and Retype Password must the same value!");
           return;
@@ -178,7 +138,7 @@ namespace TMV.UI.Admin
         frmProgress.Instance().Thread = new MethodInvoker(SaveData);
         frmProgress.Instance().Show_Progress("Changing password! Please wait...");
         frmProgress.Instance().SetFinishText(Constants.Instance().MESSAGE_SAVE_SUCCESS, 500);
-        Tag = txtUser_Name.Text;
+        Tag = txtUserName.Text;
         DialogResult = DialogResult.OK;
         Close();
       }

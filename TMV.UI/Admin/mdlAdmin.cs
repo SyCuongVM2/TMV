@@ -4,8 +4,6 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 using System.Xml;
-using TMV.BusinessObject.Admin;
-using TMV.Common;
 
 namespace TMV.UI.Admin
 {
@@ -13,51 +11,11 @@ namespace TMV.UI.Admin
   {
     internal static void SetUserRole(XtraForm oForm)
     {
-      DataSet ds = null;
-      string sButtonName = "";
-      try
-      {
-#if DEBUG
-        oForm.KeyPreview = true;
-        oForm.KeyDown += new KeyEventHandler(mdlAdmin.Form_KeyDown);
-#endif
-
-        if (oForm.Name == "frmChangePassword")
-        {
-          foreach (Control btn in oForm.Controls)
-          {
-            SetStatusButton(btn, true);
-          }
-        }
-
-        if ((Globals.LoginUserName.ToUpper().StartsWith("ADMIN")) & (oForm.Name == "frmUserRightList"))
-        {
-          foreach (Control btn in oForm.Controls)
-          {
-            SetStatusButton(btn, true);
-          }
-        }
-
-        ds = APP_UsersBO.Instance().GetUserFormButton(Globals.LoginUserID, Globals.ActiveMenuName, oForm.Name, "");
-        if (ds != null)
-          sButtonName = DataTable2String(ds.Tables[0], "|", 0);
-
-        foreach (Control btn in oForm.Controls)
-        {
-          SetUserButton(btn, sButtonName);
-        }
-      }
-      catch (Exception ex)
-      {
-        FormGlobals.Message_Error(ex);
-      }
     }
     private static void Form_KeyDown(object sender, KeyEventArgs e)
     {
       if ((e.KeyCode == Keys.F2) && (sender is XtraForm))
       {
-        XtraForm oForm = (XtraForm)sender;
-        new frmFunctionEdit().ShowForm(oForm);
       }
     }
     private static void SetUserButton(Control oControl, string ButtonList)

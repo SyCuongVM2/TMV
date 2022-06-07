@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,22 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\APP_DomainDAO.cs" />
-    <Compile Include="Admin\APP_FormbuttonsDAO.cs" />
-    <Compile Include="Admin\APP_FormfunctionsDAO.cs" />
-    <Compile Include="Admin\APP_FormsDAO.cs" />
-    <Compile Include="Admin\APP_GroupfunctionsDAO.cs" />
-    <Compile Include="Admin\APP_GroupsDAO.cs" />
-    <Compile Include="Admin\APP_LogbookDAO.cs" />
-    <Compile Include="Admin\APP_UsergroupDAO.cs" />
-    <Compile Include="Admin\APP_UsersDAO.cs" />
     <Compile Include="AppHandler.cs" />
+    <Compile Include="Auth\AppUsersDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlConnect.cs" />
     <Compile Include="SqlDataAccess.cs" />
     <Compile Include="SqlDataAccessParameterCache.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\TMV.Common\TMV.Common.csproj">
       <Project>{c554fee1-f2ba-45f1-bb49-55938c5dfc10}</Project>
@@ -67,6 +59,12 @@
       <Project>{8e16b8dd-016c-4be0-b1ce-ac51111f6635}</Project>
       <Name>TMV.ObjectInfo</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="SP\AppAuthPkgGetById.sql" />
+    <Content Include="SP\AppAuthPkgGetByTenant.sql" />
+    <Content Include="SP\AppAuthPkgGetByTenantAndUser.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

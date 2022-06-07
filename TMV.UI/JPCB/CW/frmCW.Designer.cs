@@ -30,10 +30,10 @@ namespace TMV.UI.JPCB.CW
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      DevExpress.XtraScheduler.TimeRuler timeRuler1 = new DevExpress.XtraScheduler.TimeRuler();
-      DevExpress.XtraScheduler.TimeRuler timeRuler2 = new DevExpress.XtraScheduler.TimeRuler();
-      DevExpress.XtraScheduler.TimeRuler timeRuler3 = new DevExpress.XtraScheduler.TimeRuler();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCW));
+      DevExpress.XtraScheduler.TimeRuler timeRuler4 = new DevExpress.XtraScheduler.TimeRuler();
+      DevExpress.XtraScheduler.TimeRuler timeRuler5 = new DevExpress.XtraScheduler.TimeRuler();
+      DevExpress.XtraScheduler.TimeRuler timeRuler6 = new DevExpress.XtraScheduler.TimeRuler();
       this.BarManagerCho_Rua = new DevExpress.XtraBars.BarManager(this.components);
       this.barWS = new DevExpress.XtraBars.Bar();
       this.barWSUser = new DevExpress.XtraBars.BarStaticItem();
@@ -178,7 +178,9 @@ namespace TMV.UI.JPCB.CW
       this.barWSUser.AutoSize = DevExpress.XtraBars.BarStaticItemSize.Spring;
       this.barWSUser.Caption = "Vu Manh Cuong";
       this.barWSUser.Id = 0;
+      this.barWSUser.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barWSUser.ImageOptions.Image")));
       this.barWSUser.ImageOptions.ImageIndex = 21;
+      this.barWSUser.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barWSUser.ImageOptions.LargeImage")));
       this.barWSUser.Name = "barWSUser";
       this.barWSUser.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
       // 
@@ -187,7 +189,9 @@ namespace TMV.UI.JPCB.CW
       this.barWSDealer.AutoSize = DevExpress.XtraBars.BarStaticItemSize.Spring;
       this.barWSDealer.Caption = "TTX";
       this.barWSDealer.Id = 1;
+      this.barWSDealer.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barWSDealer.ImageOptions.Image")));
       this.barWSDealer.ImageOptions.ImageIndex = 34;
+      this.barWSDealer.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barWSDealer.ImageOptions.LargeImage")));
       this.barWSDealer.Name = "barWSDealer";
       this.barWSDealer.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
       // 
@@ -462,11 +466,11 @@ namespace TMV.UI.JPCB.CW
       this.SchedulerControl.Start = new System.DateTime(2022, 5, 17, 0, 0, 0, 0);
       this.SchedulerControl.TabIndex = 0;
       this.SchedulerControl.Text = "schedulerControl1";
-      this.SchedulerControl.Views.DayView.TimeRulers.Add(timeRuler1);
+      this.SchedulerControl.Views.DayView.TimeRulers.Add(timeRuler4);
       this.SchedulerControl.Views.FullWeekView.Enabled = true;
-      this.SchedulerControl.Views.FullWeekView.TimeRulers.Add(timeRuler2);
+      this.SchedulerControl.Views.FullWeekView.TimeRulers.Add(timeRuler5);
       this.SchedulerControl.Views.WeekView.Enabled = false;
-      this.SchedulerControl.Views.WorkWeekView.TimeRulers.Add(timeRuler3);
+      this.SchedulerControl.Views.WorkWeekView.TimeRulers.Add(timeRuler6);
       this.SchedulerControl.Views.YearView.UseOptimizedScrolling = false;
       this.SchedulerControl.CustomDrawResourceHeader += new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(this.scheduler_CustomDrawResourceHeader);
       // 

@@ -133,14 +133,7 @@ D:\WIP\TMV\TMV.UI\bin\Debug\ja\DevExpress.Office.v21.2.Core.resources.dll
 D:\WIP\TMV\TMV.UI\bin\Debug\ru\DevExpress.Office.v21.2.Core.resources.dll
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.csproj.AssemblyReference.cache
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.Admin.frmChangePassword.resources
-D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.Admin.frmFunctionEdit.resources
-D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.Admin.frmGroupEdit.resources
-D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.Admin.frmLogBook.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.Admin.frmLogin.resources
-D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.Admin.frmSystemDomain.resources
-D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.Admin.frmSystemDomainEdit.resources
-D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.Admin.frmUserEdit.resources
-D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.Admin.frmUserRightList.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.frmMain.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.JP.frmJP.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.JP.frmLoading.resources

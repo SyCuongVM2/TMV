@@ -41,17 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\APP_DomainInfo.cs" />
-    <Compile Include="Admin\APP_FormbuttonsInfo.cs" />
-    <Compile Include="Admin\APP_FormfunctionsInfo.cs" />
-    <Compile Include="Admin\APP_FormsInfo.cs" />
-    <Compile Include="Admin\APP_GroupfunctionsInfo.cs" />
-    <Compile Include="Admin\APP_GroupsInfo.cs" />
-    <Compile Include="Admin\APP_LogbookInfo.cs" />
-    <Compile Include="Admin\APP_UsergroupInfo.cs" />
-    <Compile Include="Admin\APP_UsersInfo.cs" />
+    <Compile Include="Auth\AppUsersInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="JPCB\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1856,7 +1856,7 @@ namespace TMV.Common
       catch(Exception ex)
       {
         string exM = ex.Message;
-        return false;
+        return true;
       }
     }
 

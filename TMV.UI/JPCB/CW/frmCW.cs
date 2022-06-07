@@ -119,6 +119,9 @@ namespace TMV.UI.JPCB.CW
 
     private void frmCW_Load(object sender, EventArgs e)
     {
+      barWSUser.Caption = Globals.LoginUserName + " (" + Globals.LoginFullName + ")";
+      barWSDealer.Caption = Globals.LoginDealerName + " (" + Globals.LoginDealerAbbr + ")";
+
       TxtM_Ngay_Ct.EditValue = DateTime.Today.Date;
       Timer_Data.Enabled = false;
       ChkAuto_Data.Checked = false;

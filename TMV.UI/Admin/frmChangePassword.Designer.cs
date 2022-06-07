@@ -31,15 +31,15 @@ namespace TMV.UI.Admin
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmChangePassword));
-      this.txtOld_Password = new DevExpress.XtraEditors.TextEdit();
+      this.txtOldPassword = new DevExpress.XtraEditors.TextEdit();
       this.lblOldPassword = new DevExpress.XtraEditors.LabelControl();
       this.txtRetype = new DevExpress.XtraEditors.TextEdit();
-      this.txtUser_Password = new DevExpress.XtraEditors.TextEdit();
-      this.txtFull_Name = new DevExpress.XtraEditors.TextEdit();
+      this.txtPassword = new DevExpress.XtraEditors.TextEdit();
+      this.txtName = new DevExpress.XtraEditors.TextEdit();
       this.lblPassword = new DevExpress.XtraEditors.LabelControl();
-      this.lblFullName = new DevExpress.XtraEditors.LabelControl();
+      this.lblName = new DevExpress.XtraEditors.LabelControl();
       this.lblRetypePassword = new DevExpress.XtraEditors.LabelControl();
-      this.txtUser_Name = new DevExpress.XtraEditors.TextEdit();
+      this.txtUserName = new DevExpress.XtraEditors.TextEdit();
       this.imglImporterEdit = new System.Windows.Forms.ImageList(this.components);
       this.lblUserName = new DevExpress.XtraEditors.LabelControl();
       this.PanelControl1 = new DevExpress.XtraEditors.PanelControl();
@@ -47,25 +47,25 @@ namespace TMV.UI.Admin
       this.btnSave = new DevExpress.XtraEditors.SimpleButton();
       this.imgList = new System.Windows.Forms.ImageList(this.components);
       this.grpUserInfo = new DevExpress.XtraEditors.GroupControl();
-      ((System.ComponentModel.ISupportInitialize)(this.txtOld_Password.Properties)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.txtOldPassword.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.txtRetype.Properties)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.txtUser_Password.Properties)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.txtFull_Name.Properties)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.txtUser_Name.Properties)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.txtUserName.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.PanelControl1)).BeginInit();
       this.PanelControl1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.grpUserInfo)).BeginInit();
       this.grpUserInfo.SuspendLayout();
       this.SuspendLayout();
       // 
-      // txtOld_Password
+      // txtOldPassword
       // 
-      this.txtOld_Password.Location = new System.Drawing.Point(189, 135);
-      this.txtOld_Password.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtOld_Password.Name = "txtOld_Password";
-      this.txtOld_Password.Properties.PasswordChar = '*';
-      this.txtOld_Password.Size = new System.Drawing.Size(348, 26);
-      this.txtOld_Password.TabIndex = 15;
+      this.txtOldPassword.Location = new System.Drawing.Point(189, 135);
+      this.txtOldPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.txtOldPassword.Name = "txtOldPassword";
+      this.txtOldPassword.Properties.PasswordChar = '*';
+      this.txtOldPassword.Size = new System.Drawing.Size(348, 26);
+      this.txtOldPassword.TabIndex = 15;
       // 
       // lblOldPassword
       // 
@@ -85,22 +85,22 @@ namespace TMV.UI.Admin
       this.txtRetype.Size = new System.Drawing.Size(348, 26);
       this.txtRetype.TabIndex = 19;
       // 
-      // txtUser_Password
+      // txtPassword
       // 
-      this.txtUser_Password.Location = new System.Drawing.Point(189, 180);
-      this.txtUser_Password.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtUser_Password.Name = "txtUser_Password";
-      this.txtUser_Password.Properties.PasswordChar = '*';
-      this.txtUser_Password.Size = new System.Drawing.Size(348, 26);
-      this.txtUser_Password.TabIndex = 17;
+      this.txtPassword.Location = new System.Drawing.Point(189, 180);
+      this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.txtPassword.Name = "txtPassword";
+      this.txtPassword.Properties.PasswordChar = '*';
+      this.txtPassword.Size = new System.Drawing.Size(348, 26);
+      this.txtPassword.TabIndex = 17;
       // 
-      // txtFull_Name
+      // txtName
       // 
-      this.txtFull_Name.Location = new System.Drawing.Point(189, 91);
-      this.txtFull_Name.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtFull_Name.Name = "txtFull_Name";
-      this.txtFull_Name.Size = new System.Drawing.Size(348, 26);
-      this.txtFull_Name.TabIndex = 13;
+      this.txtName.Location = new System.Drawing.Point(189, 91);
+      this.txtName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.txtName.Name = "txtName";
+      this.txtName.Size = new System.Drawing.Size(348, 26);
+      this.txtName.TabIndex = 13;
       // 
       // lblPassword
       // 
@@ -111,14 +111,14 @@ namespace TMV.UI.Admin
       this.lblPassword.TabIndex = 16;
       this.lblPassword.Text = "Password";
       // 
-      // lblFullName
+      // lblName
       // 
-      this.lblFullName.Location = new System.Drawing.Point(89, 97);
-      this.lblFullName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.lblFullName.Name = "lblFullName";
-      this.lblFullName.Size = new System.Drawing.Size(71, 19);
-      this.lblFullName.TabIndex = 12;
-      this.lblFullName.Text = "Full Name";
+      this.lblName.Location = new System.Drawing.Point(89, 97);
+      this.lblName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.lblName.Name = "lblName";
+      this.lblName.Size = new System.Drawing.Size(71, 19);
+      this.lblName.TabIndex = 12;
+      this.lblName.Text = "Full Name";
       // 
       // lblRetypePassword
       // 
@@ -129,13 +129,13 @@ namespace TMV.UI.Admin
       this.lblRetypePassword.TabIndex = 18;
       this.lblRetypePassword.Text = "Retype Password";
       // 
-      // txtUser_Name
+      // txtUserName
       // 
-      this.txtUser_Name.Location = new System.Drawing.Point(189, 49);
-      this.txtUser_Name.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtUser_Name.Name = "txtUser_Name";
-      this.txtUser_Name.Size = new System.Drawing.Size(348, 26);
-      this.txtUser_Name.TabIndex = 11;
+      this.txtUserName.Location = new System.Drawing.Point(189, 49);
+      this.txtUserName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.txtUserName.Name = "txtUserName";
+      this.txtUserName.Size = new System.Drawing.Size(348, 26);
+      this.txtUserName.TabIndex = 11;
       // 
       // imglImporterEdit
       // 
@@ -226,16 +226,16 @@ namespace TMV.UI.Admin
       this.grpUserInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.grpUserInfo.Controls.Add(this.txtOld_Password);
+      this.grpUserInfo.Controls.Add(this.txtOldPassword);
       this.grpUserInfo.Controls.Add(this.lblOldPassword);
       this.grpUserInfo.Controls.Add(this.txtRetype);
-      this.grpUserInfo.Controls.Add(this.txtUser_Password);
-      this.grpUserInfo.Controls.Add(this.txtFull_Name);
+      this.grpUserInfo.Controls.Add(this.txtPassword);
+      this.grpUserInfo.Controls.Add(this.txtName);
       this.grpUserInfo.Controls.Add(this.lblPassword);
-      this.grpUserInfo.Controls.Add(this.lblFullName);
+      this.grpUserInfo.Controls.Add(this.lblName);
       this.grpUserInfo.Controls.Add(this.lblRetypePassword);
       this.grpUserInfo.Controls.Add(this.lblUserName);
-      this.grpUserInfo.Controls.Add(this.txtUser_Name);
+      this.grpUserInfo.Controls.Add(this.txtUserName);
       this.grpUserInfo.Location = new System.Drawing.Point(0, 0);
       this.grpUserInfo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grpUserInfo.Name = "grpUserInfo";
@@ -254,11 +254,11 @@ namespace TMV.UI.Admin
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Change Password";
       this.Load += new System.EventHandler(this.frmChangePassword_Load);
-      ((System.ComponentModel.ISupportInitialize)(this.txtOld_Password.Properties)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.txtOldPassword.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.txtRetype.Properties)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.txtUser_Password.Properties)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.txtFull_Name.Properties)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.txtUser_Name.Properties)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.txtUserName.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.PanelControl1)).EndInit();
       this.PanelControl1.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.grpUserInfo)).EndInit();
@@ -270,15 +270,15 @@ namespace TMV.UI.Admin
 
     #endregion
 
-    internal DevExpress.XtraEditors.TextEdit txtOld_Password;
+    internal DevExpress.XtraEditors.TextEdit txtOldPassword;
     internal DevExpress.XtraEditors.LabelControl lblOldPassword;
     internal DevExpress.XtraEditors.TextEdit txtRetype;
-    internal DevExpress.XtraEditors.TextEdit txtUser_Password;
-    internal DevExpress.XtraEditors.TextEdit txtFull_Name;
+    internal DevExpress.XtraEditors.TextEdit txtPassword;
+    internal DevExpress.XtraEditors.TextEdit txtName;
     internal DevExpress.XtraEditors.LabelControl lblPassword;
-    internal DevExpress.XtraEditors.LabelControl lblFullName;
+    internal DevExpress.XtraEditors.LabelControl lblName;
     internal DevExpress.XtraEditors.LabelControl lblRetypePassword;
-    internal DevExpress.XtraEditors.TextEdit txtUser_Name;
+    internal DevExpress.XtraEditors.TextEdit txtUserName;
     internal System.Windows.Forms.ImageList imglImporterEdit;
     internal DevExpress.XtraEditors.LabelControl lblUserName;
     internal DevExpress.XtraEditors.PanelControl PanelControl1;

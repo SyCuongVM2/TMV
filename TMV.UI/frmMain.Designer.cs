@@ -133,9 +133,6 @@ namespace TMV.UI
             new DevExpress.XtraBars.LinkPersistInfo(this.soLogin),
             new DevExpress.XtraBars.LinkPersistInfo(this.siLogOut),
             new DevExpress.XtraBars.LinkPersistInfo(this.siChangePassword),
-            new DevExpress.XtraBars.LinkPersistInfo(this.siUserManagement, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.siSystemDomain, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.siUserActionReport),
             new DevExpress.XtraBars.LinkPersistInfo(this.soExit, true)});
       this.mnuSystem.Name = "mnuSystem";
       // 
@@ -254,14 +251,20 @@ namespace TMV.UI
       // iStatus2
       // 
       this.iStatus2.Id = 1;
+      this.iStatus2.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("iStatus2.ImageOptions.Image")));
+      this.iStatus2.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("iStatus2.ImageOptions.LargeImage")));
       this.iStatus2.Name = "iStatus2";
+      this.iStatus2.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
       // 
       // iStatus1
       // 
       this.iStatus1.AutoSize = DevExpress.XtraBars.BarStaticItemSize.Spring;
       this.iStatus1.Caption = "Ready";
       this.iStatus1.Id = 2;
+      this.iStatus1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("iStatus1.ImageOptions.Image")));
+      this.iStatus1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("iStatus1.ImageOptions.LargeImage")));
       this.iStatus1.Name = "iStatus1";
+      this.iStatus1.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
       // 
       // barDockControlTop
       // 
@@ -275,9 +278,9 @@ namespace TMV.UI
       // 
       this.barDockControlBottom.CausesValidation = false;
       this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.barDockControlBottom.Location = new System.Drawing.Point(0, 947);
+      this.barDockControlBottom.Location = new System.Drawing.Point(0, 941);
       this.barDockControlBottom.Manager = this.bamBarMain;
-      this.barDockControlBottom.Size = new System.Drawing.Size(1536, 31);
+      this.barDockControlBottom.Size = new System.Drawing.Size(1536, 37);
       // 
       // barDockControlLeft
       // 
@@ -285,7 +288,7 @@ namespace TMV.UI
       this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
       this.barDockControlLeft.Location = new System.Drawing.Point(0, 52);
       this.barDockControlLeft.Manager = this.bamBarMain;
-      this.barDockControlLeft.Size = new System.Drawing.Size(0, 895);
+      this.barDockControlLeft.Size = new System.Drawing.Size(0, 889);
       // 
       // barDockControlRight
       // 
@@ -293,7 +296,7 @@ namespace TMV.UI
       this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
       this.barDockControlRight.Location = new System.Drawing.Point(1536, 52);
       this.barDockControlRight.Manager = this.bamBarMain;
-      this.barDockControlRight.Size = new System.Drawing.Size(0, 895);
+      this.barDockControlRight.Size = new System.Drawing.Size(0, 889);
       // 
       // imgListMainMenu
       // 

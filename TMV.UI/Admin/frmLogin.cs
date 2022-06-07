@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Configuration;
 using System.Windows.Forms;
-using TMV.BusinessObject.Admin;
+using TMV.BusinessObject.Auth;
 using TMV.Common;
 using TMV.Common.Forms;
-using TMV.ObjectInfo.Admin;
+using TMV.ObjectInfo.Auth;
 
 namespace TMV.UI.Admin
 {
   public partial class frmLogin : DevExpress.XtraEditors.XtraForm
   {
-    private decimal m_UserID = 0;
     private string m_Dealer;
     private string m_UserName;
     private string m_UserPassword;
@@ -30,72 +29,61 @@ namespace TMV.UI.Admin
     {
       InitControl();
     }
-    private void SetUserData()
-    {
-      try
-      {
-        APP_UsersInfo oUserInfo = APP_UsersBO.Instance().GetById(m_UserID);
-        FormGlobals.Panel_SetControlValue(grpUserInfo, oUserInfo);
-      }
-      catch (Exception ex)
-      {
-        FormGlobals.Message_Error(ex);
-      }
-    }
     private void InitControl()
     {
       FormGlobals.Control_SetFont(this, FormGlobals.CS_FONT_NAME);
     }
     private bool Login()
     {
-      bool bRet = false;
       try
       {
-        APP_UsersInfo ObjInfo = APP_UsersBO.Instance().GetByUserName(txtUser_Name.Text.Trim());
+        AppUsersInfo ObjInfo = AppUsersBO.Instance().GetByTenantAndUser(txtDealer.Text.Trim(), txtUser_Name.Text.Trim());
         if (ObjInfo != null)
         {
-          if ((ObjInfo.ISLOCKED == 0) || (ObjInfo.PASSWORDCHANGEAFTER < 0))
+          bool verified = AppUsersBO.Instance().VerifiedPassword(ObjInfo.Password, txtUser_Password.Text.Trim());
+          if (verified)
           {
-            bool verified = APP_UsersBO.Instance().VerifiedPassword(ObjInfo.USER_PASSWORD, txtUser_Password.Text.Trim());
-            if (verified)
-            {
-              bRet = true;
-              Globals.LoginUserID = ObjInfo.USER_ID;
-              Globals.LoginUserName = ObjInfo.USER_NAME;
-              Globals.LoginFullName = ObjInfo.FULL_NAME;
-              if (m_UserName.ToUpper() != txtUser_Name.Text.Trim().ToUpper())
-                mdlAdmin.WriteSetting("LastLoginUser", ObjInfo.USER_NAME);
+            Globals.LoginUserID = ObjInfo.Id;
+            Globals.LoginUserName = ObjInfo.UserName;
+            Globals.LoginFullName = ObjInfo.Name;
 
-              if (Convert.ToBoolean(speRememberPassword.EditValue.ToString()))
-                mdlAdmin.WriteSetting("LastLoginPassword", AppSecurity.Base64Encode(txtUser_Password.Text.Trim()));
-              else
-                mdlAdmin.WriteSetting("LastLoginPassword", "");
+            Globals.LoginDlrId = ObjInfo.TenantId;
+            Globals.LoginDealerCode = ObjInfo.TenantCode;
+            Globals.LoginDealerAbbr = ObjInfo.TenantAbbr;
+            Globals.LoginDealerName = ObjInfo.TenantName;
 
-              ObjInfo.NOFAILEDLOGIN = decimal.Zero;
-              APP_UsersBO.Instance().UpdateFailed(ObjInfo);
-              if (APP_UsersBO.Instance().isExpiredPassword(Globals.LoginUserID).Tables[0].Rows[0]["ISUSEREXPIRED"].ToString() == "1")
-              {
-                FormGlobals.Message_Warning_Error("Your password is expired. You must contact System Admin to reset your password.");
-                Close();
-                bRet = false;
-              }
-              return bRet;
-            }
-            ObjInfo.NOFAILEDLOGIN = decimal.Add(ObjInfo.NOFAILEDLOGIN, decimal.One);
-            APP_UsersBO.Instance().UpdateFailed(ObjInfo);
-            FormGlobals.Message_Warning_Error("Invalid Password! You have " + ObjInfo.NOFAILEDLOGIN.ToString() + " consecutive failed login.");
-            return bRet;
+            Globals.LoginTitleId = ObjInfo.TitleId;
+            Globals.LoginTitleCode = ObjInfo.TitleCode;
+            Globals.LoginTitleName = ObjInfo.TitleName;
+
+            if (m_UserName.ToUpper() != txtUser_Name.Text.Trim().ToUpper())
+              mdlAdmin.WriteSetting("LastLoginUser", ObjInfo.UserName);
+
+            if (Convert.ToBoolean(speRememberPassword.EditValue.ToString()))
+              mdlAdmin.WriteSetting("LastLoginPassword", AppSecurity.Base64Encode(txtUser_Password.Text.Trim()));
+            else
+              mdlAdmin.WriteSetting("LastLoginPassword", "");
+
+            ObjInfo.NumLoginFailed = 0;
+            AppUsersBO.Instance().UpdateFailedLogin(ObjInfo);
+
+            return true;
           }
-          FormGlobals.Message_Information("User Name has been Locked. Please contact with Administration!");
-          return bRet;
+
+          ObjInfo.NumLoginFailed = ObjInfo.NumLoginFailed + 1;
+          AppUsersBO.Instance().UpdateFailedLogin(ObjInfo);
+          FormGlobals.Message_Warning_Error("Invalid Password! You have " + ObjInfo.NumLoginFailed.ToString() + " consecutive failed login.");
+
+          return false;
         }
-        FormGlobals.Message_Information("Invalid User Name!");
+        FormGlobals.Message_Information("Invalid Dealer or User Name!");
       }
       catch (Exception ex)
       {
         FormGlobals.Message_Error(ex);
       }
-      return bRet;
+
+      return false;
     }
 
     private void frmLogin_Load(object sender, EventArgs e)
@@ -123,26 +111,39 @@ namespace TMV.UI.Admin
     {
       try
       {
+        bool isPassed = true;
+
         if (txtDealer.Text.Trim() == "")
         {
+          isPassed = false;
           FormGlobals.Message_Information("Dealer cannot be empty!");
           txtDealer.Focus();
         }
+        else
+        {
+          if (AppUsersBO.Instance().GetByTenant(txtDealer.Text.Trim()).Tables[0].Rows.Count == 0)
+          {
+            isPassed = false;
+            FormGlobals.Message_Information("Dealer is not existed!");
+            txtDealer.Focus();
+          }
+        }
+
         if (txtUser_Name.Text.Trim() == "")
         {
+          isPassed = false;
           FormGlobals.Message_Information("User Name cannot be empty!");
           txtUser_Name.Focus();
         }
         else if (txtUser_Password.Text == "")
         {
+          isPassed = false;
           FormGlobals.Message_Information("Password cannot be empty!");
           txtUser_Password.Focus();
         }
-        else if (Login())
+        
+        if (isPassed && Login())
         {
-          if (Convert.ToInt32(APP_UsersBO.Instance().GetAccountPolicy(Globals.LoginUserID).Tables[0].Rows[0]["SENDEMAIL"].ToString()) <= 0)
-            FormGlobals.Message_Warning_Error("Password will be locked after " + APP_UsersBO.Instance().GetAccountPolicy(Globals.LoginUserID).Tables[0].Rows[0]["EXPRIRED"].ToString() + " days. You must change your password!");
-
           DialogResult = DialogResult.OK;
           Close();
         }

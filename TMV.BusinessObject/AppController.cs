@@ -36,27 +36,10 @@ namespace TMV.BusinessObject
     {
       return AppHandler.Instance().Table_ListField(sTableName);
     }
-
-    public bool Table_Deletable(string sTableName, int iPKValue)
-    {
-      return AppHandler.Instance().Table_Deletable(sTableName, iPKValue);
-    }
-
     public object Table_GetFieldValue(string sTableName, string sFieldName, int iPKValue)
     {
       return AppHandler.Instance().Table_GetFieldValue(sTableName, sFieldName, iPKValue);
     }
-
-    public DataTable Widget_List()
-    {
-      return AppHandler.Instance().Widget_List();
-    }
-
-    public DataTable Widget_Data(string sSQL)
-    {
-      return AppHandler.Instance().Widget_Data(sSQL);
-    }
-
     public DataTable DataErrorMessage_Get(string sErrType, string sErrObject)
     {
       return AppHandler.Instance().DataErrorMessage_Get(sErrType, sErrObject);

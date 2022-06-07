@@ -3,13 +3,11 @@ using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using System;
-using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using TMV.BusinessObject;
-using TMV.BusinessObject.Admin;
 using TMV.Common;
 using TMV.UI.Admin;
 using TMV.UI.JPCB.CW;
@@ -17,7 +15,7 @@ using TMV.UI.JPCB.JP;
 
 namespace TMV.UI
 {
-  public partial class frmMain : DevExpress.XtraEditors.XtraForm
+  public partial class frmMain : XtraForm
   {
     #region "Load Form"
     private string skinMask = "Skin: ";
@@ -44,12 +42,6 @@ namespace TMV.UI
         UserLogOff();
         DoLogin();
         FormGlobals.App_ShowProgress(new MethodInvoker(Init_App));
-        if ((Globals.LoginUserID != 0) && (APP_UsersBO.Instance().GetAccountPolicy(Globals.LoginUserID).Tables[0].Rows[0]["ISNEXTLOGON"].ToString() == "1"))
-        {
-          AddForm(new frmChangePassword(), true);
-          siChangePassword.Enabled = true;
-          soLogin.Enabled = true;
-        }
       }
       catch (Exception ex)
       {
@@ -112,16 +104,18 @@ namespace TMV.UI
     {
       XtraForm newForm = frm;
       newForm.ShowInTaskbar = false;
-      if (Globals.LoginUserName != null)
-        mdlAdmin.SetUserRole(newForm);
-      try
-      {
-        APP_LogbookBO.Instance().UserOpenScreen(frm.Text, frm.Name);
-      }
-      catch (Exception ex)
-      {
-        FormGlobals.Message_Error(ex);
-      }
+
+      // TODO
+      //if (Globals.LoginUserName != null)
+      //  mdlAdmin.SetUserRole(newForm);
+      //try
+      //{
+      //  APP_LogbookBO.Instance().UserOpenScreen(frm.Text, frm.Name);
+      //}
+      //catch (Exception ex)
+      //{
+      //  FormGlobals.Message_Error(ex);
+      //}
 
       if (ShowDialog)
         newForm.ShowDialog();
@@ -151,7 +145,7 @@ namespace TMV.UI
             if (UserLogOff())
             {
               Text = Application.ProductName + string.Format(". Version {0} ({1})", Assembly.GetExecutingAssembly().GetName().Version.ToString(),
-                          File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location).ToShortDateString());
+                     File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location).ToShortDateString());
               iStatus1.Caption = "Please login to use application...";
               iStatus2.Caption = Application.ProductName;
               DoLogin();
@@ -159,15 +153,6 @@ namespace TMV.UI
             break;
           case "siChangePassword":
             AddForm(new frmChangePassword(), true);
-            break;
-          case "siUserManagement":
-            AddForm(new frmUserRightList(), false);
-            break;
-          case "siSystemDomain":
-            AddForm(new frmSystemDomain(), false);
-            break;
-          case "siUserActionReport":
-            AddForm(new frmLogBook(), false);
             break;
           case "siCW":
             AddForm(new frmCW(), true);
@@ -290,16 +275,17 @@ namespace TMV.UI
             mItem.Enabled = true;
         }
 
-        if (Globals.LoginUserID > 0)
-        {
-          try
-          {
-            APP_LogbookBO.Instance().UserLogOut();
-          }
-          catch
-          {
-          }
-        }
+        // TODO
+        //if (Globals.LoginUserID > 0)
+        //{
+        //  try
+        //  {
+        //    APP_LogbookBO.Instance().UserLogOut();
+        //  }
+        //  catch
+        //  {
+        //  }
+        //}
         Globals.LoginUserID = 0;
         UserLogOff = true;
       }
@@ -346,31 +332,8 @@ namespace TMV.UI
     }
     private void UserLogin()
     {
-      string expression = "";
       try
       {
-        //Code to enable Menu assigned
-        DataView dv = null;
-        DataSet ds = null;
-        ds = APP_UsersBO.Instance().GetUserMenu(Globals.LoginUserID);
-        if ((ds != null) && (ds.Tables[0] != null) && (ds.Tables[0].Rows.Count > 0))
-        {
-          dv = ds.Tables[0].DefaultView;
-          foreach (BarItem mItem in bamBarMain.Items)
-          {
-            if (mItem.Name.Substring(0, 2) == "si")
-            {
-              expression = "Menu_Name='" + mItem.Name + "'";
-              dv.RowFilter = expression;
-              if (dv.Count > 0)
-                mItem.Enabled = true;
-              else
-                mItem.Visibility = BarItemVisibility.Never;
-              ds.Tables[0].DefaultView.RowFilter = "";
-            }
-          }
-        }
-
         //Code to enable all Menu
         //foreach (BarItem mItem in bamBarMain.Items)
         //{
@@ -396,13 +359,11 @@ namespace TMV.UI
         soLogin.Enabled = false;
         try
         {
-          APP_LogbookBO.Instance().UserLogin();
-          Text = Application.ProductName + string.Format(". Version {0} ({1})", Assembly.GetExecutingAssembly().GetName().Version.ToString(),
-                 File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location).ToShortDateString()) + 
-                 ". User: " + Globals.LoginUserName + " (" + Globals.LoginFullName + ")" + 
-                 ". Time Login: " + DateTime.Now.ToString();
-          iStatus2.Caption = Application.ProductName + ": " + Globals.LoginUserName + " (" + Globals.LoginFullName + ")";
-          iStatus1.Caption = "Ready";
+          Text = Application.ProductName + 
+                 string.Format(". Version {0} ({1})", Assembly.GetExecutingAssembly().GetName().Version.ToString(), File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location).ToShortDateString()) + 
+                 ". Login (" + DateTime.Now.ToString() + ")";
+          iStatus2.Caption = Globals.LoginUserName + " (" + Globals.LoginFullName + ")";
+          iStatus1.Caption = Globals.LoginDealerName + " (" + Globals.LoginDealerAbbr + ")";
         }
         catch
         {

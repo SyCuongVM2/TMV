@@ -169,16 +169,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\APP_DomainBO.cs" />
-    <Compile Include="Admin\APP_FormbuttonsBO.cs" />
-    <Compile Include="Admin\APP_FormfunctionsBO.cs" />
-    <Compile Include="Admin\APP_FormsBO.cs" />
-    <Compile Include="Admin\APP_GroupfunctionsBO.cs" />
-    <Compile Include="Admin\APP_GroupsBO.cs" />
-    <Compile Include="Admin\APP_LogbookBO.cs" />
-    <Compile Include="Admin\APP_UsergroupBO.cs" />
-    <Compile Include="Admin\APP_UsersBO.cs" />
     <Compile Include="AppController.cs" />
+    <Compile Include="Auth\AppUsersBO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -195,5 +187,6 @@
       <Name>TMV.ObjectInfo</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
