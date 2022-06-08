@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="AppHandler.cs" />
     <Compile Include="Auth\AppUsersDAO.cs" />
+    <Compile Include="JPCB\JpcbCwDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlConnect.cs" />
     <Compile Include="SqlDataAccess.cs" />
@@ -60,11 +61,19 @@
       <Name>TMV.ObjectInfo</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="SP\CW\" />
+    <Folder Include="SP\JP\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="SP\AppAuthPkgGetById.sql" />
     <Content Include="SP\AppAuthPkgGetByTenant.sql" />
     <Content Include="SP\AppAuthPkgGetByTenantAndUser.sql" />
+    <Content Include="SP\AppAuthPkgTableGetErrorMessage.sql" />
+    <Content Include="SP\AppAuthPkgTableGetFieldValue.sql" />
+    <Content Include="SP\AppAuthPkgTableListField.sql" />
+    <Content Include="SP\AppAuthPkgUpdateFailedLogin.sql" />
+    <Content Include="SP\AppAuthPkgUserChangePassword.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

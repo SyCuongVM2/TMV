@@ -52,6 +52,7 @@
     #endregion
 
     #region "JPCB"
+    public string AppJpcbPkgGetConfigs = "AppJpcbPkgGetConfigs";
     #endregion
   }
 }

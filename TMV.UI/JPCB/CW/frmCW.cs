@@ -229,6 +229,52 @@ namespace TMV.UI.JPCB.CW
           new object[]{ "02", "Theo Cầu", "Hour", "1" },
         }
       };
+      Dt_Buoc_Nhay_KH_SCC = new DataTable()
+      {
+        Columns = {
+          "Id", "Ma_BN", "Ten_BN", "Ngam_Dinh"
+        },
+        Rows =
+        {
+          new object[] { 1, "5", "5 Phút", "0" },
+          new object[] { 2, "8", "8 Phút", "1" },
+          new object[] { 3, "10", "10 Phút", "0" },
+          new object[] { 4, "15", "15 Phút", "0" },
+          new object[] { 5, "20", "20 Phút", "0" },
+          new object[] { 6, "30", "30 Phút", "0" },
+          new object[] { 7, "60", "60 Phút", "0" }
+        }
+      };
+      Dt_Do_Rong_KH_SCC = new DataTable()
+      {
+        Columns = {
+          "Id", "Ma_Width", "Ten_Width", "Ngam_Dinh"
+        },
+        Rows = {
+          new object[] { 1, "10", "10", "1" },
+          new object[] { 2, "15", "15", "0" },
+          new object[] { 3, "20", "20", "0" },
+          new object[] { 4, "25", "25", "0" },
+          new object[] { 5, "30", "30", "0" },
+          new object[] { 6, "40", "40", "0" },
+          new object[] { 7, "50", "50", "0" },
+          new object[] { 8, "60", "60", "0" },
+          new object[] { 9, "70", "70", "0" },
+          new object[] { 10, "80", "80", "0" },
+          new object[] { 11, "100", "100", "0" },
+          new object[] { 12, "150", "150", "0" }
+        }
+      };
+      Dt_Kieu_Xem = new DataTable()
+      {
+        Columns = {
+          "Id", "Kieu_Xem", "Ten_Kieu", "Ngam_Dinh", "ShowHead"
+        },
+        Rows = {
+          new object[] { 1, "01", "Khoang", "1", 1 },
+          new object[] { 2, "02", "BKS", "0", 0 }
+        }
+      };
 
       CyberFunc.V_FillComBoxDefaul(CbbTime_Data, Dt_Time, "Tg", "Ten_Tg");
       CyberFunc.V_FillComBoxDefaul(CbbCa_Ngay, Dt_Ca_Ngay, "Ca_Ngay", "Ten");
@@ -237,23 +283,17 @@ namespace TMV.UI.JPCB.CW
     private void V_Load() 
     {
       DataSet dataSet1 = CP_RO_CW_ConFig.CreateData(); // CP_RO_CW_ConFig
-      Dt_ConFigColor_KH_SCC = dataSet1.Tables[0].Copy();
-      Dt_Set_SCC = dataSet1.Tables[1].Copy();
-      Dt_Buoc_Nhay_KH_SCC = dataSet1.Tables[2].Copy();
-      Dt_Do_Rong_KH_SCC = dataSet1.Tables[3].Copy();
-      DmKhoang_Loc_KH_SCC = dataSet1.Tables[4].Copy();
+
+      Dt_Set_SCC = dataSet1.Tables[0].Copy();
+      DmKhoang_Loc_KH_SCC = dataSet1.Tables[1].Copy();
+      DmCVDV_Loc_KH_SCC = dataSet1.Tables[2].Copy();
+
       DmKhoang_KH_SCC = DmKhoang_Loc_KH_SCC.Copy();
-
       CyberFunc.V_DeleteRowEmpty(DmKhoang_KH_SCC, "Ma_Khoang");
-
       Dv_DmKhoang_KH_SCC = new DataView(DmKhoang_KH_SCC);
-      DmCVDV_Loc_KH_SCC = dataSet1.Tables[5].Copy();
       DmCVDV_KH_SCC = DmCVDV_Loc_KH_SCC.Copy();
-
       CyberFunc.V_DeleteRowEmpty(DmCVDV_KH_SCC, "Ma_HS");
 
-      Dv_DmCVDV_KH_SCC = new DataView(DmCVDV_KH_SCC);
-      Dt_Kieu_Xem = dataSet1.Tables[6].Copy();
       if (Dt_Set_SCC == null)
       {
         DataSet dataSet2 = CP_RO_CW_Ngay_Ngam_Dinh.CreateData(); // CP_RO_CW_Ngay_Ngam_Dinh
@@ -261,6 +301,7 @@ namespace TMV.UI.JPCB.CW
         Dt_Set_SCC.ImportRow(dataSet2.Tables[0].Rows[0]);
         dataSet2.Dispose();
       }
+
       M_StartHour = Convert.ToInt32(Dt_Set_SCC.Rows[0]["StartHour"]);
       M_FinishHour = Convert.ToInt32(Dt_Set_SCC.Rows[0]["FinishHour"]);
       M_StartMINUTE = Convert.ToInt32(Dt_Set_SCC.Rows[0]["StartMINUTE"]);
@@ -395,7 +436,7 @@ namespace TMV.UI.JPCB.CW
       SchedulerControl.GroupType = SchedulerGroupType.Resource;
 
       V_SetScheduler_SetValue_RX();
-      V_SetColorAppointments_RX();
+      //V_SetColorAppointments_RX();
 
       if (DmKhoang_KH_SCC.Columns.Contains("Color"))
         SchedulerStorage.Resources.Mappings.Color = DmKhoang_KH_SCC.Columns["Color"].ColumnName.ToString().Trim();
@@ -2192,17 +2233,6 @@ namespace TMV.UI.JPCB.CW
     {
       if (_Dv_DataSource == null)
         return;
-
-      int num1 = checked(Dt_ConFigColor_KH_SCC.Rows.Count - 1);
-      int num2 = 0;
-      while (num2 <= num1)
-      {
-        SchedulerStorage.Appointments.Labels.GetByIndex(num2).Color = CyberColor.GetBackColor(Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["BackColor"]));
-        SchedulerStorage.Appointments.Labels.GetByIndex(num2).DisplayName = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
-        SchedulerStorage.Appointments.Labels.GetByIndex(num2).MenuCaption = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
-        V_SetColorlabel_RX(num2, Dt_ConFigColor_KH_SCC.Rows[num2]);
-        checked { ++num2; }
-      }
 
       V_AddResourcesTree(Dv_Cho_Rua, _Dt_Head_tree);
 

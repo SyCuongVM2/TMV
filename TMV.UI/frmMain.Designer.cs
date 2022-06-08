@@ -37,9 +37,6 @@ namespace TMV.UI
       this.soLogin = new DevExpress.XtraBars.BarButtonItem();
       this.siLogOut = new DevExpress.XtraBars.BarButtonItem();
       this.siChangePassword = new DevExpress.XtraBars.BarButtonItem();
-      this.siUserManagement = new DevExpress.XtraBars.BarButtonItem();
-      this.siSystemDomain = new DevExpress.XtraBars.BarButtonItem();
-      this.siUserActionReport = new DevExpress.XtraBars.BarButtonItem();
       this.soExit = new DevExpress.XtraBars.BarButtonItem();
       this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
       this.siCW = new DevExpress.XtraBars.BarButtonItem();
@@ -56,6 +53,9 @@ namespace TMV.UI
       this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
       this.imgListMainMenu = new System.Windows.Forms.ImageList(this.components);
       this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
+      this.siUserManagement = new DevExpress.XtraBars.BarButtonItem();
+      this.siSystemDomain = new DevExpress.XtraBars.BarButtonItem();
+      this.siUserActionReport = new DevExpress.XtraBars.BarButtonItem();
       this.repositoryImageComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
       this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
       this.repositoryItemImageComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
@@ -157,27 +157,6 @@ namespace TMV.UI
       this.siChangePassword.ImageOptions.ImageIndex = 4;
       this.siChangePassword.Name = "siChangePassword";
       // 
-      // siUserManagement
-      // 
-      this.siUserManagement.Caption = "&User Management";
-      this.siUserManagement.Id = 7;
-      this.siUserManagement.ImageOptions.ImageIndex = 6;
-      this.siUserManagement.Name = "siUserManagement";
-      // 
-      // siSystemDomain
-      // 
-      this.siSystemDomain.Caption = "System Domain";
-      this.siSystemDomain.Id = 8;
-      this.siSystemDomain.ImageOptions.ImageIndex = 0;
-      this.siSystemDomain.Name = "siSystemDomain";
-      // 
-      // siUserActionReport
-      // 
-      this.siUserActionReport.Caption = "User &Action Report";
-      this.siUserActionReport.Id = 9;
-      this.siUserActionReport.ImageOptions.ImageIndex = 8;
-      this.siUserActionReport.Name = "siUserActionReport";
-      // 
       // soExit
       // 
       this.soExit.Caption = "&Exit";
@@ -250,6 +229,7 @@ namespace TMV.UI
       // 
       // iStatus2
       // 
+      this.iStatus2.AutoSize = DevExpress.XtraBars.BarStaticItemSize.Spring;
       this.iStatus2.Id = 1;
       this.iStatus2.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("iStatus2.ImageOptions.Image")));
       this.iStatus2.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("iStatus2.ImageOptions.LargeImage")));
@@ -345,6 +325,27 @@ namespace TMV.UI
       this.barStaticItem1.Id = 0;
       this.barStaticItem1.Name = "barStaticItem1";
       // 
+      // siUserManagement
+      // 
+      this.siUserManagement.Caption = "&User Management";
+      this.siUserManagement.Id = 7;
+      this.siUserManagement.ImageOptions.ImageIndex = 6;
+      this.siUserManagement.Name = "siUserManagement";
+      // 
+      // siSystemDomain
+      // 
+      this.siSystemDomain.Caption = "System Domain";
+      this.siSystemDomain.Id = 8;
+      this.siSystemDomain.ImageOptions.ImageIndex = 0;
+      this.siSystemDomain.Name = "siSystemDomain";
+      // 
+      // siUserActionReport
+      // 
+      this.siUserActionReport.Caption = "User &Action Report";
+      this.siUserActionReport.Id = 9;
+      this.siUserActionReport.ImageOptions.ImageIndex = 8;
+      this.siUserActionReport.Name = "siUserActionReport";
+      // 
       // repositoryImageComboBox1
       // 
       this.repositoryImageComboBox1.AutoHeight = false;
@@ -382,7 +383,7 @@ namespace TMV.UI
       this.picBackGround.MenuManager = this.bamBarMain;
       this.picBackGround.Name = "picBackGround";
       this.picBackGround.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
-      this.picBackGround.Size = new System.Drawing.Size(1536, 911);
+      this.picBackGround.Size = new System.Drawing.Size(1536, 906);
       this.picBackGround.TabIndex = 4;
       // 
       // tblMdiManageMain

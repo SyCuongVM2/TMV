@@ -9,16 +9,13 @@ namespace TMV.DataAccess
   public sealed class SqlDataAccess
   {
     #region private utility methods & constructors
-
     private SqlDataAccess() { }
-
     // Nested Types
     private enum SqlConnectionOwnership
     {
       Internal,
       External
     }
-
     private static void AssignParameterValues(SqlParameter[] commandParameters, DataRow dataRow)
     {
       if ((commandParameters != null) && (dataRow != null))
@@ -36,7 +33,6 @@ namespace TMV.DataAccess
         }
       }
     }
-
     private static void AssignParameterValues(SqlParameter[] commandParameters, object[] parameterValues)
     {
       if ((commandParameters != null) || (parameterValues != null))
@@ -61,7 +57,6 @@ namespace TMV.DataAccess
         }
       }
     }
-
     private static void AttachParameters(SqlCommand command, SqlParameter[] commandParameters)
     {
       if (command == null)
@@ -81,7 +76,6 @@ namespace TMV.DataAccess
         }
       }
     }
-
     public static SqlCommand CreateCommand(SqlConnection connection, string spName, params string[] sourceColumns)
     {
       if (connection == null)
@@ -104,7 +98,6 @@ namespace TMV.DataAccess
       }
       return command;
     }
-
     private static void PrepareCommand(SqlCommand command, SqlConnection connection, SqlTransaction transaction, CommandType commandType, string commandText, SqlParameter[] commandParameters, ref bool mustCloseConnection)
     {
       if (command == null)
@@ -134,7 +127,6 @@ namespace TMV.DataAccess
       if (commandParameters != null)
         AttachParameters(command, commandParameters);
     }
-
     public static void UpdateDataset(SqlCommand insertCommand, SqlCommand deleteCommand, SqlCommand updateCommand, DataSet dataSet, string tableName)
     {
       if (insertCommand == null)
@@ -161,16 +153,13 @@ namespace TMV.DataAccess
         dataSet.AcceptChanges();
       }
     }
-
     #endregion
 
     #region ExecuteNonQuery
-
     public static int ExecuteNonQuery(SqlConnection connection, CommandType commandType, string commandText)
     {
       return ExecuteNonQuery(connection, commandType, commandText, null);
     }
-
     public static int ExecuteNonQuery(SqlConnection connection, string spName, params object[] parameterValues)
     {
       if (connection == null)
@@ -195,12 +184,10 @@ namespace TMV.DataAccess
       }
       return ExecuteNonQuery(connection, CommandType.StoredProcedure, spName);
     }
-
     public static int ExecuteNonQuery(SqlTransaction transaction, CommandType commandType, string commandText)
     {
       return ExecuteNonQuery(transaction, commandType, commandText, null);
     }
-
     public static int ExecuteNonQuery(SqlTransaction transaction, string spName, params object[] parameterValues)
     {
       if (transaction == null)
@@ -228,12 +215,10 @@ namespace TMV.DataAccess
       }
       return ExecuteNonQuery(transaction, CommandType.StoredProcedure, spName);
     }
-
     public static int ExecuteNonQuery(string connectionString, CommandType commandType, string commandText)
     {
       return ExecuteNonQuery(connectionString, commandType, commandText, null);
     }
-
     public static int ExecuteNonQuery(string connectionString, string spName, params object[] parameterValues)
     {
       if ((connectionString == null) || (connectionString.Length == 0))
@@ -258,7 +243,6 @@ namespace TMV.DataAccess
       }
       return ExecuteNonQuery(connectionString, CommandType.StoredProcedure, spName);
     }
-
     public static int ExecuteNonQuery(SqlConnection connection, CommandType commandType, string commandText, params SqlParameter[] commandParameters)
     {
       if (connection == null)
@@ -274,7 +258,6 @@ namespace TMV.DataAccess
 
       return num;
     }
-
     public static int ExecuteNonQuery(SqlTransaction transaction, CommandType commandType, string commandText, params SqlParameter[] commandParameters)
     {
       if (transaction == null)
@@ -290,7 +273,6 @@ namespace TMV.DataAccess
       command.Parameters.Clear();
       return num;
     }
-
     public static int ExecuteNonQuery(string connectionString, CommandType commandType, string commandText, params SqlParameter[] commandParameters)
     {
       if ((connectionString == null) || (connectionString.Length == 0))
@@ -302,7 +284,6 @@ namespace TMV.DataAccess
         return ExecuteNonQuery(connection, commandType, commandText, commandParameters);
       }
     }
-
     public static int ExecuteNonQueryTypedParams(SqlConnection connection, string spName, DataRow dataRow)
     {
       if (connection == null)
@@ -319,7 +300,6 @@ namespace TMV.DataAccess
       }
       return ExecuteNonQuery(connection, CommandType.StoredProcedure, spName);
     }
-
     public static int ExecuteNonQueryTypedParams(SqlTransaction transaction, string spName, DataRow dataRow)
     {
       if (transaction == null)
@@ -339,7 +319,6 @@ namespace TMV.DataAccess
       }
       return ExecuteNonQuery(transaction, CommandType.StoredProcedure, spName);
     }
-
     public static int ExecuteNonQueryTypedParams(string connectionString, string spName, DataRow dataRow)
     {
       if ((connectionString == null) || (connectionString.Length == 0))
@@ -356,16 +335,13 @@ namespace TMV.DataAccess
       }
       return ExecuteNonQuery(connectionString, CommandType.StoredProcedure, spName);
     }
-
     #endregion
 
     #region ExecuteDataSet
-
     public static DataSet ExecuteDataset(SqlConnection connection, CommandType commandType, string commandText)
     {
       return ExecuteDataset(connection, commandType, commandText, null);
     }
-
     public static DataSet ExecuteDataset(SqlConnection connection, string spName, params object[] parameterValues)
     {
       if (connection == null)
@@ -382,12 +358,10 @@ namespace TMV.DataAccess
       }
       return ExecuteDataset(connection, CommandType.StoredProcedure, spName);
     }
-
     public static DataSet ExecuteDataset(SqlTransaction transaction, CommandType commandType, string commandText)
     {
       return ExecuteDataset(transaction, commandType, commandText, null);
     }
-
     public static DataSet ExecuteDataset(SqlTransaction transaction, string spName, params object[] parameterValues)
     {
       if (transaction == null)
@@ -407,12 +381,10 @@ namespace TMV.DataAccess
       }
       return ExecuteDataset(transaction, CommandType.StoredProcedure, spName);
     }
-
     public static DataSet ExecuteDataset(string connectionString, CommandType commandType, string commandText)
     {
       return ExecuteDataset(connectionString, commandType, commandText, null);
     }
-
     public static DataSet ExecuteDataset(string connectionString, string spName, params object[] parameterValues)
     {
       if ((connectionString == null) || (connectionString.Length == 0))
@@ -429,7 +401,6 @@ namespace TMV.DataAccess
       }
       return ExecuteDataset(connectionString, CommandType.StoredProcedure, spName);
     }
-
     public static DataSet ExecuteDataset(SqlConnection connection, CommandType commandType, string commandText, params SqlParameter[] commandParameters)
     {
       if (connection == null)
@@ -449,7 +420,6 @@ namespace TMV.DataAccess
 
       return dataSet;
     }
-
     public static DataSet ExecuteDataset(SqlTransaction transaction, CommandType commandType, string commandText, params SqlParameter[] commandParameters)
     {
       if (transaction == null)
@@ -469,7 +439,6 @@ namespace TMV.DataAccess
       }
       return dataSet;
     }
-
     public static DataSet ExecuteDataset(string connectionString, CommandType commandType, string commandText, params SqlParameter[] commandParameters)
     {
       if ((connectionString == null) || (connectionString.Length == 0))
@@ -481,7 +450,6 @@ namespace TMV.DataAccess
         return ExecuteDataset(connection, commandType, commandText, commandParameters);
       }
     }
-
     public static DataSet ExecuteDatasetTypedParams(SqlConnection connection, string spName, DataRow dataRow)
     {
       if (connection == null)
@@ -498,7 +466,6 @@ namespace TMV.DataAccess
       }
       return ExecuteDataset(connection, CommandType.StoredProcedure, spName);
     }
-
     public static DataSet ExecuteDatasetTypedParams(SqlTransaction transaction, string spName, DataRow dataRow)
     {
       if (transaction == null)
@@ -518,7 +485,6 @@ namespace TMV.DataAccess
       }
       return ExecuteDataset(transaction, CommandType.StoredProcedure, spName);
     }
-
     public static DataSet ExecuteDatasetTypedParams(string connectionString, string spName, DataRow dataRow)
     {
       if ((connectionString == null) || (connectionString.Length == 0))
@@ -535,16 +501,13 @@ namespace TMV.DataAccess
       }
       return ExecuteDataset(connectionString, CommandType.StoredProcedure, spName);
     }
-
     #endregion
 
     #region ExecuteReader
-
     public static SqlDataReader ExecuteReader(SqlConnection connection, CommandType commandType, string commandText)
     {
       return ExecuteReader(connection, commandType, commandText, null);
     }
-
     public static SqlDataReader ExecuteReader(SqlConnection connection, string spName, params object[] parameterValues)
     {
       if (connection == null)
@@ -569,12 +532,10 @@ namespace TMV.DataAccess
       }
       return ExecuteReader(connection, CommandType.StoredProcedure, spName);
     }
-
     public static SqlDataReader ExecuteReader(SqlTransaction transaction, CommandType commandType, string commandText)
     {
       return ExecuteReader(transaction, commandType, commandText, null);
     }
-
     public static SqlDataReader ExecuteReader(SqlTransaction transaction, string spName, params object[] parameterValues)
     {
       if (transaction == null)
@@ -602,12 +563,10 @@ namespace TMV.DataAccess
       }
       return ExecuteReader(transaction, CommandType.StoredProcedure, spName);
     }
-
     public static SqlDataReader ExecuteReader(string connectionString, CommandType commandType, string commandText)
     {
       return ExecuteReader(connectionString, commandType, commandText, null);
     }
-
     public static SqlDataReader ExecuteReader(string connectionString, string spName, params object[] parameterValues)
     {
       if ((connectionString == null) || (connectionString.Length == 0))
@@ -632,12 +591,10 @@ namespace TMV.DataAccess
       }
       return ExecuteReader(connectionString, CommandType.StoredProcedure, spName);
     }
-
     public static SqlDataReader ExecuteReader(SqlConnection connection, CommandType commandType, string commandText, params SqlParameter[] commandParameters)
     {
       return ExecuteReader(connection, null, commandType, commandText, commandParameters, SqlConnectionOwnership.External);
     }
-
     public static SqlDataReader ExecuteReader(SqlTransaction transaction, CommandType commandType, string commandText, params SqlParameter[] commandParameters)
     {
       if (transaction == null)
@@ -648,7 +605,6 @@ namespace TMV.DataAccess
 
       return ExecuteReader(transaction.Connection, transaction, commandType, commandText, commandParameters, SqlConnectionOwnership.External);
     }
-
     public static SqlDataReader ExecuteReader(string connectionString, CommandType commandType, string commandText, params SqlParameter[] commandParameters)
     {
       SqlConnection connection = null;
@@ -671,7 +627,6 @@ namespace TMV.DataAccess
       }
       return reader;
     }
-
     private static SqlDataReader ExecuteReader(SqlConnection connection, SqlTransaction transaction, CommandType commandType, string commandText, SqlParameter[] commandParameters, SqlConnectionOwnership connectionOwnership)
     {
       SqlDataReader reader;
@@ -732,7 +687,6 @@ namespace TMV.DataAccess
       }
       return reader;
     }
-
     public static SqlDataReader ExecuteReaderTypedParams(SqlConnection connection, string spName, DataRow dataRow)
     {
       if (connection == null)
@@ -749,7 +703,6 @@ namespace TMV.DataAccess
       }
       return ExecuteReader(connection, CommandType.StoredProcedure, spName);
     }
-
     public static SqlDataReader ExecuteReaderTypedParams(SqlTransaction transaction, string spName, DataRow dataRow)
     {
       if (transaction == null)
@@ -769,7 +722,6 @@ namespace TMV.DataAccess
       }
       return ExecuteReader(transaction, CommandType.StoredProcedure, spName);
     }
-
     public static SqlDataReader ExecuteReaderTypedParams(string connectionString, string spName, DataRow dataRow)
     {
       if ((connectionString == null) || (connectionString.Length == 0))
@@ -786,16 +738,13 @@ namespace TMV.DataAccess
       }
       return ExecuteReader(connectionString, CommandType.StoredProcedure, spName);
     }
-
     #endregion
 
     #region ExecuteScalar
-
     public static object ExecuteScalar(SqlConnection connection, CommandType commandType, string commandText)
     {
       return ExecuteScalar(connection, commandType, commandText, null);
     }
-
     public static object ExecuteScalar(SqlConnection connection, string spName, params object[] parameterValues)
     {
       if (connection == null)
@@ -820,12 +769,10 @@ namespace TMV.DataAccess
       }
       return ExecuteScalar(connection, CommandType.StoredProcedure, spName);
     }
-
     public static object ExecuteScalar(SqlTransaction transaction, CommandType commandType, string commandText)
     {
       return ExecuteScalar(transaction, commandType, commandText, null);
     }
-
     public static object ExecuteScalar(SqlTransaction transaction, string spName, params object[] parameterValues)
     {
       if (transaction == null)
@@ -853,12 +800,10 @@ namespace TMV.DataAccess
       }
       return ExecuteScalar(transaction, CommandType.StoredProcedure, spName);
     }
-
     public static object ExecuteScalar(string connectionString, CommandType commandType, string commandText)
     {
       return ExecuteScalar(connectionString, commandType, commandText, null);
     }
-
     public static object ExecuteScalar(string connectionString, string spName, params object[] parameterValues)
     {
       if ((connectionString == null) || (connectionString.Length == 0))
@@ -883,7 +828,6 @@ namespace TMV.DataAccess
       }
       return ExecuteScalar(connectionString, CommandType.StoredProcedure, spName);
     }
-
     public static object ExecuteScalar(SqlConnection connection, CommandType commandType, string commandText, params SqlParameter[] commandParameters)
     {
       if (connection == null)
@@ -899,7 +843,6 @@ namespace TMV.DataAccess
 
       return objectValue;
     }
-
     public static object ExecuteScalar(SqlTransaction transaction, CommandType commandType, string commandText, params SqlParameter[] commandParameters)
     {
       if (transaction == null)
@@ -915,7 +858,6 @@ namespace TMV.DataAccess
       command.Parameters.Clear();
       return objectValue;
     }
-
     public static object ExecuteScalar(string connectionString, CommandType commandType, string commandText, params SqlParameter[] commandParameters)
     {
       if ((connectionString == null) || (connectionString.Length == 0))
@@ -927,7 +869,6 @@ namespace TMV.DataAccess
         return ExecuteScalar(connection, commandType, commandText, commandParameters);
       }
     }
-
     public static object ExecuteScalarTypedParams(SqlConnection connection, string spName, DataRow dataRow)
     {
       if (connection == null)
@@ -944,7 +885,6 @@ namespace TMV.DataAccess
       }
       return ExecuteScalar(connection, CommandType.StoredProcedure, spName);
     }
-
     public static object ExecuteScalarTypedParams(SqlTransaction transaction, string spName, DataRow dataRow)
     {
       if (transaction == null)
@@ -964,7 +904,6 @@ namespace TMV.DataAccess
       }
       return ExecuteScalar(transaction, CommandType.StoredProcedure, spName);
     }
-
     public static object ExecuteScalarTypedParams(string connectionString, string spName, DataRow dataRow)
     {
       if ((connectionString == null) || (connectionString.Length == 0))
@@ -981,16 +920,13 @@ namespace TMV.DataAccess
       }
       return ExecuteScalar(connectionString, CommandType.StoredProcedure, spName);
     }
-
     #endregion
 
     #region ExecuteXmlReader
-
     public static XmlReader ExecuteXmlReader(SqlConnection connection, CommandType commandType, string commandText)
     {
       return ExecuteXmlReader(connection, commandType, commandText, null);
     }
-
     public static XmlReader ExecuteXmlReader(SqlConnection connection, string spName, params object[] parameterValues)
     {
       if (connection == null)
@@ -1007,12 +943,10 @@ namespace TMV.DataAccess
       }
       return ExecuteXmlReader(connection, CommandType.StoredProcedure, spName);
     }
-
     public static XmlReader ExecuteXmlReader(SqlTransaction transaction, CommandType commandType, string commandText)
     {
       return ExecuteXmlReader(transaction, commandType, commandText, null);
     }
-
     public static XmlReader ExecuteXmlReader(SqlTransaction transaction, string spName, params object[] parameterValues)
     {
       if (transaction == null)
@@ -1032,7 +966,6 @@ namespace TMV.DataAccess
       }
       return ExecuteXmlReader(transaction, CommandType.StoredProcedure, spName);
     }
-
     public static XmlReader ExecuteXmlReader(SqlConnection connection, CommandType commandType, string commandText, params SqlParameter[] commandParameters)
     {
       XmlReader reader;
@@ -1057,7 +990,6 @@ namespace TMV.DataAccess
       }
       return reader;
     }
-
     public static XmlReader ExecuteXmlReader(SqlTransaction transaction, CommandType commandType, string commandText, params SqlParameter[] commandParameters)
     {
       if (transaction == null)
@@ -1073,7 +1005,6 @@ namespace TMV.DataAccess
       command.Parameters.Clear();
       return xmlRead;
     }
-
     public static XmlReader ExecuteXmlReaderTypedParams(SqlConnection connection, string spName, DataRow dataRow)
     {
       if (connection == null)
@@ -1090,7 +1021,6 @@ namespace TMV.DataAccess
       }
       return ExecuteXmlReader(connection, CommandType.StoredProcedure, spName);
     }
-
     public static XmlReader ExecuteXmlReaderTypedParams(SqlTransaction transaction, string spName, DataRow dataRow)
     {
       if (transaction == null)
@@ -1110,16 +1040,13 @@ namespace TMV.DataAccess
       }
       return ExecuteXmlReader(transaction, CommandType.StoredProcedure, spName);
     }
-
     #endregion
 
     #region FillDataSet
-
     public static void FillDataset(SqlConnection connection, CommandType commandType, string commandText, DataSet dataSet, string[] tableNames)
     {
       FillDataset(connection, commandType, commandText, dataSet, tableNames, null);
     }
-
     public static void FillDataset(SqlConnection connection, string spName, DataSet dataSet, string[] tableNames, params object[] parameterValues)
     {
       if (connection == null)
@@ -1140,12 +1067,10 @@ namespace TMV.DataAccess
       else
         FillDataset(connection, CommandType.StoredProcedure, spName, dataSet, tableNames);
     }
-
     public static void FillDataset(SqlTransaction transaction, CommandType commandType, string commandText, DataSet dataSet, string[] tableNames)
     {
       FillDataset(transaction, commandType, commandText, dataSet, tableNames, null);
     }
-
     public static void FillDataset(SqlTransaction transaction, string spName, DataSet dataSet, string[] tableNames, params object[] parameterValues)
     {
       if (transaction == null)
@@ -1169,7 +1094,6 @@ namespace TMV.DataAccess
       else
         FillDataset(transaction, CommandType.StoredProcedure, spName, dataSet, tableNames);
     }
-
     public static void FillDataset(string connectionString, CommandType commandType, string commandText, DataSet dataSet, string[] tableNames)
     {
       SqlConnection connection = null;
@@ -1191,7 +1115,6 @@ namespace TMV.DataAccess
           connection.Dispose();
       }
     }
-
     public static void FillDataset(string connectionString, string spName, DataSet dataSet, string[] tableNames, params object[] parameterValues)
     {
       SqlConnection connection = null;
@@ -1213,12 +1136,10 @@ namespace TMV.DataAccess
           connection.Dispose();
       }
     }
-
     public static void FillDataset(SqlConnection connection, CommandType commandType, string commandText, DataSet dataSet, string[] tableNames, params SqlParameter[] commandParameters)
     {
       FillDataset(connection, null, commandType, commandText, dataSet, tableNames, commandParameters);
     }
-
     public static void FillDataset(SqlTransaction transaction, CommandType commandType, string commandText, DataSet dataSet, string[] tableNames, params SqlParameter[] commandParameters)
     {
       if (transaction == null)
@@ -1229,7 +1150,6 @@ namespace TMV.DataAccess
 
       FillDataset(transaction.Connection, transaction, commandType, commandText, dataSet, tableNames, commandParameters);
     }
-
     public static void FillDataset(string connectionString, CommandType commandType, string commandText, DataSet dataSet, string[] tableNames, params SqlParameter[] commandParameters)
     {
       SqlConnection connection = null;
@@ -1251,7 +1171,6 @@ namespace TMV.DataAccess
           connection.Dispose();
       }
     }
-
     private static void FillDataset(SqlConnection connection, SqlTransaction transaction, CommandType commandType, string commandText, DataSet dataSet, string[] tableNames, params SqlParameter[] commandParameters)
     {
       if (connection == null)
@@ -1284,7 +1203,6 @@ namespace TMV.DataAccess
       if (mustCloseConnection)
         connection.Close();
     }
-
     #endregion
   }
 }

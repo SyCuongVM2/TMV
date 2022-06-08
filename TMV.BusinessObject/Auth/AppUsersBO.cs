@@ -14,7 +14,6 @@ namespace TMV.BusinessObject.Auth
     protected AppUsersBO()
     {
     }
-
     public static AppUsersBO Instance()
     {
       if (_instance == null)
@@ -27,7 +26,6 @@ namespace TMV.BusinessObject.Auth
       }
       return _instance;
     }
-
     protected void Dispose()
     {
       _instance = null;

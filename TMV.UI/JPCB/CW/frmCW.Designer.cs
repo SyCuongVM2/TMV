@@ -31,9 +31,9 @@ namespace TMV.UI.JPCB.CW
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCW));
-      DevExpress.XtraScheduler.TimeRuler timeRuler4 = new DevExpress.XtraScheduler.TimeRuler();
-      DevExpress.XtraScheduler.TimeRuler timeRuler5 = new DevExpress.XtraScheduler.TimeRuler();
-      DevExpress.XtraScheduler.TimeRuler timeRuler6 = new DevExpress.XtraScheduler.TimeRuler();
+      DevExpress.XtraScheduler.TimeRuler timeRuler1 = new DevExpress.XtraScheduler.TimeRuler();
+      DevExpress.XtraScheduler.TimeRuler timeRuler2 = new DevExpress.XtraScheduler.TimeRuler();
+      DevExpress.XtraScheduler.TimeRuler timeRuler3 = new DevExpress.XtraScheduler.TimeRuler();
       this.BarManagerCho_Rua = new DevExpress.XtraBars.BarManager(this.components);
       this.barWS = new DevExpress.XtraBars.Bar();
       this.barWSUser = new DevExpress.XtraBars.BarStaticItem();
@@ -466,11 +466,11 @@ namespace TMV.UI.JPCB.CW
       this.SchedulerControl.Start = new System.DateTime(2022, 5, 17, 0, 0, 0, 0);
       this.SchedulerControl.TabIndex = 0;
       this.SchedulerControl.Text = "schedulerControl1";
-      this.SchedulerControl.Views.DayView.TimeRulers.Add(timeRuler4);
+      this.SchedulerControl.Views.DayView.TimeRulers.Add(timeRuler1);
       this.SchedulerControl.Views.FullWeekView.Enabled = true;
-      this.SchedulerControl.Views.FullWeekView.TimeRulers.Add(timeRuler5);
+      this.SchedulerControl.Views.FullWeekView.TimeRulers.Add(timeRuler2);
       this.SchedulerControl.Views.WeekView.Enabled = false;
-      this.SchedulerControl.Views.WorkWeekView.TimeRulers.Add(timeRuler6);
+      this.SchedulerControl.Views.WorkWeekView.TimeRulers.Add(timeRuler3);
       this.SchedulerControl.Views.YearView.UseOptimizedScrolling = false;
       this.SchedulerControl.CustomDrawResourceHeader += new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(this.scheduler_CustomDrawResourceHeader);
       // 

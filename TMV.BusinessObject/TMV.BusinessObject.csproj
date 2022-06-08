@@ -171,6 +171,7 @@
   <ItemGroup>
     <Compile Include="AppController.cs" />
     <Compile Include="Auth\AppUsersBO.cs" />
+    <Compile Include="JPCB\JpcbCwBO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -67,17 +67,13 @@ namespace TMV.UI.JPCB.Common
   {
     public CP_RO_CW_ConFig()
     {
-      DataTable Dt_ConFigColor_KH_SCC = new DataTable("Dt_ConFigColor_KH_SCC");
       DataTable Dt_Set_SCC = new DataTable("Dt_Set_SCC");
-      DataTable Dt_Buoc_Nhay_KH_SCC = new DataTable("Dt_Buoc_Nhay_KH_SCC");
-      DataTable Dt_Do_Rong_KH_SCC = new DataTable("Dt_Do_Rong_KH_SCC");
       DataTable DmKhoang_Loc_KH_SCC = new DataTable("DmKhoang_Loc_KH_SCC");
       DataTable DmCVDV_Loc_KH_SCC = new DataTable("DmCVDV_Loc_KH_SCC");
-      DataTable Dt_Kieu_Xem = new DataTable("Dt_Kieu_Xem");
 
-      Dt_ConFigColor_KH_SCC.Columns.Add("ID", typeof(Int32));
-      Dt_ConFigColor_KH_SCC.Columns.Add("BackColor", typeof(string));
-      Dt_ConFigColor_KH_SCC.Columns.Add("Ten_Color", typeof(string));
+      //Dt_ConFigColor_KH_SCC.Columns.Add("ID", typeof(Int32));
+      //Dt_ConFigColor_KH_SCC.Columns.Add("BackColor", typeof(string));
+      //Dt_ConFigColor_KH_SCC.Columns.Add("Ten_Color", typeof(string));
 
       Dt_Set_SCC.Columns.Add("ID", typeof(Int32));
       Dt_Set_SCC.Columns.Add("StartHour", typeof(Int32));
@@ -105,15 +101,15 @@ namespace TMV.UI.JPCB.Common
       Dt_Set_SCC.Columns.Add("Ngay_Chieu1", typeof(DateTime));
       Dt_Set_SCC.Columns.Add("Ngay_Chieu2", typeof(DateTime));
 
-      Dt_Buoc_Nhay_KH_SCC.Columns.Add("ID", typeof(Int32));
-      Dt_Buoc_Nhay_KH_SCC.Columns.Add("Ma_BN", typeof(string));
-      Dt_Buoc_Nhay_KH_SCC.Columns.Add("Ten_BN", typeof(string));
-      Dt_Buoc_Nhay_KH_SCC.Columns.Add("Ngam_Dinh", typeof(string));
+      //Dt_Buoc_Nhay_KH_SCC.Columns.Add("ID", typeof(Int32));
+      //Dt_Buoc_Nhay_KH_SCC.Columns.Add("Ma_BN", typeof(string));
+      //Dt_Buoc_Nhay_KH_SCC.Columns.Add("Ten_BN", typeof(string));
+      //Dt_Buoc_Nhay_KH_SCC.Columns.Add("Ngam_Dinh", typeof(string));
 
-      Dt_Do_Rong_KH_SCC.Columns.Add("ID", typeof(Int32));
-      Dt_Do_Rong_KH_SCC.Columns.Add("Ma_Width", typeof(string));
-      Dt_Do_Rong_KH_SCC.Columns.Add("Ten_Width", typeof(string));
-      Dt_Do_Rong_KH_SCC.Columns.Add("Ngam_Dinh", typeof(string));
+      //Dt_Do_Rong_KH_SCC.Columns.Add("ID", typeof(Int32));
+      //Dt_Do_Rong_KH_SCC.Columns.Add("Ma_Width", typeof(string));
+      //Dt_Do_Rong_KH_SCC.Columns.Add("Ten_Width", typeof(string));
+      //Dt_Do_Rong_KH_SCC.Columns.Add("Ngam_Dinh", typeof(string));
 
       DmKhoang_Loc_KH_SCC.Columns.Add("ID", typeof(Int32));
       DmKhoang_Loc_KH_SCC.Columns.Add("Color", typeof(string));
@@ -126,26 +122,22 @@ namespace TMV.UI.JPCB.Common
       DmCVDV_Loc_KH_SCC.Columns.Add("Ten_Hs", typeof(string));
       DmCVDV_Loc_KH_SCC.Columns.Add("Ngam_Dinh", typeof(string));
 
-      Dt_Kieu_Xem.Columns.Add("ID", typeof(Int32));
-      Dt_Kieu_Xem.Columns.Add("Kieu_Xem", typeof(string));
-      Dt_Kieu_Xem.Columns.Add("Ten_Kieu", typeof(string));
-      Dt_Kieu_Xem.Columns.Add("Ngam_Dinh", typeof(string));
-      Dt_Kieu_Xem.Columns.Add("ShowHead", typeof(Int32));
+      //Dt_Kieu_Xem.Columns.Add("ID", typeof(Int32));
+      //Dt_Kieu_Xem.Columns.Add("Kieu_Xem", typeof(string));
+      //Dt_Kieu_Xem.Columns.Add("Ten_Kieu", typeof(string));
+      //Dt_Kieu_Xem.Columns.Add("Ngam_Dinh", typeof(string));
+      //Dt_Kieu_Xem.Columns.Add("ShowHead", typeof(Int32));
 
-      Tables.AddRange(new DataTable[] { Dt_ConFigColor_KH_SCC, Dt_Set_SCC, Dt_Buoc_Nhay_KH_SCC, Dt_Do_Rong_KH_SCC, DmKhoang_Loc_KH_SCC, DmCVDV_Loc_KH_SCC, Dt_Kieu_Xem });
+      Tables.AddRange(new DataTable[] { Dt_Set_SCC, DmKhoang_Loc_KH_SCC, DmCVDV_Loc_KH_SCC });
     }
     public static CP_RO_CW_ConFig CreateData()
     {
       CP_RO_CW_ConFig ds = new CP_RO_CW_ConFig();
-      DataTable Dt_ConFigColor_KH_SCC = ds.Tables["Dt_ConFigColor_KH_SCC"];
       DataTable Dt_Set_SCC = ds.Tables["Dt_Set_SCC"];
-      DataTable Dt_Buoc_Nhay_KH_SCC = ds.Tables["Dt_Buoc_Nhay_KH_SCC"];
-      DataTable Dt_Do_Rong_KH_SCC = ds.Tables["Dt_Do_Rong_KH_SCC"];
       DataTable DmKhoang_Loc_KH_SCC = ds.Tables["DmKhoang_Loc_KH_SCC"];
       DataTable DmCVDV_Loc_KH_SCC = ds.Tables["DmCVDV_Loc_KH_SCC"];
-      DataTable Dt_Kieu_Xem = ds.Tables["Dt_Kieu_Xem"];
 
-      Dt_ConFigColor_KH_SCC.Rows.Add(new object[] { 1, "19, 230, 255", "Red" });
+      //Dt_ConFigColor_KH_SCC.Rows.Add(new object[] { 1, "19, 19, 19", "Yellow" });
 
       Dt_Set_SCC.Rows.Add(new object[] {
         1, 8, 17, 0, 0, DateTime.Today, DateTime.Today, DateTime.Today, "0", "1", 20, 2, 50,
@@ -153,26 +145,26 @@ namespace TMV.UI.JPCB.Common
         13, 0, 17, 0, DateTime.Today, DateTime.Today
       });
 
-      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 1, "5", "5 Phút", "0" });
-      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 2, "8", "8 Phút", "1" });
-      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 3, "10", "10 Phút", "0" });
-      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 4, "15", "15 Phút", "0" });
-      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 5, "20", "20 Phút", "0" });
-      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 6, "30", "30 Phút", "0" });
-      Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 7, "60", "60 Phút", "0" });
+      //Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 1, "5", "5 Phút", "0" });
+      //Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 2, "8", "8 Phút", "1" });
+      //Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 3, "10", "10 Phút", "0" });
+      //Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 4, "15", "15 Phút", "0" });
+      //Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 5, "20", "20 Phút", "0" });
+      //Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 6, "30", "30 Phút", "0" });
+      //Dt_Buoc_Nhay_KH_SCC.Rows.Add(new object[] { 7, "60", "60 Phút", "0" });
 
-      Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 1, "10", "10", "1" });
-      Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 2, "15", "15", "0" });
-      Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 3, "20", "20", "0" });
-      Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 4, "25", "25", "0" });
-      Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 5, "30", "30", "0" });
-      Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 6, "40", "40", "0" });
-      Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 7, "50", "50", "0" });
-      Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 8, "60", "60", "0" });
-      Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 9, "70", "70", "0" });
-      Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 10, "80", "80", "0" });
-      Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 11, "100", "100", "0" });
-      Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 12, "150", "150", "0" });
+      //Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 1, "10", "10", "1" });
+      //Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 2, "15", "15", "0" });
+      //Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 3, "20", "20", "0" });
+      //Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 4, "25", "25", "0" });
+      //Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 5, "30", "30", "0" });
+      //Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 6, "40", "40", "0" });
+      //Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 7, "50", "50", "0" });
+      //Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 8, "60", "60", "0" });
+      //Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 9, "70", "70", "0" });
+      //Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 10, "80", "80", "0" });
+      //Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 11, "100", "100", "0" });
+      //Dt_Do_Rong_KH_SCC.Rows.Add(new object[] { 12, "150", "150", "0" });
 
       DmKhoang_Loc_KH_SCC.Rows.Add(new object[] { 1, "10, 123, 255", "", "1T1", "Khoang rửa xe ướt 1T1" });
       DmKhoang_Loc_KH_SCC.Rows.Add(new object[] { 2, "14, 15, 200", "", "2T1", "Khoang rửa xe ướt 2T1" });
@@ -185,8 +177,8 @@ namespace TMV.UI.JPCB.Common
       DmCVDV_Loc_KH_SCC.Rows.Add(new object[] { 5, "100070", "Ngô Văn Nam", "0" });
       DmCVDV_Loc_KH_SCC.Rows.Add(new object[] { 6, "100090", "Công Tuấn Dương", "0" });
 
-      Dt_Kieu_Xem.Rows.Add(new object[] { 1, "01", "Khoang", "1", 1 });
-      Dt_Kieu_Xem.Rows.Add(new object[] { 2, "02", "BKS", "0", 0 });
+      //Dt_Kieu_Xem.Rows.Add(new object[] { 1, "01", "Khoang", "1", 1 });
+      //Dt_Kieu_Xem.Rows.Add(new object[] { 2, "02", "BKS", "0", 0 });
 
       return ds;
     }
