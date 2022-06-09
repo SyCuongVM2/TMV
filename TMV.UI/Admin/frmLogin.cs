@@ -56,6 +56,9 @@ namespace TMV.UI.Admin
             Globals.LoginTitleCode = ObjInfo.TitleCode;
             Globals.LoginTitleName = ObjInfo.TitleName;
 
+            if (m_Dealer.ToUpper() != txtDealer.Text.Trim().ToUpper())
+              mdlAdmin.WriteSetting("LastLoginDealer", ObjInfo.TenantAbbr);
+
             if (m_UserName.ToUpper() != txtUser_Name.Text.Trim().ToUpper())
               mdlAdmin.WriteSetting("LastLoginUser", ObjInfo.UserName);
 

@@ -363,7 +363,7 @@ namespace TMV.UI
                  string.Format(". Version {0} ({1})", Assembly.GetExecutingAssembly().GetName().Version.ToString(), File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location).ToShortDateString()) + 
                  ". Login (" + DateTime.Now.ToString() + ")";
           iStatus2.Caption = Globals.LoginUserName + " (" + Globals.LoginFullName + ")";
-          iStatus1.Caption = Globals.LoginDealerName + " (" + Globals.LoginDealerAbbr + ")";
+          iStatus1.Caption = Globals.LoginDealerName + " (" + Globals.LoginDealerAbbr + " - " + Globals.LoginDealerCode + ")";
         }
         catch
         {

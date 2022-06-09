@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using TMV.DataAccess.JPCB;
 
 namespace TMV.BusinessObject.JPCB
@@ -33,6 +34,18 @@ namespace TMV.BusinessObject.JPCB
     public DataSet GetCWConfig(int tenantId, string type)
     {
       return JpcbCwDAO.Instance().GetCWConfig(tenantId, type); // CW, GJ, BP
+    }
+    public DataSet GetCWData(int tenantId, string type, int dayViewType, DateTime dateView, decimal cvdv, string bks, string roNo)
+    {
+      return JpcbCwDAO.Instance().GetCWData(
+        tenantId, 
+        (type == "CW") ? 3 : (type == "GJ") ? 2 : 1,
+        dayViewType, 
+        dateView, 
+        cvdv, 
+        bks, 
+        roNo
+      );
     }
   }
 }

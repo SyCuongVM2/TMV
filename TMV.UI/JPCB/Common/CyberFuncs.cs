@@ -275,14 +275,14 @@ namespace TMV.UI.JPCB.Common
       GRVMaster.KeyDown -= new KeyEventHandler(MasterGRV_KeyDown);
       GRVMaster.CustomDrawRowIndicator += new RowIndicatorCustomDrawEventHandler(MasterGRV_CustomDrawRowIndicator);
       GRVMaster.KeyDown += new KeyEventHandler(MasterGRV_KeyDown);
-      GRVMaster.IndicatorWidth = DvMater.Count < 1000 ? 30 : 45;
+      GRVMaster.IndicatorWidth = DvMater.Count < 1000 ? 40 : 55;
       GRVMaster.ColumnPanelRowHeight = 40;
       GRVMaster.AppearancePrint.HeaderPanel.BackColor = CyberColor.GetBackColorPrintGrid();
       GRVMaster.AppearancePrint.HeaderPanel.ForeColor = CyberColor.GetForeColorPrintGrid();
       GRVMaster.AppearancePrint.HeaderPanel.TextOptions.WordWrap = WordWrap.Wrap;
       GRVMaster.Appearance.Row.Font = new Font("Tahoma", Convert.ToSingle(9M), FontStyle.Regular);
       GRVMaster.Appearance.ViewCaption.Font = new Font("Tahoma", Convert.ToSingle(9M), FontStyle.Regular);
-      GRVMaster.RowHeight = 28;
+      GRVMaster.RowHeight = 35;
       GRVMaster.GridControl.LookAndFeel.Style = LookAndFeelStyle.Flat;
       GRVMaster.Appearance.HorzLine.BackColor = Color.FromArgb(170, 170, 170);
       GRVMaster.Appearance.VertLine.BackColor = Color.FromArgb(170, 170, 170);
@@ -299,9 +299,10 @@ namespace TMV.UI.JPCB.Common
 
         string Field_name = Convert.ToString(Dvhead[recordIndex]["Field_Name"]);
         string Field_Type = Convert.ToString(Dvhead[recordIndex]["Field_Type"]);
-        int integer = Convert.ToInt32(Dvhead[recordIndex]["Field_Width"]);
-        string Field_ReadOnly = Convert.ToString(Dvhead[recordIndex]["Field_ReOnly"]);
-        string Field_Format = Convert.ToString(Dvhead[recordIndex]["Format"]);
+        int Field_Width = Convert.ToInt32(Dvhead[recordIndex]["Field_Width"]);
+        string Field_ReadOnly = Convert.ToString(Dvhead[recordIndex]["Field_ReadOnly"]);
+        string Field_Format = Convert.ToString(Dvhead[recordIndex]["Field_Format"]);
+
         if (Dvhead.Table.Columns.Contains("BackColor"))
           str1 = Convert.ToString(Dvhead[recordIndex]["BackColor"]);
         if (Dvhead.Table.Columns.Contains("BackColor2"))
@@ -313,7 +314,7 @@ namespace TMV.UI.JPCB.Common
         if (Dvhead.Table.Columns.Contains("ExportExcel"))
           defaultBoolean = (Dvhead[recordIndex]["ExportExcel"] == (object)1) ? DefaultBoolean.True : DefaultBoolean.False;
         
-        GridColumn column = GetColumn(Field_name, Field_Type, Field_Head1, Field_Head2, integer, Field_ReadOnly, Field_Format, DvMater);
+        GridColumn column = GetColumn(Field_name, Field_Type, Field_Head1, Field_Head2, Field_Width, Field_ReadOnly, Field_Format, DvMater);
         if (column != null)
         {
           GRVMaster.Columns.Add(column);

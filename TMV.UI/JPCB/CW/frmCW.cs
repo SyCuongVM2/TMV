@@ -12,6 +12,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using TMV.BusinessObject.JPCB;
 using TMV.Common;
 using TMV.UI.JPCB.Common;
 
@@ -25,7 +26,6 @@ namespace TMV.UI.JPCB.CW
     private CyberColumnGridView EditMa_Xe_Cho = new CyberColumnGridView();
     private CyberColumnGridView EditMa_Xe_Dang_Rua = new CyberColumnGridView();
     private CyberColumnGridView EditMa_Xe_Rua_Xong = new CyberColumnGridView();
-    private DataTable Dt_ConFigColor_KH_SCC;
     private DataTable Dt_Set_SCC;
     private DataTable Dt_Buoc_Nhay_KH_SCC;
     private DataTable Dt_Do_Rong_KH_SCC;
@@ -34,7 +34,6 @@ namespace TMV.UI.JPCB.CW
     private DataTable DmKhoang_Loc_KH_SCC;
     private DataTable DmCVDV_KH_SCC;
     private DataTable DmKhoang_KH_SCC;
-    private DataView Dv_DmCVDV_KH_SCC;
     private DataView Dv_DmKhoang_KH_SCC;
     private int M_StartHour;
     private int M_FinishHour;
@@ -282,7 +281,7 @@ namespace TMV.UI.JPCB.CW
     }
     private void V_Load() 
     {
-      DataSet dataSet1 = CP_RO_CW_ConFig.CreateData(); // CP_RO_CW_ConFig
+      DataSet dataSet1 = JpcbCwBO.Instance().GetCWConfig(Globals.LoginDlrId, "CW"); // CP_RO_CW_ConFig
 
       Dt_Set_SCC = dataSet1.Tables[0].Copy();
       DmKhoang_Loc_KH_SCC = dataSet1.Tables[1].Copy();
@@ -314,6 +313,14 @@ namespace TMV.UI.JPCB.CW
       SchedulerControl.LimitInterval.Start = M_Ngay_LimitInterval_Min;
       SchedulerControl.LimitInterval.End = M_Ngay_LimitInterval_Max_RX;
       SchedulerControl.Start = Convert.ToDateTime(Dt_Set_SCC.Rows[0]["Ngay_Ct"]);
+
+      // Add default selected CVDV
+      DataRow row = DmCVDV_Loc_KH_SCC.NewRow();
+      row["Id"] = 0;
+      row["Ma_Hs"] = "";
+      row["Ten_Hs"] = "Chọn CVDV";
+      row["Ngam_Dinh"] = 1;
+      DmCVDV_Loc_KH_SCC.Rows.InsertAt(row, 0);
 
       CyberFunc.V_FillComBoxDefaul(CbbMa_HS, DmCVDV_Loc_KH_SCC, "Ma_Hs", "Ten_Hs", "Ngam_Dinh");
       CyberFunc.V_FillComBoxDefaul(CbbMa_BN, Dt_Buoc_Nhay_KH_SCC, "Ma_BN", "Ten_BN", "Ngam_Dinh");
@@ -436,7 +443,6 @@ namespace TMV.UI.JPCB.CW
       SchedulerControl.GroupType = SchedulerGroupType.Resource;
 
       V_SetScheduler_SetValue_RX();
-      //V_SetColorAppointments_RX();
 
       if (DmKhoang_KH_SCC.Columns.Contains("Color"))
         SchedulerStorage.Resources.Mappings.Color = DmKhoang_KH_SCC.Columns["Color"].ColumnName.ToString().Trim();
@@ -1784,7 +1790,7 @@ namespace TMV.UI.JPCB.CW
     #endregion
 
     #region "V_Load"
-    private void V_Kieu_Xem(string _Kieu_Xem)
+    private void V_Kieu_Xem(string _Kieu_Xem) 
     {
       if (_Kieu_Xem == "02")
         CbbGio_Xem.SelectedValue = "01";
@@ -1843,11 +1849,63 @@ namespace TMV.UI.JPCB.CW
         if (Dt_Data_Xe.Columns.Contains("Stt"))
           Dv_Data_Xe.Sort = Dt_Cho_Rua.Columns["Stt"].ColumnName;
 
-        Dt_Cho_Rua_H = dataSet.Tables[5].Copy();
+        // Set header column of the grid
+        Dt_Cho_Rua_H = new DataTable()
+        {
+          Columns = {
+            "Field_Head1",
+            "Field_Head2",
+            "Field_Name",
+            "Field_Type",
+            "Field_Width",
+            "Field_ReadOnly",
+            "Field_Format",
+          },
+          Rows = {
+            new object[]{ "BKS", "", "Ma_Xe", "CM", "100", "1", "" },
+            new object[]{ "Giao xe", "", "Ma_Hs", "DT", "100", "1", "" },
+            new object[]{ "CVDV", "", "Ma_Hs", "CM", "150", "1", "" },
+            new object[]{ "Tình trạng", "", "Ma_Hs", "CM", "200", "1", "" },
+          }
+        };
         Dv_Cho_Rua_H = new DataView(Dt_Cho_Rua_H);
-        Dt_Dang_Rua_H = dataSet.Tables[6].Copy();
+        Dt_Dang_Rua_H = new DataTable()
+        {
+          Columns = {
+            "Field_Head1",
+            "Field_Head2",
+            "Field_Name",
+            "Field_Type",
+            "Field_Width",
+            "Field_ReadOnly",
+            "Field_Format",
+          },
+          Rows = {
+            new object[]{ "BKS", "", "Ma_Xe", "CM", "100", "1", "" },
+            new object[]{ "Khoang", "", "Ma_Hs", "DT", "150", "1", "" },
+            new object[]{ "Giao xe", "", "Ma_Hs", "DT", "100", "1", "" },
+            new object[]{ "CVDV", "", "Ma_Hs", "CM", "150", "1", "" },
+          }
+        };
         Dv_Dang_Rua_H = new DataView(Dt_Dang_Rua_H);
-        Dt_Rua_Xong_H = dataSet.Tables[7].Copy();
+        Dt_Rua_Xong_H = new DataTable()
+        {
+          Columns = {
+            "Field_Head1",
+            "Field_Head2",
+            "Field_Name",
+            "Field_Type",
+            "Field_Width",
+            "Field_ReadOnly",
+            "Field_Format",
+          },
+          Rows = {
+            new object[]{ "BKS", "", "Ma_Xe", "CM", "100", "1", "" },
+            new object[]{ "Điểm đỗ", "", "Ma_Hs", "DT", "150", "1", "" },
+            new object[]{ "Giao xe", "", "Ma_Hs", "DT", "100", "1", "" },
+            new object[]{ "CVDV", "", "Ma_Hs", "CM", "150", "1", "" },
+          }
+        };
         Dv_Rua_Xong_H = new DataView(Dt_Rua_Xong_H);
 
         if (dataSet.Tables.Count > 8)
@@ -1964,12 +2022,16 @@ namespace TMV.UI.JPCB.CW
             Dt_Data_Xe.Load(dataSet.Tables[4].CreateDataReader());
         }
       }
+
       dataSet.Dispose();
 
       SchedulerStorage.EndUpdate();
+
       V_Filter_KH_RX(new object(), new EventArgs());
+
       SchedulerControl.Storage.RefreshData();
       SchedulerStorage.Appointments.AutoReload = true;
+
       V_Hieu_suat();
     }
     #endregion
@@ -1979,6 +2041,7 @@ namespace TMV.UI.JPCB.CW
     {
       if (_Dt == null)
         return;
+
       int num = checked(_Dt.Rows.Count - 1);
       if (_Stt_Rec.Trim() == "")
       {
@@ -2332,22 +2395,6 @@ namespace TMV.UI.JPCB.CW
           splitContainer5.SplitterDistance = Left1;
         }
       }
-    }
-    private void V_SetColorAppointments_RX()
-    {
-      int num1 = checked(Dt_ConFigColor_KH_SCC.Rows.Count - 1);
-      int num2 = 0;
-      while (num2 <= num1)
-      {
-        SchedulerStorage.Appointments.Labels.GetByIndex(num2).Color = CyberColor.GetBackColor(Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["BackColor"]));
-        SchedulerStorage.Appointments.Labels.GetByIndex(num2).DisplayName = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
-        SchedulerStorage.Appointments.Labels.GetByIndex(num2).MenuCaption = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
-        V_SetColorlabel_RX(num2, Dt_ConFigColor_KH_SCC.Rows[num2]);
-        checked { ++num2; }
-      }
-    }
-    private void V_SetColorlabel_RX(int _i, DataRow _Dr)
-    {
     }
     #endregion
   }
