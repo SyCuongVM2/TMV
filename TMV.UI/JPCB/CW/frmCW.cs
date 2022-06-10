@@ -119,7 +119,7 @@ namespace TMV.UI.JPCB.CW
     private void frmCW_Load(object sender, EventArgs e)
     {
       barWSUser.Caption = Globals.LoginUserName + " (" + Globals.LoginFullName + ")";
-      barWSDealer.Caption = Globals.LoginDealerName + " (" + Globals.LoginDealerAbbr + ")";
+      barWSDealer.Caption = Globals.LoginDealerName + " (" + Globals.LoginDealerAbbr + " - " + Globals.LoginDealerCode + ")";
 
       TxtM_Ngay_Ct.EditValue = DateTime.Today.Date;
       Timer_Data.Enabled = false;
@@ -472,7 +472,7 @@ namespace TMV.UI.JPCB.CW
         SchedulerStorage.Appointments.Mappings.Type = Dt_Data.Columns["Type"].ColumnName;
 
       if (Dt_Data.Columns.Contains("Tootip"))
-        SchedulerStorage.Appointments.Mappings.Location = Dt_Data.Columns["Tootip"].ColumnName;
+        SchedulerStorage.Appointments.Mappings.Location = Dt_Data.Columns["Tootip"].ColumnName; // String Appointment.Location property value displayed beneath the appointment subject.
       else if (Dt_Data.Columns.Contains("Dien_Giai"))
         SchedulerStorage.Appointments.Mappings.Location = Dt_Data.Columns["Dien_Giai"].ColumnName;
 
@@ -1267,7 +1267,7 @@ namespace TMV.UI.JPCB.CW
         e.Appearance.ForeColor = CyberColor.GetForeColor(ColorName1);
       }
       else
-        e.Appearance.BackColor = System.Drawing.Color.Silver;
+        e.Appearance.BackColor = Color.Silver;
     }
     private void ResourcesTree1_CustomDrawNodeCell(object sender, CustomDrawNodeCellEventArgs e)
     {
@@ -1805,7 +1805,7 @@ namespace TMV.UI.JPCB.CW
       DateTime date = Convert.ToDateTime(TxtM_Ngay_Ct.EditValue);
       string str = CbbCa_Ngay.SelectedValue.ToString();
 
-      DataSet dataSet = CP_RO_CW_Data.CreateData(); // CP_RO_CW_Data
+      DataSet dataSet = JpcbCwBO.Instance().GetCWData(Globals.LoginDlrId, "CW", str, date); // CP_RO_CW_Data
       int num = checked(dataSet.Tables.Count - 1);
       int index = 0;
       while (index <= num)
@@ -1863,9 +1863,9 @@ namespace TMV.UI.JPCB.CW
           },
           Rows = {
             new object[]{ "BKS", "", "Ma_Xe", "CM", "100", "1", "" },
-            new object[]{ "Giao xe", "", "Ma_Hs", "DT", "100", "1", "" },
+            new object[]{ "Giao xe", "", "Giao_Xe", "CM", "100", "1", "" },
             new object[]{ "CVDV", "", "Ma_Hs", "CM", "150", "1", "" },
-            new object[]{ "Tình trạng", "", "Ma_Hs", "CM", "200", "1", "" },
+            new object[]{ "Tình trạng", "", "Status_Desc", "CM", "200", "1", "" },
           }
         };
         Dv_Cho_Rua_H = new DataView(Dt_Cho_Rua_H);
@@ -1882,8 +1882,8 @@ namespace TMV.UI.JPCB.CW
           },
           Rows = {
             new object[]{ "BKS", "", "Ma_Xe", "CM", "100", "1", "" },
-            new object[]{ "Khoang", "", "Ma_Hs", "DT", "150", "1", "" },
-            new object[]{ "Giao xe", "", "Ma_Hs", "DT", "100", "1", "" },
+            new object[]{ "Khoang", "", "Ma_Khoang", "CM", "150", "1", "" },
+            new object[]{ "Giao xe", "", "Giao_Xe", "CM", "100", "1", "" },
             new object[]{ "CVDV", "", "Ma_Hs", "CM", "150", "1", "" },
           }
         };
@@ -1901,8 +1901,8 @@ namespace TMV.UI.JPCB.CW
           },
           Rows = {
             new object[]{ "BKS", "", "Ma_Xe", "CM", "100", "1", "" },
-            new object[]{ "Điểm đỗ", "", "Ma_Hs", "DT", "150", "1", "" },
-            new object[]{ "Giao xe", "", "Ma_Hs", "DT", "100", "1", "" },
+            new object[]{ "Điểm đỗ", "", "Parking_Loc", "CM", "150", "1", "" },
+            new object[]{ "Giao xe", "", "Giao_Xe", "CM", "100", "1", "" },
             new object[]{ "CVDV", "", "Ma_Hs", "CM", "150", "1", "" },
           }
         };
@@ -1913,15 +1913,6 @@ namespace TMV.UI.JPCB.CW
           Dt_Xe_H = dataSet.Tables[8].Copy();
           Dv_Xe_H = new DataView(Dt_Xe_H);
         }
-
-        if (dataSet.Tables.Count > 9)
-          CyberFunc.V_SetSortView(ref Dv_Cho_Rua, dataSet.Tables[9]);
-        if (dataSet.Tables.Count > 10)
-          CyberFunc.V_SetSortView(ref Dv_Data, dataSet.Tables[10]);
-        if (dataSet.Tables.Count > 11)
-          CyberFunc.V_SetSortView(ref Dv_Dang_Rua, dataSet.Tables[11]);
-        if (dataSet.Tables.Count > 12)
-          CyberFunc.V_SetSortView(ref Dv_Rua_Xong, dataSet.Tables[12]);
 
         GridView masterChoRuaGrv = MasterCho_RuaGRV;
         DataView dvChoRuaH = Dv_Cho_Rua_H;

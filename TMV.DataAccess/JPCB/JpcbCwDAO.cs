@@ -42,7 +42,7 @@ namespace TMV.DataAccess.JPCB
         }
       );
     }
-    public DataSet GetCWData(int tenantId, int type, int dayViewType, DateTime dateView, decimal cvdv, string bks, string roNo)
+    public DataSet GetCWData(int tenantId, int type, string dayViewType, DateTime dateView)
     {
       return SqlDataAccess.ExecuteDataset(
         SqlConnect.ConnectionString,
@@ -51,10 +51,7 @@ namespace TMV.DataAccess.JPCB
           Globals.DB_GetNull(tenantId),
           Globals.DB_GetNull(type), // CW, GJ, BP
           Globals.DB_GetNull(dayViewType), // 01: Ca ngay, 02: Sang, 03: Chieu
-          Globals.DB_GetNull(dateView), // view date
-          Globals.DB_GetNull(cvdv),
-          Globals.DB_GetNull(bks),
-          Globals.DB_GetNull(roNo)
+          Globals.DB_GetNull(dateView) // view date
         }
       );
     }

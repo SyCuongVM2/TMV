@@ -35,16 +35,13 @@ namespace TMV.BusinessObject.JPCB
     {
       return JpcbCwDAO.Instance().GetCWConfig(tenantId, type); // CW, GJ, BP
     }
-    public DataSet GetCWData(int tenantId, string type, int dayViewType, DateTime dateView, decimal cvdv, string bks, string roNo)
+    public DataSet GetCWData(int tenantId, string type, string dayViewType, DateTime dateView)
     {
       return JpcbCwDAO.Instance().GetCWData(
         tenantId, 
         (type == "CW") ? 3 : (type == "GJ") ? 2 : 1,
         dayViewType, 
-        dateView, 
-        cvdv, 
-        bks, 
-        roNo
+        dateView
       );
     }
   }

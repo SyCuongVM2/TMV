@@ -20,7 +20,7 @@ BEGIN
 	   and cast(EffDateTo as date) >= cast(getdate() as date)
 	   and TenantId = @p_TenantId
 
-	select w.Id, w.ColorCode Color, w.WorkshopCode Ma_khoang, coalesce(w.WorkshopDesc, w.WorkshopCode, 'RX') Ten_khoang
+	select w.Id, w.ColorCode Color, w.WorkshopCode Ma_khoang, coalesce(w.WorkshopName, w.WorkshopCode, 'RX') Ten_khoang
 	  from MstSrvWorkshop w
 	  join MstSrvWorkshopType t on t.Id = w.WorkshopTypeId
 	 where w.TenantId = @p_TenantId

@@ -369,7 +369,7 @@ namespace TMV.UI.JPCB.Common
       CP_RO_CW_Tinh_Hieu_suat ds = new CP_RO_CW_Tinh_Hieu_suat();
       DataTable dt = ds.Tables["CP_RO_CW_Tinh_Hieu_suat"];
 
-      dt.Rows.Add(new object[] { 1, "1", "90", "231, 24, 162", "89, 39, 20" });
+      dt.Rows.Add(new object[] { 1, "1", "90", "128, 128, 128", "255, 255, 255" });
 
       return ds;
     }
