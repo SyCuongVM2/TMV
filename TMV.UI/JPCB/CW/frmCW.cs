@@ -293,13 +293,13 @@ namespace TMV.UI.JPCB.CW
       DmCVDV_KH_SCC = DmCVDV_Loc_KH_SCC.Copy();
       CyberFunc.V_DeleteRowEmpty(DmCVDV_KH_SCC, "Ma_HS");
 
-      if (Dt_Set_SCC == null)
-      {
-        DataSet dataSet2 = CP_RO_CW_Ngay_Ngam_Dinh.CreateData(); // CP_RO_CW_Ngay_Ngam_Dinh
-        Dt_Set_SCC.Clear();
-        Dt_Set_SCC.ImportRow(dataSet2.Tables[0].Rows[0]);
-        dataSet2.Dispose();
-      }
+      //if (Dt_Set_SCC == null)
+      //{
+      //  DataSet dataSet2 = CP_RO_CW_Ngay_Ngam_Dinh.CreateData(); // CP_RO_CW_Ngay_Ngam_Dinh
+      //  Dt_Set_SCC.Clear();
+      //  Dt_Set_SCC.ImportRow(dataSet2.Tables[0].Rows[0]);
+      //  dataSet2.Dispose();
+      //}
 
       M_StartHour = Convert.ToInt32(Dt_Set_SCC.Rows[0]["StartHour"]);
       M_FinishHour = Convert.ToInt32(Dt_Set_SCC.Rows[0]["FinishHour"]);
@@ -763,10 +763,13 @@ namespace TMV.UI.JPCB.CW
     }
     private void V_Ngay_Ct_KH(object sender, EventArgs e)
     {
-      DataSet dataSet = CP_RO_CW_Ngay_Ngam_Dinh.CreateData(); // CP_RO_CW_Ngay_Ngam_Dinh
-      Dt_Set_SCC.Clear();
-      Dt_Set_SCC.ImportRow(dataSet.Tables[0].Rows[0]);
-      dataSet.Dispose();
+      if (Dt_Set_SCC.Rows.Count == 0)
+      {
+        DataSet dataSet = CP_RO_CW_Ngay_Ngam_Dinh.CreateData(); // CP_RO_CW_Ngay_Ngam_Dinh
+        Dt_Set_SCC.Clear();
+        Dt_Set_SCC.ImportRow(dataSet.Tables[0].Rows[0]);
+        dataSet.Dispose();
+      }
 
       M_StartHour = Convert.ToInt32(Dt_Set_SCC.Rows[0]["StartHour"]);
       M_FinishHour = Convert.ToInt32(Dt_Set_SCC.Rows[0]["FinishHour"]);
