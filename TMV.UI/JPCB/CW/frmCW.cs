@@ -282,7 +282,6 @@ namespace TMV.UI.JPCB.CW
     private void V_Load() 
     {
       DataSet dataSet1 = JpcbCwBO.Instance().GetCWConfig(Globals.LoginDlrId, "CW"); // CP_RO_CW_ConFig
-
       Dt_Set_SCC = dataSet1.Tables[0].Copy();
       DmKhoang_Loc_KH_SCC = dataSet1.Tables[1].Copy();
       DmCVDV_Loc_KH_SCC = dataSet1.Tables[2].Copy();
@@ -293,13 +292,13 @@ namespace TMV.UI.JPCB.CW
       DmCVDV_KH_SCC = DmCVDV_Loc_KH_SCC.Copy();
       CyberFunc.V_DeleteRowEmpty(DmCVDV_KH_SCC, "Ma_HS");
 
-      //if (Dt_Set_SCC == null)
-      //{
-      //  DataSet dataSet2 = CP_RO_CW_Ngay_Ngam_Dinh.CreateData(); // CP_RO_CW_Ngay_Ngam_Dinh
-      //  Dt_Set_SCC.Clear();
-      //  Dt_Set_SCC.ImportRow(dataSet2.Tables[0].Rows[0]);
-      //  dataSet2.Dispose();
-      //}
+      if (Dt_Set_SCC == null)
+      {
+        DataSet dataSet2 = JpcbCwBO.Instance().GetCWConfigDefault(Globals.LoginDlrId, Convert.ToDateTime(TxtM_Ngay_Ct.EditValue)); // CP_RO_CW_Ngay_Ngam_Dinh
+        Dt_Set_SCC.Clear();
+        Dt_Set_SCC.ImportRow(dataSet2.Tables[0].Rows[0]);
+        dataSet2.Dispose();
+      }
 
       M_StartHour = Convert.ToInt32(Dt_Set_SCC.Rows[0]["StartHour"]);
       M_FinishHour = Convert.ToInt32(Dt_Set_SCC.Rows[0]["FinishHour"]);
@@ -460,16 +459,18 @@ namespace TMV.UI.JPCB.CW
       SchedulerStorage.Appointments.Mappings.End = Dt_Data.Columns["Ngay_KT"].ColumnName;
       SchedulerControl.Views.GanttView.AppointmentDisplayOptions.AutoAdjustForeColor = false;
 
-      if (Dt_Data.Columns.Contains("Size_Border"))
-        SchedulerStorage.Appointments.Mappings.Status = Dt_Data.Columns["Size_Border"].ColumnName;
+      // Free = 0, Tentative = 1, Busy = 2, Out Of Office = 3, Working Elsewhere = 4
+      if (Dt_Data.Columns.Contains("A_Status"))
+        SchedulerStorage.Appointments.Mappings.Status = Dt_Data.Columns["A_Status"].ColumnName;
 
       if (Dt_Data.Columns.Contains("PercentComplete"))
         SchedulerStorage.Appointments.Mappings.PercentComplete = Dt_Data.Columns["PercentComplete"].ColumnName;
       else
         SchedulerControl.Views.GanttView.AppointmentDisplayOptions.PercentCompleteDisplayType = PercentCompleteDisplayType.None;
 
-      if (Dt_Data.Columns.Contains("Type"))
-        SchedulerStorage.Appointments.Mappings.Type = Dt_Data.Columns["Type"].ColumnName;
+      // Normal = 0, Pattern = 1, Occurrence = 2, ChangedOccurrence = 3, DeletedOccurrence = 4
+      if (Dt_Data.Columns.Contains("A_Type"))
+        SchedulerStorage.Appointments.Mappings.Type = Dt_Data.Columns["A_Type"].ColumnName;
 
       if (Dt_Data.Columns.Contains("Tootip"))
         SchedulerStorage.Appointments.Mappings.Location = Dt_Data.Columns["Tootip"].ColumnName; // String Appointment.Location property value displayed beneath the appointment subject.
@@ -763,13 +764,10 @@ namespace TMV.UI.JPCB.CW
     }
     private void V_Ngay_Ct_KH(object sender, EventArgs e)
     {
-      if (Dt_Set_SCC.Rows.Count == 0)
-      {
-        DataSet dataSet = CP_RO_CW_Ngay_Ngam_Dinh.CreateData(); // CP_RO_CW_Ngay_Ngam_Dinh
-        Dt_Set_SCC.Clear();
-        Dt_Set_SCC.ImportRow(dataSet.Tables[0].Rows[0]);
-        dataSet.Dispose();
-      }
+      DataSet dataSet = JpcbCwBO.Instance().GetCWConfigDefault(Globals.LoginDlrId, Convert.ToDateTime(TxtM_Ngay_Ct.EditValue)); // CP_RO_CW_Ngay_Ngam_Dinh
+      Dt_Set_SCC.Clear();
+      Dt_Set_SCC.ImportRow(dataSet.Tables[0].Rows[0]);
+      dataSet.Dispose();
 
       M_StartHour = Convert.ToInt32(Dt_Set_SCC.Rows[0]["StartHour"]);
       M_FinishHour = Convert.ToInt32(Dt_Set_SCC.Rows[0]["FinishHour"]);
@@ -813,15 +811,11 @@ namespace TMV.UI.JPCB.CW
 
         AppointmentImageInfo appointmentImageInfo = new AppointmentImageInfo();
         string Left = str2;
-        appointmentImageInfo.Image = (Left == "1") ?
-                                     (Left == "2") ?
-                                     (Left == "3") ?
-                                     (Left == "4") ?
-                                     ImageResourceCache.Default.GetImage("images/communication/wifi_16x16.png") :
-                                     ImageResourceCache.Default.GetImage("images/communication/radio_16x16.png") :
-                                     ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png") :
-                                     ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png") :
-                                     ImageResourceCache.Default.GetImage("images/communication/wifi_16x16.png");
+        appointmentImageInfo.Image = (Left == "1") ? ImageResourceCache.Default.GetImage("images/communication/wifi_16x16.png") :
+                                     (Left == "2") ? ImageResourceCache.Default.GetImage("images/communication/radio_16x16.png") :
+                                     (Left == "3") ? ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png") :
+                                     (Left == "4") ? ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png") :
+                                                     ImageResourceCache.Default.GetImage("images/communication/wifi_16x16.png");
         e.ImageInfoList.Add(appointmentImageInfo);
       }
       catch (Exception ex)
@@ -865,8 +859,8 @@ namespace TMV.UI.JPCB.CW
           return;
 
         decimal d1 = 2M;
-        if (Dt_Data.Columns.Contains("SizeBorder"))
-          d1 = Convert.ToDecimal(dataRowArray[0]["SizeBorder"]);
+        if (Dt_Data.Columns.Contains("Size_Border"))
+          d1 = Convert.ToDecimal(dataRowArray[0]["Size_Border"]);
         if (d1 < 2M)
           d1 = 2M;
         e.Handled = true;
@@ -925,7 +919,7 @@ namespace TMV.UI.JPCB.CW
         if (Dt_Data.Columns.Contains("FontSize"))
           emSize = Convert.ToInt32(dataRowArray[0]["FontSize"]);
         if (emSize <= 0)
-          emSize = checked((int)Math.Round((double)Font.Size));
+          emSize = checked((int)Math.Round(Font.Size));
         if (_Bold_Data && dataRowArray[0][_FieldBold_Data].ToString().Trim() == "1")
           str2 = "1";
         if (_Underline_Data && dataRowArray[0][_FieldUnderline_Data].ToString().Trim() == "1")
@@ -939,26 +933,26 @@ namespace TMV.UI.JPCB.CW
           if (str3.Trim() == "1")
           {
             if (flag)
-              e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, (float)emSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
+              e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, emSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
             else
-              e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, (float)emSize, FontStyle.Bold | FontStyle.Underline);
+              e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, emSize, FontStyle.Bold | FontStyle.Underline);
           }
           else if (flag)
-            e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, (float)emSize, FontStyle.Bold | FontStyle.Italic);
+            e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, emSize, FontStyle.Bold | FontStyle.Italic);
           else
-            e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, (float)emSize, FontStyle.Bold);
+            e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, emSize, FontStyle.Bold);
         }
         else if (str3.Trim() == "1")
         {
           if (flag)
-            e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, (float)emSize, FontStyle.Italic | FontStyle.Underline);
+            e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, emSize, FontStyle.Italic | FontStyle.Underline);
           else
-            e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, (float)emSize, FontStyle.Underline);
+            e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, emSize, FontStyle.Underline);
         }
         else if (flag)
-          e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, (float)emSize, FontStyle.Italic);
+          e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, emSize, FontStyle.Italic);
         else
-          e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, (float)emSize, FontStyle.Regular);
+          e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, emSize, FontStyle.Regular);
       }
       catch (Exception ex)
       {
@@ -1431,8 +1425,6 @@ namespace TMV.UI.JPCB.CW
     }
     private void V_Tao_KH_Scheduler(object sender, EventArgs e)
     {
-      string _Mode = "M";
-      string _Stt_Rec = "";
       DateTime start = SchedulerControl.SelectedInterval.Start;
       DateTime end = SchedulerControl.SelectedInterval.End;
       string _Ma_khoang = SchedulerControl.SelectedResource.Id.ToString().Trim();
@@ -1935,10 +1927,10 @@ namespace TMV.UI.JPCB.CW
           Dt_Data, ref _Bold_Data, ref _BackColor_Data, ref _BackColor2_Data, ref _ForeColor_Data, ref _Underline_Data, 
           ref _FieldBold_Data, ref _FieldBackColor_Data, ref _FieldBackColor2_Data, ref _FieldForeColor_Data, ref _FieldUnderline_Data);
        
-        if (Dt_Data.Columns.Contains("Border") & Dt_Data.Columns.Contains("BorderColor") & Dt_Data.Columns.Contains("SizeBorder"))
+        if (Dt_Data.Columns.Contains("Border") & Dt_Data.Columns.Contains("Border_Color") & Dt_Data.Columns.Contains("Size_Border"))
           _BorderColor_Data = true;
         if (_BorderColor_Data)
-          _FieldBorderColor_Data = Dt_Data.Columns["BorderColor"].ColumnName;
+          _FieldBorderColor_Data = Dt_Data.Columns["Border_Color"].ColumnName;
 
         GridView masterDangRuaGrv = MasterDang_RuaGRV;
         DataView dvDangRuaH = Dv_Dang_Rua_H;

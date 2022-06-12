@@ -42,6 +42,17 @@ namespace TMV.DataAccess.JPCB
         }
       );
     }
+    public DataSet GetCWConfigDefault(int tenantId, DateTime date)
+    {
+      return SqlDataAccess.ExecuteDataset(
+        SqlConnect.ConnectionString,
+        Constants.Instance().AppJpcbPkgGetConfigsDefault,
+        new object[] {
+          Globals.DB_GetNull(tenantId),
+          Globals.DB_GetNull(date)
+        }
+      );
+    }
     public DataSet GetCWData(int tenantId, int type, string dayViewType, DateTime dateView)
     {
       return SqlDataAccess.ExecuteDataset(

@@ -74,6 +74,7 @@
     <Content Include="SP\AppAuthPkgUpdateFailedLogin.sql" />
     <Content Include="SP\AppAuthPkgUserChangePassword.sql" />
     <Content Include="SP\CW\AppJpcbPkgGetConfigs.sql" />
+    <Content Include="SP\CW\AppJpcbPkgGetConfigsDefault.sql" />
     <Content Include="SP\CW\AppJpcbPkgGetCWData.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
