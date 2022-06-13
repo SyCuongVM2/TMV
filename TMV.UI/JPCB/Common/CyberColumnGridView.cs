@@ -67,9 +67,7 @@ namespace TMV.UI.JPCB.Common
         return;
 
       if (!Visible)
-      {
         column.Visible = Visible;
-      }
       else
       {
         int index = checked(column.View.VisibleColumns.Count - 1);
@@ -89,9 +87,10 @@ namespace TMV.UI.JPCB.Common
     {
       if (Column == null)
         return;
+
       Column.OptionsColumn.ReadOnly = _ReadOnly1;
     }
-    private void V_CyberValiting(object sender, KeyEventArgs e) => _CyberValiting(sender, (EventArgs)e);
+    private void V_CyberValiting(object sender, KeyEventArgs e) => _CyberValiting(sender, e);
     private void V_CyberLeave(object sender, EventArgs e) => _CyberLeave(sender, e);
   }
 }

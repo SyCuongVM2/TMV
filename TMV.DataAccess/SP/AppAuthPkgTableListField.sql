@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [AppAuthPkgTableListField]
+﻿CREATE OR ALTER PROCEDURE [AppAuthPkgTableListField]
 	@p_TableName VARCHAR(50)
 AS
 BEGIN

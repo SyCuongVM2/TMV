@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [AppAuthPkgUserChangePassword]
+﻿CREATE OR ALTER PROCEDURE [AppAuthPkgUserChangePassword]
 	@p_UserId nvarchar(50),
 	@p_Password nvarchar(200)
 AS

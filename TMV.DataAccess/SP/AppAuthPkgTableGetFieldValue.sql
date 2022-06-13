@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [AppAuthPkgTableGetFieldValue]
+﻿CREATE OR ALTER PROCEDURE [AppAuthPkgTableGetFieldValue]
 	@p_Table_Name VARCHAR(50),
     @p_Column_Name VARCHAR(50),
     @p_PK_Value INT

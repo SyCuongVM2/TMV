@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [AppAuthPkgGetByTenantAndUser]
+﻿CREATE OR ALTER PROCEDURE [AppAuthPkgGetByTenantAndUser]
 	@p_TenantName nvarchar(50),
 	@p_UserName nvarchar(50)
 AS

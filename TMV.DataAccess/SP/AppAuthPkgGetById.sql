@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [AppAuthPkgGetById]
+﻿CREATE OR ALTER PROCEDURE [AppAuthPkgGetById]
 	@p_UserId INT
 AS
 BEGIN

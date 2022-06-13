@@ -331,18 +331,18 @@ namespace TMV.UI.JPCB.CW
     }
     private void V_GetColumn()
     {
-      EditMa_Xe_Cho.GetColumn(MasterCho_RuaGRV, "Ma_XE");
-      EditMa_Xe_Dang_Rua.GetColumn(MasterDang_RuaGRV, "Ma_XE");
-      EditMa_Xe_Rua_Xong.GetColumn(MasterRua_XongGRV, "Ma_XE");
+      EditMa_Xe_Cho.GetColumn(MasterCho_RuaGRV, "Ma_Xe");
+      EditMa_Xe_Dang_Rua.GetColumn(MasterDang_RuaGRV, "Ma_Xe");
+      EditMa_Xe_Rua_Xong.GetColumn(MasterRua_XongGRV, "Ma_Xe");
     }
     private void V_AddHander()
     {
-      //EditMa_Xe_Cho.EditColumn.Click -= new EventHandler(V_Ma_Xe_Cho);
-      //EditMa_Xe_Cho.EditColumn.Click += new EventHandler(V_Ma_Xe_Cho);
-      //EditMa_Xe_Dang_Rua.EditColumn.Click -= new EventHandler(V_Ma_Xe_Dang_Rua);
-      //EditMa_Xe_Dang_Rua.EditColumn.Click += new EventHandler(V_Ma_Xe_Dang_Rua);
-      //EditMa_Xe_Rua_Xong.EditColumn.Click -= new EventHandler(V_Ma_Xe_Rua_Xong);
-      //EditMa_Xe_Rua_Xong.EditColumn.Click += new EventHandler(V_Ma_Xe_Rua_Xong);
+      EditMa_Xe_Cho.EditColumn.Click -= new EventHandler(V_Ma_Xe_Cho);
+      EditMa_Xe_Cho.EditColumn.Click += new EventHandler(V_Ma_Xe_Cho);
+      EditMa_Xe_Dang_Rua.EditColumn.Click -= new EventHandler(V_Ma_Xe_Dang_Rua);
+      EditMa_Xe_Dang_Rua.EditColumn.Click += new EventHandler(V_Ma_Xe_Dang_Rua);
+      EditMa_Xe_Rua_Xong.EditColumn.Click -= new EventHandler(V_Ma_Xe_Rua_Xong);
+      EditMa_Xe_Rua_Xong.EditColumn.Click += new EventHandler(V_Ma_Xe_Rua_Xong);
 
       MasterCho_RuaGRV.PopupMenuShowing -= new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(MasterCho_RuaGRV_PopupMenuShowing);
       MasterCho_RuaGRV.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(MasterCho_RuaGRV_PopupMenuShowing);
@@ -522,11 +522,13 @@ namespace TMV.UI.JPCB.CW
       bool flag1 = false;
       string columnName1 = "";
       DataRow[] dataRowArray = null;
+
       if (Left1 == "02")
       {
         CyberColor.V_GetColorBold(Dt_Data_Xe, ref _Bold, ref _BackColor, ref _BackColor2, ref _ForeColor, ref _FieldBold, ref _FieldBackColor, ref _FieldBackColor2, ref _FieldForeColor);
-        dataRowArray = Dt_Data_Xe.Select("Stt_Rec='" + str1 + "'");
+        dataRowArray = Dt_Data_Xe.Select("Stt_Rec='" + str1 + "'"); // Ma_Khoang
       }
+
       if (dataRowArray == null || dataRowArray.Length <= 0)
         return;
 
@@ -655,7 +657,7 @@ namespace TMV.UI.JPCB.CW
           if (Left3 == "1")
           {
             Graphics graphics = e.Graphics;
-            Image flag1_1 = ImageResourceCache.Default.GetImage("images/communication/wifi_16x16.png");
+            Image flag1_1 = ImageResourceCache.Default.GetImage("images/tasks/status_16x16.png");
             rectangle1 = new Rectangle(objectInfo.ImageBounds.X, objectInfo.ImageBounds.Y, num, num);
             Rectangle rect = rectangle1;
             graphics.DrawImage(flag1_1, rect);
@@ -811,7 +813,7 @@ namespace TMV.UI.JPCB.CW
 
         AppointmentImageInfo appointmentImageInfo = new AppointmentImageInfo();
         string Left = str2;
-        appointmentImageInfo.Image = (Left == "1") ? ImageResourceCache.Default.GetImage("images/communication/wifi_16x16.png") :
+        appointmentImageInfo.Image = (Left == "1") ? ImageResourceCache.Default.GetImage("images/tasks/status_16x16.png") :
                                      (Left == "2") ? ImageResourceCache.Default.GetImage("images/communication/radio_16x16.png") :
                                      (Left == "3") ? ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png") :
                                      (Left == "4") ? ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png") :
@@ -1839,10 +1841,13 @@ namespace TMV.UI.JPCB.CW
         if (Dt_Rua_Xong.Columns.Contains("Stt"))
           Dv_Rua_Xong.Sort = Dt_Rua_Xong.Columns["Stt"].ColumnName;
 
-        Dt_Data_Xe = dataSet.Tables[4].Copy();
-        Dv_Data_Xe = new DataView(Dt_Data_Xe);
-        if (Dt_Data_Xe.Columns.Contains("Stt"))
-          Dv_Data_Xe.Sort = Dt_Cho_Rua.Columns["Stt"].ColumnName;
+        if (dataSet.Tables.Count > 4)
+        {
+          Dt_Data_Xe = dataSet.Tables[4].Copy();
+          Dv_Data_Xe = new DataView(Dt_Data_Xe);
+          if (Dt_Data_Xe.Columns.Contains("Stt"))
+            Dv_Data_Xe.Sort = Dt_Cho_Rua.Columns["Stt"].ColumnName;
+        }  
 
         // Set header column of the grid
         Dt_Cho_Rua_H = new DataTable()
@@ -1857,7 +1862,7 @@ namespace TMV.UI.JPCB.CW
             "Field_Format",
           },
           Rows = {
-            new object[]{ "BKS", "", "Ma_Xe", "CM", "100", "1", "" },
+            new object[]{ "BKS", "", "Ma_Xe", "TB", "110", "1", "" },
             new object[]{ "Giao xe", "", "Giao_Xe", "CM", "100", "1", "" },
             new object[]{ "CVDV", "", "Ma_Hs", "CM", "150", "1", "" },
             new object[]{ "Tình trạng", "", "Status_Desc", "CM", "200", "1", "" },
@@ -1876,7 +1881,7 @@ namespace TMV.UI.JPCB.CW
             "Field_Format",
           },
           Rows = {
-            new object[]{ "BKS", "", "Ma_Xe", "CM", "100", "1", "" },
+            new object[]{ "BKS", "", "Ma_Xe", "TB", "110", "1", "" },
             new object[]{ "Khoang", "", "Ma_Khoang", "CM", "150", "1", "" },
             new object[]{ "Giao xe", "", "Giao_Xe", "CM", "100", "1", "" },
             new object[]{ "CVDV", "", "Ma_Hs", "CM", "150", "1", "" },
@@ -1895,19 +1900,29 @@ namespace TMV.UI.JPCB.CW
             "Field_Format",
           },
           Rows = {
-            new object[]{ "BKS", "", "Ma_Xe", "CM", "100", "1", "" },
+            new object[]{ "BKS", "", "Ma_Xe", "TB", "110", "1", "" },
             new object[]{ "Điểm đỗ", "", "Parking_Loc", "CM", "150", "1", "" },
             new object[]{ "Giao xe", "", "Giao_Xe", "CM", "100", "1", "" },
             new object[]{ "CVDV", "", "Ma_Hs", "CM", "150", "1", "" },
           }
         };
         Dv_Rua_Xong_H = new DataView(Dt_Rua_Xong_H);
-
-        if (dataSet.Tables.Count > 8)
+        Dt_Xe_H = new DataTable()
         {
-          Dt_Xe_H = dataSet.Tables[8].Copy();
-          Dv_Xe_H = new DataView(Dt_Xe_H);
-        }
+          Columns = {
+            "Field_Name",
+            "Field_Head1",
+            "Field_Type",
+            "TxtAlign",
+            "Field_Width"
+          },
+          Rows = {
+            new object[]{ "Ma_Hs", "CVDV", "CM", "L", "100" },
+            new object[]{ "Giao_Xe", "Giao Xe", "CM", "L", "100" },
+            // new object[]{ "Ma_Xe", "BKS", "CM", "C", "100" }
+          }
+        };
+        Dv_Xe_H = new DataView(Dt_Xe_H);
 
         GridView masterChoRuaGrv = MasterCho_RuaGRV;
         DataView dvChoRuaH = Dv_Cho_Rua_H;
@@ -1972,8 +1987,11 @@ namespace TMV.UI.JPCB.CW
         Dt_Rua_Xong.Clear();
         Dt_Rua_Xong.Load(dataSet.Tables[3].CreateDataReader());
 
-        Dt_Data_Xe.Clear();
-        Dt_Data_Xe.Load(dataSet.Tables[4].CreateDataReader());
+        if (Dt_Data_Xe != null)
+        {
+          Dt_Data_Xe.Clear();
+          Dt_Data_Xe.Load(dataSet.Tables[4].CreateDataReader());
+        }
       }
       else
       {
@@ -2053,7 +2071,9 @@ namespace TMV.UI.JPCB.CW
       string filterKhScc1 = V_GetFilter_KH_SCC(Dt_Cho_Rua);
       string filterKhScc2 = V_GetFilter_KH_SCC(Dt_Data);
       string filterKhScc3 = V_GetFilter_KH_SCC(Dt_Rua_Xong);
-      string filterKhScc4 = V_GetFilter_KH_SCC(Dt_Data_Xe);
+      string filterKhScc4 = "";
+      if (Dt_Data_Xe != null)
+        filterKhScc4 = V_GetFilter_KH_SCC(Dt_Data_Xe);
       string filterKhScc5 = V_GetFilter_KH_SCC(Dt_Dang_Rua);
 
       try
@@ -2061,7 +2081,8 @@ namespace TMV.UI.JPCB.CW
         Dv_Cho_Rua.RowFilter = filterKhScc1;
         Dv_Data.RowFilter = filterKhScc2;
         Dv_Rua_Xong.RowFilter = filterKhScc3;
-        Dv_Data_Xe.RowFilter = filterKhScc4;
+        if (Dt_Data_Xe != null)
+          Dv_Data_Xe.RowFilter = filterKhScc4;
         Dv_Dang_Rua.RowFilter = filterKhScc5;
       }
       catch (Exception ex)
@@ -2138,28 +2159,28 @@ namespace TMV.UI.JPCB.CW
     private void V_CyberSetTime_KH_RX()
     {
       string Left = CyberFunc.V_GetvalueCombox(CbbCa_Ngay); // 01: Ca ngay, 02: Sang, 03: Chieu
-      decimal num1 = new decimal(M_StartHour);
-      decimal num2 = new decimal(M_StartMINUTE);
-      decimal num3 = new decimal(M_FinishHour);
-      decimal num4 = new decimal(M_FinishMINUTE);
+      int num1 = M_StartHour;
+      int num2 = M_StartMINUTE;
+      int num3 = M_FinishHour;
+      int num4 = M_FinishMINUTE;
       DateTime Startdate1 = M_Ngay_LimitInterval_Min;
       DateTime limitIntervalMaxRx = M_Ngay_LimitInterval_Max_RX;
 
       if (Left == "02") // Sang
       {
-        num1 = Convert.ToDecimal(Dt_Set_SCC.Rows[0]["H_Sang1"]);
-        num2 = Convert.ToDecimal(Dt_Set_SCC.Rows[0]["M_Sang1"]);
-        num3 = Convert.ToDecimal(Dt_Set_SCC.Rows[0]["H_Sang2"]);
-        num4 = Convert.ToDecimal(Dt_Set_SCC.Rows[0]["M_Sang2"]);
+        num1 = Convert.ToInt32(Dt_Set_SCC.Rows[0]["H_Sang1"]);
+        num2 = Convert.ToInt32(Dt_Set_SCC.Rows[0]["M_Sang1"]);
+        num3 = Convert.ToInt32(Dt_Set_SCC.Rows[0]["H_Sang2"]);
+        num4 = Convert.ToInt32(Dt_Set_SCC.Rows[0]["M_Sang2"]);
         Startdate1 = Convert.ToDateTime(Dt_Set_SCC.Rows[0]["Ngay_Sang1"]);
         M_Ngay_LimitInterval_Max_RX = Convert.ToDateTime(Dt_Set_SCC.Rows[0]["Ngay_Sang2"]);
       }
       if (Left == "03") // Chieu
       {
-        num1 = Convert.ToDecimal(Dt_Set_SCC.Rows[0]["H_Chieu1"]);
-        num2 = Convert.ToDecimal(Dt_Set_SCC.Rows[0]["M_Chieu1"]);
-        num3 = Convert.ToDecimal(Dt_Set_SCC.Rows[0]["H_Chieu2"]);
-        num4 = Convert.ToDecimal(Dt_Set_SCC.Rows[0]["M_Chieu2"]);
+        num1 = Convert.ToInt32(Dt_Set_SCC.Rows[0]["H_Chieu1"]);
+        num2 = Convert.ToInt32(Dt_Set_SCC.Rows[0]["M_Chieu1"]);
+        num3 = Convert.ToInt32(Dt_Set_SCC.Rows[0]["H_Chieu2"]);
+        num4 = Convert.ToInt32(Dt_Set_SCC.Rows[0]["M_Chieu2"]);
         Startdate1 = Convert.ToDateTime(Dt_Set_SCC.Rows[0]["Ngay_Chieu1"]);
         M_Ngay_LimitInterval_Max_RX = Convert.ToDateTime(Dt_Set_SCC.Rows[0]["Ngay_Chieu2"]);
       }
@@ -2171,14 +2192,13 @@ namespace TMV.UI.JPCB.CW
         try
         {
           scales.Clear();
-          int integer = Convert.ToInt32(CbbMa_BN.SelectedValue.ToString().Trim());
-          TimeScaleLessThanDay scaleLessThanDay1 = new TimeScaleLessThanDay(TimeSpan.FromHours(1.0), M_StartHour, M_FinishHour, Startdate1, limitIntervalMaxRx, M_Thu_Bay, M_Chu_Nhat);
-          TimeScaleLessThanDay scaleLessThanDay2 = new TimeScaleLessThanDay(TimeSpan.FromMinutes((double)integer), M_StartHour, M_FinishHour, Startdate1, limitIntervalMaxRx, M_Thu_Bay, M_Chu_Nhat);
+          TimeScaleLessThanDay scaleLessThanDay1 = new TimeScaleLessThanDay(TimeSpan.FromHours((double)1.0), num1, num3, M_Thu_Bay, M_Chu_Nhat);
+          TimeScaleLessThanDay scaleLessThanDay2 = new TimeScaleLessThanDay(TimeSpan.FromMinutes(Convert.ToDouble(CyberFunc.V_GetvalueCombox(CbbMa_BN))), num1, num3, M_Thu_Bay, M_Chu_Nhat);
           scales.Add(new TimeScaleYear());
           scales.Add(new TimeScaleQuarter());
           scales.Add(new TimeScaleMonth());
           scales.Add(new TimeScaleWeek());
-          scales.Add(new CyberTimeScaleDay(M_StartHour, M_FinishHour, Startdate1, limitIntervalMaxRx));  // TimeScaleDay: dd/MM
+          scales.Add(new CyberTimeScaleDay(num1, num3));  // TimeScaleDay: dd/MM
           scales.Add(scaleLessThanDay1);  // TimeScaleHour
           //scales.Add(scaleLessThanDay2);  // TimeScale15Minutes: TODO
           //scales.Add(new TimeScaleDay());
@@ -2198,6 +2218,7 @@ namespace TMV.UI.JPCB.CW
             SchedulerControl.GanttView.Scales[6].Visible = false;
           else
             SchedulerControl.GanttView.Scales[6].Visible = true;
+
           scales.EndUpdate();
         }
       }
@@ -2205,8 +2226,8 @@ namespace TMV.UI.JPCB.CW
       {
         SchedulerControl.Views.DayView.ShowWorkTimeOnly = true;
         SchedulerControl.DayView.ShowDayHeaders = false;
-        TimeSpan timeSpan1 = new TimeSpan(Convert.ToInt32(num1), Convert.ToInt32(num2), 0);
-        TimeSpan timeSpan2 = new TimeSpan(Convert.ToInt32(num3), Convert.ToInt32(num4), 0);
+        TimeSpan timeSpan1 = new TimeSpan(num1, num2, 0);
+        TimeSpan timeSpan2 = new TimeSpan(num3, num4, 0);
         SchedulerControl.Views.DayView.WorkTime.End = new TimeSpan(M_FinishHour, M_FinishMINUTE, 0);
         SchedulerControl.Views.DayView.WorkTime.Start = timeSpan1;
         SchedulerControl.Views.DayView.WorkTime.End = timeSpan2;
@@ -2276,7 +2297,7 @@ namespace TMV.UI.JPCB.CW
       if (Left1 != "02")
         return;
 
-      V_SetScheduler_RX(Dv_Cho_Rua, "Stt_Rec", "Ma_Xe", _Do_Rong, Dt_Xe_H);
+      V_SetScheduler_RX(Dv_Cho_Rua, "Ma_khoang", "Ma_Xe", _Do_Rong, Dt_Xe_H); // Stt_Rec
     }
     private void V_SetScheduler_RX(DataView _Dv_DataSource, string _Id, string _Caption, decimal _Do_Rong, DataTable _Dt_Head_tree = null)
     {
@@ -2341,6 +2362,7 @@ namespace TMV.UI.JPCB.CW
               column.ColumnEdit = repositoryItemMemoEdit;
               column.OptionsColumn.AllowSort = false;
               Left1 = Left1 + Convert.ToInt32(row["Field_Width"]);
+              column.FieldName = Convert.ToString(row["Field_Name"]);
               column.Caption = Convert.ToString(row["Field_Head1"]);
               column.Visible = true;
               column.AppearanceHeader.Options.UseTextOptions = true;

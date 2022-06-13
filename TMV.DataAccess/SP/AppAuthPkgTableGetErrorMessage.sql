@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [AppAuthPkgTableGetErrorMessage]
+﻿CREATE OR ALTER PROCEDURE [AppAuthPkgTableGetErrorMessage]
 	@p_ErrType char, 
   @p_ErrObject varchar(50)
 AS

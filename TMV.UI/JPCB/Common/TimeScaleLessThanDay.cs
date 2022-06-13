@@ -9,12 +9,10 @@ namespace TMV.UI.JPCB.Common
   {
     private double StartHour;
     private double FinishHour;
-    private DateTime Finishdate;
-    private DateTime Startdate;
     private static TimeSpan StartTimeLimitation = TimeSpan.FromHours(8.0);
     private static TimeSpan EndTimeLimitation = TimeSpan.FromHours(18.0);
 
-    public TimeScaleLessThanDay(TimeSpan scaleValue, int Start, int Finish, DateTime Startdate1, DateTime Finishdate1, string Thu_Bay,string Chu_Nhat)
+    public TimeScaleLessThanDay(TimeSpan scaleValue, int Start, int Finish, string Thu_Bay, string Chu_Nhat)
       : base(scaleValue)
     {
       StartHour = 8.0;
@@ -28,8 +26,6 @@ namespace TMV.UI.JPCB.Common
 
       StartHour = (double)Start;
       FinishHour = (double)Finish;
-      Startdate = Startdate1;
-      Finishdate = Finishdate1;
 
       StartTimeLimitation = TimeSpan.FromHours(StartHour);
       EndTimeLimitation = TimeSpan.FromHours(FinishHour);
@@ -74,7 +70,6 @@ namespace TMV.UI.JPCB.Common
       }
       return dateTime1;
     }
-
     public override DateTime GetNextDate(DateTime date)
     {
       try
@@ -93,11 +88,9 @@ namespace TMV.UI.JPCB.Common
       }
       catch(Exception ex)
       {
-        date = new DateTime();
       }
       return date;
     }
-
     private DateTime SkipSomeDays(DateTime date, int skipDayCount)
     {
       int num1 = checked(DaysToIgnore.Count - 1);

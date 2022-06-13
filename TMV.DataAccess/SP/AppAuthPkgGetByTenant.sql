@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [AppAuthPkgGetByTenant]
+﻿CREATE OR ALTER PROCEDURE [AppAuthPkgGetByTenant]
 	@p_TenantName NVARCHAR(40)
 AS
 BEGIN

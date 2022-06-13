@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [AppAuthPkgUpdateFailedLogin]
+﻿CREATE OR ALTER PROCEDURE [AppAuthPkgUpdateFailedLogin]
 	@p_TenantId int,
 	@p_UserName nvarchar(50),
 	@p_NumLoginFailed int
