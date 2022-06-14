@@ -66,5 +66,18 @@ namespace TMV.DataAccess.JPCB
         }
       );
     }
+    public DataSet StartFinishCW(decimal userId, int tenantId, string type, decimal Id)
+    {
+      return SqlDataAccess.ExecuteDataset(
+        SqlConnect.ConnectionString,
+        Constants.Instance().AppJpcbPkgStartFinishCW,
+        new object[] {
+          Globals.DB_GetNull(userId),
+          Globals.DB_GetNull(tenantId),
+          Globals.DB_GetNull(type), // S: Start, F: Finish
+          Globals.DB_GetNull(Id) // Id: PlanId, ActualId
+        }
+      );
+    }
   }
 }

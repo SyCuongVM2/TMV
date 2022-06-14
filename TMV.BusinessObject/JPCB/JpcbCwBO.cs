@@ -48,5 +48,14 @@ namespace TMV.BusinessObject.JPCB
         dateView
       );
     }
+    public DataSet StartFinishCW(decimal userId, int tenantId, string type, decimal Id)
+    {
+      return JpcbCwDAO.Instance().StartFinishCW(
+        userId,
+        tenantId,
+        type,
+        Id
+      );
+    }
   }
 }

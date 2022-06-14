@@ -76,6 +76,7 @@
     <Content Include="SP\CW\AppJpcbPkgGetConfigs.sql" />
     <Content Include="SP\CW\AppJpcbPkgGetConfigsDefault.sql" />
     <Content Include="SP\CW\AppJpcbPkgGetCWData.sql" />
+    <Content Include="SP\CW\AppJpcbPkgStartFinishCW.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

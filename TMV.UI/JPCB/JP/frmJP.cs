@@ -1582,7 +1582,7 @@ namespace TMV.UI.JPCB.JP
           scales.Add((TimeScale)new TimeScaleQuarter());
           scales.Add((TimeScale)new TimeScaleMonth());
           scales.Add((TimeScale)new TimeScaleWeek());
-          scales.Add((TimeScale)new CyberTimeScaleDay(M_StartHour, M_FinishHour));
+          scales.Add((TimeScale)new CyberTimeScaleDay(M_StartHour, M_FinishHour, M_Ngay_LimitInterval_Min, M_Ngay_LimitInterval_Max));
           scales.Add((TimeScale)scaleLessThanDay1);
           scales.Add((TimeScale)scaleLessThanDay2);
         }

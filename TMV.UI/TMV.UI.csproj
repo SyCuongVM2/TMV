@@ -81,6 +81,7 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="JPCB\Common\CustomScales.cs" />
     <Compile Include="JPCB\Common\CyberFuncs.cs" />
     <Compile Include="JPCB\Common\GridviewDragDrop.cs" />
     <Compile Include="JPCB\JP\frmJP.cs">

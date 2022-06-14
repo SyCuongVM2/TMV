@@ -7,11 +7,16 @@ namespace TMV.UI.JPCB.Common
   {
     private int StartHour;
     private int FinishHour;
+    private DateTime Finishdate;
+    private DateTime Startdate;
 
-    public CyberTimeScaleDay(int Start, int Finish)
+    public CyberTimeScaleDay(int Start, int Finish, DateTime Startdate1, DateTime Finishdate1)
     {
+      Width = 100;
       StartHour = Start;
       FinishHour = Finish;
+      Startdate = Startdate1;
+      Finishdate = Finishdate1;
     }
 
     protected override string DefaultDisplayFormat => "dd/MM";

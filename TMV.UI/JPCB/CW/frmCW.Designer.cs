@@ -756,7 +756,7 @@ namespace TMV.UI.JPCB.CW
       this.CmdRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.CmdRefresh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("CmdRefresh.ImageOptions.Image")));
       this.CmdRefresh.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-      this.CmdRefresh.Location = new System.Drawing.Point(706, -18);
+      this.CmdRefresh.Location = new System.Drawing.Point(706, -17);
       this.CmdRefresh.Name = "CmdRefresh";
       this.CmdRefresh.Size = new System.Drawing.Size(35, 35);
       this.CmdRefresh.TabIndex = 10;

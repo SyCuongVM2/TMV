@@ -23,6 +23,7 @@ namespace TMV.UI.JPCB.CW
     #region "variables"
     public string M_Loai_SC = "1";
     public string M_Tang = "1";
+    public string M_Loai_KH = "3";
     private CyberColumnGridView EditMa_Xe_Cho = new CyberColumnGridView();
     private CyberColumnGridView EditMa_Xe_Dang_Rua = new CyberColumnGridView();
     private CyberColumnGridView EditMa_Xe_Rua_Xong = new CyberColumnGridView();
@@ -43,7 +44,6 @@ namespace TMV.UI.JPCB.CW
     private DateTime M_Ngay_LimitInterval_Max_RX;
     private string M_Thu_Bay = "0";
     private string M_Chu_Nhat = "1";
-    private string M_Loai_KH = "3";
     private DataTable Dt_Time;
     private DataTable Dt_Ca_Ngay;
     private DataTable Dt_Gio_Xem;
@@ -73,7 +73,6 @@ namespace TMV.UI.JPCB.CW
     private DataTable Dt_Dang_Rua_H;
     private DataTable Dt_Rua_Xong_H;
     private DataTable Dt_Xe_H;
-    private DataView Dv_Xe_H;
     private DataView Dv_Cho_Rua_H;
     private DataView Dv_Dang_Rua_H;
     private DataView Dv_Rua_Xong_H;
@@ -235,13 +234,13 @@ namespace TMV.UI.JPCB.CW
         },
         Rows =
         {
-          new object[] { 1, "5", "5 Phút", "0" },
-          new object[] { 2, "8", "8 Phút", "1" },
-          new object[] { 3, "10", "10 Phút", "0" },
-          new object[] { 4, "15", "15 Phút", "0" },
-          new object[] { 5, "20", "20 Phút", "0" },
-          new object[] { 6, "30", "30 Phút", "0" },
-          new object[] { 7, "60", "60 Phút", "0" }
+          new object[] { 1, 5, "5 Phút", "0" },
+          new object[] { 2, 8, "8 Phút", "1" },
+          new object[] { 3, 10, "10 Phút", "0" },
+          new object[] { 4, 15, "15 Phút", "0" },
+          new object[] { 5, 20, "20 Phút", "0" },
+          new object[] { 6, 30, "30 Phút", "0" },
+          new object[] { 7, 60, "60 Phút", "0" }
         }
       };
       Dt_Do_Rong_KH_SCC = new DataTable()
@@ -472,10 +471,14 @@ namespace TMV.UI.JPCB.CW
       if (Dt_Data.Columns.Contains("A_Type"))
         SchedulerStorage.Appointments.Mappings.Type = Dt_Data.Columns["A_Type"].ColumnName;
 
-      if (Dt_Data.Columns.Contains("Tootip"))
-        SchedulerStorage.Appointments.Mappings.Location = Dt_Data.Columns["Tootip"].ColumnName; // String Appointment.Location property value displayed beneath the appointment subject.
+      if (Dt_Data.Columns.Contains("Tooltip"))
+        SchedulerStorage.Appointments.Mappings.Location = Dt_Data.Columns["Tooltip"].ColumnName; // String Appointment.Location property value displayed beneath the appointment subject.
       else if (Dt_Data.Columns.Contains("Dien_Giai"))
         SchedulerStorage.Appointments.Mappings.Location = Dt_Data.Columns["Dien_Giai"].ColumnName;
+
+      // Add custom fields to appointment
+      SchedulerStorage.Appointments.CustomFieldMappings.Clear();
+      SchedulerStorage.Appointments.CustomFieldMappings.Add(new AppointmentCustomFieldMapping("T_Type", Dt_Data.Columns["T_Type"].ColumnName));
 
       SchedulerControl.GanttView.Appearance.Appointment.ForeColor = Color.White;
       SchedulerControl.GanttView.Appearance.Appointment.Font = new Font(SchedulerControl.DayView.Appearance.Appointment.Font.FontFamily, 8f);
@@ -711,10 +714,11 @@ namespace TMV.UI.JPCB.CW
         return;
 
       string _Stt_Rec = Dv_Cho_Rua[dataSourceRowIndex]["Stt_Rec"].ToString().Trim();
+      string _T_Type = Dv_Cho_Rua[dataSourceRowIndex]["T_Type"].ToString().Trim();
       if (_Stt_Rec.Trim() == "")
         return;
 
-      V_Thuc_Hien(_Stt_Rec);
+      V_Thuc_Hien(_Stt_Rec, _T_Type);
     }
     private void V_Ma_Xe_Dang_Rua(object sender, EventArgs e)
     {
@@ -723,10 +727,11 @@ namespace TMV.UI.JPCB.CW
         return;
 
       string _Stt_Rec = Dv_Dang_Rua[dataSourceRowIndex]["Stt_Rec"].ToString().Trim();
+      string _T_Type = Dv_Dang_Rua[dataSourceRowIndex]["T_Type"].ToString().Trim();
       if (_Stt_Rec.Trim() == "")
         return;
 
-      V_Thuc_Hien(_Stt_Rec);
+      V_Thuc_Hien(_Stt_Rec, _T_Type);
     }
     private void V_Ma_Xe_Rua_Xong(object sender, EventArgs e)
     {
@@ -784,6 +789,7 @@ namespace TMV.UI.JPCB.CW
       SchedulerControl.Start = Convert.ToDateTime(Dt_Set_SCC.Rows[0]["Ngay_Ct"]);
       V_LoadDatabases("0", "");
       V_SetScheduler_SetValue_RX();
+
       V_SetScheduler_RXControl_KH_RX();
     }
     private void SchedulerControl_InitAppointmentImages(object sender, AppointmentImagesEventArgs e)
@@ -1100,21 +1106,27 @@ namespace TMV.UI.JPCB.CW
       e.Menu.Items.Clear();
       int rowHandle = 0;
       PopupMenuSchedulerControl.ItemLinks.Clear();
+
       PopupMenuSchedulerControl.ItemLinks.Add(
         new CyberMenuPopup(sender, 0, "Bắt đầu/Kết thúc rửa xe", 
         new EventHandler(V_BD_KT), Shortcut.F10, ImageResourceCache.Default.GetImage("images/scheduling/time_16x16.png"), true), false);
+
       PopupMenuSchedulerControl.ItemLinks.Add(
         new CyberMenuPopup(sender, 0, "Tạo KH rửa", 
         new EventHandler(V_Tao_KH_Scheduler), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), true);
+
       PopupMenuSchedulerControl.ItemLinks.Add(
         new CyberMenuPopup(sender, 0, "Sửa KH rửa", 
         new EventHandler(V_Sua_KH_Scheduler), Shortcut.F3, ImageResourceCache.Default.GetImage("images/edit/edit_16x16.png"), true), false);
+
       PopupMenuSchedulerControl.ItemLinks.Add(
         new CyberMenuPopup(sender, 0, "Xóa KH", 
         new EventHandler(V_Xoa_KH_Scheduler), Shortcut.F8, ImageResourceCache.Default.GetImage("images/data/deletedatasource_16x16.png"), true), false);
+      
       PopupMenuSchedulerControl.ItemLinks.Add(
         new CyberMenuPopup(sender, 0, "Xem lệnh", 
         new EventHandler(V_Preview_RX), Shortcut.F7, ImageResourceCache.Default.GetImage("images/print/preview_16x16.png"), true), true);
+
       PopupMenuSchedulerControl.ItemLinks.Add(
         new CyberMenuPopup(sender, 0, "Làm tươi dữ liệu", 
         new EventHandler(V_RefreshData_KH_RX), Shortcut.F5, ImageResourceCache.Default.GetImage("images/actions/refresh2_16x16.png"), true), false);
@@ -1353,12 +1365,17 @@ namespace TMV.UI.JPCB.CW
       }
 
       string _Stt_Rec = "";
+      string _T_Type = "";
       if (recordIndex >= 0)
+      {
         _Stt_Rec = dataSource[recordIndex]["Stt_Rec"].ToString().Trim();
+        _T_Type = dataSource[recordIndex]["T_Type"].ToString().Trim();
+      }
+
       if (_Stt_Rec.Trim() == "")
         return;
 
-      V_Thuc_Hien(_Stt_Rec);
+      V_Thuc_Hien(_Stt_Rec, _T_Type);
     }
     private void ResourcesTree1_PopupMenuShowing(object sender, DevExpress.XtraTreeList.PopupMenuShowingEventArgs e)
     {
@@ -1408,11 +1425,13 @@ namespace TMV.UI.JPCB.CW
     private void V_BD_KT(object sender, EventArgs e)
     {
       string _Stt_Rec = "";
+      string _T_Type = "";
       if (SchedulerControl.SelectedAppointments.Count > 0)
       {
         try
         {
           _Stt_Rec = SchedulerControl.SelectedAppointments[0].Id.ToString();
+          _T_Type = SchedulerControl.SelectedAppointments[0].CustomFields["T_Type"].ToString();
         }
         catch (Exception ex)
         {
@@ -1423,7 +1442,7 @@ namespace TMV.UI.JPCB.CW
       if (_Stt_Rec.ToString().Trim() == "")
         return;
 
-      V_Thuc_Hien(_Stt_Rec);
+      V_Thuc_Hien(_Stt_Rec, _T_Type);
     }
     private void V_Tao_KH_Scheduler(object sender, EventArgs e)
     {
@@ -1555,10 +1574,11 @@ namespace TMV.UI.JPCB.CW
         return;
 
       string _Stt_Rec = Convert.ToString(Dv_Cho_Rua[dataSourceRowIndex]["Stt_Rec"]);
+      string _T_Type = Convert.ToString(Dv_Cho_Rua[dataSourceRowIndex]["T_Type"]);
       if (_Stt_Rec.ToString().Trim() == "")
         return;
 
-      V_Thuc_Hien(_Stt_Rec);
+      V_Thuc_Hien(_Stt_Rec, _T_Type);
     }
     private void V_Tao_Cho_Rua(object sender, EventArgs e)
     {
@@ -1661,13 +1681,17 @@ namespace TMV.UI.JPCB.CW
     }
     private void V_RefreshData_KH_RX(object sender, EventArgs e) => V_LoadDatabases("0", "");
     private void V_Quay_Ra(object sender, EventArgs e) => Close();
-    private bool V_Thuc_Hien(string _Stt_Rec)
+    private bool V_Thuc_Hien(string _Stt_Rec, string _T_Type)
     {
       if (_Stt_Rec.Trim() == "")
         return false;
 
-      DataSet dataSet = CP_RO_CW_Execute.CreateData(); // TODO: CP_RO_CW_BD_KT: status (Y/N), Msg (Y/N), Note
-      bool flag = (dataSet.Tables[0] != null);
+      DataSet ds = JpcbCwBO.Instance().StartFinishCW(
+        Globals.LoginUserID, 
+        Globals.LoginDlrId,
+        _T_Type == "P" ? "S" : "F", 
+        Convert.ToDecimal(_Stt_Rec)); 
+      bool flag = (ds.Tables != null && ds.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS");
       if (flag)
         V_LoadDatabases("0", _Stt_Rec);
 
@@ -1728,10 +1752,11 @@ namespace TMV.UI.JPCB.CW
         return;
 
       string _Stt_Rec = Convert.ToString(Dv_Dang_Rua[dataSourceRowIndex]["Stt_Rec"]);
+      string _T_Type = Convert.ToString(Dv_Dang_Rua[dataSourceRowIndex]["T_Type"]);
       if (_Stt_Rec.ToString().Trim() == "")
         return;
 
-      V_Thuc_Hien(_Stt_Rec);
+      V_Thuc_Hien(_Stt_Rec, _T_Type);
     }
     private void V_Preview_Dang_Rua(object sender, EventArgs e)
     {
@@ -1922,7 +1947,6 @@ namespace TMV.UI.JPCB.CW
             // new object[]{ "Ma_Xe", "BKS", "CM", "C", "100" }
           }
         };
-        Dv_Xe_H = new DataView(Dt_Xe_H);
 
         GridView masterChoRuaGrv = MasterCho_RuaGRV;
         DataView dvChoRuaH = Dv_Cho_Rua_H;
@@ -2188,22 +2212,20 @@ namespace TMV.UI.JPCB.CW
       if (SchedulerControl.ActiveViewType == SchedulerViewType.Gantt)
       {
         TimeScaleCollection scales = SchedulerControl.GanttView.Scales;
-        scales.BeginUpdate();
+        SchedulerControl.GanttView.Scales.BeginUpdate();
         try
         {
           scales.Clear();
-          TimeScaleLessThanDay scaleLessThanDay1 = new TimeScaleLessThanDay(TimeSpan.FromHours((double)1.0), num1, num3, M_Thu_Bay, M_Chu_Nhat);
-          TimeScaleLessThanDay scaleLessThanDay2 = new TimeScaleLessThanDay(TimeSpan.FromMinutes(Convert.ToDouble(CyberFunc.V_GetvalueCombox(CbbMa_BN))), num1, num3, M_Thu_Bay, M_Chu_Nhat);
+          TimeScaleLessThanDay scaleLessThanDay1 = new TimeScaleLessThanDay(TimeSpan.FromHours(1), num1, num3, M_Thu_Bay, M_Chu_Nhat);
+          TimeScaleLessThanDay scaleLessThanDay2 = new TimeScaleLessThanDay(TimeSpan.FromMinutes(15), num1, num3, M_Thu_Bay, M_Chu_Nhat);
           scales.Add(new TimeScaleYear());
           scales.Add(new TimeScaleQuarter());
           scales.Add(new TimeScaleMonth());
           scales.Add(new TimeScaleWeek());
-          scales.Add(new CyberTimeScaleDay(num1, num3));  // TimeScaleDay: dd/MM
+          scales.Add(new CyberTimeScaleDay(num1, num3, Startdate1, limitIntervalMaxRx));  // TimeScaleDay: dd/MM
           scales.Add(scaleLessThanDay1);  // TimeScaleHour
-          //scales.Add(scaleLessThanDay2);  // TimeScale15Minutes: TODO
-          //scales.Add(new TimeScaleDay());
-          //scales.Add(new TimeScaleHour());
-          scales.Add(new TimeScale15Minutes());
+          scales.Add(scaleLessThanDay2);  // TimeScale15Minutes: TODO
+          //Convert.ToDouble(CyberFunc.V_GetvalueCombox(CbbMa_BN))
         }
         finally
         {
@@ -2219,7 +2241,7 @@ namespace TMV.UI.JPCB.CW
           else
             SchedulerControl.GanttView.Scales[6].Visible = true;
 
-          scales.EndUpdate();
+          SchedulerControl.GanttView.Scales.EndUpdate();
         }
       }
       else if (SchedulerControl.ActiveViewType == SchedulerViewType.Day)
@@ -2232,7 +2254,7 @@ namespace TMV.UI.JPCB.CW
         SchedulerControl.Views.DayView.WorkTime.Start = timeSpan1;
         SchedulerControl.Views.DayView.WorkTime.End = timeSpan2;
         int integer = Convert.ToInt32(CbbMa_BN.SelectedValue);
-        SchedulerControl.Views.DayView.TimeScale = TimeSpan.FromMinutes((double)integer);
+        SchedulerControl.Views.DayView.TimeScale = TimeSpan.FromMinutes(integer);
         SchedulerControl.DayView.VisibleTimeSnapMode = true;
         SchedulerControl.DayView.TimeScale = new TimeSpan(0, integer, 0);
         SchedulerControl.DayView.TimeRulers.Clear();

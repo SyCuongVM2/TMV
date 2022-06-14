@@ -42,53 +42,43 @@ namespace TMV.UI.JPCB.Common
     public override DateTime Floor(DateTime date)
     {
       DateTime dateTime1;
-      try
+
+      if (DateTime.Compare(date, DateTime.MinValue) == 0 || DateTime.Compare(date, DateTime.MaxValue) == 0)
+        dateTime1 = date;
+      else
       {
-        if (DateTime.Compare(date, DateTime.MinValue) == 0 || DateTime.Compare(date, DateTime.MaxValue) == 0)
-          dateTime1 = date;
-        else
-        {
-          date = DateTimeHelper.Floor(date, Value, RoundToHour(date, StartTime));
-          TimeSpan timeOfDay = date.TimeOfDay;
+        date = DateTimeHelper.Floor(date, Value, RoundToHour(date, StartTime));
+        TimeSpan timeOfDay = date.TimeOfDay;
 
-          if (timeOfDay < StartTime)
-            date = RoundToHour(date.AddDays(-1.0), EndTime);
-          else if (timeOfDay > EndTime)
-            date = RoundToHour(date, EndTime);
+        if (timeOfDay < StartTime)
+          date = RoundToHour(date.AddDays(-1.0), EndTime);
+        else if (timeOfDay > EndTime)
+          date = RoundToHour(date, EndTime);
 
-          DateTime dateTime2 = SkipSomeDays(date, -1);
-          if (DateTime.Compare(dateTime2, date) != 0)
-            date = RoundToHour(dateTime2, EndTime);
+        DateTime dateTime2 = SkipSomeDays(date, -1);
+        if (DateTime.Compare(dateTime2, date) != 0)
+          date = RoundToHour(dateTime2, EndTime);
 
-          date = DateTimeHelper.Floor(date, Value, RoundToHour(date, StartTime));
-          dateTime1 = date;
-        }
-      }
-      catch(Exception ex)
-      {
+        date = DateTimeHelper.Floor(date, Value, RoundToHour(date, StartTime));
         dateTime1 = date;
       }
+
       return dateTime1;
     }
     public override DateTime GetNextDate(DateTime date)
     {
-      try
-      {
-        date = HasNextDate(date) ? date + Value : date;
-        TimeSpan timeOfDay = date.TimeOfDay;
+      date = HasNextDate(date) ? date + Value : date;
+      TimeSpan timeOfDay = date.TimeOfDay;
 
-        if (timeOfDay < StartTime)
-          date = RoundToHour(date, StartTime);
-        else if (timeOfDay > EndTime)
-          date = RoundToHour(date.AddDays(1.0), StartTime);
+      if (timeOfDay < StartTime)
+        date = RoundToHour(date, StartTime);
+      else if (timeOfDay > EndTime)
+        date = RoundToHour(date.AddDays(1.0), StartTime);
 
-        DateTime dateTime = SkipSomeDays(date, 1);
-        if (DateTime.Compare(dateTime, date) != 0)
-          date = RoundToHour(dateTime, StartTime);
-      }
-      catch(Exception ex)
-      {
-      }
+      DateTime dateTime = SkipSomeDays(date, 1);
+      if (DateTime.Compare(dateTime, date) != 0)
+        date = RoundToHour(dateTime, StartTime);
+
       return date;
     }
     private DateTime SkipSomeDays(DateTime date, int skipDayCount)
