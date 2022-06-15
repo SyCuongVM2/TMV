@@ -5,7 +5,7 @@
 	@p_Date datetime
 AS
 BEGIN
-    set nocount on;
+  set nocount on;
 
 	-- 128, 255, 255 : green
 	-- 255, 153, 255 : pink
@@ -52,13 +52,13 @@ BEGIN
 	-- Get dlr config
 	select @v_CW_Time = coalesce(m.WashTime, 10),
 	       @v_WkAmFrom_H = datepart(hour, WkAmFrom),
-		   @v_WkAmFrom_M = datepart(minute, WkAmFrom),
-		   @v_WkAmTo_H = datepart(hour, WkAmTo),
-		   @v_WkAmTo_M = datepart(minute, WkAmTo),
-		   @v_WkPmFrom_H = datepart(hour, WkPmFrom),
-		   @v_WkPmFrom_M = datepart(minute, WkPmFrom),
-		   @v_WkPmTo_H = datepart(hour, WkPmTo),
-		   @v_WkPmTo_M = datepart(minute, WkPmTo)
+				 @v_WkAmFrom_M = datepart(minute, WkAmFrom),
+				 @v_WkAmTo_H = datepart(hour, WkAmTo),
+				 @v_WkAmTo_M = datepart(minute, WkAmTo),
+				 @v_WkPmFrom_H = datepart(hour, WkPmFrom),
+				 @v_WkPmFrom_M = datepart(minute, WkPmFrom),
+				 @v_WkPmTo_H = datepart(hour, WkPmTo),
+				 @v_WkPmTo_M = datepart(minute, WkPmTo)
 	  from MstSrvDlrConfig m
 	 where cast(EffDateFrom as date) <= cast(@p_Date as date)
 	   and cast(EffDateTo as date) >= cast(@p_Date as date)
@@ -85,12 +85,12 @@ BEGIN
 			   r.CarDeliveryDate Giao_Xe_Full, convert(varchar(5), r.CarDeliveryDate, 108) Giao_Xe,
 			   coalesce(ws.WorkshopName, ws.WorkshopCode, 'RX') Ma_Khoang, ws.WorkshopCode Khoang_Code, '' Parking_Loc,
 			   (case
-				  when (datediff(m, getdate(), r.CarDeliveryDate) <= 0) then '255, 153, 255' -- pink
-				  else '128, 255, 255'  -- YellowGreen
-				end) Backcolor, 
-			   0 Border, '128, 128, 128' Border_Color, 0 Size_Border, 
+						when (datediff(m, getdate(), r.CarDeliveryDate) <= 0) then '255, 153, 255' -- pink
+						else '128, 255, 255'  -- YellowGreen
+				 end) Backcolor, 
+			   0 Border, '' Border_Color, 0 Size_Border, 
 			   0 A_Status, '' Status_Desc,
-			   p.IsPriority Uu_Tien, p.IsCustomerWait KH_Doi, 3 Flag, 0 A_Type, 0 Is_Completed
+			   p.IsPriority Uu_Tien, p.IsCustomerWait KH_Doi, 0 Flag, 0 A_Type, 0 Is_Completed
 		  from SrvPrgPlan p
 		  join SrvQuoRepairOrder r on r.Id = p.ROId
 		  join SrvQuoVehicle v on v.Id = p.VehicleId
@@ -124,15 +124,16 @@ BEGIN
 			   r.CarDeliveryDate Giao_Xe_Full, convert(varchar(5), r.CarDeliveryDate, 108) Giao_Xe,
 			   coalesce(ws.WorkshopName, ws.WorkshopCode, 'RX') Ma_Khoang, ws.WorkshopCode Khoang_Code, '' Parking_Loc,
 			   (case
-				  when (datediff(m, getdate(), r.CarDeliveryDate) <= 0) then '255, 153, 255'  -- pink
-				  else '0, 128, 254'  -- Blue
-				end) Backcolor, 
-			   1 Border, '23, 56, 2' Border_Color, 1 Size_Border,
+						when (datediff(m, getdate(), r.CarDeliveryDate) <= 0) then '255, 153, 255'  -- pink
+						when a.ActualToTime is null then '0, 128, 254'  -- Blue
+						else '255, 255, 255'  -- White
+				 end) Backcolor, 
+			   0 Border, '' Border_Color, 0 Size_Border,
 			   0 A_Status, '' Status_Desc, 
 			   a.IsPriority Uu_Tien, a.IsCustomerWait KH_Doi, 0 Flag, 0 A_Type, 
 			   (case 
-			     when a.ActualState = 4 then 1
-				 else 0
+			     when (a.ActualState = 4 and a.ActualToTime is not null) then 1
+				   else 0
 			   end) Is_Completed
 		  from SrvPrgActual a
 		  join SrvQuoRepairOrder r on r.Id = a.ROId
@@ -222,13 +223,21 @@ BEGIN
 	deallocate cursor_data
 
 	select *
-	  from @v_Data_Table where DataTable = 'Dt_Cho_Rua'
+	  from @v_Data_Table 
+	 where DataTable = 'Dt_Cho_Rua'
+
 	select *
-	  from @v_Data_Table where DataTable = 'Dt_Data'
+	  from @v_Data_Table 
+	 where DataTable = 'Dt_Data'
+
 	select *
-	  from @v_Data_Table where DataTable = 'Dt_Dang_Rua'
+	  from @v_Data_Table 
+	 where DataTable = 'Dt_Dang_Rua'
+
 	select *
-	  from @v_Data_Table where DataTable = 'Dt_Rua_Xong'
+	  from @v_Data_Table 
+	 where DataTable = 'Dt_Rua_Xong'
+
 	select *
 	  from @v_Dt_Data_Xe
 END

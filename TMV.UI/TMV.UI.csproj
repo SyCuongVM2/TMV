@@ -84,6 +84,12 @@
     <Compile Include="JPCB\Common\CustomScales.cs" />
     <Compile Include="JPCB\Common\CyberFuncs.cs" />
     <Compile Include="JPCB\Common\GridviewDragDrop.cs" />
+    <Compile Include="JPCB\CW\frmCWPlan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JPCB\CW\frmCWPlan.Designer.cs">
+      <DependentUpon>frmCWPlan.cs</DependentUpon>
+    </Compile>
     <Compile Include="JPCB\JP\frmJP.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JPCB\CW\frmCWPlan.resx">
+      <DependentUpon>frmCWPlan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="JPCB\JP\frmJP.resx">
       <DependentUpon>frmJP.cs</DependentUpon>

@@ -1,5 +1,6 @@
 ﻿CREATE OR ALTER PROCEDURE AppJpcbPkgStartFinishCW
 	@p_UserId bigint,
+	@p_TenantId int,
 	@p_Type varchar(1),
 	@p_Id bigint
 AS
@@ -16,12 +17,17 @@ BEGIN
 				   -- 1: Insert into Actual
 					 insert into SrvPrgActual(WaitId, AppointmentId, CustomerVisitId, ROId, ROType, VehicleId, CustomerId, WorkshopId, QCLevel, 
 					                          IsCustomerWait, IsCarWash, IsTakeParts, IsPriority,
-																		ActualFromTime, ActualState, 
-																		CreatorUserId, CreationTime)
+																		ActualFromTime, 
+																		ActualState, PlanId, TenantId,
+																		CreatorUserId, CreationTime, IsDeleted)
 														 select WaitId, AppointmentId, CustomerVisitId, ROId, ROType, VehicleId, CustomerId, WorkshopId, QCLevel, 
 					                          IsCustomerWait, IsCarWash, IsTakeParts, IsPriority,
-																		getdate(), 1,
-																		@p_UserId, getdate()
+																		(case 
+																			when PlanFromTime < getdate() then PlanFromTime
+																			else getdate()
+																		end), 
+																		1, @p_Id, @p_TenantId,
+																		@p_UserId, getdate(), 0
 														   from SrvPrgPlan
 														  where Id = @p_Id
 
@@ -37,7 +43,7 @@ BEGIN
 
 						-- 4: display message
 						select 'SUCCESS' as Status_Code, 
-						       'Insert new actual ' & @v_New_Actual_Id as Status_Message, 
+						       'Insert new actual ' + cast(@v_New_Actual_Id as varchar) as Status_Message, 
 									 getdate() as Status_Time, 
 									 'AppJpcbPkgStartFinishCW' as Status_Note
 				end
@@ -45,9 +51,35 @@ BEGIN
 				begin
 					print 'Finish CW'
 
+					declare @v_PlanId bigint
+					declare @v_ActualFromTime datetime
+					declare @v_PlanToTime datetime
+					declare @v_FinishTime datetime
+
+					-- 1: get info from actual
+					select @v_PlanId = PlanId,
+					       @v_ActualFromTime = ActualFromTime
+					  from SrvPrgActual
+					 where Id = @p_Id
+					 
+					-- 2: get plan time
+					select @v_PlanToTime = PlanToTime
+					  from SrvPrgPlan 
+					 where Id = @v_PlanId
+					if (@v_PlanToTime is not null)
+						begin
+							if (@v_PlanToTime < getdate())
+								if (@v_ActualFromTime > @v_PlanToTime and @v_ActualFromTime < getdate())
+									set @v_FinishTime = getdate()
+								else 
+									set @v_FinishTime = @v_PlanToTime
+							else
+								set @v_FinishTime = getdate()
+						end
+
 					-- 1: update finish to actual
 					update SrvPrgActual
-					   set ActualToTime = getdate(),
+					   set ActualToTime = @v_FinishTime,
 						     ActualState = 4,
 								 LastModifierUserId = @p_UserId,
 								 LastModificationTime = getdate()
@@ -55,7 +87,7 @@ BEGIN
 
 					-- 4: display message
 					select 'SUCCESS' as Status_Code, 
-						     'Update finish to actual ' & @p_Id as Status_Message, 
+						     'Update finish to actual ' + cast(@p_Id as varchar) as Status_Message, 
 								 getdate() as Status_Time, 
 								 'AppJpcbPkgStartFinishCW' as Status_Note
 				end
@@ -73,4 +105,3 @@ BEGIN
 		
   END CATCH
 END
-GO

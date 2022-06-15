@@ -368,14 +368,14 @@ namespace TMV.UI.JPCB.CW
       SchedulerControl.CustomDrawAppointmentBackground += new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(SchedulerControl_CustomDrawAppointmentBackground);
       SchedulerControl.AppointmentViewInfoCustomizing -= new AppointmentViewInfoCustomizingEventHandler(V_AppointmentViewInfoCustomizing);
       SchedulerControl.AppointmentViewInfoCustomizing += new AppointmentViewInfoCustomizingEventHandler(V_AppointmentViewInfoCustomizing);
-      SchedulerControl.CustomDrawDayHeader -= new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(schedulerControl_CustomDrawDayHeader);
-      SchedulerControl.CustomDrawDayHeader += new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(schedulerControl_CustomDrawDayHeader);
+      SchedulerControl.CustomDrawDayHeader -= new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(SchedulerControl_CustomDrawDayHeader);
+      SchedulerControl.CustomDrawDayHeader += new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(SchedulerControl_CustomDrawDayHeader);
       SchedulerControl.DoubleClick -= new EventHandler(V_BD_KT);
       SchedulerControl.DoubleClick += new EventHandler(V_BD_KT);
-      SchedulerControl.AppointmentDrop -= new AppointmentDragEventHandler(SchedulerControl_KH_RX_AppointmentDrop);
-      SchedulerControl.AppointmentDrop += new AppointmentDragEventHandler(SchedulerControl_KH_RX_AppointmentDrop);
-      SchedulerControl.AppointmentResized -= new AppointmentResizeEventHandler(SchedulerControl_KH_RX_AppointmentResized);
-      SchedulerControl.AppointmentResized += new AppointmentResizeEventHandler(SchedulerControl_KH_RX_AppointmentResized);
+      //SchedulerControl.AppointmentDrop -= new AppointmentDragEventHandler(SchedulerControl_KH_RX_AppointmentDrop);
+      //SchedulerControl.AppointmentDrop += new AppointmentDragEventHandler(SchedulerControl_KH_RX_AppointmentDrop);
+      //SchedulerControl.AppointmentResized -= new AppointmentResizeEventHandler(SchedulerControl_KH_RX_AppointmentResized);
+      //SchedulerControl.AppointmentResized += new AppointmentResizeEventHandler(SchedulerControl_KH_RX_AppointmentResized);
       SchedulerControl.InitAppointmentImages -= new AppointmentImagesEventHandler(SchedulerControl_InitAppointmentImages);
       SchedulerControl.InitAppointmentImages += new AppointmentImagesEventHandler(SchedulerControl_InitAppointmentImages);
 
@@ -508,7 +508,7 @@ namespace TMV.UI.JPCB.CW
     #endregion
 
     #region "Other Functions"
-    private void scheduler_CustomDrawResourceHeader(object sender, DevExpress.XtraScheduler.CustomDrawObjectEventArgs e)
+    private void Scheduler_CustomDrawResourceHeader(object sender, DevExpress.XtraScheduler.CustomDrawObjectEventArgs e)
     {
       ResourceHeader objectInfo = (ResourceHeader)e.ObjectInfo;
       string str1 = objectInfo.Resource.Id.ToString().Trim();
@@ -762,8 +762,10 @@ namespace TMV.UI.JPCB.CW
     private void V_Gio_Xem_RX(object sender, EventArgs e)
     {
       string Left = CyberFunc.V_GetvalueCombox(CbbGio_Xem);
+
       if (Left == "01")
         V_ActiView_Gantt_RX(sender, e);
+
       if (Left != "02")
         return;
 
@@ -869,8 +871,10 @@ namespace TMV.UI.JPCB.CW
         decimal d1 = 2M;
         if (Dt_Data.Columns.Contains("Size_Border"))
           d1 = Convert.ToDecimal(dataRowArray[0]["Size_Border"]);
+
         if (d1 < 2M)
           d1 = 2M;
+
         e.Handled = true;
         Rectangle bounds = e.Bounds;
         e.DrawDefault();
@@ -967,7 +971,7 @@ namespace TMV.UI.JPCB.CW
         MessageBox.Show("V_AppointmentViewInfoCustomizing2: " + ex.Message);
       }
     }
-    private void schedulerControl_CustomDrawDayHeader(object sender, DevExpress.XtraScheduler.CustomDrawObjectEventArgs e)
+    private void SchedulerControl_CustomDrawDayHeader(object sender, DevExpress.XtraScheduler.CustomDrawObjectEventArgs e)
     {
       DateTime date = DateTime.Now.Date;
       DateTime t2 = DateTime.Now.Date;
@@ -975,8 +979,10 @@ namespace TMV.UI.JPCB.CW
       t2 = t2.AddMinutes(59.0);
       SchedulerHeader objectInfo = e.ObjectInfo as SchedulerHeader;
       AppearanceObject headerCaption = objectInfo.Appearance.HeaderCaption;
+
       if (!(DateTime.Compare(objectInfo.Interval.Start, date) >= 0 & DateTime.Compare(objectInfo.Interval.Start, t2) <= 0 & DateTime.Compare(objectInfo.Interval.End, t2) > 0))
         return;
+
       if (e.Bounds.Height > 0 && e.Bounds.Width > 0)
       {
         e.Cache.FillRectangle(new LinearGradientBrush(e.Bounds, Color.FromArgb(175, 231, 228), Color.FromArgb(125, 181, 178), LinearGradientMode.Vertical), e.Bounds);
@@ -1001,11 +1007,13 @@ namespace TMV.UI.JPCB.CW
     private bool V_Update_Keo_Tha_KH_RX(Appointment _Appointment)
     {
       string _Stt_Rec = "";
+      string _T_Type = "";
       if (SchedulerControl.SelectedAppointments.Count > 0)
       {
         try
         {
           _Stt_Rec = SchedulerControl.SelectedAppointments[0].Id.ToString();
+          _T_Type = SchedulerControl.SelectedAppointments[0].CustomFields["T_Type"].ToString();
         }
         catch (Exception ex)
         {
@@ -1019,6 +1027,7 @@ namespace TMV.UI.JPCB.CW
       DateTime end = SchedulerControl.SelectedInterval.End;
       string _Ma_khoang = "";
       string _ma_khoangOld = "";
+
       V_GetFromSetScheduler_RX(ref _Ma_khoang, ref start, ref end, _Appointment);
       V_GetFromSetScheduler_RXOld(ref _ma_khoangOld, _Appointment);
 
@@ -1044,8 +1053,10 @@ namespace TMV.UI.JPCB.CW
       {
         MessageBox.Show("V_GetFromSetScheduler_RXOld: " + ex.Message);
       }
+
       if (dataRowView == null || !Dt_Data.Columns.Contains("ma_khoang"))
         return;
+
       _ma_khoangOld = dataRowView["Ma_khoang"].ToString().Trim();
     }
     private void V_GetFromSetScheduler_RX(ref string _Ma_khoang, ref DateTime _Ngay_BD, ref DateTime _Ngay_KT, Appointment _Appointment = null)
@@ -1064,8 +1075,10 @@ namespace TMV.UI.JPCB.CW
       }
 
       string str = GetvalueSelectedResource_RX(_Appointment);
+
       if (str.ToUpper().Trim() == "DevExpress.XtraScheduler.EmptyResourceId".ToUpper().Trim())
         str = "";
+
       _Ma_khoang = str;
     }
     private string GetvalueSelectedResource_RX(Appointment _Appointment = null)
@@ -1079,8 +1092,10 @@ namespace TMV.UI.JPCB.CW
       {
         MessageBox.Show("GetvalueSelectedResource_RX: " + ex.Message);
       }
+
       if (str.ToUpper().Trim() == "DevExpress.XtraScheduler.EmptyResourceId".ToUpper().Trim())
         str = "";
+
       if (str.ToUpper().Trim().Contains("DevExpress.XtraScheduler".ToUpper().Trim()))
         str = "";
 
@@ -1144,12 +1159,14 @@ namespace TMV.UI.JPCB.CW
 
       if (e == null)
         return;
+
       PopupMenuSchedulerControl.ShowPopup(MousePosition);
     }
     private void MasterCho_RuaGRV_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
     {
       int rowHandle = e != null ? e.HitInfo.RowHandle : -1;
       PopupMenuCho_Rua.ItemLinks.Clear();
+
       PopupMenuCho_Rua.ItemLinks.Add(
         new CyberMenuPopup(sender, 0, "Bắt đầu/Kết thúc rửa xe", 
         new EventHandler(V_BD_KT_Cho_Rua), Shortcut.F10, ImageResourceCache.Default.GetImage("images/scheduling/time_16x16.png"), true), false);
@@ -1171,15 +1188,19 @@ namespace TMV.UI.JPCB.CW
       PopupMenuCho_Rua.ItemLinks.Add(
         new CyberMenuPopup(sender, rowHandle, "Quay ra", 
         new EventHandler(V_Quay_Ra), ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true), true);
+
       PopupMenuCho_Rua.ShowPopup(MousePosition);
+
       if (e == null)
         return;
+
       PopupMenuCho_Rua.ShowPopup(MousePosition);
     }
     private void MasterDang_Rua_KHGRV_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
     {
       int rowHandle = e != null ? e.HitInfo.RowHandle : -1;
       PopupMenuDang_Rua.ItemLinks.Clear();
+
       PopupMenuDang_Rua.ItemLinks.Add(
         new CyberMenuPopup(sender, 0, "Bắt đầu/Kết thúc rửa xe", 
         new EventHandler(V_BD_KT_Dang_Rua), Shortcut.F10, ImageResourceCache.Default.GetImage("images/scheduling/time_16x16.png"), true), false);
@@ -1192,15 +1213,19 @@ namespace TMV.UI.JPCB.CW
       PopupMenuDang_Rua.ItemLinks.Add(
         new CyberMenuPopup(sender, rowHandle, "Quay ra", 
         new EventHandler(V_Quay_Ra), ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true), true);
+
       PopupMenuDang_Rua.ShowPopup(MousePosition);
+
       if (e == null)
         return;
+
       PopupMenuDang_Rua.ShowPopup(MousePosition);
     }
     private void MasterRua_Xong_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
     {
       int rowHandle = e != null ? e.HitInfo.RowHandle : -1;
       PopupMenuRua_Xong.ItemLinks.Clear();
+
       PopupMenuRua_Xong.ItemLinks.Add(
         new CyberMenuPopup(sender, 0, "Đặt vị trí xe", 
         new EventHandler(V_Vi_Tri_Xe), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
@@ -1219,9 +1244,12 @@ namespace TMV.UI.JPCB.CW
       PopupMenuRua_Xong.ItemLinks.Add(
         new CyberMenuPopup(sender, rowHandle, "Quay ra", 
         new EventHandler(V_Quay_Ra), ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true), true);
+
       PopupMenuRua_Xong.ShowPopup(MousePosition);
+
       if (e == null)
         return;
+
       PopupMenuRua_Xong.ShowPopup(MousePosition);
     }
     private void MasterCho_RuaGRV_RowCellStyle(object sender, RowCellStyleEventArgs e) => 
@@ -1342,6 +1370,7 @@ namespace TMV.UI.JPCB.CW
       {
         if (!dataSource.Table.Columns.Contains("ForeColor"))
           return;
+
         e.Appearance.ForeColor = CyberColor.GetForeColor(Convert.ToString(dataSource[nodeIndex]["ForeColor"]));
       }
     }
@@ -1380,6 +1409,7 @@ namespace TMV.UI.JPCB.CW
     private void ResourcesTree1_PopupMenuShowing(object sender, DevExpress.XtraTreeList.PopupMenuShowingEventArgs e)
     {
       PopupMenuCho_Rua.ItemLinks.Clear();
+
       PopupMenuCho_Rua.ItemLinks.Add(
         new CyberMenuPopup(sender, 0, "Cập nhập màu xe/Kiểu xe", 
         new EventHandler(V_Nhap_Mau_Xe_Tree), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
@@ -1389,9 +1419,12 @@ namespace TMV.UI.JPCB.CW
       PopupMenuCho_Rua.ItemLinks.Add(
         new CyberMenuPopup(sender, 0, "Quay ra", 
         new EventHandler(V_Quay_Ra), ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true));
+
       PopupMenuCho_Rua.ShowPopup(MousePosition);
+
       if (e == null)
         return;
+
       PopupMenuCho_Rua.ShowPopup(MousePosition);
     }
     private void V_Nhap_Mau_Xe_Tree(object sender, EventArgs e)
@@ -1399,6 +1432,7 @@ namespace TMV.UI.JPCB.CW
       DataView dataSource = (DataView)SchedulerStorage.Resources.DataSource;
       if (dataSource == null || !dataSource.Table.Columns.Contains("Stt_Rec"))
         return;
+
       int recordIndex = -1;
       try
       {
@@ -1495,55 +1529,30 @@ namespace TMV.UI.JPCB.CW
     }
     private void V_Xoa_KH_Scheduler(object sender, EventArgs e)
     {
-      object Right = null;
+      string _Stt_Rec = "";
       if (SchedulerControl.SelectedAppointments.Count > 0)
       {
         try
         {
-          Right = SchedulerControl.SelectedAppointments[0].Id;
+          _Stt_Rec = SchedulerControl.SelectedAppointments[0].Id.ToString();
         }
         catch (Exception ex)
         {
           MessageBox.Show("V_Xoa_KH_Scheduler: " + ex.Message);
         }
       }
-      if (Right.ToString().Trim() == "" || !FormGlobals.Message_Confirm("Bạn có chắc chắn xóa không?", false))
+      if (_Stt_Rec.Trim() == "" || !FormGlobals.Message_Confirm("Bạn có chắc chắn xóa không?", false))
         return;
 
-      DataSet dataSet = CP_RO_CW_Execute.CreateData(); // CP_RO_CW_Delete
-      if (dataSet.Tables[0] == null || dataSet.Tables[0].Rows.Count == 0)
-        dataSet.Dispose();
-      else
+      DataSet ds = CP_RO_CW_Execute.CreateData(); // CP_RO_CW_Delete
+      bool flag = (ds.Tables != null && ds.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS");
+      if (flag)
       {
-        int index1 = checked(Dt_Data.Rows.Count - 1);
-        while (index1 >= 0)
-        {
-          if (Dt_Data.Rows[index1]["Stt_Rec"] == Right)
-            Dt_Data.Rows[index1].Delete();
-          checked { index1 += -1; }
-        }
-        Dt_Data.AcceptChanges();
-
-        int index2 = checked(Dt_Cho_Rua.Rows.Count - 1);
-        while (index2 >= 0)
-        {
-          if (Dt_Cho_Rua.Rows[index2]["Stt_Rec"] == Right)
-            Dt_Cho_Rua.Rows[index2].Delete();
-          checked { index2 += -1; }
-        }
-        Dt_Cho_Rua.AcceptChanges();
-
-        int index3 = checked(Dt_Rua_Xong.Rows.Count - 1);
-        while (index3 >= 0)
-        {
-          if (Dt_Rua_Xong.Rows[index3]["Stt_Rec"] == Right)
-            Dt_Rua_Xong.Rows[index3].Delete();
-          checked { index3 += -1; }
-        }
-        Dt_Rua_Xong.AcceptChanges();
-
-        dataSet.Dispose();
+        V_LoadDatabases("0", _Stt_Rec);
+        ds.Dispose();
       }
+      else
+        ds.Dispose();
     }
     private void V_Preview_RX(object sender, EventArgs e)
     {
@@ -1686,11 +1695,7 @@ namespace TMV.UI.JPCB.CW
       if (_Stt_Rec.Trim() == "")
         return false;
 
-      DataSet ds = JpcbCwBO.Instance().StartFinishCW(
-        Globals.LoginUserID, 
-        Globals.LoginDlrId,
-        _T_Type == "P" ? "S" : "F", 
-        Convert.ToDecimal(_Stt_Rec)); 
+      DataSet ds = JpcbCwBO.Instance().StartFinishCW(Globals.LoginUserID, Globals.LoginDlrId, _T_Type == "P" ? "S" : "F", Convert.ToDecimal(_Stt_Rec)); 
       bool flag = (ds.Tables != null && ds.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS");
       if (flag)
         V_LoadDatabases("0", _Stt_Rec);
@@ -2035,7 +2040,7 @@ namespace TMV.UI.JPCB.CW
         {
           V_Delete_KH_Rx(Dt_Dang_Rua, _Stt_Rec);
           if (dataSet.Tables.Count > 2)
-            Dt_Dang_Rua.Load((IDataReader)dataSet.Tables[2].CreateDataReader());
+            Dt_Dang_Rua.Load(dataSet.Tables[2].CreateDataReader());
         }
         if (Dt_Rua_Xong != null)
         {
@@ -2070,25 +2075,28 @@ namespace TMV.UI.JPCB.CW
       if (_Dt == null)
         return;
 
-      int num = checked(_Dt.Rows.Count - 1);
-      if (_Stt_Rec.Trim() == "")
-      {
-        _Dt.Clear();
-        _Dt.AcceptChanges();
-      }
-      else
-      {
-        if (!_Dt.Columns.Contains("Stt_Rec"))
-          return;
-        int index = checked(_Dt.Rows.Count - 1);
-        while (index >= 0)
-        {
-          if (_Dt.Rows[index]["Stt_Rec"].ToString().Trim() == _Stt_Rec.Trim())
-            _Dt.Rows[index].Delete();
-          checked { index += -1; }
-        }
-        _Dt.AcceptChanges();
-      }
+      _Dt.Clear();
+      _Dt.AcceptChanges();
+
+      //if (_Stt_Rec.Trim() == "")
+      //{
+      //  _Dt.Clear();
+      //  _Dt.AcceptChanges();
+      //}
+      //else
+      //{
+      //  if (!_Dt.Columns.Contains("Stt_Rec"))
+      //    return;
+
+      //  int index = checked(_Dt.Rows.Count - 1);
+      //  while (index >= 0)
+      //  {
+      //    if (_Dt.Rows[index]["Stt_Rec"].ToString().Trim() == _Stt_Rec.Trim())
+      //      _Dt.Rows[index].Delete();
+      //    checked { index += -1; }
+      //  }
+      //  _Dt.AcceptChanges();
+      //}
     }
     private void V_Filter_KH_RX(object sender, EventArgs e)
     {

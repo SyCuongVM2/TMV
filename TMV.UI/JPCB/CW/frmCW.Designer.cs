@@ -472,7 +472,9 @@ namespace TMV.UI.JPCB.CW
       this.SchedulerControl.Views.WeekView.Enabled = false;
       this.SchedulerControl.Views.WorkWeekView.TimeRulers.Add(timeRuler3);
       this.SchedulerControl.Views.YearView.UseOptimizedScrolling = false;
-      this.SchedulerControl.CustomDrawResourceHeader += new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(this.scheduler_CustomDrawResourceHeader);
+      this.SchedulerControl.AppointmentDrop += new DevExpress.XtraScheduler.AppointmentDragEventHandler(this.SchedulerControl_KH_RX_AppointmentDrop);
+      this.SchedulerControl.AppointmentResized += new DevExpress.XtraScheduler.AppointmentResizeEventHandler(this.SchedulerControl_KH_RX_AppointmentResized);
+      this.SchedulerControl.CustomDrawResourceHeader += new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(this.Scheduler_CustomDrawResourceHeader);
       // 
       // SchedulerStorage
       // 
@@ -661,7 +663,7 @@ namespace TMV.UI.JPCB.CW
       // 
       this.TxtM_Ngay_Ct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.TxtM_Ngay_Ct.EditValue = null;
-      this.TxtM_Ngay_Ct.Location = new System.Drawing.Point(1594, -12);
+      this.TxtM_Ngay_Ct.Location = new System.Drawing.Point(1594, -10);
       this.TxtM_Ngay_Ct.MenuManager = this.BarManagerCho_Rua;
       this.TxtM_Ngay_Ct.Name = "TxtM_Ngay_Ct";
       this.TxtM_Ngay_Ct.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -676,7 +678,7 @@ namespace TMV.UI.JPCB.CW
       this.CbbMa_HS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.CbbMa_HS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbMa_HS.FormattingEnabled = true;
-      this.CbbMa_HS.Location = new System.Drawing.Point(1418, -12);
+      this.CbbMa_HS.Location = new System.Drawing.Point(1418, -10);
       this.CbbMa_HS.Name = "CbbMa_HS";
       this.CbbMa_HS.Size = new System.Drawing.Size(167, 27);
       this.CbbMa_HS.TabIndex = 16;
@@ -688,7 +690,7 @@ namespace TMV.UI.JPCB.CW
       this.TxtMa_Xe.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.TxtMa_Xe.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
       this.TxtMa_Xe.ForeColor = System.Drawing.Color.Navy;
-      this.TxtMa_Xe.Location = new System.Drawing.Point(1267, -12);
+      this.TxtMa_Xe.Location = new System.Drawing.Point(1267, -10);
       this.TxtMa_Xe.Name = "TxtMa_Xe";
       this.TxtMa_Xe.Size = new System.Drawing.Size(145, 27);
       this.TxtMa_Xe.TabIndex = 15;
@@ -702,7 +704,7 @@ namespace TMV.UI.JPCB.CW
       this.TxtSo_RO.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.TxtSo_RO.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
       this.TxtSo_RO.ForeColor = System.Drawing.Color.Navy;
-      this.TxtSo_RO.Location = new System.Drawing.Point(1116, -12);
+      this.TxtSo_RO.Location = new System.Drawing.Point(1116, -10);
       this.TxtSo_RO.Name = "TxtSo_RO";
       this.TxtSo_RO.Size = new System.Drawing.Size(145, 27);
       this.TxtSo_RO.TabIndex = 14;
@@ -716,7 +718,7 @@ namespace TMV.UI.JPCB.CW
       this.LabKQ_RX.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
       this.LabKQ_RX.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.LabKQ_RX.ForeColor = System.Drawing.Color.White;
-      this.LabKQ_RX.Location = new System.Drawing.Point(928, -11);
+      this.LabKQ_RX.Location = new System.Drawing.Point(928, -9);
       this.LabKQ_RX.Name = "LabKQ_RX";
       this.LabKQ_RX.Size = new System.Drawing.Size(127, 29);
       this.LabKQ_RX.TabIndex = 13;
@@ -730,7 +732,7 @@ namespace TMV.UI.JPCB.CW
       this.LabKQ_DR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
       this.LabKQ_DR.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.LabKQ_DR.ForeColor = System.Drawing.Color.White;
-      this.LabKQ_DR.Location = new System.Drawing.Point(854, -10);
+      this.LabKQ_DR.Location = new System.Drawing.Point(854, -8);
       this.LabKQ_DR.Name = "LabKQ_DR";
       this.LabKQ_DR.Size = new System.Drawing.Size(39, 29);
       this.LabKQ_DR.TabIndex = 12;
@@ -744,7 +746,7 @@ namespace TMV.UI.JPCB.CW
       this.LabKQ_CR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
       this.LabKQ_CR.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.LabKQ_CR.ForeColor = System.Drawing.Color.White;
-      this.LabKQ_CR.Location = new System.Drawing.Point(781, -11);
+      this.LabKQ_CR.Location = new System.Drawing.Point(781, -9);
       this.LabKQ_CR.Name = "LabKQ_CR";
       this.LabKQ_CR.Size = new System.Drawing.Size(39, 29);
       this.LabKQ_CR.TabIndex = 11;
@@ -756,7 +758,7 @@ namespace TMV.UI.JPCB.CW
       this.CmdRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.CmdRefresh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("CmdRefresh.ImageOptions.Image")));
       this.CmdRefresh.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-      this.CmdRefresh.Location = new System.Drawing.Point(706, -17);
+      this.CmdRefresh.Location = new System.Drawing.Point(706, -15);
       this.CmdRefresh.Name = "CmdRefresh";
       this.CmdRefresh.Size = new System.Drawing.Size(35, 35);
       this.CmdRefresh.TabIndex = 10;
@@ -766,7 +768,7 @@ namespace TMV.UI.JPCB.CW
       this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.label4.AutoSize = true;
       this.label4.ForeColor = System.Drawing.Color.Red;
-      this.label4.Location = new System.Drawing.Point(898, -4);
+      this.label4.Location = new System.Drawing.Point(898, -2);
       this.label4.Name = "label4";
       this.label4.Size = new System.Drawing.Size(28, 19);
       this.label4.TabIndex = 9;
@@ -777,7 +779,7 @@ namespace TMV.UI.JPCB.CW
       this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.label2.AutoSize = true;
       this.label2.ForeColor = System.Drawing.Color.Red;
-      this.label2.Location = new System.Drawing.Point(823, -4);
+      this.label2.Location = new System.Drawing.Point(823, -2);
       this.label2.Name = "label2";
       this.label2.Size = new System.Drawing.Size(30, 19);
       this.label2.TabIndex = 8;
@@ -788,7 +790,7 @@ namespace TMV.UI.JPCB.CW
       this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.label1.AutoSize = true;
       this.label1.ForeColor = System.Drawing.Color.Red;
-      this.label1.Location = new System.Drawing.Point(750, -4);
+      this.label1.Location = new System.Drawing.Point(750, -2);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(29, 19);
       this.label1.TabIndex = 7;
@@ -799,7 +801,7 @@ namespace TMV.UI.JPCB.CW
       this.CbbGio_Xem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.CbbGio_Xem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbGio_Xem.FormattingEnabled = true;
-      this.CbbGio_Xem.Location = new System.Drawing.Point(588, -10);
+      this.CbbGio_Xem.Location = new System.Drawing.Point(588, -8);
       this.CbbGio_Xem.Name = "CbbGio_Xem";
       this.CbbGio_Xem.Size = new System.Drawing.Size(114, 27);
       this.CbbGio_Xem.TabIndex = 6;
@@ -809,7 +811,7 @@ namespace TMV.UI.JPCB.CW
       this.CbbCa_Ngay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.CbbCa_Ngay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbCa_Ngay.FormattingEnabled = true;
-      this.CbbCa_Ngay.Location = new System.Drawing.Point(466, -10);
+      this.CbbCa_Ngay.Location = new System.Drawing.Point(466, -8);
       this.CbbCa_Ngay.Name = "CbbCa_Ngay";
       this.CbbCa_Ngay.Size = new System.Drawing.Size(116, 27);
       this.CbbCa_Ngay.TabIndex = 5;
@@ -819,7 +821,7 @@ namespace TMV.UI.JPCB.CW
       this.CbbKieu_Xem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.CbbKieu_Xem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbKieu_Xem.FormattingEnabled = true;
-      this.CbbKieu_Xem.Location = new System.Drawing.Point(343, -10);
+      this.CbbKieu_Xem.Location = new System.Drawing.Point(343, -8);
       this.CbbKieu_Xem.Name = "CbbKieu_Xem";
       this.CbbKieu_Xem.Size = new System.Drawing.Size(116, 27);
       this.CbbKieu_Xem.TabIndex = 4;
@@ -829,7 +831,7 @@ namespace TMV.UI.JPCB.CW
       this.CbbDo_Rong.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.CbbDo_Rong.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbDo_Rong.FormattingEnabled = true;
-      this.CbbDo_Rong.Location = new System.Drawing.Point(258, -10);
+      this.CbbDo_Rong.Location = new System.Drawing.Point(258, -8);
       this.CbbDo_Rong.Name = "CbbDo_Rong";
       this.CbbDo_Rong.Size = new System.Drawing.Size(80, 27);
       this.CbbDo_Rong.TabIndex = 3;
@@ -840,7 +842,7 @@ namespace TMV.UI.JPCB.CW
       this.CbbMa_BN.Cursor = System.Windows.Forms.Cursors.IBeam;
       this.CbbMa_BN.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbMa_BN.FormattingEnabled = true;
-      this.CbbMa_BN.Location = new System.Drawing.Point(172, -10);
+      this.CbbMa_BN.Location = new System.Drawing.Point(172, -8);
       this.CbbMa_BN.Name = "CbbMa_BN";
       this.CbbMa_BN.Size = new System.Drawing.Size(80, 27);
       this.CbbMa_BN.TabIndex = 2;
@@ -851,7 +853,7 @@ namespace TMV.UI.JPCB.CW
       this.CbbTime_Data.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.CbbTime_Data.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbTime_Data.FormattingEnabled = true;
-      this.CbbTime_Data.Location = new System.Drawing.Point(87, -10);
+      this.CbbTime_Data.Location = new System.Drawing.Point(87, -8);
       this.CbbTime_Data.Name = "CbbTime_Data";
       this.CbbTime_Data.Size = new System.Drawing.Size(80, 27);
       this.CbbTime_Data.TabIndex = 1;
@@ -861,7 +863,7 @@ namespace TMV.UI.JPCB.CW
       this.ChkAuto_Data.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkAuto_Data.AutoSize = true;
       this.ChkAuto_Data.ForeColor = System.Drawing.Color.Red;
-      this.ChkAuto_Data.Location = new System.Drawing.Point(12, -6);
+      this.ChkAuto_Data.Location = new System.Drawing.Point(12, -4);
       this.ChkAuto_Data.Name = "ChkAuto_Data";
       this.ChkAuto_Data.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
       this.ChkAuto_Data.Size = new System.Drawing.Size(69, 23);
