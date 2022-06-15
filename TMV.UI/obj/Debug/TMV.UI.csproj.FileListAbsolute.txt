@@ -135,6 +135,7 @@ D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.csproj.AssemblyReference.cache
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.Admin.frmChangePassword.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.Admin.frmLogin.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.frmMain.resources
+D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.CW.frmCWPlan.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.JP.frmJP.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.JP.frmLoading.resources
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.Properties.Resources.resources
@@ -147,4 +148,3 @@ D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.csproj.CoreCompileInputs.cache
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.csproj.CopyComplete
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.exe
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.pdb
-D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.CW.frmCWPlan.resources

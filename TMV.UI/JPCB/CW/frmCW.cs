@@ -2323,11 +2323,11 @@ namespace TMV.UI.JPCB.CW
       SchedulerControl.Views.GanttView.ShowResourceHeaders = flag;
 
       if (Left1 == "01")
-        V_SetScheduler_RX(Dv_DmKhoang_KH_SCC, "Ma_khoang", DmKhoang_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_khoang", _Do_Rong);
+        V_SetScheduler_RX(Dv_DmKhoang_KH_SCC, "Id_khoang", DmKhoang_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_khoang", _Do_Rong);
       if (Left1 != "02")
         return;
 
-      V_SetScheduler_RX(Dv_Cho_Rua, "Ma_khoang", "Ma_Xe", _Do_Rong, Dt_Xe_H); // Stt_Rec
+      V_SetScheduler_RX(Dv_Cho_Rua, "Id_khoang", "Ma_Xe", _Do_Rong, Dt_Xe_H); // Stt_Rec
     }
     private void V_SetScheduler_RX(DataView _Dv_DataSource, string _Id, string _Caption, decimal _Do_Rong, DataTable _Dt_Head_tree = null)
     {
