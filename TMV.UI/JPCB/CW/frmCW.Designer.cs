@@ -472,9 +472,6 @@ namespace TMV.UI.JPCB.CW
       this.SchedulerControl.Views.WeekView.Enabled = false;
       this.SchedulerControl.Views.WorkWeekView.TimeRulers.Add(timeRuler3);
       this.SchedulerControl.Views.YearView.UseOptimizedScrolling = false;
-      this.SchedulerControl.AppointmentDrop += new DevExpress.XtraScheduler.AppointmentDragEventHandler(this.SchedulerControl_KH_RX_AppointmentDrop);
-      this.SchedulerControl.AppointmentResized += new DevExpress.XtraScheduler.AppointmentResizeEventHandler(this.SchedulerControl_KH_RX_AppointmentResized);
-      this.SchedulerControl.CustomDrawResourceHeader += new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(this.Scheduler_CustomDrawResourceHeader);
       // 
       // SchedulerStorage
       // 

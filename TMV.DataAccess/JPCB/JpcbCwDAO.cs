@@ -79,5 +79,17 @@ namespace TMV.DataAccess.JPCB
         }
       );
     }
+    public DataSet GetWorkingTime(int tenantId, DateTime fromDate, DateTime toTime)
+    {
+      return SqlDataAccess.ExecuteDataset(
+        SqlConnect.ConnectionString,
+        Constants.Instance().AppJpcbPkgGetWorkingTime,
+        new object[] {
+          Globals.DB_GetNull(tenantId),
+          Globals.DB_GetNull(fromDate),
+          Globals.DB_GetNull(toTime)
+        }
+      );
+    }
   }
 }

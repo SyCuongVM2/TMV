@@ -56,6 +56,7 @@
     public string AppJpcbPkgGetConfigsDefault = "AppJpcbPkgGetConfigsDefault";
     public string AppJpcbPkgGetCWData = "AppJpcbPkgGetCWData";
     public string AppJpcbPkgStartFinishCW = "AppJpcbPkgStartFinishCW";
+    public string AppJpcbPkgGetWorkingTime = "AppJpcbPkgGetWorkingTime";
     #endregion
   }
 }

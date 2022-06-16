@@ -57,5 +57,9 @@ namespace TMV.BusinessObject.JPCB
         Id
       );
     }
+    public DataSet GetWorkingTime(int tenantId, DateTime fromDate, DateTime toTime)
+    {
+      return JpcbCwDAO.Instance().GetWorkingTime(tenantId, fromDate, toTime);
+    }
   }
 }

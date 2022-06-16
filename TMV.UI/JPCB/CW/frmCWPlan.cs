@@ -83,7 +83,6 @@ namespace TMV.UI.JPCB.CW
       this.TxtNgay_KT.Leave += new EventHandler(this.V_Ngay_KT);
       this.TxtSo_Ro.Leave += new EventHandler(this.L_So_Ro);
       this.ChkDat_them.CheckedChanged += new EventHandler(this.V_Dat_Them);
-      this.LabMa_Xe.Click += new EventHandler(this.V_Ma_Xe_Click);
       this.ChkDat_them.CheckedChanged += new EventHandler(this.V_Chk_Dat_Them);
       this.btnSave.Click += new EventHandler(this.V_Nhan);
       this.btnClose.Click += new EventHandler(V_Close);
@@ -164,7 +163,6 @@ namespace TMV.UI.JPCB.CW
     private void V_TG_SC(object sender, EventArgs e)
     {
       DateTime date = Convert.ToDateTime(this.TxtNgay_BD.EditValue);
-
 
       if (this.TxtTG_SC.Value <= 0)
         this.TxtTG_SC.Value = 5;

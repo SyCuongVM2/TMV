@@ -78,6 +78,7 @@ namespace TMV.UI.JPCB.CW
     private DataView Dv_Rua_Xong_H;
     private CyberColor CyberColor = new CyberColor();
     private CyberFuncs CyberFunc = new CyberFuncs();
+    private CalcTime CalcTime = new CalcTime();
     private bool _Bold_Cho_KH = false;
     private bool _BackColor_Cho_KH = false;
     private bool _BackColor2_Cho_KH = false;
@@ -336,81 +337,47 @@ namespace TMV.UI.JPCB.CW
     }
     private void V_AddHander()
     {
-      EditMa_Xe_Cho.EditColumn.Click -= new EventHandler(V_Ma_Xe_Cho);
       EditMa_Xe_Cho.EditColumn.Click += new EventHandler(V_Ma_Xe_Cho);
-      EditMa_Xe_Dang_Rua.EditColumn.Click -= new EventHandler(V_Ma_Xe_Dang_Rua);
       EditMa_Xe_Dang_Rua.EditColumn.Click += new EventHandler(V_Ma_Xe_Dang_Rua);
-      EditMa_Xe_Rua_Xong.EditColumn.Click -= new EventHandler(V_Ma_Xe_Rua_Xong);
       EditMa_Xe_Rua_Xong.EditColumn.Click += new EventHandler(V_Ma_Xe_Rua_Xong);
 
-      MasterCho_RuaGRV.PopupMenuShowing -= new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(MasterCho_RuaGRV_PopupMenuShowing);
       MasterCho_RuaGRV.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(MasterCho_RuaGRV_PopupMenuShowing);
-      MasterCho_RuaGRV.RowCellStyle -= new RowCellStyleEventHandler(MasterCho_RuaGRV_RowCellStyle);
       MasterCho_RuaGRV.RowCellStyle += new RowCellStyleEventHandler(MasterCho_RuaGRV_RowCellStyle);
 
-      MasterDang_RuaGRV.PopupMenuShowing -= new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(MasterDang_Rua_KHGRV_PopupMenuShowing);
       MasterDang_RuaGRV.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(MasterDang_Rua_KHGRV_PopupMenuShowing);
-      MasterDang_RuaGRV.RowCellStyle -= new RowCellStyleEventHandler(MasterDang_Rua_KHGRV_RowCellStyle);
       MasterDang_RuaGRV.RowCellStyle += new RowCellStyleEventHandler(MasterDang_Rua_KHGRV_RowCellStyle);
 
-      MasterRua_XongGRV.PopupMenuShowing -= new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(MasterRua_Xong_PopupMenuShowing);
       MasterRua_XongGRV.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(MasterRua_Xong_PopupMenuShowing);
-      MasterRua_XongGRV.RowCellStyle -= new RowCellStyleEventHandler(MasterRua_Xong_RowCellStyle);
       MasterRua_XongGRV.RowCellStyle += new RowCellStyleEventHandler(MasterRua_Xong_RowCellStyle);
 
-      SchedulerControl.PopupMenuShowing -= new DevExpress.XtraScheduler.PopupMenuShowingEventHandler(V_PopupMenu_RX);
       SchedulerControl.PopupMenuShowing += new DevExpress.XtraScheduler.PopupMenuShowingEventHandler(V_PopupMenu_RX);
-      SchedulerControl.EditAppointmentFormShowing -= new AppointmentFormEventHandler(V_Lap_F3F4_KH_RX);
       SchedulerControl.EditAppointmentFormShowing += new AppointmentFormEventHandler(V_Lap_F3F4_KH_RX);
-      SchedulerControl.CustomDrawTimeIndicator -= new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(SchedulerControl_CustomDrawTimeIndicator_RX);
       SchedulerControl.CustomDrawTimeIndicator += new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(SchedulerControl_CustomDrawTimeIndicator_RX);
-      SchedulerControl.CustomDrawAppointmentBackground -= new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(SchedulerControl_CustomDrawAppointmentBackground);
       SchedulerControl.CustomDrawAppointmentBackground += new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(SchedulerControl_CustomDrawAppointmentBackground);
-      SchedulerControl.AppointmentViewInfoCustomizing -= new AppointmentViewInfoCustomizingEventHandler(V_AppointmentViewInfoCustomizing);
       SchedulerControl.AppointmentViewInfoCustomizing += new AppointmentViewInfoCustomizingEventHandler(V_AppointmentViewInfoCustomizing);
-      SchedulerControl.CustomDrawDayHeader -= new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(SchedulerControl_CustomDrawDayHeader);
       SchedulerControl.CustomDrawDayHeader += new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(SchedulerControl_CustomDrawDayHeader);
-      SchedulerControl.DoubleClick -= new EventHandler(V_BD_KT);
+      SchedulerControl.CustomDrawResourceHeader += new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(this.Scheduler_CustomDrawResourceHeader);
       SchedulerControl.DoubleClick += new EventHandler(V_BD_KT);
-      //SchedulerControl.AppointmentDrop -= new AppointmentDragEventHandler(SchedulerControl_KH_RX_AppointmentDrop);
-      //SchedulerControl.AppointmentDrop += new AppointmentDragEventHandler(SchedulerControl_KH_RX_AppointmentDrop);
-      //SchedulerControl.AppointmentResized -= new AppointmentResizeEventHandler(SchedulerControl_KH_RX_AppointmentResized);
-      //SchedulerControl.AppointmentResized += new AppointmentResizeEventHandler(SchedulerControl_KH_RX_AppointmentResized);
-      SchedulerControl.InitAppointmentImages -= new AppointmentImagesEventHandler(SchedulerControl_InitAppointmentImages);
+      SchedulerControl.AppointmentDrop += new AppointmentDragEventHandler(SchedulerControl_KH_RX_AppointmentDrop);
+      SchedulerControl.AppointmentResized += new AppointmentResizeEventHandler(SchedulerControl_KH_RX_AppointmentResized);
       SchedulerControl.InitAppointmentImages += new AppointmentImagesEventHandler(SchedulerControl_InitAppointmentImages);
 
-      ChkAuto_Data.CheckedChanged -= new EventHandler(V_Auto_Data_KH_RX);
       ChkAuto_Data.CheckedChanged += new EventHandler(V_Auto_Data_KH_RX);
-      CbbTime_Data.SelectedValueChanged -= new EventHandler(V_Auto_Data_KH_RX);
       CbbTime_Data.SelectedValueChanged += new EventHandler(V_Auto_Data_KH_RX);
-      Timer_Data.Tick -= new EventHandler(V_Timer_Data_KH_RX);
       Timer_Data.Tick += new EventHandler(V_Timer_Data_KH_RX);
-      CbbMa_BN.SelectedValueChanged -= new EventHandler(V_Buoc_Nhay_KH_RX);
       CbbMa_BN.SelectedValueChanged += new EventHandler(V_Buoc_Nhay_KH_RX);
-      CbbDo_Rong.SelectedValueChanged -= new EventHandler(V_Do_Rong_KH_RX);
       CbbDo_Rong.SelectedValueChanged += new EventHandler(V_Do_Rong_KH_RX);
-      CbbCa_Ngay.SelectedIndexChanged -= new EventHandler(V_Ca_Ngay);
       CbbCa_Ngay.SelectedIndexChanged += new EventHandler(V_Ca_Ngay);
-      CbbKieu_Xem.SelectedIndexChanged -= new EventHandler(V_Kieu_Xem_RX);
       CbbKieu_Xem.SelectedIndexChanged += new EventHandler(V_Kieu_Xem_RX);
-      CbbGio_Xem.SelectedIndexChanged -= new EventHandler(V_Gio_Xem_RX);
       CbbGio_Xem.SelectedIndexChanged += new EventHandler(V_Gio_Xem_RX);
-      CmdRefresh.Click -= new EventHandler(V_RefreshData_KH_RX);
       CmdRefresh.Click += new EventHandler(V_RefreshData_KH_RX);
-      TxtM_Ngay_Ct.TextChanged -= new EventHandler(V_Ngay_Ct_KH);
       TxtM_Ngay_Ct.TextChanged += new EventHandler(V_Ngay_Ct_KH);
-      CbbMa_HS.SelectedValueChanged -= new EventHandler(V_Filter_KH_RX);
       CbbMa_HS.SelectedValueChanged += new EventHandler(V_Filter_KH_RX);
-      TxtMa_Xe.TextChanged -= new EventHandler(V_Filter_KH_RX);
       TxtMa_Xe.TextChanged += new EventHandler(V_Filter_KH_RX);
-      TxtSo_RO.TextChanged -= new EventHandler(V_Filter_KH_RX);
       TxtSo_RO.TextChanged += new EventHandler(V_Filter_KH_RX);
 
-      resourcesTree1.CustomDrawNodeCell -= new CustomDrawNodeCellEventHandler(ResourcesTree1_CustomDrawNodeCell);
       resourcesTree1.CustomDrawNodeCell += new CustomDrawNodeCellEventHandler(ResourcesTree1_CustomDrawNodeCell);
-      resourcesTree1.DoubleClick -= new EventHandler(ResourcesTree1_DoubleClick);
       resourcesTree1.DoubleClick += new EventHandler(ResourcesTree1_DoubleClick);
-      resourcesTree1.PopupMenuShowing -= new DevExpress.XtraTreeList.PopupMenuShowingEventHandler(ResourcesTree1_PopupMenuShowing);
       resourcesTree1.PopupMenuShowing += new DevExpress.XtraTreeList.PopupMenuShowingEventHandler(ResourcesTree1_PopupMenuShowing);
 
       CbbTime_Data.MouseHover += new EventHandler(Options_MouseHover);
@@ -1054,7 +1021,7 @@ namespace TMV.UI.JPCB.CW
         MessageBox.Show("V_GetFromSetScheduler_RXOld: " + ex.Message);
       }
 
-      if (dataRowView == null || !Dt_Data.Columns.Contains("ma_khoang"))
+      if (dataRowView == null || !Dt_Data.Columns.Contains("Ma_khoang"))
         return;
 
       _ma_khoangOld = dataRowView["Ma_khoang"].ToString().Trim();
