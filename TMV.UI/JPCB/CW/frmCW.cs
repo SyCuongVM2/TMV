@@ -1447,17 +1447,16 @@ namespace TMV.UI.JPCB.CW
     }
     private void V_Tao_KH_Scheduler(object sender, EventArgs e)
     {
+      string _Mode = "M";
+      string _Stt_Rec = "";
       DateTime start = SchedulerControl.SelectedInterval.Start;
       DateTime end = SchedulerControl.SelectedInterval.End;
       string _Ma_khoang = SchedulerControl.SelectedResource.Id.ToString().Trim();
       V_GetFromSetScheduler(ref start, ref end, ref _Ma_khoang);
 
       int integer = Convert.ToInt32(CbbMa_BN.SelectedValue);
-      DataTable dataTable = CP_RO_CW_Execute.CreateData().Tables[0]; // TODO: Ma_Xe, So_Ro, Stt_Rec, Ma_Ct (CyberProgress.V_KH_CW)
-      if (dataTable == null || dataTable.Rows.Count == 0 || !dataTable.Columns.Contains("Stt_Rec") || dataTable.Rows[0]["Stt_Rec"].ToString().Trim() == "")
-        return;
-
-      V_LoadDatabases("0", dataTable.Rows[0]["Stt_Rec"].ToString().Trim());
+      new frmCWPlan().ShowForm(_Mode, _Stt_Rec, _Ma_khoang, start, end, integer);
+      // V_LoadDatabases("0", "Stt_Rec");
     }
     private void V_Sua_KH_Scheduler(object sender, EventArgs e)
     {
@@ -1488,11 +1487,8 @@ namespace TMV.UI.JPCB.CW
         _Ngay_KT = Convert.ToDateTime(dataRowArray[0]["Ngay_KT"]);
       }
       int integer = Convert.ToInt32(CbbMa_BN.SelectedValue);
-      DataTable dataTable = CP_RO_CW_Execute.CreateData().Tables[0]; // TODO: Ma_Xe, So_Ro, Stt_Rec, Ma_Ct (CyberProgress.V_KH_CW)
-      if (dataTable == null || dataTable.Rows.Count == 0 || !dataTable.Columns.Contains("Stt_Rec") || dataTable.Rows[0]["Stt_Rec"].ToString().Trim() == "")
-        return;
-
-      V_LoadDatabases("0", dataTable.Rows[0]["Stt_Rec"].ToString().Trim());
+      new frmCWPlan().ShowForm(_Mode, _Stt_Rec, _Ma_Khoang, _Ngay_BD, _Ngay_KT, integer);
+      //V_LoadDatabases("0", "Stt_Rec");
     }
     private void V_Xoa_KH_Scheduler(object sender, EventArgs e)
     {
@@ -1568,10 +1564,8 @@ namespace TMV.UI.JPCB.CW
       DateTime now = DateTime.Now;
       DateTime _Ngay_KT2 = now.AddMinutes(10.0);
       int integer = Convert.ToInt32(CbbMa_BN.SelectedValue);
-      DataTable dataTable = CP_RO_CW_Execute.CreateData().Tables[0]; // TODO: Ma_Xe, So_Ro, Stt_Rec, Ma_Ct (CyberProgress.V_KH_CW)
-      if (dataTable == null || dataTable.Rows.Count == 0 || !dataTable.Columns.Contains("Stt_Rec") || (dataTable.Rows[0]["Stt_Rec"].ToString().Trim() == ""))
-        return;
-      V_LoadDatabases("0", dataTable.Rows[0]["Stt_Rec"].ToString().Trim());
+      new frmCWPlan().ShowForm(_Mode, _Stt_Rec, _Ma_khoang, now, _Ngay_KT2, integer);
+      // V_LoadDatabases("0", dataTable.Rows[0]["Stt_Rec"].ToString().Trim());
     }
     private void V_Sua_Cho_Rua(object sender, EventArgs e)
     {
@@ -1598,11 +1592,9 @@ namespace TMV.UI.JPCB.CW
         _Ngay_KT = Convert.ToDateTime(dataRowArray[0]["Ngay_KT"]);
       }
       int integer = Convert.ToInt32(CbbMa_BN.SelectedValue);
-      DataTable dataTable = CP_RO_CW_Execute.CreateData().Tables[0]; // TODO: Ma_Xe, So_Ro, Stt_Rec, Ma_Ct (CyberProgress.V_KH_CW)
-      if (dataTable == null || dataTable.Rows.Count == 0 || !dataTable.Columns.Contains("Stt_Rec") || (dataTable.Rows[0]["Stt_Rec"].ToString().Trim() == ""))
-        return;
+      new frmCWPlan().ShowForm(_Mode, _Stt_Rec, _Ma_Khoang, _Ngay_BD, _Ngay_KT, integer);
 
-      V_LoadDatabases("0", dataTable.Rows[0]["Stt_Rec"].ToString().Trim());
+      //V_LoadDatabases("0", dataTable.Rows[0]["Stt_Rec"].ToString().Trim());
     }
     private void V_Xoa_Cho_Rua(object sender, EventArgs e)
     {
@@ -1617,40 +1609,15 @@ namespace TMV.UI.JPCB.CW
       if (Right.ToString().Trim() == "" || !FormGlobals.Message_Confirm("Bạn có chắc chắn xóa không?", false))
         return;
 
-      DataSet dataSet = CP_RO_CW_Execute.CreateData(); // CP_RO_CW_Delete"
-      if (dataSet.Tables[0] == null || dataSet.Tables[0].Rows.Count == 0)
-        dataSet.Dispose();
-      else
+      DataSet ds = CP_RO_CW_Execute.CreateData(); // CP_RO_CW_Delete"
+      bool flag = (ds.Tables != null && ds.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS");
+      if (flag)
       {
-        int index1 = checked(Dt_Data.Rows.Count - 1);
-        while (index1 >= 0)
-        {
-          if (Dt_Data.Rows[index1]["Stt_Rec"] == Right)
-            Dt_Data.Rows[index1].Delete();
-          checked { index1 += -1; }
-        }
-        Dt_Data.AcceptChanges();
-
-        int index2 = checked(Dt_Cho_Rua.Rows.Count - 1);
-        while (index2 >= 0)
-        {
-          if (Dt_Cho_Rua.Rows[index2]["Stt_Rec"] == Right)
-            Dt_Cho_Rua.Rows[index2].Delete();
-          checked { index2 += -1; }
-        }
-        Dt_Cho_Rua.AcceptChanges();
-
-        int index3 = checked(Dt_Rua_Xong.Rows.Count - 1);
-        while (index3 >= 0)
-        {
-          if (Dt_Rua_Xong.Rows[index3]["Stt_Rec"] == Right)
-            Dt_Rua_Xong.Rows[index3].Delete();
-          checked { index3 += -1; }
-        }
-        Dt_Rua_Xong.AcceptChanges();
-
-        dataSet.Dispose();
+        V_LoadDatabases("0", Right.ToString().Trim());
+        ds.Dispose();
       }
+      else
+        ds.Dispose();
     }
     private void V_Preview_Cho_Rua(object sender, EventArgs e)
     {
@@ -2110,6 +2077,7 @@ namespace TMV.UI.JPCB.CW
           LabTy_Hieusuat.BackColor = CyberColor.GetBackColor(Convert.ToString(dataSet.Tables[0].Rows[0]["BackColor"]));
         if (dataSet.Tables[0].Columns.Contains("ForeColor"))
           LabTy_Hieusuat.ForeColor = CyberColor.GetBackColor(Convert.ToString(dataSet.Tables[0].Rows[0]["ForeColor"]));
+
         dataSet.Dispose();
       }
     }
