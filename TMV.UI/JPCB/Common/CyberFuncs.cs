@@ -362,6 +362,11 @@ namespace TMV.UI.JPCB.Common
 
       V_AddColumnRowStype("Underline", GRVMaster, DvMater);
     }
+    public string V_FormatBien_So(string Bien_So, bool Bs_Sk)
+    {
+      string str = Bien_So;
+      return Bs_Sk ? str.Replace(" ", "").Replace("-", "").Replace("_", "").Replace("+", "").Replace(".", "").Replace(",", "").Replace("/", "").Replace(")", "").Replace("(", "").Replace("\\", "").Replace(";", "").Replace("'", "").Replace("<", "").Replace(">", "").Replace("=", "").Replace("@", "").Replace("&", "").Replace("#", "").Replace("$", "").Replace("!", "") : str;
+    }
 
     private GridColumn GetColumn(string Field_name, string Field_Type, string Field_Head1, string Field_Head2, int Field_Width, string Field_ReadOnly, string Field_Format, DataView DvMaster)
     {

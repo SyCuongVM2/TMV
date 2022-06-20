@@ -73,9 +73,13 @@
     <Content Include="SP\AppAuthPkgTableListField.sql" />
     <Content Include="SP\AppAuthPkgUpdateFailedLogin.sql" />
     <Content Include="SP\AppAuthPkgUserChangePassword.sql" />
+    <Content Include="SP\CW\AppJpcbPkgAddOrUpdateCW.sql" />
     <Content Include="SP\CW\AppJpcbPkgGetConfigs.sql" />
     <Content Include="SP\CW\AppJpcbPkgGetConfigsDefault.sql" />
     <Content Include="SP\CW\AppJpcbPkgGetCWData.sql" />
+    <Content Include="SP\CW\AppJpcbPkgGetCWDetail.sql" />
+    <Content Include="SP\CW\AppJpcbPkgGetHolidays.sql" />
+    <Content Include="SP\CW\AppJpcbPkgGetWorkshops.sql" />
     <Content Include="SP\CW\AppJpcbPkgStartFinishCW.sql" />
     <Content Include="SP\CW\CalcCloneRepairTime.sql" />
     <Content Include="SP\CW\CalcWorkingTime.sql" />

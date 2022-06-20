@@ -182,7 +182,7 @@ END
 GO
 
 
-CREATE OR ALTER PROCEDURE CalcWorkingTime
+CREATE OR ALTER PROCEDURE AppJpcbPkgCalcWorkingTime
 (
 	@p_Tenant_Id int,
 	@p_FromTime datetime,
@@ -356,6 +356,6 @@ BEGIN
 				end
 		end
 
-	select @v_MinutesDiff
+	select @v_MinutesDiff TG_SC
 END
 GO

@@ -57,6 +57,10 @@
     public string AppJpcbPkgGetCWData = "AppJpcbPkgGetCWData";
     public string AppJpcbPkgStartFinishCW = "AppJpcbPkgStartFinishCW";
     public string AppJpcbPkgGetWorkingTime = "AppJpcbPkgGetWorkingTime";
+    public string AppJpcbPkgGetWorkshops = "AppJpcbPkgGetWorkshops";
+    public string AppJpcbPkgGetCWDetail = "AppJpcbPkgGetCWDetail";
+    public string AppJpcbPkgCalcWorkingTime = "AppJpcbPkgCalcWorkingTime";
+    public string AppJpcbPkgAddOrUpdateCW = "AppJpcbPkgAddOrUpdateCW";
     #endregion
   }
 }

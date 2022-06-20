@@ -115,7 +115,6 @@ namespace TMV.UI.JPCB.CW
     {
       InitializeComponent();
     }
-
     private void frmCW_Load(object sender, EventArgs e)
     {
       barWSUser.Caption = Globals.LoginUserName + " (" + Globals.LoginFullName + ")";
@@ -1073,11 +1072,13 @@ namespace TMV.UI.JPCB.CW
     {
       SchedulerControl schedulerControl = (SchedulerControl)sender;
       string str = "";
+      string type = "";
       if (schedulerControl.SelectedAppointments.Count > 0)
       {
         try
         {
           str = schedulerControl.SelectedAppointments[0].Id.ToString();
+          type = schedulerControl.SelectedAppointments[0].CustomFields["T_Type"].ToString();
         }
         catch (Exception ex)
         {
@@ -1089,21 +1090,30 @@ namespace TMV.UI.JPCB.CW
       int rowHandle = 0;
       PopupMenuSchedulerControl.ItemLinks.Clear();
 
-      PopupMenuSchedulerControl.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Bắt đầu/Kết thúc rửa xe", 
-        new EventHandler(V_BD_KT), Shortcut.F10, ImageResourceCache.Default.GetImage("images/scheduling/time_16x16.png"), true), false);
+      if (type == "P")
+      {
+        PopupMenuSchedulerControl.ItemLinks.Add(
+          new CyberMenuPopup(sender, 0, "Bắt đầu rửa xe",
+          new EventHandler(V_BD_KT), Shortcut.F10, ImageResourceCache.Default.GetImage("images/scheduling/time_16x16.png"), true), false);
 
+        PopupMenuSchedulerControl.ItemLinks.Add(
+          new CyberMenuPopup(sender, 0, "Sửa KH rửa",
+          new EventHandler(V_Sua_KH_Scheduler), Shortcut.F3, ImageResourceCache.Default.GetImage("images/edit/edit_16x16.png"), true), false);
+
+        PopupMenuSchedulerControl.ItemLinks.Add(
+          new CyberMenuPopup(sender, 0, "Xóa KH",
+          new EventHandler(V_Xoa_KH_Scheduler), Shortcut.F8, ImageResourceCache.Default.GetImage("images/data/deletedatasource_16x16.png"), true), false);
+      }
+      else if (type == "A")
+      {
+        PopupMenuSchedulerControl.ItemLinks.Add(
+          new CyberMenuPopup(sender, 0, "Kết thúc rửa xe",
+          new EventHandler(V_BD_KT), Shortcut.F10, ImageResourceCache.Default.GetImage("images/scheduling/time_16x16.png"), true), false);
+      }
+      
       PopupMenuSchedulerControl.ItemLinks.Add(
         new CyberMenuPopup(sender, 0, "Tạo KH rửa", 
         new EventHandler(V_Tao_KH_Scheduler), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), true);
-
-      PopupMenuSchedulerControl.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Sửa KH rửa", 
-        new EventHandler(V_Sua_KH_Scheduler), Shortcut.F3, ImageResourceCache.Default.GetImage("images/edit/edit_16x16.png"), true), false);
-
-      PopupMenuSchedulerControl.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Xóa KH", 
-        new EventHandler(V_Xoa_KH_Scheduler), Shortcut.F8, ImageResourceCache.Default.GetImage("images/data/deletedatasource_16x16.png"), true), false);
       
       PopupMenuSchedulerControl.ItemLinks.Add(
         new CyberMenuPopup(sender, 0, "Xem lệnh", 
@@ -1451,43 +1461,49 @@ namespace TMV.UI.JPCB.CW
       string _Stt_Rec = "";
       DateTime start = SchedulerControl.SelectedInterval.Start;
       DateTime end = SchedulerControl.SelectedInterval.End;
-      string _Ma_khoang = SchedulerControl.SelectedResource.Id.ToString().Trim();
+
+      string _Ma_khoang = SchedulerControl.SelectedResource.CustomFields["Ma_Khoang"].ToString();
+      int _id_khoang = Convert.ToInt32(SchedulerControl.SelectedResource.Id);
       V_GetFromSetScheduler(ref start, ref end, ref _Ma_khoang);
 
       int integer = Convert.ToInt32(CbbMa_BN.SelectedValue);
-      new frmCWPlan().ShowForm(_Mode, _Stt_Rec, _Ma_khoang, start, end, integer);
+      new frmCWPlan().ShowForm(_Mode, _Stt_Rec, _id_khoang, _Ma_khoang, start, end, integer);
       // V_LoadDatabases("0", "Stt_Rec");
     }
     private void V_Sua_KH_Scheduler(object sender, EventArgs e)
     {
       string _Mode = "S";
       string _Stt_Rec = "";
+      string _T_Type = "";
       if (SchedulerControl.SelectedAppointments.Count > 0)
       {
         try
         {
           _Stt_Rec = SchedulerControl.SelectedAppointments[0].Id.ToString();
+          _T_Type = SchedulerControl.SelectedAppointments[0].CustomFields["T_Type"].ToString();
         }
         catch (Exception ex)
         {
           MessageBox.Show("V_Sua_KH_Scheduler: " + ex.Message);
         }
       }
-      if (_Stt_Rec.ToString().Trim() == "")
+      if (_Stt_Rec.ToString().Trim() == "" || _T_Type.ToString().Trim() != "P")
         return;
 
       string _Ma_Khoang = "";
+      int _id_khoang = 0;
       DateTime _Ngay_BD = DateTime.Now;
       DateTime _Ngay_KT = DateTime.Now;
       DataRow[] dataRowArray = Dt_Data.Select("Stt_Rec = '" + _Stt_Rec + "'");
       if (dataRowArray.Length > 0)
       {
+        _id_khoang = Convert.ToInt32(dataRowArray[0]["Id_khoang"]);
         _Ma_Khoang = dataRowArray[0]["Ma_khoang"].ToString().Trim();
         _Ngay_BD = Convert.ToDateTime(dataRowArray[0]["Ngay_Bd"]);
         _Ngay_KT = Convert.ToDateTime(dataRowArray[0]["Ngay_KT"]);
       }
       int integer = Convert.ToInt32(CbbMa_BN.SelectedValue);
-      new frmCWPlan().ShowForm(_Mode, _Stt_Rec, _Ma_Khoang, _Ngay_BD, _Ngay_KT, integer);
+      new frmCWPlan().ShowForm(_Mode, _Stt_Rec, _id_khoang, _Ma_Khoang, _Ngay_BD, _Ngay_KT, integer);
       //V_LoadDatabases("0", "Stt_Rec");
     }
     private void V_Xoa_KH_Scheduler(object sender, EventArgs e)
@@ -1564,7 +1580,7 @@ namespace TMV.UI.JPCB.CW
       DateTime now = DateTime.Now;
       DateTime _Ngay_KT2 = now.AddMinutes(10.0);
       int integer = Convert.ToInt32(CbbMa_BN.SelectedValue);
-      new frmCWPlan().ShowForm(_Mode, _Stt_Rec, _Ma_khoang, now, _Ngay_KT2, integer);
+      new frmCWPlan().ShowForm(_Mode, _Stt_Rec, 0, _Ma_khoang, now, _Ngay_KT2, integer);
       // V_LoadDatabases("0", dataTable.Rows[0]["Stt_Rec"].ToString().Trim());
     }
     private void V_Sua_Cho_Rua(object sender, EventArgs e)
@@ -1582,17 +1598,19 @@ namespace TMV.UI.JPCB.CW
         return;
 
       string _Ma_Khoang = "";
+      int _id_khoang = 0;
       DateTime _Ngay_BD = DateTime.Now;
       DateTime _Ngay_KT = DateTime.Now;
       DataRow[] dataRowArray = Dt_Data.Select("Stt_Rec = '" + _Stt_Rec + "'");
       if (dataRowArray.Length > 0)
       {
+        _id_khoang = Convert.ToInt32(dataRowArray[0]["Id_khoang"]);
         _Ma_Khoang = dataRowArray[0]["Ma_khoang"].ToString().Trim();
         _Ngay_BD = Convert.ToDateTime(dataRowArray[0]["Ngay_Bd"]);
         _Ngay_KT = Convert.ToDateTime(dataRowArray[0]["Ngay_KT"]);
       }
       int integer = Convert.ToInt32(CbbMa_BN.SelectedValue);
-      new frmCWPlan().ShowForm(_Mode, _Stt_Rec, _Ma_Khoang, _Ngay_BD, _Ngay_KT, integer);
+      new frmCWPlan().ShowForm(_Mode, _Stt_Rec, _id_khoang, _Ma_Khoang, _Ngay_BD, _Ngay_KT, integer);
 
       //V_LoadDatabases("0", dataTable.Rows[0]["Stt_Rec"].ToString().Trim());
     }
@@ -2277,6 +2295,9 @@ namespace TMV.UI.JPCB.CW
       SchedulerStorage.Resources.DataSource = _Dv_DataSource;
       SchedulerStorage.Resources.Mappings.Id = _Dv_DataSource.Table.Columns[_Id].ColumnName.ToString().Trim();
       SchedulerStorage.Resources.Mappings.Caption = _Dv_DataSource.Table.Columns[_Caption].ColumnName.ToString().Trim();
+
+      SchedulerStorage.Resources.CustomFieldMappings.Clear();
+      SchedulerStorage.Resources.CustomFieldMappings.Add(new ResourceCustomFieldMapping("Ma_Khoang", _Dv_DataSource.Table.Columns["Ma_Khoang"].ColumnName));
 
       if (_Dv_DataSource.Table.Columns.Contains("Color"))
         SchedulerStorage.Resources.Mappings.Color = _Dv_DataSource.Table.Columns["Color"].ColumnName.ToString().Trim();

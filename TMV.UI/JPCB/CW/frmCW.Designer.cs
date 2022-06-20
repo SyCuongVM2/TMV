@@ -33,6 +33,13 @@ namespace TMV.UI.JPCB.CW
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCW));
       DevExpress.XtraScheduler.TimeRuler timeRuler1 = new DevExpress.XtraScheduler.TimeRuler();
       DevExpress.XtraScheduler.TimeRuler timeRuler2 = new DevExpress.XtraScheduler.TimeRuler();
+      DevExpress.XtraScheduler.TimeScaleYear timeScaleYear1 = new DevExpress.XtraScheduler.TimeScaleYear();
+      DevExpress.XtraScheduler.TimeScaleQuarter timeScaleQuarter1 = new DevExpress.XtraScheduler.TimeScaleQuarter();
+      DevExpress.XtraScheduler.TimeScaleMonth timeScaleMonth1 = new DevExpress.XtraScheduler.TimeScaleMonth();
+      DevExpress.XtraScheduler.TimeScaleWeek timeScaleWeek1 = new DevExpress.XtraScheduler.TimeScaleWeek();
+      DevExpress.XtraScheduler.TimeScaleDay timeScaleDay1 = new DevExpress.XtraScheduler.TimeScaleDay();
+      DevExpress.XtraScheduler.TimeScaleHour timeScaleHour1 = new DevExpress.XtraScheduler.TimeScaleHour();
+      DevExpress.XtraScheduler.TimeScale15Minutes timeScale15Minutes1 = new DevExpress.XtraScheduler.TimeScale15Minutes();
       DevExpress.XtraScheduler.TimeRuler timeRuler3 = new DevExpress.XtraScheduler.TimeRuler();
       this.BarManagerCho_Rua = new DevExpress.XtraBars.BarManager(this.components);
       this.barWS = new DevExpress.XtraBars.Bar();
@@ -469,6 +476,13 @@ namespace TMV.UI.JPCB.CW
       this.SchedulerControl.Views.DayView.TimeRulers.Add(timeRuler1);
       this.SchedulerControl.Views.FullWeekView.Enabled = true;
       this.SchedulerControl.Views.FullWeekView.TimeRulers.Add(timeRuler2);
+      this.SchedulerControl.Views.GanttView.Scales.Add(timeScaleYear1);
+      this.SchedulerControl.Views.GanttView.Scales.Add(timeScaleQuarter1);
+      this.SchedulerControl.Views.GanttView.Scales.Add(timeScaleMonth1);
+      this.SchedulerControl.Views.GanttView.Scales.Add(timeScaleWeek1);
+      this.SchedulerControl.Views.GanttView.Scales.Add(timeScaleDay1);
+      this.SchedulerControl.Views.GanttView.Scales.Add(timeScaleHour1);
+      this.SchedulerControl.Views.GanttView.Scales.Add(timeScale15Minutes1);
       this.SchedulerControl.Views.WeekView.Enabled = false;
       this.SchedulerControl.Views.WorkWeekView.TimeRulers.Add(timeRuler3);
       this.SchedulerControl.Views.YearView.UseOptimizedScrolling = false;

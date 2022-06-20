@@ -1,7 +1,5 @@
 D:\WIP\TMV\TMV.BusinessObject\bin\Debug\TMV.BusinessObject.dll
 D:\WIP\TMV\TMV.BusinessObject\bin\Debug\TMV.BusinessObject.pdb
-D:\WIP\TMV\TMV.BusinessObject\bin\Debug\Microsoft.AspNetCore.Cryptography.Internal.dll
-D:\WIP\TMV\TMV.BusinessObject\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 D:\WIP\TMV\TMV.BusinessObject\bin\Debug\System.Buffers.dll
 D:\WIP\TMV\TMV.BusinessObject\bin\Debug\TMV.Common.dll
 D:\WIP\TMV\TMV.BusinessObject\bin\Debug\TMV.DataAccess.dll
@@ -28,8 +26,6 @@ D:\WIP\TMV\TMV.BusinessObject\bin\Debug\DevExpress.Office.v21.2.Core.dll
 D:\WIP\TMV\TMV.BusinessObject\bin\Debug\TMV.Common.pdb
 D:\WIP\TMV\TMV.BusinessObject\bin\Debug\TMV.DataAccess.pdb
 D:\WIP\TMV\TMV.BusinessObject\bin\Debug\TMV.ObjectInfo.pdb
-D:\WIP\TMV\TMV.BusinessObject\bin\Debug\Microsoft.AspNetCore.Cryptography.Internal.xml
-D:\WIP\TMV\TMV.BusinessObject\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.xml
 D:\WIP\TMV\TMV.BusinessObject\bin\Debug\DevExpress.XtraEditors.v21.2.xml
 D:\WIP\TMV\TMV.BusinessObject\bin\Debug\DevExpress.XtraGrid.v21.2.xml
 D:\WIP\TMV\TMV.BusinessObject\bin\Debug\DevExpress.Data.v21.2.xml

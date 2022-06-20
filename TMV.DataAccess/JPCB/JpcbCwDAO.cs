@@ -91,5 +91,58 @@ namespace TMV.DataAccess.JPCB
         }
       );
     }
+    public DataSet GetCWWorkshops(int tenantId, string type)
+    {
+      return SqlDataAccess.ExecuteDataset(
+        SqlConnect.ConnectionString,
+        Constants.Instance().AppJpcbPkgGetWorkshops,
+        new object[] {
+          Globals.DB_GetNull(tenantId),
+          Globals.DB_GetNull(type) // CW, GJ, BP
+        }
+      );
+    }
+    public DataSet GetCWDetail(int tenantId, decimal Id)
+    {
+      return SqlDataAccess.ExecuteDataset(
+        SqlConnect.ConnectionString,
+        Constants.Instance().AppJpcbPkgGetCWDetail,
+        new object[] {
+          Globals.DB_GetNull(tenantId),
+          Globals.DB_GetNull(Id)
+        }
+      );
+    }
+    public DataSet CalcWorkingTime(int tenantId, DateTime fromTime, DateTime toTime)
+    {
+      return SqlDataAccess.ExecuteDataset(
+        SqlConnect.ConnectionString,
+        Constants.Instance().AppJpcbPkgCalcWorkingTime,
+        new object[] {
+          Globals.DB_GetNull(tenantId),
+          Globals.DB_GetNull(fromTime),
+          Globals.DB_GetNull(toTime)
+        }
+      );
+    }
+    public DataSet AddOrUpdateCW(decimal userId, int tenantId, string type, string registerNo, int workshopId, 
+                                 DateTime planFromTime, DateTime planToTime, int planCalcTime, decimal Id)
+    {
+      return SqlDataAccess.ExecuteDataset(
+        SqlConnect.ConnectionString,
+        Constants.Instance().AppJpcbPkgAddOrUpdateCW,
+        new object[] {
+          Globals.DB_GetNull(userId),
+          Globals.DB_GetNull(tenantId),
+          Globals.DB_GetNull(type), // N: New, U: Update
+          Globals.DB_GetNull(registerNo),
+          Globals.DB_GetNull(workshopId),
+          Globals.DB_GetNull(planFromTime),
+          Globals.DB_GetNull(planToTime),
+          Globals.DB_GetNull(planCalcTime),
+          Globals.DB_GetNull(Id) // PlanId
+        }
+      );
+    }
   }
 }

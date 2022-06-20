@@ -34,6 +34,7 @@ BEGIN
 	declare @v_Ngay_KT datetime
 	declare @v_Giao_Xe_Full datetime 
 	declare @v_Giao_Xe varchar(5)
+	declare @v_Id_Khoang int
 	declare @v_Ma_Khoang nvarchar(150) 
 	declare @v_Khoang_Code nvarchar(150) 
 	declare @v_Parking_Loc nvarchar(150) 
@@ -68,102 +69,102 @@ BEGIN
 						(
 						   Stt int, Stt_Rec bigint, T_Type varchar(1), Ma_Xe nvarchar(100), So_RO nvarchar(100), Ma_Hs nvarchar(150), Ma_Hs_Id bigint,
 						   Ngay_BD datetime, Ngay_KT datetime,
-						   Giao_Xe_Full datetime, Giao_Xe varchar(5), Ma_Khoang nvarchar(150), Khoang_Code nvarchar(150), Parking_Loc nvarchar(150), 
+						   Giao_Xe_Full datetime, Giao_Xe varchar(5), Id_khoang int, Ma_Khoang nvarchar(150), Khoang_Code nvarchar(150), Parking_Loc nvarchar(150), 
 						   Backcolor nvarchar(150), Border int, Border_Color nvarchar(150), Size_Border int,
 						   A_Status int, Status_Desc nvarchar(200), Uu_Tien int, KH_Doi int, Flag int, A_Type int, Is_Completed int, DataTable varchar(50)
                         )
 	declare @v_Dt_Data_Xe table
 						(
-						   Stt int, Stt_Rec nvarchar(150), Ma_Khoang nvarchar(150), Ma_Xe nvarchar(100), So_RO nvarchar(100), Ma_Hs nvarchar(150), Ma_Hs_Id bigint, Giao_Xe varchar(5),
+						   Stt int, Stt_Rec nvarchar(150), Id_khoang int, Ma_Khoang nvarchar(150), Ma_Xe nvarchar(100), So_RO nvarchar(100), Ma_Hs nvarchar(150), Ma_Hs_Id bigint, Giao_Xe varchar(5),
 						   BackColorHead nvarchar(150), BackColor2Head nvarchar(150), Italic int, FontSize int, UnDerLine int, Flag int, DataTable varchar(50)
-                        )
+             )
 
 	declare cursor_data cursor for
 		select row_number() over (order by p.Id) Stt, p.Id Stt_Rec, 'P' T_Type,
-			   v.RegisterNo Ma_Xe, r.RepairOrderNo So_RO, u.[Name] Ma_Hs, u.Id Ma_Hs_Id,
-			   p.PlanFromTime Ngay_BD, p.PlanToTime Ngay_KT, 
-			   r.CarDeliveryDate Giao_Xe_Full, convert(varchar(5), r.CarDeliveryDate, 108) Giao_Xe,
-			   coalesce(ws.WorkshopName, ws.WorkshopCode, 'RX') Ma_Khoang, ws.WorkshopCode Khoang_Code, '' Parking_Loc,
-			   (case
-						when (datediff(m, getdate(), r.CarDeliveryDate) <= 0) then '255, 153, 255' -- pink
-						else '128, 255, 255'  -- YellowGreen
-				 end) Backcolor, 
-			   0 Border, '' Border_Color, 0 Size_Border, 
-			   0 A_Status, '' Status_Desc,
-			   p.IsPriority Uu_Tien, p.IsCustomerWait KH_Doi, 0 Flag, 0 A_Type, 0 Is_Completed
-		  from SrvPrgPlan p
-		  join SrvQuoRepairOrder r on r.Id = p.ROId
-		  join SrvQuoVehicle v on v.Id = p.VehicleId
-		  join MstSrvWorkshop ws on ws.Id = p.WorkshopId
-		  join AbpUsers u on u.Id = r.CreatorUserId
+					 v.RegisterNo Ma_Xe, r.RepairOrderNo So_RO, u.[Name] Ma_Hs, u.Id Ma_Hs_Id,
+					 p.PlanFromTime Ngay_BD, p.PlanToTime Ngay_KT, 
+					 r.CarDeliveryDate Giao_Xe_Full, convert(varchar(5), r.CarDeliveryDate, 108) Giao_Xe, p.WorkshopId Id_khoang, 
+					 coalesce(ws.WorkshopName, ws.WorkshopCode, 'RX') Ma_Khoang, ws.WorkshopCode Khoang_Code, '' Parking_Loc,
+					 (case
+							when (datediff(minute, getdate(), r.CarDeliveryDate) < 0) then '255, 153, 255' -- pink
+							else '128, 255, 255'  -- YellowGreen
+					 end) Backcolor, 
+					 0 Border, '' Border_Color, 0 Size_Border, 
+					 0 A_Status, '' Status_Desc,
+					 p.IsPriority Uu_Tien, p.IsCustomerWait KH_Doi, 0 Flag, 0 A_Type, 0 Is_Completed
+			from SrvPrgPlan p
+			join SrvQuoRepairOrder r on r.Id = p.ROId
+			join SrvQuoVehicle v on v.Id = p.VehicleId
+			join MstSrvWorkshop ws on ws.Id = p.WorkshopId
+			join AbpUsers u on u.Id = r.CreatorUserId
 		 where p.TenantId = @p_TenantId
-		   and p.ROType = @p_RO_Type
-		   and p.ActualId is null
-		   and 
-		    (case
-			    when @p_DayView_Type = '01' and (cast(p.PlanFromTime as date) = cast(@p_Date as date)) then 1
-				when @p_DayView_Type = '02' and 
-				    (
-					   p.PlanFromTime >= dateadd(hh, @v_WkAmFrom_H, dateadd(mi, @v_WkAmFrom_M, dateadd(ss, 00, DATEDIFF(dd, 0, @p_Date))))
+			 and p.ROType = @p_RO_Type
+			 and p.ActualId is null
+			 and 
+			 (case
+				 when @p_DayView_Type = '01' and (cast(p.PlanFromTime as date) = cast(@p_Date as date)) then 1
+				 when @p_DayView_Type = '02' and 
+						(
+							p.PlanFromTime >= dateadd(hh, @v_WkAmFrom_H, dateadd(mi, @v_WkAmFrom_M, dateadd(ss, 00, DATEDIFF(dd, 0, @p_Date))))
 					) and
 					(
-					   p.PlanFromTime <= dateadd(hh, @v_WkAmTo_H, dateadd(mi, @v_WkAmTo_M, dateadd(ss, 00, DATEDIFF(dd, 0, @p_Date))))
+							p.PlanFromTime <= dateadd(hh, @v_WkAmTo_H, dateadd(mi, @v_WkAmTo_M, dateadd(ss, 00, DATEDIFF(dd, 0, @p_Date))))
 					) then 1
-				when @p_DayView_Type = '03' and 
-				    (
-					   p.PlanFromTime >= dateadd(hh, @v_WkPmFrom_H, dateadd(mi, @v_WkPmFrom_M, dateadd(ss, 00, DATEDIFF(dd, 0, @p_Date))))
+				 when @p_DayView_Type = '03' and 
+						(
+							p.PlanFromTime >= dateadd(hh, @v_WkPmFrom_H, dateadd(mi, @v_WkPmFrom_M, dateadd(ss, 00, DATEDIFF(dd, 0, @p_Date))))
 					) and
 					(
-					   p.PlanFromTime <= dateadd(hh, @v_WkPmTo_H, dateadd(mi, @v_WkPmTo_M, dateadd(ss, 00, DATEDIFF(dd, 0, @p_Date))))
+							p.PlanFromTime <= dateadd(hh, @v_WkPmTo_H, dateadd(mi, @v_WkPmTo_M, dateadd(ss, 00, DATEDIFF(dd, 0, @p_Date))))
 					) then 1
-		     end = 1)
+				end = 1)
 	union
 	    select row_number() over (order by a.Id) Stt, a.Id Stt_Rec, 'A' T_Type,
-			   v.RegisterNo Ma_Xe, r.RepairOrderNo So_RO, u.[Name] Ma_Hs, u.Id Ma_Hs_Id,
-			   a.ActualFromTime Ngay_BD, coalesce(a.ActualToTime, dateadd(minute, @v_CW_Time, a.ActualFromTime)) Ngay_KT, 
-			   r.CarDeliveryDate Giao_Xe_Full, convert(varchar(5), r.CarDeliveryDate, 108) Giao_Xe,
-			   coalesce(ws.WorkshopName, ws.WorkshopCode, 'RX') Ma_Khoang, ws.WorkshopCode Khoang_Code, '' Parking_Loc,
-			   (case
-						when (datediff(m, getdate(), r.CarDeliveryDate) <= 0) then '255, 153, 255'  -- pink
-						when a.ActualToTime is null then '0, 128, 254'  -- Blue
-						else '255, 255, 255'  -- White
-				 end) Backcolor, 
-			   0 Border, '' Border_Color, 0 Size_Border,
-			   0 A_Status, '' Status_Desc, 
-			   a.IsPriority Uu_Tien, a.IsCustomerWait KH_Doi, 0 Flag, 0 A_Type, 
-			   (case 
-			     when (a.ActualState = 4 and a.ActualToTime is not null) then 1
-				   else 0
-			   end) Is_Completed
-		  from SrvPrgActual a
-		  join SrvQuoRepairOrder r on r.Id = a.ROId
-		  join SrvQuoVehicle v on v.Id = a.VehicleId
-		  join MstSrvWorkshop ws on ws.Id = a.WorkshopId
-		  join AbpUsers u on u.Id = r.CreatorUserId
-		 where a.TenantId = @p_TenantId
-		   and a.ROType = @p_RO_Type
-		   and 
-		     (case
-			    when @p_DayView_Type = '01' and (cast(a.ActualFromTime as date) = cast(@p_Date as date)) then 1
-				when @p_DayView_Type = '02' and 
-				    (
-					   a.ActualFromTime >= dateadd(hh, @v_WkAmFrom_H, dateadd(mi, @v_WkAmFrom_M, dateadd(ss, 00, DATEDIFF(dd, 0, @p_Date))))
-					) and
-					(
-					   a.ActualFromTime <= dateadd(hh, @v_WkAmTo_H, dateadd(mi, @v_WkAmTo_M, dateadd(ss, 00, DATEDIFF(dd, 0, @p_Date))))
-					) then 1
-				when @p_DayView_Type = '03' and 
-				    (
-					   a.ActualFromTime >= dateadd(hh, @v_WkPmFrom_H, dateadd(mi, @v_WkPmFrom_M, dateadd(ss, 00, DATEDIFF(dd, 0, @p_Date))))
-					) and
-					(
-					   a.ActualFromTime <= dateadd(hh, @v_WkPmTo_H, dateadd(mi, @v_WkPmTo_M, dateadd(ss, 00, DATEDIFF(dd, 0, @p_Date))))
-					) then 1
-		     end = 1)
+							v.RegisterNo Ma_Xe, r.RepairOrderNo So_RO, u.[Name] Ma_Hs, u.Id Ma_Hs_Id,
+							a.ActualFromTime Ngay_BD, coalesce(a.ActualToTime, dateadd(minute, @v_CW_Time, a.ActualFromTime)) Ngay_KT, 
+							r.CarDeliveryDate Giao_Xe_Full, convert(varchar(5), r.CarDeliveryDate, 108) Giao_Xe, a.WorkshopId Id_khoang,
+							coalesce(ws.WorkshopName, ws.WorkshopCode, 'RX') Ma_Khoang, ws.WorkshopCode Khoang_Code, '' Parking_Loc,
+							(case
+								when (datediff(minute, getdate(), r.CarDeliveryDate) < 0) then '255, 153, 255'  -- pink
+								when a.ActualToTime is null then '0, 128, 254'  -- Blue
+								else '255, 255, 255'  -- White
+							end) Backcolor, 
+							0 Border, '' Border_Color, 0 Size_Border,
+							0 A_Status, '' Status_Desc, 
+							a.IsPriority Uu_Tien, a.IsCustomerWait KH_Doi, 0 Flag, 0 A_Type, 
+							(case 
+								when (a.ActualState = 4 and a.ActualToTime is not null) then 1
+								else 0
+							end) Is_Completed
+				from SrvPrgActual a
+				join SrvQuoRepairOrder r on r.Id = a.ROId
+				join SrvQuoVehicle v on v.Id = a.VehicleId
+				join MstSrvWorkshop ws on ws.Id = a.WorkshopId
+				join AbpUsers u on u.Id = r.CreatorUserId
+				where a.TenantId = @p_TenantId
+					and a.ROType = @p_RO_Type
+					and 
+						(case
+							when @p_DayView_Type = '01' and (cast(a.ActualFromTime as date) = cast(@p_Date as date)) then 1
+							when @p_DayView_Type = '02' and 
+									(
+										a.ActualFromTime >= dateadd(hh, @v_WkAmFrom_H, dateadd(mi, @v_WkAmFrom_M, dateadd(ss, 00, DATEDIFF(dd, 0, @p_Date))))
+								) and
+								(
+										a.ActualFromTime <= dateadd(hh, @v_WkAmTo_H, dateadd(mi, @v_WkAmTo_M, dateadd(ss, 00, DATEDIFF(dd, 0, @p_Date))))
+								) then 1
+							when @p_DayView_Type = '03' and 
+									(
+										a.ActualFromTime >= dateadd(hh, @v_WkPmFrom_H, dateadd(mi, @v_WkPmFrom_M, dateadd(ss, 00, DATEDIFF(dd, 0, @p_Date))))
+								) and
+								(
+										a.ActualFromTime <= dateadd(hh, @v_WkPmTo_H, dateadd(mi, @v_WkPmTo_M, dateadd(ss, 00, DATEDIFF(dd, 0, @p_Date))))
+								) then 1
+						end = 1)
 
 	open cursor_data
 	fetch next from cursor_data into 
-		@v_Stt, @v_Stt_Rec, @v_T_Type, @v_Ma_Xe, @v_So_RO, @v_Ma_Hs, @v_Ma_Hs_Id, @v_Ngay_BD, @v_Ngay_KT, @v_Giao_Xe_Full, @v_Giao_Xe, @v_Ma_Khoang, @v_Khoang_Code,
+		@v_Stt, @v_Stt_Rec, @v_T_Type, @v_Ma_Xe, @v_So_RO, @v_Ma_Hs, @v_Ma_Hs_Id, @v_Ngay_BD, @v_Ngay_KT, @v_Giao_Xe_Full, @v_Giao_Xe, @v_Id_Khoang, @v_Ma_Khoang, @v_Khoang_Code,
 		@v_Parking_Loc, @v_Backcolor, @v_Border, @v_Border_Color, @v_Size_Border, @v_Status, @v_Status_Desc, @v_Uu_Tien, @v_KH_Doi, @v_Flag, @v_Type, @v_Is_Completed
 	while @@FETCH_STATUS = 0
 		begin
@@ -174,25 +175,25 @@ BEGIN
 					 where Ma_Xe = @v_Ma_Xe
 					if @v_Count = 0
 						begin
-							insert into @v_Dt_Data_Xe(Stt, Stt_Rec, Ma_Khoang, Ma_Xe, So_RO, Ma_Hs, Ma_Hs_Id, Giao_Xe,
+							insert into @v_Dt_Data_Xe(Stt, Stt_Rec, Id_khoang, Ma_Khoang, Ma_Xe, So_RO, Ma_Hs, Ma_Hs_Id, Giao_Xe,
 													  BackColorHead, BackColor2Head, Italic, FontSize, UnDerLine, Flag, DataTable)
-												values(@v_Stt, @v_Khoang_Code, @v_Khoang_Code, @v_Ma_Xe, @v_So_RO, @v_Ma_Hs, @v_Ma_Hs_Id, @v_Giao_Xe, 
+												values(@v_Stt, @v_Stt_Rec, @v_Id_Khoang, @v_Ma_Khoang, @v_Ma_Xe, @v_So_RO, @v_Ma_Hs, @v_Ma_Hs_Id, @v_Giao_Xe, 
 													  '', '', 0, 9, 0, 0, 'Dt_Data_Xe')
 						end 
 
 					insert into @v_Data_Table(
-							Stt, Stt_Rec, T_Type, Ma_Xe, So_RO, Ma_Hs, Ma_Hs_Id, Ngay_BD, Ngay_KT, Giao_Xe_Full, Giao_Xe, Ma_Khoang, Khoang_Code,
+							Stt, Stt_Rec, T_Type, Ma_Xe, So_RO, Ma_Hs, Ma_Hs_Id, Ngay_BD, Ngay_KT, Giao_Xe_Full, Giao_Xe, Id_khoang, Ma_Khoang, Khoang_Code,
 							Parking_Loc, Backcolor, Border, Border_Color, Size_Border, A_Status, Status_Desc, Uu_Tien, KH_Doi, Flag, A_Type, Is_Completed, DataTable)
-					values(@v_Stt, @v_Stt_Rec, @v_T_Type, @v_Ma_Xe, @v_So_RO, @v_Ma_Hs, @v_Ma_Hs_Id, @v_Ngay_BD, @v_Ngay_KT, @v_Giao_Xe_Full, @v_Giao_Xe, @v_Ma_Khoang, @v_Khoang_Code,
+					values(@v_Stt, @v_Stt_Rec, @v_T_Type, @v_Ma_Xe, @v_So_RO, @v_Ma_Hs, @v_Ma_Hs_Id, @v_Ngay_BD, @v_Ngay_KT, @v_Giao_Xe_Full, @v_Giao_Xe, @v_Id_Khoang, @v_Ma_Khoang, @v_Khoang_Code,
 							@v_Parking_Loc, @v_Backcolor, @v_Border, @v_Border_Color, @v_Size_Border, @v_Status, @v_Status_Desc, @v_Uu_Tien, @v_KH_Doi, @v_Flag, @v_Type, @v_Is_Completed, 'Dt_Data')
 				end
 
 			if (@v_T_Type = 'P')
 			  begin
 				insert into @v_Data_Table(
-						   Stt, Stt_Rec, T_Type, Ma_Xe, So_RO, Ma_Hs, Ma_Hs_Id, Ngay_BD, Ngay_KT, Giao_Xe_Full, Giao_Xe, Ma_Khoang, Khoang_Code,
+						   Stt, Stt_Rec, T_Type, Ma_Xe, So_RO, Ma_Hs, Ma_Hs_Id, Ngay_BD, Ngay_KT, Giao_Xe_Full, Giao_Xe, Id_khoang, Ma_Khoang, Khoang_Code,
 						   Parking_Loc, Backcolor, Border, Border_Color, Size_Border, A_Status, Status_Desc, Uu_Tien, KH_Doi, Flag, A_Type, Is_Completed, DataTable)
-					 values(@v_Stt, @v_Stt_Rec, @v_T_Type, @v_Ma_Xe, @v_So_RO, @v_Ma_Hs, @v_Ma_Hs_Id, @v_Ngay_BD, @v_Ngay_KT, @v_Giao_Xe_Full, @v_Giao_Xe, @v_Ma_Khoang, @v_Khoang_Code,
+					 values(@v_Stt, @v_Stt_Rec, @v_T_Type, @v_Ma_Xe, @v_So_RO, @v_Ma_Hs, @v_Ma_Hs_Id, @v_Ngay_BD, @v_Ngay_KT, @v_Giao_Xe_Full, @v_Giao_Xe, @v_Id_Khoang, @v_Ma_Khoang, @v_Khoang_Code,
 					        @v_Parking_Loc, @v_Backcolor, @v_Border, @v_Border_Color, @v_Size_Border, @v_Status, @v_Status_Desc, @v_Uu_Tien, @v_KH_Doi, @v_Flag, @v_Type, @v_Is_Completed, 'Dt_Cho_Rua')
 			  end
 			else if (@v_T_Type = 'A')
@@ -200,23 +201,23 @@ BEGIN
 			    if (@v_Is_Completed = 1)
 					begin
 						insert into @v_Data_Table(
-									   Stt, Stt_Rec, T_Type, Ma_Xe, So_RO, Ma_Hs, Ma_Hs_Id, Ngay_BD, Ngay_KT, Giao_Xe_Full, Giao_Xe, Ma_Khoang, Khoang_Code,
+									   Stt, Stt_Rec, T_Type, Ma_Xe, So_RO, Ma_Hs, Ma_Hs_Id, Ngay_BD, Ngay_KT, Giao_Xe_Full, Giao_Xe, Id_khoang, Ma_Khoang, Khoang_Code,
 									   Parking_Loc, Backcolor, Border, Border_Color, Size_Border, A_Status, Status_Desc, Uu_Tien, KH_Doi, Flag, A_Type, Is_Completed, DataTable)
-								 values(@v_Stt, @v_Stt_Rec, @v_T_Type, @v_Ma_Xe, @v_So_RO, @v_Ma_Hs, @v_Ma_Hs_Id, @v_Ngay_BD, @v_Ngay_KT, @v_Giao_Xe_Full, @v_Giao_Xe, @v_Ma_Khoang, @v_Khoang_Code, 
+								 values(@v_Stt, @v_Stt_Rec, @v_T_Type, @v_Ma_Xe, @v_So_RO, @v_Ma_Hs, @v_Ma_Hs_Id, @v_Ngay_BD, @v_Ngay_KT, @v_Giao_Xe_Full, @v_Giao_Xe, @v_Id_Khoang, @v_Ma_Khoang, @v_Khoang_Code, 
 										@v_Parking_Loc, @v_Backcolor, @v_Border, @v_Border_Color, @v_Size_Border, @v_Status, @v_Status_Desc, @v_Uu_Tien, @v_KH_Doi, @v_Flag, @v_Type, @v_Is_Completed, 'Dt_Rua_Xong')
 					end 
 				else 
 					begin
 						insert into @v_Data_Table(
-								   Stt, Stt_Rec, T_Type, Ma_Xe, So_RO, Ma_Hs, Ma_Hs_Id, Ngay_BD, Ngay_KT, Giao_Xe_Full, Giao_Xe, Ma_Khoang, Khoang_Code,
+								   Stt, Stt_Rec, T_Type, Ma_Xe, So_RO, Ma_Hs, Ma_Hs_Id, Ngay_BD, Ngay_KT, Giao_Xe_Full, Giao_Xe, Id_khoang, Ma_Khoang, Khoang_Code,
 								   Parking_Loc, Backcolor, Border, Border_Color, Size_Border, A_Status, Status_Desc, Uu_Tien, KH_Doi, Flag, A_Type, Is_Completed, DataTable)
-							 values(@v_Stt, @v_Stt_Rec, @v_T_Type, @v_Ma_Xe, @v_So_RO, @v_Ma_Hs, @v_Ma_Hs_Id, @v_Ngay_BD, @v_Ngay_KT, @v_Giao_Xe_Full, @v_Giao_Xe, @v_Ma_Khoang, @v_Khoang_Code,
+							 values(@v_Stt, @v_Stt_Rec, @v_T_Type, @v_Ma_Xe, @v_So_RO, @v_Ma_Hs, @v_Ma_Hs_Id, @v_Ngay_BD, @v_Ngay_KT, @v_Giao_Xe_Full, @v_Giao_Xe, @v_Id_Khoang, @v_Ma_Khoang, @v_Khoang_Code,
 									@v_Parking_Loc, @v_Backcolor, @v_Border, @v_Border_Color, @v_Size_Border, @v_Status, @v_Status_Desc, @v_Uu_Tien, @v_KH_Doi, @v_Flag, @v_Type, @v_Is_Completed, 'Dt_Dang_Rua')
 					end
 			  end
 
 			fetch next from cursor_data into
-				@v_Stt, @v_Stt_Rec, @v_T_Type, @v_Ma_Xe, @v_So_RO, @v_Ma_Hs, @v_Ma_Hs_Id, @v_Ngay_BD, @v_Ngay_KT, @v_Giao_Xe_Full, @v_Giao_Xe, @v_Ma_Khoang, @v_Khoang_Code,
+				@v_Stt, @v_Stt_Rec, @v_T_Type, @v_Ma_Xe, @v_So_RO, @v_Ma_Hs, @v_Ma_Hs_Id, @v_Ngay_BD, @v_Ngay_KT, @v_Giao_Xe_Full, @v_Giao_Xe, @v_Id_Khoang, @v_Ma_Khoang, @v_Khoang_Code,
 		        @v_Parking_Loc, @v_Backcolor, @v_Border, @v_Border_Color, @v_Size_Border, @v_Status, @v_Status_Desc, @v_Uu_Tien, @v_KH_Doi, @v_Flag, @v_Type, @v_Is_Completed
 		end
 	close cursor_data

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
+using TMV.BusinessObject.JPCB;
 using TMV.Common;
 using TMV.Common.Forms;
 using TMV.UI.JPCB.Common;
@@ -9,10 +10,17 @@ namespace TMV.UI.JPCB.CW
 {
   public partial class frmCWPlan : DevExpress.XtraEditors.XtraForm
   {
+    #region "variables"
     private CyberFuncs CyberFunc = new CyberFuncs();
+    private CalcTime calcTime = new CalcTime();
     private int M_Tg_SC = 5;
     private string M_Loai_SC = "1";
     private string M_Mode = "M";
+    private string M_Stt_rec = "";
+    private string M_ma_khoang = "";
+    private int M_id_khoang = 0;
+    private DateTime M_Ngay_BD;
+    private DateTime M_Ngay_KT;
     public DataTable Dt_Return;
     private DataTable Dt_Khoang;
 
@@ -20,148 +28,141 @@ namespace TMV.UI.JPCB.CW
     {
       InitializeComponent();
     }
+    #endregion
 
-    public bool ShowForm(string mode, string stt_rec, string _Ma_khoang, DateTime start, DateTime end, int BN)
+    public bool ShowForm(string mode, string stt_rec, int _id_khoang, string _Ma_khoang, DateTime start, DateTime end, int BN)
     {
-      frmProgress.Instance().Thread = new MethodInvoker(V_LoadData);
+      M_Mode = mode;
+      M_Tg_SC = BN;
+      M_Stt_rec = stt_rec;
+      M_ma_khoang = _Ma_khoang;
+      M_id_khoang = _id_khoang;
+      M_Ngay_BD = start;
+      M_Ngay_KT = end;
+
+      frmProgress.Instance().Thread = new MethodInvoker(InitForm);
       frmProgress.Instance().Show_Progress();
       return (ShowDialog() == DialogResult.OK);
     }
-    private void frmCWPlan_Load(object sender, EventArgs e)
+    private void InitForm()
     {
-      V_LoadData();
-      V_SetDefault();
+      if (M_Mode.Trim() == "M")
+      {
+        Text = "Tạo mới/New";
+        V_SetDefault();
+      }
+      else
+      {
+        Text = "Sửa KH/Edit";
+        V_LoadData();
+      }
       V_AddHandler();
-      Text = M_Mode.Trim() == "M" ? "Tạo mới/New" : "Sửa KH/Edit";
-      V_Dat_Them();
-      V_Chk_Dat_Them(new object(), new EventArgs());
     }
-
     private void V_LoadData()
     {
-      Dt_Khoang = new DataTable(); // TODO
-      CyberFunc.V_FillComBoxDefaul(CbbMa_khoang, Dt_Khoang, "Ma_khoang", "Ten_Khoang");
-      if (CyberFunc.V_GetvalueCombox(CbbMa_khoang).ToString().Trim() == "" & M_Mode == "M")
+      try
       {
-        try
+        DataSet ds = JpcbCwBO.Instance().GetCWDetail(Globals.LoginDlrId, Convert.ToDecimal(M_Stt_rec));
+        if (ds.Tables != null & ds.Tables.Count > 0)
         {
-          CbbMa_khoang.SelectedValue = (object)Dt_Khoang.Rows[0]["Ma_khoang"].ToString().Trim();
-        }
-        catch (Exception ex)
-        {
-          MessageBox.Show("V_LoadData: " + ex.Message);
+          DateTime? date_kt_ro;
+          DateTime? date_hen_kt_ro;
+          Dt_Khoang = ds.Tables[0];
+          Dt_Return = ds.Tables[1];
+          CyberFunc.V_FillComBoxDefaul(CbbMa_khoang, Dt_Khoang, "Id_khoang", "Ma_khoang");
+          CbbMa_khoang.SelectedValue = M_id_khoang;
+
+          ChkDat_them.Enabled = false;
+          ChkDat_them.Checked = false;
+
+          TxtMa_Xe.Text = Dt_Return.Rows[0]["Ma_Xe"].ToString().Trim();
+          TxtMa_Xe.Enabled = false;
+          TxtTG_SC.Value = M_Tg_SC;
+          TxtNgay_BD.EditValue = M_Ngay_BD;
+          TxtNgay_KT.EditValue = M_Ngay_KT;
+
+          TxtNgay_BD_RO.EditValue = Convert.ToDateTime(Dt_Return.Rows[0]["Ngay_BD_Ro"].ToString().Trim());
+          TxtNgay_BD_RO.Enabled = false;
+          if (Dt_Return.Rows[0]["Ngay_KT_Ro"].ToString() != "")
+            date_kt_ro = Convert.ToDateTime(Dt_Return.Rows[0]["Ngay_KT_Ro"].ToString().Trim());
+          else
+            date_kt_ro = null;
+          TxtNgay_KT_RO.EditValue = date_kt_ro;
+          TxtNgay_KT_RO.Enabled = false;
+          if (Dt_Return.Rows[0]["Ngay_henKT_Ro"].ToString() != "")
+            date_hen_kt_ro = Convert.ToDateTime(Dt_Return.Rows[0]["Ngay_henKT_Ro"].ToString().Trim());
+          else
+            date_hen_kt_ro = null;
+          TxtNgay_henKT_RO.EditValue = date_hen_kt_ro;
+          TxtNgay_henKT_RO.Enabled = false;
+
+          TxtSo_Ro.Text = Dt_Return.Rows[0]["So_RO"].ToString().Trim();
+          TxtSo_Ro.Enabled = false;
+          TxtLoai_SC.Text = M_Loai_SC;
         }
       }
-
-      if (TxtTG_SC.Value <= 0)
-        TxtTG_SC.Value = M_Tg_SC;
-
-      DateTime date = Convert.ToDateTime(TxtNgay_BD.EditValue);
-      if (TxtTG_SC.Value > 0)
-        TxtNgay_KT.EditValue = DateTime.Today; // TODO
+      catch (Exception ex)
+      {
+        MessageBox.Show("V_LoadData: " + ex.Message);
+      }
     }
     private void V_SetDefault()
     {
-      TxtNgay_BD_RO.Enabled = false;
-      TxtNgay_KT_RO.Enabled = false;
-      TxtNgay_henKT_RO.Enabled = false;
-      TxtSo_Ro.Enabled = (M_Mode.Trim() == "M");
-      TxtMa_Xe.Enabled = (M_Mode.Trim() == "M");
-      ChkDat_them.Enabled = (M_Mode.Trim() == "M");
-
-      if (M_Mode.Trim() == "M")
+      DataSet ds = JpcbCwBO.Instance().GetCWWorkshops(Globals.LoginDlrId, "CW");
+      if (ds.Tables != null)
       {
-        TxtMa_Xe.Focus();
-        TxtLoai_SC.Text = M_Loai_SC;
+        Dt_Khoang = ds.Tables[0];
+        CyberFunc.V_FillComBoxDefaul(CbbMa_khoang, Dt_Khoang, "Id_khoang", "Ma_khoang");
+        CbbMa_khoang.SelectedValue = M_id_khoang;
       }
-      else
-        TxtTG_SC.Focus();
 
-      TxtNgay_KT.Enabled = false;
+      ChkDat_them.Enabled = false;
+      ChkDat_them.Checked = true;
+
+      TxtMa_Xe.Focus();
+      TxtTG_SC.Value = M_Tg_SC;
+      TxtNgay_BD.EditValue = M_Ngay_BD;
+      var val = calcTime.CalcCloneRepairTime(Convert.ToInt32(TxtTG_SC.Value), M_Ngay_BD);
+      TxtNgay_KT.EditValue = val.EndPlanTime;
+
+      TxtNgay_BD_RO.Visible = false;
+      lblNgay_BD_RO.Visible = false;
+      TxtNgay_KT_RO.Visible = false;
+      lblNgay_KT_RO.Visible = false;
+      TxtNgay_henKT_RO.Visible = false;
+      lblNgay_henKT_RO.Visible = false;
+      TxtSo_Ro.Visible = false;
+      lblSo_RO.Visible = false;
+      TxtLoai_SC.Text = M_Loai_SC;
     }
     private void V_AddHandler()
     {
       TxtTG_SC.Leave += new EventHandler(V_TG_SC);
       TxtNgay_BD.Leave += new EventHandler(V_Ngay_BD);
       TxtNgay_KT.Leave += new EventHandler(V_Ngay_KT);
-      TxtSo_Ro.Leave += new EventHandler(L_So_Ro);
-      ChkDat_them.CheckedChanged += new EventHandler(V_Dat_Them);
-      ChkDat_them.CheckedChanged += new EventHandler(V_Chk_Dat_Them);
       btnSave.Click += new EventHandler(V_Nhan);
       btnClose.Click += new EventHandler(V_Close);
-    }
-    private void V_Dat_Them()
-    {
-      TxtSo_Ro.ReadOnly = ChkDat_them.Checked;
-      TxtMa_Xe.ReadOnly = !ChkDat_them.Checked;
-    }
-    private void V_GetInfor()
-    {
-      string text1 = TxtSo_Ro.Text;
-      string text2 = TxtMa_Xe.Text;
-      string str = ChkDat_them.Checked ? "1" : "0";
-      if (text1.Trim() == "" & text2.Trim() == "")
-        return;
-
-      DataSet dataSet = new DataSet(); // TODO
-      if (dataSet.Tables.Count == 0)
-        dataSet.Dispose();
-      else if (dataSet.Tables[0].Rows.Count == 0)
-        dataSet.Dispose();
-      else
-      {
-        if (dataSet.Tables[0].Columns.Contains("Ngay_BD_Ro"))
-          TxtNgay_BD_RO.EditValue = dataSet.Tables[0].Rows[0]["Ngay_Bd_RO"];
-        if (dataSet.Tables[0].Columns.Contains("Ngay_KT_Ro"))
-          TxtNgay_KT_RO.EditValue = dataSet.Tables[0].Rows[0]["Ngay_KT_RO"];
-        if (dataSet.Tables[0].Columns.Contains("Ngay_henKT_Ro"))
-          TxtNgay_henKT_RO.EditValue = dataSet.Tables[0].Rows[0]["Ngay_henKT_RO"];
-        if (dataSet.Tables[0].Columns.Contains("Ma_Xe"))
-          TxtMa_Xe.Text = dataSet.Tables[0].Rows[0]["Ma_Xe"].ToString().Trim();
-        if (dataSet.Tables[0].Columns.Contains("So_RO"))
-          TxtMa_Xe.Text = dataSet.Tables[0].Rows[0]["So_RO"].ToString().Trim();
-        if (dataSet.Tables[0].Columns.Contains("Ma_Ct"))
-          TxtMa_Xe.Text = dataSet.Tables[0].Rows[0]["Ma_Ct"].ToString().Trim();
-        if (dataSet.Tables[0].Columns.Contains("Stt_Rec"))
-          TxtMa_Xe.Text = dataSet.Tables[0].Rows[0]["Stt_Rec"].ToString().Trim();
-        if (!dataSet.Tables[0].Columns.Contains("Dat_Them"))
-          return;
-
-        ChkDat_them.Checked = dataSet.Tables[0].Rows[0]["Dat_Them"].ToString() == "1";
-      }
     }
 
     private void V_Ngay_BD(object sender, EventArgs e)
     {
       DateTime date1 = Convert.ToDateTime(TxtNgay_BD.EditValue);
       if (TxtTG_SC.Value > 0)
-        TxtNgay_KT.EditValue = DateTime.Now; // TODO
+      {
+        var val = calcTime.CalcCloneRepairTime(Convert.ToInt32(TxtTG_SC.Value), date1);
+        TxtNgay_KT.EditValue = val.EndPlanTime;
+      }
 
       DateTime date2 = Convert.ToDateTime(TxtNgay_KT.EditValue);
-      TxtTG_SC.Value = 0; // TODO
+      DataSet ds = JpcbCwBO.Instance().CalcWorkingTime(Globals.LoginDlrId, date1, date2);
+      if (ds.Tables != null & ds.Tables.Count > 0)
+        TxtTG_SC.Value = Convert.ToInt32(ds.Tables[0].Rows[0]["TG_SC"]);
     }
     private void V_Ngay_KT(object sender, EventArgs e)
     {
-      TxtTG_SC.Value = 0; // TODO
-    }
-    private void V_Chk_Dat_Them(object sender, EventArgs e)
-    {
-      LabSo_RO.Visible = !ChkDat_them.Checked;
-      TxtSo_Ro.Visible = !ChkDat_them.Checked;
-    }
-    private void L_So_Ro(object sender, EventArgs e)
-    {
-      M_Mode = M_Mode.Trim();
-      if (!(M_Mode == "M" | M_Mode == "S" || TxtSo_Ro.Text.Trim() == ""))
-        return;
-
-      TxtSo_Ro.Text = ""; // TODO
-      V_GetInfor();
-    }
-    private void V_Dat_Them(object sender, EventArgs e)
-    {
-      V_Dat_Them();
-      V_GetInfor();
+      DataSet ds = JpcbCwBO.Instance().CalcWorkingTime(Globals.LoginDlrId, Convert.ToDateTime(TxtNgay_BD.EditValue), Convert.ToDateTime(TxtNgay_KT.EditValue));
+      if (ds.Tables != null & ds.Tables.Count > 0)
+        TxtTG_SC.Value = Convert.ToInt32(ds.Tables[0].Rows[0]["TG_SC"]);
     }
     private void V_TG_SC(object sender, EventArgs e)
     {
@@ -172,11 +173,19 @@ namespace TMV.UI.JPCB.CW
       if (!(TxtTG_SC.Value == 5 | TxtTG_SC.Value == 10 | TxtTG_SC.Value == 15 | TxtTG_SC.Value == 20 | TxtTG_SC.Value == 25 | TxtTG_SC.Value == 30))
         TxtTG_SC.Value = 5;
 
-      TxtNgay_KT.EditValue = DateTime.Today; // TODO
+      var val = calcTime.CalcCloneRepairTime(Convert.ToInt32(TxtTG_SC.Value), date);
+      TxtNgay_KT.EditValue = val.EndPlanTime;
     }
     private void V_Nhan(object sender, EventArgs e)
     {
+      if (M_Mode.Trim() == "M")
+      {
+        TxtMa_Xe.Text = CyberFunc.V_FormatBien_So(TxtMa_Xe.Text, true);
+      }
+      else
+      {
 
+      }
     }
     private void V_Close(object sender, EventArgs e)
     {
