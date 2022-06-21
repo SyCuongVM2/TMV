@@ -98,5 +98,21 @@ namespace TMV.BusinessObject.JPCB
         Id
       );
     }
+    public DataSet DeleteCWPlan(int tenantId, decimal Id)
+    {
+      return JpcbCwDAO.Instance().DeleteCWPlan(
+        tenantId,
+        Id
+      );
+    }
+    public DataSet CWGoback(int tenantId, decimal userId, string type, decimal Id)
+    {
+      return JpcbCwDAO.Instance().CWGoback(
+        tenantId,
+        userId,
+        type,
+        Id
+      );
+    }
   }
 }

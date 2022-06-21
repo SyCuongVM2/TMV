@@ -470,7 +470,7 @@ namespace TMV.UI.JPCB.CW
       this.SchedulerControl.OptionsView.ResourceHeaders.RotateCaption = false;
       this.SchedulerControl.OptionsView.ToolTipVisibility = DevExpress.XtraScheduler.ToolTipVisibility.Always;
       this.SchedulerControl.Size = new System.Drawing.Size(674, 628);
-      this.SchedulerControl.Start = new System.DateTime(2022, 5, 17, 0, 0, 0, 0);
+      this.SchedulerControl.Start = new System.DateTime(2020, 12, 27, 0, 0, 0, 0);
       this.SchedulerControl.TabIndex = 0;
       this.SchedulerControl.Text = "schedulerControl1";
       this.SchedulerControl.Views.DayView.TimeRulers.Add(timeRuler1);
@@ -489,7 +489,17 @@ namespace TMV.UI.JPCB.CW
       // 
       // SchedulerStorage
       // 
-      this.SchedulerStorage.AppointmentDependencies.AutoReload = false;
+      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.LightGray, "Chờ sửa chữa", "&Chờ sửa chữa");
+      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.GreenYellow, "Đang sửa chữa", "&Đang sửa chữa");
+      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.Red, "Dừng", "&Dừng");
+      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.MediumPurple, "Đặt chỗ", "Đặt chỗ");
+      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.Yellow, "Đặt hẹn", "Đặt hẹn");
+      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.FromArgb(244, 206, 147), "Must Attend", "Must &Attend");
+      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.FromArgb(199, 244, (int)byte.MaxValue), "Travel Required", "&Travel Required");
+      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.FromArgb(207, 219, 152), "Needs Preparation", "&Needs Preparation");
+      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.FromArgb(224, 207, 233), "Birthday", "&Birthday");
+      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.FromArgb(141, 233, 223), "Anniversary", "&Anniversary");
+      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.FromArgb((int)byte.MaxValue, 247, 165), "Phone Call", "Phone &Call");
       // 
       // LabPlan
       // 

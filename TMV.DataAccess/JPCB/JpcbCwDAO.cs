@@ -144,5 +144,29 @@ namespace TMV.DataAccess.JPCB
         }
       );
     }
+    public DataSet DeleteCWPlan(int tenantId, decimal Id)
+    {
+      return SqlDataAccess.ExecuteDataset(
+        SqlConnect.ConnectionString,
+        Constants.Instance().AppJpcbPkgDeleteCWPlan,
+        new object[] {
+          Globals.DB_GetNull(tenantId),
+          Globals.DB_GetNull(Id)
+        }
+      );
+    }
+    public DataSet CWGoback(int tenantId, decimal userId, string type, decimal Id)
+    {
+      return SqlDataAccess.ExecuteDataset(
+        SqlConnect.ConnectionString,
+        Constants.Instance().AppJpcbPkgCWGoback,
+        new object[] {
+          Globals.DB_GetNull(tenantId),
+          Globals.DB_GetNull(userId),
+          Globals.DB_GetNull(type),
+          Globals.DB_GetNull(Id)
+        }
+      );
+    }
   }
 }

@@ -445,6 +445,7 @@ namespace TMV.UI.JPCB.CW
       // Add custom fields to appointment
       SchedulerStorage.Appointments.CustomFieldMappings.Clear();
       SchedulerStorage.Appointments.CustomFieldMappings.Add(new AppointmentCustomFieldMapping("T_Type", Dt_Data.Columns["T_Type"].ColumnName));
+      SchedulerStorage.Appointments.CustomFieldMappings.Add(new AppointmentCustomFieldMapping("Is_Completed", Dt_Data.Columns["Is_Completed"].ColumnName));
 
       SchedulerControl.GanttView.Appearance.Appointment.ForeColor = Color.White;
       SchedulerControl.GanttView.Appearance.Appointment.Font = new Font(SchedulerControl.DayView.Appearance.Appointment.Font.FontFamily, 8f);
@@ -1103,21 +1104,29 @@ namespace TMV.UI.JPCB.CW
         PopupMenuSchedulerControl.ItemLinks.Add(
           new CyberMenuPopup(sender, 0, "Xóa KH",
           new EventHandler(V_Xoa_KH_Scheduler), Shortcut.F8, ImageResourceCache.Default.GetImage("images/data/deletedatasource_16x16.png"), true), false);
+
+        PopupMenuSchedulerControl.ItemLinks.Add(
+          new CyberMenuPopup(sender, 0, "Xem lệnh",
+          new EventHandler(V_Preview_RX), Shortcut.F7, ImageResourceCache.Default.GetImage("images/print/preview_16x16.png"), true), true);
       }
       else if (type == "A")
       {
         PopupMenuSchedulerControl.ItemLinks.Add(
           new CyberMenuPopup(sender, 0, "Kết thúc rửa xe",
           new EventHandler(V_BD_KT), Shortcut.F10, ImageResourceCache.Default.GetImage("images/scheduling/time_16x16.png"), true), false);
+
+        PopupMenuSchedulerControl.ItemLinks.Add(
+          new CyberMenuPopup(sender, 0, "Quay lại",
+          new EventHandler(V_Go_Back), Shortcut.F9, ImageResourceCache.Default.GetImage("images/actions/reset_16x16.png"), true), false);
+
+        PopupMenuSchedulerControl.ItemLinks.Add(
+          new CyberMenuPopup(sender, 0, "Xem lệnh",
+          new EventHandler(V_Preview_RX), Shortcut.F7, ImageResourceCache.Default.GetImage("images/print/preview_16x16.png"), true), true);
       }
       
       PopupMenuSchedulerControl.ItemLinks.Add(
         new CyberMenuPopup(sender, 0, "Tạo KH rửa", 
         new EventHandler(V_Tao_KH_Scheduler), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), true);
-      
-      PopupMenuSchedulerControl.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Xem lệnh", 
-        new EventHandler(V_Preview_RX), Shortcut.F7, ImageResourceCache.Default.GetImage("images/print/preview_16x16.png"), true), true);
 
       PopupMenuSchedulerControl.ItemLinks.Add(
         new CyberMenuPopup(sender, 0, "Làm tươi dữ liệu", 
@@ -1145,7 +1154,7 @@ namespace TMV.UI.JPCB.CW
       PopupMenuCho_Rua.ItemLinks.Clear();
 
       PopupMenuCho_Rua.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Bắt đầu/Kết thúc rửa xe", 
+        new CyberMenuPopup(sender, 0, "Bắt đầu rửa xe", 
         new EventHandler(V_BD_KT_Cho_Rua), Shortcut.F10, ImageResourceCache.Default.GetImage("images/scheduling/time_16x16.png"), true), false);
       PopupMenuCho_Rua.ItemLinks.Add(
         new CyberMenuPopup(sender, 0, "Tạo KH rửa", 
@@ -1179,8 +1188,11 @@ namespace TMV.UI.JPCB.CW
       PopupMenuDang_Rua.ItemLinks.Clear();
 
       PopupMenuDang_Rua.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Bắt đầu/Kết thúc rửa xe", 
+        new CyberMenuPopup(sender, 0, "Kết thúc rửa xe", 
         new EventHandler(V_BD_KT_Dang_Rua), Shortcut.F10, ImageResourceCache.Default.GetImage("images/scheduling/time_16x16.png"), true), false);
+      PopupMenuDang_Rua.ItemLinks.Add(
+          new CyberMenuPopup(sender, 0, "Quay lại",
+          new EventHandler(V_Go_Back_DR), Shortcut.F9, ImageResourceCache.Default.GetImage("images/actions/reset_16x16.png"), true), false);
       PopupMenuDang_Rua.ItemLinks.Add(
         new CyberMenuPopup(sender, 0, "Xem lệnh", 
         new EventHandler(V_Preview_Dang_Rua), Shortcut.F7, ImageResourceCache.Default.GetImage("images/print/preview_16x16.png"), true), true);
@@ -1203,6 +1215,9 @@ namespace TMV.UI.JPCB.CW
       int rowHandle = e != null ? e.HitInfo.RowHandle : -1;
       PopupMenuRua_Xong.ItemLinks.Clear();
 
+      PopupMenuRua_Xong.ItemLinks.Add(
+          new CyberMenuPopup(sender, 0, "Quay lại",
+          new EventHandler(V_Go_Back_RX), Shortcut.F9, ImageResourceCache.Default.GetImage("images/actions/reset_16x16.png"), true), false);
       PopupMenuRua_Xong.ItemLinks.Add(
         new CyberMenuPopup(sender, 0, "Đặt vị trí xe", 
         new EventHandler(V_Vi_Tri_Xe), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
@@ -1433,6 +1448,36 @@ namespace TMV.UI.JPCB.CW
     #endregion
 
     #region "V_PopupMenu_RX"
+    private void V_Go_Back(object sender, EventArgs e)
+    {
+      string _Stt_Rec = "";
+      string _T_Type = "";
+      string _Is_Completed = "";
+      if (SchedulerControl.SelectedAppointments.Count > 0)
+      {
+        try
+        {
+          _Stt_Rec = SchedulerControl.SelectedAppointments[0].Id.ToString();
+          _T_Type = SchedulerControl.SelectedAppointments[0].CustomFields["T_Type"].ToString();
+          _Is_Completed = SchedulerControl.SelectedAppointments[0].CustomFields["Is_Completed"].ToString();
+        }
+        catch (Exception ex)
+        {
+          MessageBox.Show("V_Go_Back: " + ex.Message);
+        }
+      }
+      if (_Stt_Rec.Trim() == "" || _T_Type.ToString().Trim() != "A" || !FormGlobals.Message_Confirm("Bạn có chắc chắn muốn quay lại không?", false))
+        return;
+
+      DataSet ds = JpcbCwBO.Instance().CWGoback(Globals.LoginDlrId, Globals.LoginUserID, _Is_Completed == "0" ? "AP" : "FS", Convert.ToDecimal(_Stt_Rec));
+      if (ds.Tables != null && ds.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS")
+      {
+        V_LoadDatabases("0", _Stt_Rec);
+        ds.Dispose();
+      }
+      else
+        ds.Dispose();
+    }
     private void V_BD_KT(object sender, EventArgs e)
     {
       string _Stt_Rec = "";
@@ -1468,7 +1513,7 @@ namespace TMV.UI.JPCB.CW
 
       int integer = Convert.ToInt32(CbbMa_BN.SelectedValue);
       new frmCWPlan().ShowForm(_Mode, _Stt_Rec, _id_khoang, _Ma_khoang, start, end, integer);
-      // V_LoadDatabases("0", "Stt_Rec");
+      V_LoadDatabases("0", "Stt_Rec");
     }
     private void V_Sua_KH_Scheduler(object sender, EventArgs e)
     {
@@ -1504,28 +1549,29 @@ namespace TMV.UI.JPCB.CW
       }
       int integer = Convert.ToInt32(CbbMa_BN.SelectedValue);
       new frmCWPlan().ShowForm(_Mode, _Stt_Rec, _id_khoang, _Ma_Khoang, _Ngay_BD, _Ngay_KT, integer);
-      //V_LoadDatabases("0", "Stt_Rec");
+      V_LoadDatabases("0", "Stt_Rec");
     }
     private void V_Xoa_KH_Scheduler(object sender, EventArgs e)
     {
       string _Stt_Rec = "";
+      string _T_Type = "";
       if (SchedulerControl.SelectedAppointments.Count > 0)
       {
         try
         {
           _Stt_Rec = SchedulerControl.SelectedAppointments[0].Id.ToString();
+          _T_Type = SchedulerControl.SelectedAppointments[0].CustomFields["T_Type"].ToString();
         }
         catch (Exception ex)
         {
           MessageBox.Show("V_Xoa_KH_Scheduler: " + ex.Message);
         }
       }
-      if (_Stt_Rec.Trim() == "" || !FormGlobals.Message_Confirm("Bạn có chắc chắn xóa không?", false))
+      if (_Stt_Rec.Trim() == "" || _T_Type.ToString().Trim() != "P" || !FormGlobals.Message_Confirm("Bạn có chắc chắn xóa không?", false))
         return;
 
-      DataSet ds = CP_RO_CW_Execute.CreateData(); // CP_RO_CW_Delete
-      bool flag = (ds.Tables != null && ds.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS");
-      if (flag)
+      DataSet ds = JpcbCwBO.Instance().DeleteCWPlan(Globals.LoginDlrId, Convert.ToDecimal(_Stt_Rec)); // CP_RO_CW_Delete
+      if (ds.Tables != null && ds.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS")
       {
         V_LoadDatabases("0", _Stt_Rec);
         ds.Dispose();
@@ -1699,6 +1745,30 @@ namespace TMV.UI.JPCB.CW
     #endregion
 
     #region "MasterDang_Rua_KHGRV_PopupMenuShowing"
+    private void V_Go_Back_DR(object sender, EventArgs e)
+    {
+      if (!Dt_Dang_Rua.Columns.Contains("Stt_Rec"))
+        return;
+
+      int dataSourceRowIndex = MasterDang_RuaGRV.GetFocusedDataSourceRowIndex();
+      if (dataSourceRowIndex < 0)
+        return;
+
+      string _Stt_Rec = Convert.ToString(Dv_Dang_Rua[dataSourceRowIndex]["Stt_Rec"]);
+      string _T_Type = Convert.ToString(Dv_Dang_Rua[dataSourceRowIndex]["T_Type"]);
+      string _Is_Completed = Convert.ToString(Dv_Dang_Rua[dataSourceRowIndex]["Is_Completed"]);
+      if (_Stt_Rec.Trim() == "" || _T_Type.ToString().Trim() != "A" || !FormGlobals.Message_Confirm("Bạn có chắc chắn muốn quay lại không?", false))
+        return;
+
+      DataSet ds = JpcbCwBO.Instance().CWGoback(Globals.LoginDlrId, Globals.LoginUserID, _Is_Completed == "0" ? "AP" : "FS", Convert.ToDecimal(_Stt_Rec));
+      if (ds.Tables != null && ds.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS")
+      {
+        V_LoadDatabases("0", _Stt_Rec);
+        ds.Dispose();
+      }
+      else
+        ds.Dispose();
+    }
     private void V_BD_KT_Dang_Rua(object sender, EventArgs e)
     {
       if (!Dt_Dang_Rua.Columns.Contains("Stt_Rec"))
@@ -1721,6 +1791,30 @@ namespace TMV.UI.JPCB.CW
     #endregion
 
     #region "MasterRua_Xong_PopupMenuShowing"
+    private void V_Go_Back_RX(object sender, EventArgs e)
+    {
+      if (!Dt_Rua_Xong.Columns.Contains("Stt_Rec"))
+        return;
+
+      int dataSourceRowIndex = MasterRua_XongGRV.GetFocusedDataSourceRowIndex();
+      if (dataSourceRowIndex < 0)
+        return;
+
+      string _Stt_Rec = Convert.ToString(Dv_Rua_Xong[dataSourceRowIndex]["Stt_Rec"]);
+      string _T_Type = Convert.ToString(Dv_Rua_Xong[dataSourceRowIndex]["T_Type"]);
+      string _Is_Completed = Convert.ToString(Dv_Rua_Xong[dataSourceRowIndex]["Is_Completed"]);
+      if (_Stt_Rec.Trim() == "" || _T_Type.ToString().Trim() != "A" || !FormGlobals.Message_Confirm("Bạn có chắc chắn muốn quay lại không?", false))
+        return;
+
+      DataSet ds = JpcbCwBO.Instance().CWGoback(Globals.LoginDlrId, Globals.LoginUserID, _Is_Completed == "0" ? "AP" : "FS", Convert.ToDecimal(_Stt_Rec));
+      if (ds.Tables != null && ds.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS")
+      {
+        V_LoadDatabases("0", _Stt_Rec);
+        ds.Dispose();
+      }
+      else
+        ds.Dispose();
+    }
     private void V_Vi_Tri_Xe(object sender, EventArgs e)
     {
       // TODO
@@ -2296,6 +2390,7 @@ namespace TMV.UI.JPCB.CW
       SchedulerStorage.Resources.Mappings.Id = _Dv_DataSource.Table.Columns[_Id].ColumnName.ToString().Trim();
       SchedulerStorage.Resources.Mappings.Caption = _Dv_DataSource.Table.Columns[_Caption].ColumnName.ToString().Trim();
 
+      // add cutom resource fields
       SchedulerStorage.Resources.CustomFieldMappings.Clear();
       SchedulerStorage.Resources.CustomFieldMappings.Add(new ResourceCustomFieldMapping("Ma_Khoang", _Dv_DataSource.Table.Columns["Ma_Khoang"].ColumnName));
 

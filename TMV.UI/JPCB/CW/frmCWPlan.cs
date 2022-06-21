@@ -169,9 +169,9 @@ namespace TMV.UI.JPCB.CW
       DateTime date = Convert.ToDateTime(TxtNgay_BD.EditValue);
 
       if (TxtTG_SC.Value <= 0)
-        TxtTG_SC.Value = 5;
-      if (!(TxtTG_SC.Value == 5 | TxtTG_SC.Value == 10 | TxtTG_SC.Value == 15 | TxtTG_SC.Value == 20 | TxtTG_SC.Value == 25 | TxtTG_SC.Value == 30))
-        TxtTG_SC.Value = 5;
+        TxtTG_SC.Value = 8;
+      if (!(TxtTG_SC.Value == 8 | TxtTG_SC.Value == 10 | TxtTG_SC.Value == 15 | TxtTG_SC.Value == 20 | TxtTG_SC.Value == 25 | TxtTG_SC.Value == 30))
+        TxtTG_SC.Value = 8;
 
       var val = calcTime.CalcCloneRepairTime(Convert.ToInt32(TxtTG_SC.Value), date);
       TxtNgay_KT.EditValue = val.EndPlanTime;
@@ -181,10 +181,40 @@ namespace TMV.UI.JPCB.CW
       if (M_Mode.Trim() == "M")
       {
         TxtMa_Xe.Text = CyberFunc.V_FormatBien_So(TxtMa_Xe.Text, true);
+        if (TxtMa_Xe.Text.Trim() != "")
+        {
+          FormGlobals.Message_Warning_Error("Please input valid Register No!");
+          return;
+        }
+        if (Convert.ToDateTime(TxtNgay_BD.EditValue) <= Convert.ToDateTime(TxtNgay_KT.EditValue))
+        {
+          FormGlobals.Message_Warning_Error("From Time cannot <= To Time!");
+          return;
+        }
+
+        DataSet ds = JpcbCwBO.Instance().AddOrUpdateCW(Globals.LoginUserID, Globals.LoginDlrId, "N",
+                                                       CyberFunc.V_FormatBien_So(TxtMa_Xe.Text, true),
+                                                       M_id_khoang,
+                                                       Convert.ToDateTime(TxtNgay_BD.EditValue),
+                                                       Convert.ToDateTime(TxtNgay_KT.EditValue),
+                                                       Convert.ToInt32(TxtTG_SC.Value),
+                                                       0
+        );
+        if (ds.Tables != null && ds.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS")
+          Close();
       }
       else
       {
-
+        DataSet ds = JpcbCwBO.Instance().AddOrUpdateCW(Globals.LoginUserID, Globals.LoginDlrId, "U",
+                                                       CyberFunc.V_FormatBien_So(TxtMa_Xe.Text, true),
+                                                       M_id_khoang,
+                                                       Convert.ToDateTime(TxtNgay_BD.EditValue),
+                                                       Convert.ToDateTime(TxtNgay_KT.EditValue),
+                                                       Convert.ToInt32(TxtTG_SC.Value),
+                                                       Convert.ToDecimal(M_Stt_rec)
+        );
+        if (ds.Tables != null && ds.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS")
+          Close();
       }
     }
     private void V_Close(object sender, EventArgs e)
