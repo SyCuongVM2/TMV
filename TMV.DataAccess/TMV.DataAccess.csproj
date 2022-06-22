@@ -74,6 +74,8 @@
     <Content Include="SP\AppAuthPkgUpdateFailedLogin.sql" />
     <Content Include="SP\AppAuthPkgUserChangePassword.sql" />
     <Content Include="SP\CW\AppJpcbPkgAddOrUpdateCW.sql" />
+    <Content Include="SP\CW\AppJpcbPkgCWGoback.sql" />
+    <Content Include="SP\CW\AppJpcbPkgDeleteCWPlan.sql" />
     <Content Include="SP\CW\AppJpcbPkgGetConfigs.sql" />
     <Content Include="SP\CW\AppJpcbPkgGetConfigsDefault.sql" />
     <Content Include="SP\CW\AppJpcbPkgGetCWData.sql" />

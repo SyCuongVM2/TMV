@@ -14,7 +14,6 @@ namespace TMV.UI.JPCB.Common
       start = spanStart;
       end = spanEnd;
     }
-
     public override DateTime Floor(DateTime date)
     {
       if (date.TimeOfDay < start)
@@ -35,7 +34,6 @@ namespace TMV.UI.JPCB.Common
 
       return result;
     }
-
     public override DateTime GetNextDate(DateTime date)
     {
       if (date.TimeOfDay == start)
@@ -50,7 +48,6 @@ namespace TMV.UI.JPCB.Common
 
       return result;
     }
-
     public override string FormatCaption(DateTime start, DateTime end)
     {
       if (base.Value == TimeSpan.FromDays(1)) 

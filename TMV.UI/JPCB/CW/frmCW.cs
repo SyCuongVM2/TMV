@@ -144,12 +144,12 @@ namespace TMV.UI.JPCB.CW
     }
     private void V_SetTree()
     {
-      resourcesTree1.VertScrollVisibility = ScrollVisibility.Never;
-      resourcesTree1.OptionsView.ShowIndicator = false;
-      resourcesTree1.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.RowFocus;
-      resourcesTree1.TreeLineStyle = LineStyle.None;
-      resourcesTree1.OptionsView.ShowHorzLines = false;
-      resourcesTree1.Visible = false;
+      ResourcesTree1.VertScrollVisibility = ScrollVisibility.Never;
+      ResourcesTree1.OptionsView.ShowIndicator = false;
+      ResourcesTree1.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.RowFocus;
+      ResourcesTree1.TreeLineStyle = LineStyle.None;
+      ResourcesTree1.OptionsView.ShowHorzLines = false;
+      ResourcesTree1.Visible = false;
     }
     private void V_SetRowHeight_KH()
     {
@@ -336,55 +336,98 @@ namespace TMV.UI.JPCB.CW
     }
     private void V_AddHander()
     {
+      EditMa_Xe_Cho.EditColumn.Click -= new EventHandler(V_Ma_Xe_Cho);
       EditMa_Xe_Cho.EditColumn.Click += new EventHandler(V_Ma_Xe_Cho);
+      EditMa_Xe_Dang_Rua.EditColumn.Click -= new EventHandler(V_Ma_Xe_Dang_Rua);
       EditMa_Xe_Dang_Rua.EditColumn.Click += new EventHandler(V_Ma_Xe_Dang_Rua);
+      EditMa_Xe_Rua_Xong.EditColumn.Click -= new EventHandler(V_Ma_Xe_Rua_Xong);
       EditMa_Xe_Rua_Xong.EditColumn.Click += new EventHandler(V_Ma_Xe_Rua_Xong);
 
+      MasterCho_RuaGRV.PopupMenuShowing -= new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(MasterCho_RuaGRV_PopupMenuShowing);
       MasterCho_RuaGRV.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(MasterCho_RuaGRV_PopupMenuShowing);
+      MasterCho_RuaGRV.RowCellStyle -= new RowCellStyleEventHandler(MasterCho_RuaGRV_RowCellStyle);
       MasterCho_RuaGRV.RowCellStyle += new RowCellStyleEventHandler(MasterCho_RuaGRV_RowCellStyle);
 
+      MasterDang_RuaGRV.PopupMenuShowing -= new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(MasterDang_Rua_KHGRV_PopupMenuShowing);
       MasterDang_RuaGRV.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(MasterDang_Rua_KHGRV_PopupMenuShowing);
+      MasterDang_RuaGRV.RowCellStyle -= new RowCellStyleEventHandler(MasterDang_Rua_KHGRV_RowCellStyle);
       MasterDang_RuaGRV.RowCellStyle += new RowCellStyleEventHandler(MasterDang_Rua_KHGRV_RowCellStyle);
 
+      MasterRua_XongGRV.PopupMenuShowing -= new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(MasterRua_Xong_PopupMenuShowing);
       MasterRua_XongGRV.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(MasterRua_Xong_PopupMenuShowing);
+      MasterRua_XongGRV.RowCellStyle -= new RowCellStyleEventHandler(MasterRua_Xong_RowCellStyle);
       MasterRua_XongGRV.RowCellStyle += new RowCellStyleEventHandler(MasterRua_Xong_RowCellStyle);
 
+      SchedulerControl.PopupMenuShowing -= new DevExpress.XtraScheduler.PopupMenuShowingEventHandler(V_PopupMenu_RX);
       SchedulerControl.PopupMenuShowing += new DevExpress.XtraScheduler.PopupMenuShowingEventHandler(V_PopupMenu_RX);
+      SchedulerControl.EditAppointmentFormShowing -= new AppointmentFormEventHandler(V_Lap_F3F4_KH_RX);
       SchedulerControl.EditAppointmentFormShowing += new AppointmentFormEventHandler(V_Lap_F3F4_KH_RX);
+      SchedulerControl.CustomDrawTimeIndicator -= new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(SchedulerControl_CustomDrawTimeIndicator_RX);
       SchedulerControl.CustomDrawTimeIndicator += new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(SchedulerControl_CustomDrawTimeIndicator_RX);
+      SchedulerControl.CustomDrawAppointmentBackground -= new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(SchedulerControl_CustomDrawAppointmentBackground);
       SchedulerControl.CustomDrawAppointmentBackground += new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(SchedulerControl_CustomDrawAppointmentBackground);
+      SchedulerControl.AppointmentViewInfoCustomizing -= new AppointmentViewInfoCustomizingEventHandler(V_AppointmentViewInfoCustomizing);
       SchedulerControl.AppointmentViewInfoCustomizing += new AppointmentViewInfoCustomizingEventHandler(V_AppointmentViewInfoCustomizing);
+      SchedulerControl.CustomDrawDayHeader -= new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(SchedulerControl_CustomDrawDayHeader);
       SchedulerControl.CustomDrawDayHeader += new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(SchedulerControl_CustomDrawDayHeader);
-      SchedulerControl.CustomDrawResourceHeader += new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(this.Scheduler_CustomDrawResourceHeader);
+      SchedulerControl.CustomDrawResourceHeader -= new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(Scheduler_CustomDrawResourceHeader);
+      SchedulerControl.CustomDrawResourceHeader += new DevExpress.XtraScheduler.CustomDrawObjectEventHandler(Scheduler_CustomDrawResourceHeader);
+      SchedulerControl.DoubleClick -= new EventHandler(V_BD_KT);
       SchedulerControl.DoubleClick += new EventHandler(V_BD_KT);
+      SchedulerControl.AppointmentDrop -= new AppointmentDragEventHandler(SchedulerControl_KH_RX_AppointmentDrop);
       SchedulerControl.AppointmentDrop += new AppointmentDragEventHandler(SchedulerControl_KH_RX_AppointmentDrop);
+      SchedulerControl.AppointmentResized -= new AppointmentResizeEventHandler(SchedulerControl_KH_RX_AppointmentResized);
       SchedulerControl.AppointmentResized += new AppointmentResizeEventHandler(SchedulerControl_KH_RX_AppointmentResized);
+      SchedulerControl.InitAppointmentImages -= new AppointmentImagesEventHandler(SchedulerControl_InitAppointmentImages);
       SchedulerControl.InitAppointmentImages += new AppointmentImagesEventHandler(SchedulerControl_InitAppointmentImages);
 
+      ChkAuto_Data.CheckedChanged -= new EventHandler(V_Auto_Data_KH_RX);
       ChkAuto_Data.CheckedChanged += new EventHandler(V_Auto_Data_KH_RX);
+      CbbTime_Data.SelectedValueChanged -= new EventHandler(V_Auto_Data_KH_RX);
       CbbTime_Data.SelectedValueChanged += new EventHandler(V_Auto_Data_KH_RX);
+      Timer_Data.Tick -= new EventHandler(V_Timer_Data_KH_RX);
       Timer_Data.Tick += new EventHandler(V_Timer_Data_KH_RX);
+      CbbMa_BN.SelectedValueChanged -= new EventHandler(V_Buoc_Nhay_KH_RX);
       CbbMa_BN.SelectedValueChanged += new EventHandler(V_Buoc_Nhay_KH_RX);
+      CbbDo_Rong.SelectedValueChanged -= new EventHandler(V_Do_Rong_KH_RX);
       CbbDo_Rong.SelectedValueChanged += new EventHandler(V_Do_Rong_KH_RX);
+      CbbCa_Ngay.SelectedIndexChanged -= new EventHandler(V_Ca_Ngay);
       CbbCa_Ngay.SelectedIndexChanged += new EventHandler(V_Ca_Ngay);
+      CbbKieu_Xem.SelectedIndexChanged -= new EventHandler(V_Kieu_Xem_RX);
       CbbKieu_Xem.SelectedIndexChanged += new EventHandler(V_Kieu_Xem_RX);
+      CbbGio_Xem.SelectedIndexChanged -= new EventHandler(V_Gio_Xem_RX);
       CbbGio_Xem.SelectedIndexChanged += new EventHandler(V_Gio_Xem_RX);
+      CmdRefresh.Click -= new EventHandler(V_RefreshData_KH_RX);
       CmdRefresh.Click += new EventHandler(V_RefreshData_KH_RX);
+      TxtM_Ngay_Ct.TextChanged -= new EventHandler(V_Ngay_Ct_KH);
       TxtM_Ngay_Ct.TextChanged += new EventHandler(V_Ngay_Ct_KH);
+      CbbMa_HS.SelectedValueChanged -= new EventHandler(V_Filter_KH_RX);
       CbbMa_HS.SelectedValueChanged += new EventHandler(V_Filter_KH_RX);
+      TxtMa_Xe.TextChanged -= new EventHandler(V_Filter_KH_RX);
       TxtMa_Xe.TextChanged += new EventHandler(V_Filter_KH_RX);
+      TxtSo_RO.TextChanged -= new EventHandler(V_Filter_KH_RX);
       TxtSo_RO.TextChanged += new EventHandler(V_Filter_KH_RX);
 
-      resourcesTree1.CustomDrawNodeCell += new CustomDrawNodeCellEventHandler(ResourcesTree1_CustomDrawNodeCell);
-      resourcesTree1.DoubleClick += new EventHandler(ResourcesTree1_DoubleClick);
-      resourcesTree1.PopupMenuShowing += new DevExpress.XtraTreeList.PopupMenuShowingEventHandler(ResourcesTree1_PopupMenuShowing);
+      ResourcesTree1.CustomDrawNodeCell -= new CustomDrawNodeCellEventHandler(ResourcesTree1_CustomDrawNodeCell);
+      ResourcesTree1.CustomDrawNodeCell += new CustomDrawNodeCellEventHandler(ResourcesTree1_CustomDrawNodeCell);
+      ResourcesTree1.DoubleClick -= new EventHandler(ResourcesTree1_DoubleClick);
+      ResourcesTree1.DoubleClick += new EventHandler(ResourcesTree1_DoubleClick);
+      ResourcesTree1.PopupMenuShowing -= new DevExpress.XtraTreeList.PopupMenuShowingEventHandler(ResourcesTree1_PopupMenuShowing);
+      ResourcesTree1.PopupMenuShowing += new DevExpress.XtraTreeList.PopupMenuShowingEventHandler(ResourcesTree1_PopupMenuShowing);
 
+      CbbTime_Data.MouseHover -= new EventHandler(Options_MouseHover);
       CbbTime_Data.MouseHover += new EventHandler(Options_MouseHover);
+      CbbMa_BN.MouseHover -= new EventHandler(Options_MouseHover);
       CbbMa_BN.MouseHover += new EventHandler(Options_MouseHover);
+      CbbDo_Rong.MouseHover -= new EventHandler(Options_MouseHover);
       CbbDo_Rong.MouseHover += new EventHandler(Options_MouseHover);
+      CbbCa_Ngay.MouseHover -= new EventHandler(Options_MouseHover);
       CbbCa_Ngay.MouseHover += new EventHandler(Options_MouseHover);
+      CbbKieu_Xem.MouseHover -= new EventHandler(Options_MouseHover);
       CbbKieu_Xem.MouseHover += new EventHandler(Options_MouseHover);
+      CbbGio_Xem.MouseHover -= new EventHandler(Options_MouseHover);
       CbbGio_Xem.MouseHover += new EventHandler(Options_MouseHover);
+      CbbMa_HS.MouseHover -= new EventHandler(Options_MouseHover);
       CbbMa_HS.MouseHover += new EventHandler(Options_MouseHover);
     }
     private void V_SetScheduler_RXControl_KH_RX()
@@ -471,205 +514,6 @@ namespace TMV.UI.JPCB.CW
     {
       V_CyberSetTime_KH_RX();
       V_Do_Rong_KH_RX(sender, e);
-    }
-    #endregion
-
-    #region "Other Functions"
-    private void Scheduler_CustomDrawResourceHeader(object sender, DevExpress.XtraScheduler.CustomDrawObjectEventArgs e)
-    {
-      ResourceHeader objectInfo = (ResourceHeader)e.ObjectInfo;
-      string str1 = objectInfo.Resource.Id.ToString().Trim();
-      int emSize = 0;
-      string Left1 = CyberFunc.V_GetvalueCombox(CbbKieu_Xem);
-      bool _Bold = false;
-      bool _BackColor = false;
-      bool _BackColor2 = false;
-      bool _ForeColor = false;
-      string _FieldBold = "";
-      string _FieldBackColor = "";
-      string _FieldBackColor2 = "";
-      string _FieldForeColor = "";
-      bool flag1 = false;
-      string columnName1 = "";
-      DataRow[] dataRowArray = null;
-
-      if (Left1 == "02")
-      {
-        CyberColor.V_GetColorBold(Dt_Data_Xe, ref _Bold, ref _BackColor, ref _BackColor2, ref _ForeColor, ref _FieldBold, ref _FieldBackColor, ref _FieldBackColor2, ref _FieldForeColor);
-        dataRowArray = Dt_Data_Xe.Select("Stt_Rec='" + str1 + "'"); // Ma_Khoang
-      }
-
-      if (dataRowArray == null || dataRowArray.Length <= 0)
-        return;
-
-      bool flag2 = false;
-      _FieldBackColor = "";
-      string columnName2 = "";
-      bool flag3 = false;
-      bool flag4 = false;
-      if (dataRowArray[0].Table.Columns.Contains("BackColorHead"))
-      {
-        flag3 = true;
-        _FieldBackColor = dataRowArray[0].Table.Columns["BackColorHead"].ColumnName;
-      }
-      if (dataRowArray[0].Table.Columns.Contains("BackColor2Head"))
-      {
-        flag4 = true;
-        columnName2 = dataRowArray[0].Table.Columns["BackColor2Head"].ColumnName;
-      }
-      if (dataRowArray[0].Table.Columns.Contains("Italic"))
-        flag2 = true;
-      if (flag2)
-        flag2 = (dataRowArray[0]["Italic"].ToString().Trim() == "1");
-      if (dataRowArray[0].Table.Columns.Contains("FontSize"))
-        emSize = Convert.ToInt32(dataRowArray[0]["FontSize"]);
-      if (emSize <= 0)
-        emSize = checked((int)Math.Round(objectInfo.Appearance.HeaderCaption.Font.Size));
-      if (dataRowArray[0].Table.Columns.Contains("UnDerLine"))
-        flag1 = true;
-      if (dataRowArray[0].Table.Columns.Contains("UnDerLine"))
-        columnName1 = dataRowArray[0].Table.Columns["UnDerLine"].ColumnName;
-      if (_Bold)
-      {
-        string Left2 = dataRowArray[0][_FieldBold].ToString().Trim();
-        string str2 = "0";
-        if (flag1)
-          str2 = dataRowArray[0][columnName1].ToString().Trim();
-        if (str2.ToString().Trim() != "1")
-          flag1 = false;
-        if (Left2 == "1")
-        {
-          if (flag1)
-          {
-            if (flag2)
-              objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
-            else
-              objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Bold | FontStyle.Underline);
-          }
-          else if (flag2)
-            objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Bold | FontStyle.Italic);
-          else
-            objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Bold);
-        }
-        else if (flag1)
-        {
-          if (flag2)
-            objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Italic | FontStyle.Underline);
-          else
-            objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Underline);
-        }
-        else if (flag2)
-          objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Italic);
-        else
-          objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Regular);
-      }
-      else
-      {
-        string str3 = "0";
-        if (flag1)
-          str3 = dataRowArray[0][columnName1].ToString().Trim();
-        if (str3.ToString().Trim() != "1")
-          flag1 = false;
-        if (flag1)
-        {
-          if (flag2)
-            objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Italic | FontStyle.Underline);
-          else
-            objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Underline);
-        }
-        else if (flag2)
-          objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Italic);
-        else
-          objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Regular);
-      }
-      if (_ForeColor)
-      {
-        string ColorName = dataRowArray[0][_FieldForeColor].ToString().Trim();
-        objectInfo.Appearance.HeaderCaption.ForeColor = CyberColor.GetForeColor(ColorName);
-      }
-      string ColorName1 = "";
-      string ColorName2 = "";
-      if (flag3)
-        ColorName1 = dataRowArray[0][_FieldBackColor].ToString().Trim();
-      if (flag4)
-        ColorName2 = dataRowArray[0][columnName2].ToString().Trim();
-      string str4 = "0";
-      if (dataRowArray[0].Table.Columns.Contains("Flag"))
-        str4 = dataRowArray[0]["Flag"].ToString().Trim();
-      if (flag3 | flag4 | (str4.Trim() == "1") | (str4.Trim() == "2") | (str4.Trim() == "3") | (str4.Trim() == "4"))
-      {
-        if (flag3 | flag4)
-        {
-          AppearanceObject headerCaption = objectInfo.Appearance.HeaderCaption;
-          SchedulerGroupType groupType = SchedulerControl.ActiveView.GroupType;
-          bool flag5 = SchedulerControl.ActiveView is WeekView && groupType.Equals((object)SchedulerGroupType.Date) || SchedulerControl.ActiveView is TimelineView && !groupType.Equals((object)SchedulerGroupType.None);
-          LinearGradientMode linearGradientMode = flag5 ? LinearGradientMode.Horizontal : LinearGradientMode.Vertical;
-          if (ColorName1.Trim() == "")
-            ColorName1 = "White";
-          if (ColorName2.Trim() == "")
-            ColorName2 = ColorName1;
-          Rectangle rectangle = Rectangle.Inflate(e.Bounds, -2, -2);
-          e.Cache.FillRectangle(new LinearGradientBrush(e.Bounds, CyberColor.GetBackColor(ColorName1), CyberColor.GetBackColor(ColorName2), linearGradientMode), rectangle);
-          StringFormat stringFormat = headerCaption.TextOptions.GetStringFormat(TextOptions.DefaultOptionsCenteredWithEllipsis);
-          if (flag5)
-            e.Cache.DrawVString(objectInfo.Caption, headerCaption.Font, headerCaption.GetForeBrush(e.Cache), rectangle, stringFormat, 0);
-          else
-            e.Cache.DrawString(objectInfo.Caption, headerCaption.Font, headerCaption.GetForeBrush(e.Cache), rectangle, stringFormat);
-        }
-        if ((str4.Trim() == "1") | (str4.Trim() == "2") | (str4.Trim() == "3") | (str4.Trim() == "4"))
-        {
-          int num = Math.Min(16, objectInfo.ImageBounds.Height);
-          ResourceHeader resourceHeader = objectInfo;
-          Rectangle rectangle1 = new Rectangle(checked(objectInfo.ImageBounds.X + 2), objectInfo.ImageBounds.Y, num, num);
-          Rectangle rectangle2 = rectangle1;
-          resourceHeader.ImageBounds = rectangle2;
-          string Left3 = str4;
-          if (Left3 == "1")
-          {
-            Graphics graphics = e.Graphics;
-            Image flag1_1 = ImageResourceCache.Default.GetImage("images/tasks/status_16x16.png");
-            rectangle1 = new Rectangle(objectInfo.ImageBounds.X, objectInfo.ImageBounds.Y, num, num);
-            Rectangle rect = rectangle1;
-            graphics.DrawImage(flag1_1, rect);
-          }
-          else if (Left3 == "2")
-          {
-            Graphics graphics = e.Graphics;
-            Image flag2_1 = ImageResourceCache.Default.GetImage("images/communication/radio_16x16.png");
-            rectangle1 = new Rectangle(objectInfo.ImageBounds.X, objectInfo.ImageBounds.Y, num, num);
-            Rectangle rect = rectangle1;
-            graphics.DrawImage(flag2_1, rect);
-          }
-          else if (Left3 == "3")
-          {
-            Graphics graphics = e.Graphics;
-            Image flag3_1 = ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png");
-            rectangle1 = new Rectangle(objectInfo.ImageBounds.X, objectInfo.ImageBounds.Y, num, num);
-            Rectangle rect = rectangle1;
-            graphics.DrawImage(flag3_1, rect);
-          }
-          else if (Left3 == "4")
-          {
-            Graphics graphics = e.Graphics;
-            Image flag4_1 = ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png");
-            rectangle1 = new Rectangle(objectInfo.ImageBounds.X, objectInfo.ImageBounds.Y, num, num);
-            Rectangle rect = rectangle1;
-            graphics.DrawImage(flag4_1, rect);
-          }
-          else
-          {
-            Graphics graphics = e.Graphics;
-            Image flag1_2 = ImageResourceCache.Default.GetImage("images/tasks/status_16x16.png");
-            rectangle1 = new Rectangle(objectInfo.ImageBounds.X, objectInfo.ImageBounds.Y, num, num);
-            Rectangle rect = rectangle1;
-            graphics.DrawImage(flag1_2, rect);
-            objectInfo.Image = Properties.Resources.Warning;
-          }
-        }
-      }
-      else
-        e.DrawDefault();
-      e.Handled = true;
     }
     #endregion
 
@@ -967,9 +811,206 @@ namespace TMV.UI.JPCB.CW
     }
     private void SchedulerControl_KH_RX_AppointmentResized(object sender, AppointmentResizeEventArgs e)
     {
-      bool flag = V_Update_Keo_Tha_KH_RX(e.EditedAppointment);
-      e.Allow = flag;
-      e.Handled = !flag;
+      // bool flag = V_Update_Keo_Tha_KH_RX(e.EditedAppointment);
+      e.Allow = false;
+      e.Handled = true;
+    }
+    private void Scheduler_CustomDrawResourceHeader(object sender, DevExpress.XtraScheduler.CustomDrawObjectEventArgs e)
+    {
+      ResourceHeader objectInfo = (ResourceHeader)e.ObjectInfo;
+      string str1 = objectInfo.Resource.Id.ToString().Trim();
+      int emSize = 0;
+      string Left1 = CyberFunc.V_GetvalueCombox(CbbKieu_Xem);
+      bool _Bold = false;
+      bool _BackColor = false;
+      bool _BackColor2 = false;
+      bool _ForeColor = false;
+      string _FieldBold = "";
+      string _FieldBackColor = "";
+      string _FieldBackColor2 = "";
+      string _FieldForeColor = "";
+      bool flag1 = false;
+      string columnName1 = "";
+      DataRow[] dataRowArray = null;
+
+      if (Left1 == "02")
+      {
+        CyberColor.V_GetColorBold(Dt_Data_Xe, ref _Bold, ref _BackColor, ref _BackColor2, ref _ForeColor, ref _FieldBold, ref _FieldBackColor, ref _FieldBackColor2, ref _FieldForeColor);
+        dataRowArray = Dt_Data_Xe.Select("Stt_Rec='" + str1 + "'"); // Ma_Khoang
+      }
+
+      if (dataRowArray == null || dataRowArray.Length <= 0)
+        return;
+
+      bool flag2 = false;
+      _FieldBackColor = "";
+      string columnName2 = "";
+      bool flag3 = false;
+      bool flag4 = false;
+      if (dataRowArray[0].Table.Columns.Contains("BackColorHead"))
+      {
+        flag3 = true;
+        _FieldBackColor = dataRowArray[0].Table.Columns["BackColorHead"].ColumnName;
+      }
+      if (dataRowArray[0].Table.Columns.Contains("BackColor2Head"))
+      {
+        flag4 = true;
+        columnName2 = dataRowArray[0].Table.Columns["BackColor2Head"].ColumnName;
+      }
+      if (dataRowArray[0].Table.Columns.Contains("Italic"))
+        flag2 = true;
+      if (flag2)
+        flag2 = (dataRowArray[0]["Italic"].ToString().Trim() == "1");
+      if (dataRowArray[0].Table.Columns.Contains("FontSize"))
+        emSize = Convert.ToInt32(dataRowArray[0]["FontSize"]);
+      if (emSize <= 0)
+        emSize = checked((int)Math.Round(objectInfo.Appearance.HeaderCaption.Font.Size));
+      if (dataRowArray[0].Table.Columns.Contains("UnDerLine"))
+        flag1 = true;
+      if (dataRowArray[0].Table.Columns.Contains("UnDerLine"))
+        columnName1 = dataRowArray[0].Table.Columns["UnDerLine"].ColumnName;
+      if (_Bold)
+      {
+        string Left2 = dataRowArray[0][_FieldBold].ToString().Trim();
+        string str2 = "0";
+        if (flag1)
+          str2 = dataRowArray[0][columnName1].ToString().Trim();
+        if (str2.ToString().Trim() != "1")
+          flag1 = false;
+        if (Left2 == "1")
+        {
+          if (flag1)
+          {
+            if (flag2)
+              objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
+            else
+              objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Bold | FontStyle.Underline);
+          }
+          else if (flag2)
+            objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Bold | FontStyle.Italic);
+          else
+            objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Bold);
+        }
+        else if (flag1)
+        {
+          if (flag2)
+            objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Italic | FontStyle.Underline);
+          else
+            objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Underline);
+        }
+        else if (flag2)
+          objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Italic);
+        else
+          objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Regular);
+      }
+      else
+      {
+        string str3 = "0";
+        if (flag1)
+          str3 = dataRowArray[0][columnName1].ToString().Trim();
+        if (str3.ToString().Trim() != "1")
+          flag1 = false;
+        if (flag1)
+        {
+          if (flag2)
+            objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Italic | FontStyle.Underline);
+          else
+            objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Underline);
+        }
+        else if (flag2)
+          objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Italic);
+        else
+          objectInfo.Appearance.HeaderCaption.Font = new Font(objectInfo.Appearance.HeaderCaption.Font.Name, (float)emSize, FontStyle.Regular);
+      }
+      if (_ForeColor)
+      {
+        string ColorName = dataRowArray[0][_FieldForeColor].ToString().Trim();
+        objectInfo.Appearance.HeaderCaption.ForeColor = CyberColor.GetForeColor(ColorName);
+      }
+      string ColorName1 = "";
+      string ColorName2 = "";
+      if (flag3)
+        ColorName1 = dataRowArray[0][_FieldBackColor].ToString().Trim();
+      if (flag4)
+        ColorName2 = dataRowArray[0][columnName2].ToString().Trim();
+      string str4 = "0";
+      if (dataRowArray[0].Table.Columns.Contains("Flag"))
+        str4 = dataRowArray[0]["Flag"].ToString().Trim();
+      if (flag3 | flag4 | (str4.Trim() == "1") | (str4.Trim() == "2") | (str4.Trim() == "3") | (str4.Trim() == "4"))
+      {
+        if (flag3 | flag4)
+        {
+          AppearanceObject headerCaption = objectInfo.Appearance.HeaderCaption;
+          SchedulerGroupType groupType = SchedulerControl.ActiveView.GroupType;
+          bool flag5 = SchedulerControl.ActiveView is WeekView && groupType.Equals((object)SchedulerGroupType.Date) || SchedulerControl.ActiveView is TimelineView && !groupType.Equals((object)SchedulerGroupType.None);
+          LinearGradientMode linearGradientMode = flag5 ? LinearGradientMode.Horizontal : LinearGradientMode.Vertical;
+          if (ColorName1.Trim() == "")
+            ColorName1 = "White";
+          if (ColorName2.Trim() == "")
+            ColorName2 = ColorName1;
+          Rectangle rectangle = Rectangle.Inflate(e.Bounds, -2, -2);
+          e.Cache.FillRectangle(new LinearGradientBrush(e.Bounds, CyberColor.GetBackColor(ColorName1), CyberColor.GetBackColor(ColorName2), linearGradientMode), rectangle);
+          StringFormat stringFormat = headerCaption.TextOptions.GetStringFormat(TextOptions.DefaultOptionsCenteredWithEllipsis);
+          if (flag5)
+            e.Cache.DrawVString(objectInfo.Caption, headerCaption.Font, headerCaption.GetForeBrush(e.Cache), rectangle, stringFormat, 0);
+          else
+            e.Cache.DrawString(objectInfo.Caption, headerCaption.Font, headerCaption.GetForeBrush(e.Cache), rectangle, stringFormat);
+        }
+        if ((str4.Trim() == "1") | (str4.Trim() == "2") | (str4.Trim() == "3") | (str4.Trim() == "4"))
+        {
+          int num = Math.Min(16, objectInfo.ImageBounds.Height);
+          ResourceHeader resourceHeader = objectInfo;
+          Rectangle rectangle1 = new Rectangle(checked(objectInfo.ImageBounds.X + 2), objectInfo.ImageBounds.Y, num, num);
+          Rectangle rectangle2 = rectangle1;
+          resourceHeader.ImageBounds = rectangle2;
+          string Left3 = str4;
+          if (Left3 == "1")
+          {
+            Graphics graphics = e.Graphics;
+            Image flag1_1 = ImageResourceCache.Default.GetImage("images/tasks/status_16x16.png");
+            rectangle1 = new Rectangle(objectInfo.ImageBounds.X, objectInfo.ImageBounds.Y, num, num);
+            Rectangle rect = rectangle1;
+            graphics.DrawImage(flag1_1, rect);
+          }
+          else if (Left3 == "2")
+          {
+            Graphics graphics = e.Graphics;
+            Image flag2_1 = ImageResourceCache.Default.GetImage("images/communication/radio_16x16.png");
+            rectangle1 = new Rectangle(objectInfo.ImageBounds.X, objectInfo.ImageBounds.Y, num, num);
+            Rectangle rect = rectangle1;
+            graphics.DrawImage(flag2_1, rect);
+          }
+          else if (Left3 == "3")
+          {
+            Graphics graphics = e.Graphics;
+            Image flag3_1 = ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png");
+            rectangle1 = new Rectangle(objectInfo.ImageBounds.X, objectInfo.ImageBounds.Y, num, num);
+            Rectangle rect = rectangle1;
+            graphics.DrawImage(flag3_1, rect);
+          }
+          else if (Left3 == "4")
+          {
+            Graphics graphics = e.Graphics;
+            Image flag4_1 = ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png");
+            rectangle1 = new Rectangle(objectInfo.ImageBounds.X, objectInfo.ImageBounds.Y, num, num);
+            Rectangle rect = rectangle1;
+            graphics.DrawImage(flag4_1, rect);
+          }
+          else
+          {
+            Graphics graphics = e.Graphics;
+            Image flag1_2 = ImageResourceCache.Default.GetImage("images/tasks/status_16x16.png");
+            rectangle1 = new Rectangle(objectInfo.ImageBounds.X, objectInfo.ImageBounds.Y, num, num);
+            Rectangle rect = rectangle1;
+            graphics.DrawImage(flag1_2, rect);
+            objectInfo.Image = Properties.Resources.Warning;
+          }
+        }
+      }
+      else
+        e.DrawDefault();
+
+      e.Handled = true;
     }
     private bool V_Update_Keo_Tha_KH_RX(Appointment _Appointment)
     {
@@ -987,7 +1028,7 @@ namespace TMV.UI.JPCB.CW
           MessageBox.Show("V_Update_Keo_Tha_KH_RX: " + ex.Message);
         }
       }
-      if (_Stt_Rec.ToString().Trim() == "")
+      if (_Stt_Rec.ToString().Trim() == "" || _T_Type == "A")
         return false;
 
       DateTime start = SchedulerControl.SelectedInterval.Start;
@@ -998,13 +1039,21 @@ namespace TMV.UI.JPCB.CW
       V_GetFromSetScheduler_RX(ref _Ma_khoang, ref start, ref end, _Appointment);
       V_GetFromSetScheduler_RXOld(ref _ma_khoangOld, _Appointment);
 
-      DataSet dataSet = CP_RO_CW_Execute.CreateData(); // CP_RO_CW_Save_Keo_Tha
-      bool flag = (dataSet.Tables[0] != null);
-      dataSet.Dispose();
-      if (flag)
+      DataSet ds = JpcbCwBO.Instance().AddOrUpdateCW(Globals.LoginUserID, Globals.LoginDlrId, 
+                                                     "U",
+                                                     "",
+                                                     Convert.ToInt32(_Ma_khoang),
+                                                     start,
+                                                     end,
+                                                     0,
+                                                     Convert.ToDecimal(_Stt_Rec)); // CP_RO_CW_Save_Keo_Tha
+      if (ds.Tables != null && ds.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS")
+      {
         V_LoadDatabases("0", _Stt_Rec);
+        return true;
+      }
 
-      return flag;
+      return false;
     }
     private void V_GetFromSetScheduler_RXOld(ref string _ma_khoangOld, Appointment _Appointment = null)
     {
@@ -1302,14 +1351,14 @@ namespace TMV.UI.JPCB.CW
     }
     private void ResourcesTree1_CustomDrawNodeCell(object sender, CustomDrawNodeCellEventArgs e)
     {
-      if (!resourcesTree1.Visible)
+      if (!ResourcesTree1.Visible)
         return;
 
       DataView dataSource = (DataView)SchedulerStorage.Resources.DataSource;
       if (dataSource == null)
         return;
 
-      int nodeIndex = resourcesTree1.GetNodeIndex(e.Node);
+      int nodeIndex = ResourcesTree1.GetNodeIndex(e.Node);
       bool flag1 = false;
       bool flag2 = false;
       string str1 = "0";
@@ -1368,7 +1417,7 @@ namespace TMV.UI.JPCB.CW
     }
     private void ResourcesTree1_DoubleClick(object sender, EventArgs e)
     {
-      if (!resourcesTree1.Visible)
+      if (!ResourcesTree1.Visible)
         return;
 
       DataView dataSource = (DataView)SchedulerStorage.Resources.DataSource;
@@ -1378,7 +1427,7 @@ namespace TMV.UI.JPCB.CW
       int recordIndex = -1;
       try
       {
-        recordIndex = resourcesTree1.FocusedNode.Id;
+        recordIndex = ResourcesTree1.FocusedNode.Id;
       }
       catch (Exception ex)
       {
@@ -1428,7 +1477,7 @@ namespace TMV.UI.JPCB.CW
       int recordIndex = -1;
       try
       {
-        recordIndex = resourcesTree1.FocusedNode.Id;
+        recordIndex = ResourcesTree1.FocusedNode.Id;
       }
       catch (Exception ex)
       {
@@ -2408,20 +2457,20 @@ namespace TMV.UI.JPCB.CW
     }
     private void V_AddResourcesTree(DataView _Dv_DataSource, DataTable _Dt_Header)
     {
-      resourcesTree1.Columns.Clear();
+      ResourcesTree1.Columns.Clear();
       if (_Dv_DataSource == null | _Dt_Header == null)
       {
         SchedulerControl.Views.GanttView.ShowResourceHeaders = true;
-        resourcesTree1.Visible = false;
+        ResourcesTree1.Visible = false;
         splitContainer5.SplitterDistance = 0;
       }
       else
       {
-        resourcesTree1.BorderStyle = SchedulerControl.BorderStyle;
+        ResourcesTree1.BorderStyle = SchedulerControl.BorderStyle;
         int num = 10;
         int Left1 = num;
-        resourcesTree1.Visible = true;
-        resourcesTree1.Columns.Clear();
+        ResourcesTree1.Visible = true;
+        ResourcesTree1.Columns.Clear();
         string str = "L";
 
         try
@@ -2465,7 +2514,7 @@ namespace TMV.UI.JPCB.CW
               column.AppearanceCell.TextOptions.WordWrap = WordWrap.Wrap;
               column.AppearanceCell.TextOptions.VAlignment = VertAlignment.Center;
               column.Width = Convert.ToInt32(row["Field_Width"]);
-              resourcesTree1.Columns.Add(column);
+              ResourcesTree1.Columns.Add(column);
             }
           }
         }
@@ -2474,13 +2523,13 @@ namespace TMV.UI.JPCB.CW
         }
         if (num == Left1)
         {
-          resourcesTree1.Visible = false;
+          ResourcesTree1.Visible = false;
           splitContainer5.SplitterDistance = 0;
         }
         else
         {
-          resourcesTree1.Width = Left1;
-          resourcesTree1.Visible = true;
+          ResourcesTree1.Width = Left1;
+          ResourcesTree1.Visible = true;
           splitContainer5.SplitterDistance = Left1;
         }
       }

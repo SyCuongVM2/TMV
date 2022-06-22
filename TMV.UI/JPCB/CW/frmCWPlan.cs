@@ -211,8 +211,7 @@ namespace TMV.UI.JPCB.CW
                                                        Convert.ToDateTime(TxtNgay_BD.EditValue),
                                                        Convert.ToDateTime(TxtNgay_KT.EditValue),
                                                        Convert.ToInt32(TxtTG_SC.Value),
-                                                       Convert.ToDecimal(M_Stt_rec)
-        );
+                                                       Convert.ToDecimal(M_Stt_rec));
         if (ds.Tables != null && ds.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS")
           Close();
       }

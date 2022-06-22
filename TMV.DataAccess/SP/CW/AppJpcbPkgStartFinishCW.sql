@@ -77,15 +77,19 @@ BEGIN
 								set @v_FinishTime = getdate()
 						end
 
-					-- 1: update finish to actual
+					-- 3: calc time
+					declare @v_calc_time int = [dbo].[CalcWorkingTime](@p_TenantId, @v_ActualFromTime, @v_FinishTime)
+
+					-- 4: update finish to actual
 					update SrvPrgActual
 					   set ActualToTime = @v_FinishTime,
 						     ActualState = 4,
+								 ActualCalcTime = @v_calc_time,
 								 LastModifierUserId = @p_UserId,
 								 LastModificationTime = getdate()
 					 where Id = @p_Id
 
-					-- 4: display message
+					-- 5: display message
 					select 'SUCCESS' as Status_Code, 
 						     'Update finish to actual ' + cast(@p_Id as varchar) as Status_Message, 
 								 getdate() as Status_Time, 

@@ -1,4 +1,4 @@
-﻿CREATE OR ALTER PROCEDURE [AppJpcbPkgGetCWData]
+﻿CREATE OR ALTER PROCEDURE AppJpcbPkgGetCWData
 	@p_TenantId int,
 	@p_RO_Type int,
 	@p_DayView_Type varchar(2),
@@ -100,6 +100,7 @@ BEGIN
 		 where p.TenantId = @p_TenantId
 			 and p.ROType = @p_RO_Type
 			 and p.ActualId is null
+			 and p.IsDeleted = 0
 			 and 
 			 (case
 				 when @p_DayView_Type = '01' and (cast(p.PlanFromTime as date) = cast(@p_Date as date)) then 1
@@ -143,6 +144,7 @@ BEGIN
 				join AbpUsers u on u.Id = r.CreatorUserId
 				where a.TenantId = @p_TenantId
 					and a.ROType = @p_RO_Type
+					and a.IsDeleted = 0
 					and 
 						(case
 							when @p_DayView_Type = '01' and (cast(a.ActualFromTime as date) = cast(@p_Date as date)) then 1

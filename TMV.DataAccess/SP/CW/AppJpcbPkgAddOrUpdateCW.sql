@@ -1,7 +1,7 @@
 ﻿CREATE OR ALTER PROCEDURE AppJpcbPkgAddOrUpdateCW
 	@p_UserId bigint,
 	@p_TenantId int,
-	@p_Type varchar(1),
+	@p_Type varchar(1), -- N: New, U: Update
 	@p_RegisterNo nvarchar(50),
 	@p_WorkshopId int,
 	@p_PlanFromTime datetime,
@@ -40,11 +40,18 @@ BEGIN
 				begin
 					print 'Update Plan CW'
 
+					declare @v_calc_time int = [dbo].[CalcWorkingTime](@p_TenantId, @p_PlanFromTime, @p_PlanToTime)
+
 					-- 1: update plan
 					update SrvPrgPlan
 					   set PlanFromTime = @p_PlanFromTime,
 						     PlanToTime = @p_PlanToTime,
-								 PlanCalcTime = @p_PlanCalcTime,
+								 PlanCalcTime = (
+									case 
+										when @p_PlanCalcTime != @v_calc_time then @v_calc_time
+										else @p_PlanCalcTime
+									end
+								 ),
 								 WorkshopId = @p_WorkshopId,
 								 LastModifierUserId = @p_UserId,
 								 LastModificationTime = getdate()

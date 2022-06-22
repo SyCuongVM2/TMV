@@ -7,7 +7,7 @@ BEGIN
 
 	select datepart(hour, WkAmFrom) StartHour, datepart(hour, WkPmTo) FinishHour,
 	       datepart(minute, WkAmFrom) StartMinute, datepart(minute, WkPmTo) FinishMinute,
-				 getdate() Ngay_LimitInterval_Min, getdate() Ngay_LimitInterval_Max, getdate() Ngay_Ct,
+				 getdate() Ngay_LimitInterval_Min, dateadd(d, 1, getdate()) Ngay_LimitInterval_Max, getdate() Ngay_Ct,
 				 0 Thu_Bay, 1 Chu_Nhat, 50 HourWidth, 3 RowPage, 50 RowHeight,
 				 datepart(hour, WkAmFrom) H_Sang1, datepart(minute, WkAmFrom) M_Sang1,
 				 datepart(hour, WkAmTo) H_Sang2, datepart(minute, WkAmTo) M_Sang2,
@@ -15,10 +15,10 @@ BEGIN
 				 datepart(hour, WkPmFrom) H_Chieu1, datepart(minute, WkPmFrom) M_Chieu1,
 				 datepart(hour, WkPmTo) H_Chieu2, datepart(minute, WkPmTo) M_Chieu2,
 				 getdate() Ngay_Chieu1, getdate() Ngay_Chieu2
-	  from MstSrvDlrConfig 
+		from MstSrvDlrConfig 
 	 where cast(EffDateFrom as date) <= cast(getdate() as date)
-	   and cast(EffDateTo as date) >= cast(getdate() as date)
-	   and TenantId = @p_TenantId
+		 and cast(EffDateTo as date) >= cast(getdate() as date)
+		 and TenantId = @p_TenantId
 
 	select w.Id Id_khoang, w.ColorCode Color, w.WorkshopCode Ma_khoang, coalesce(w.WorkshopName, w.WorkshopCode, 'RX') Ten_khoang
 	  from MstSrvWorkshop w
@@ -34,9 +34,9 @@ BEGIN
 		end = 1
   order by w.Ordering
 
-	 select u.Id, u.UserName Ma_Hs, u.Name Ten_Hs, 0 Ngam_Dinh
-	   from AbpUsers u
-	   join MstSrvTitle t on t.Id = u.TitleId
-	  where u.TenantId = @p_TenantId
-	    and t.TitleCode = 'SA' -- CVDV
+	select u.Id, u.UserName Ma_Hs, u.Name Ten_Hs, 0 Ngam_Dinh
+	  from AbpUsers u
+	  join MstSrvTitle t on t.Id = u.TitleId
+	where u.TenantId = @p_TenantId
+	  and t.TitleCode = 'SA' -- CVDV
 END

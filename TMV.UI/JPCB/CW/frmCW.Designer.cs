@@ -57,7 +57,7 @@ namespace TMV.UI.JPCB.CW
       this.LabWait = new System.Windows.Forms.Label();
       this.splitContainer3 = new System.Windows.Forms.SplitContainer();
       this.splitContainer5 = new System.Windows.Forms.SplitContainer();
-      this.resourcesTree1 = new DevExpress.XtraScheduler.UI.ResourcesTree();
+      this.ResourcesTree1 = new DevExpress.XtraScheduler.UI.ResourcesTree();
       this.SchedulerControl = new DevExpress.XtraScheduler.SchedulerControl();
       this.SchedulerStorage = new DevExpress.XtraScheduler.SchedulerStorage(this.components);
       this.LabPlan = new System.Windows.Forms.Label();
@@ -127,7 +127,7 @@ namespace TMV.UI.JPCB.CW
       this.splitContainer5.Panel1.SuspendLayout();
       this.splitContainer5.Panel2.SuspendLayout();
       this.splitContainer5.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.resourcesTree1)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.ResourcesTree1)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.SchedulerControl)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.SchedulerStorage)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
@@ -418,7 +418,7 @@ namespace TMV.UI.JPCB.CW
       // 
       // splitContainer5.Panel1
       // 
-      this.splitContainer5.Panel1.Controls.Add(this.resourcesTree1);
+      this.splitContainer5.Panel1.Controls.Add(this.ResourcesTree1);
       this.splitContainer5.Panel1MinSize = 0;
       // 
       // splitContainer5.Panel2
@@ -429,23 +429,23 @@ namespace TMV.UI.JPCB.CW
       this.splitContainer5.SplitterDistance = 339;
       this.splitContainer5.TabIndex = 2;
       // 
-      // resourcesTree1
+      // ResourcesTree1
       // 
-      this.resourcesTree1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.resourcesTree1.FixedLineWidth = 1;
-      this.resourcesTree1.HorzScrollStep = 1;
-      this.resourcesTree1.Location = new System.Drawing.Point(0, 0);
-      this.resourcesTree1.MenuManager = this.BarManagerCho_Rua;
-      this.resourcesTree1.Name = "resourcesTree1";
-      this.resourcesTree1.OptionsBehavior.Editable = false;
-      this.resourcesTree1.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.RowFullFocus;
-      this.resourcesTree1.OptionsView.ShowButtons = false;
-      this.resourcesTree1.OptionsView.ShowRoot = false;
-      this.resourcesTree1.OptionsView.ShowVertLines = true;
-      this.resourcesTree1.SchedulerControl = this.SchedulerControl;
-      this.resourcesTree1.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-      this.resourcesTree1.Size = new System.Drawing.Size(339, 628);
-      this.resourcesTree1.TabIndex = 0;
+      this.ResourcesTree1.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.ResourcesTree1.FixedLineWidth = 1;
+      this.ResourcesTree1.HorzScrollStep = 1;
+      this.ResourcesTree1.Location = new System.Drawing.Point(0, 0);
+      this.ResourcesTree1.MenuManager = this.BarManagerCho_Rua;
+      this.ResourcesTree1.Name = "ResourcesTree1";
+      this.ResourcesTree1.OptionsBehavior.Editable = false;
+      this.ResourcesTree1.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.RowFullFocus;
+      this.ResourcesTree1.OptionsView.ShowButtons = false;
+      this.ResourcesTree1.OptionsView.ShowRoot = false;
+      this.ResourcesTree1.OptionsView.ShowVertLines = true;
+      this.ResourcesTree1.SchedulerControl = this.SchedulerControl;
+      this.ResourcesTree1.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
+      this.ResourcesTree1.Size = new System.Drawing.Size(339, 628);
+      this.ResourcesTree1.TabIndex = 0;
       // 
       // SchedulerControl
       // 
@@ -462,6 +462,7 @@ namespace TMV.UI.JPCB.CW
       this.SchedulerControl.MenuManager = this.BarManagerCho_Rua;
       this.SchedulerControl.Name = "SchedulerControl";
       this.SchedulerControl.OptionsCustomization.AllowAppointmentDelete = DevExpress.XtraScheduler.UsedAppointmentType.None;
+      this.SchedulerControl.OptionsCustomization.AllowAppointmentResize = DevExpress.XtraScheduler.UsedAppointmentType.None;
       this.SchedulerControl.OptionsCustomization.AllowDisplayAppointmentFlyout = false;
       this.SchedulerControl.OptionsView.ResourceHeaders.Height = 80;
       this.SchedulerControl.OptionsView.ResourceHeaders.ImageAlign = DevExpress.XtraScheduler.HeaderImageAlign.Right;
@@ -470,7 +471,7 @@ namespace TMV.UI.JPCB.CW
       this.SchedulerControl.OptionsView.ResourceHeaders.RotateCaption = false;
       this.SchedulerControl.OptionsView.ToolTipVisibility = DevExpress.XtraScheduler.ToolTipVisibility.Always;
       this.SchedulerControl.Size = new System.Drawing.Size(674, 628);
-      this.SchedulerControl.Start = new System.DateTime(2020, 12, 27, 0, 0, 0, 0);
+      this.SchedulerControl.Start = new System.DateTime(2017, 12, 31, 0, 0, 0, 0);
       this.SchedulerControl.TabIndex = 0;
       this.SchedulerControl.Text = "schedulerControl1";
       this.SchedulerControl.Views.DayView.TimeRulers.Add(timeRuler1);
@@ -494,12 +495,12 @@ namespace TMV.UI.JPCB.CW
       this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.Red, "Dừng", "&Dừng");
       this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.MediumPurple, "Đặt chỗ", "Đặt chỗ");
       this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.Yellow, "Đặt hẹn", "Đặt hẹn");
-      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.FromArgb(244, 206, 147), "Must Attend", "Must &Attend");
-      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.FromArgb(199, 244, (int)byte.MaxValue), "Travel Required", "&Travel Required");
-      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.FromArgb(207, 219, 152), "Needs Preparation", "&Needs Preparation");
-      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.FromArgb(224, 207, 233), "Birthday", "&Birthday");
-      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.FromArgb(141, 233, 223), "Anniversary", "&Anniversary");
-      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.FromArgb((int)byte.MaxValue, 247, 165), "Phone Call", "Phone &Call");
+      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(206)))), ((int)(((byte)(147))))), "Must Attend", "Must &Attend");
+      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(244)))), ((int)(((byte)(255))))), "Travel Required", "&Travel Required");
+      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(219)))), ((int)(((byte)(152))))), "Needs Preparation", "&Needs Preparation");
+      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(207)))), ((int)(((byte)(233))))), "Birthday", "&Birthday");
+      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(233)))), ((int)(((byte)(223))))), "Anniversary", "&Anniversary");
+      this.SchedulerStorage.Appointments.Labels.Add(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(247)))), ((int)(((byte)(165))))), "Phone Call", "Phone &Call");
       // 
       // LabPlan
       // 
@@ -1080,7 +1081,7 @@ namespace TMV.UI.JPCB.CW
       this.splitContainer5.Panel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
       this.splitContainer5.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.resourcesTree1)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.ResourcesTree1)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.SchedulerControl)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.SchedulerStorage)).EndInit();
       this.splitContainer4.Panel1.ResumeLayout(false);
@@ -1134,7 +1135,7 @@ namespace TMV.UI.JPCB.CW
     private System.Windows.Forms.SplitContainer splitContainer5;
     private DevExpress.XtraScheduler.SchedulerControl SchedulerControl;
     private DevExpress.XtraScheduler.SchedulerStorage SchedulerStorage;
-    private DevExpress.XtraScheduler.UI.ResourcesTree resourcesTree1;
+    private DevExpress.XtraScheduler.UI.ResourcesTree ResourcesTree1;
     private System.Windows.Forms.CheckBox ChkAuto_Data;
     private System.Windows.Forms.ComboBox CbbGio_Xem;
     private System.Windows.Forms.ComboBox CbbCa_Ngay;

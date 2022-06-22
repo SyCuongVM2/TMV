@@ -181,7 +181,6 @@ BEGIN
 END
 GO
 
-
 CREATE OR ALTER PROCEDURE AppJpcbPkgCalcWorkingTime
 (
 	@p_Tenant_Id int,
