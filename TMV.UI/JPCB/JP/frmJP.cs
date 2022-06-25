@@ -16,6 +16,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using TMV.BusinessObject.JPCB;
 using TMV.Common;
 using TMV.UI.JPCB.Common;
 
@@ -85,7 +86,7 @@ namespace TMV.UI.JPCB.JP
     private string M_Ma_CT_PKH = "PKH";
     private string M_Ma_CT_PDC = "PDC";
     private string M_Kieu_Xem = "TIEN_DO";
-    private string M_Loai_SC = "1";
+    private string M_Loai_SC = "1"; // 1: GJ, 2: BP
     private string M_Stt_Rec_Ro = "";
     private DataTable dt_configTab;
     private DataTable Dt_Hen;
@@ -188,7 +189,7 @@ namespace TMV.UI.JPCB.JP
     private DateTime M_Ngay_LimitInterval_Max;
     private string M_Thu_Bay = "0";
     private string M_Chu_Nhat = "1";
-    private string M_Loai_KH_SCC = "1";
+    private string M_Loai_KH_SCC = "1"; // GJ
     private DataTable Dt_Right;
     private DataTable Dt_Xem_Gio;
     private DataTable Dt_Data_KH_SCC;
@@ -274,16 +275,19 @@ namespace TMV.UI.JPCB.JP
     }
     private void frmJP_Load(object sender, EventArgs e)
     {
+      barWSUser.Caption = Globals.LoginUserName + " (" + Globals.LoginFullName + ")";
+      barWSDealer.Caption = Globals.LoginDealerName + " (" + Globals.LoginDealerAbbr + " - " + Globals.LoginDealerCode + ")";
+
       Text = "BẢNG THEO DÕI SỬA CHỮA";
       V_SetTree();
-      IMouseHandlerService service = (IMouseHandlerService)SchedulerControl_KH_SCC.GetService(typeof(IMouseHandlerService));
-      if (service != null)
-      {
-        CyberBarSubMenuPopup.CustomMouseHandlerService serviceInstance = new CyberBarSubMenuPopup.CustomMouseHandlerService((System.IServiceProvider)SchedulerControl_KH_SCC, service);
-        SchedulerControl_KH_SCC.RemoveService(typeof(IMouseHandlerService));
-        SchedulerControl_KH_SCC.AddService(typeof(IMouseHandlerService), (object)serviceInstance);
-      }
-      SchedulerControl_KH_SCC.MouseWheel += new MouseEventHandler(V_SchedulerControl_KH_SCC_MouseWheel);
+      //IMouseHandlerService service = (IMouseHandlerService)SchedulerControl_KH_SCC.GetService(typeof(IMouseHandlerService));
+      //if (service != null)
+      //{
+      //  CyberBarSubMenuPopup.CustomMouseHandlerService serviceInstance = new CyberBarSubMenuPopup.CustomMouseHandlerService(SchedulerControl_KH_SCC, service);
+      //  SchedulerControl_KH_SCC.RemoveService(typeof(IMouseHandlerService));
+      //  SchedulerControl_KH_SCC.AddService(typeof(IMouseHandlerService), serviceInstance);
+      //}
+      //SchedulerControl_KH_SCC.MouseWheel += new MouseEventHandler(V_SchedulerControl_KH_SCC_MouseWheel);
       V_GetKieu_Xem_Loai_SC();
       LabLock.Visible = (M_Kieu_Xem.Trim().ToUpper() != "HEN");
       TxtM_Ngay_Ct_KH_SCC.EditValue = DateTime.Today.Date;
@@ -291,16 +295,16 @@ namespace TMV.UI.JPCB.JP
       V_LoadTabVisible();
       V_CreateTimeALl();
 
-      if (_TabVisible1)
-        V_Load_System_Hen();
+      //if (_TabVisible1)
+      //  V_Load_System_Hen();
       if (_TabVisible3)
         V_Load_System_KH_SC();
-      if (_TabVisible8)
-        V_Load_System_HonHop();
-      if (_TabVisible9)
-        V_Load_System_Dung();
+      //if (_TabVisible8)
+      //  V_Load_System_HonHop();
+      //if (_TabVisible9)
+      //  V_Load_System_Dung();
 
-      V_LoadHonHop_Dung_ChayTHU();
+      //V_LoadHonHop_Dung_ChayTHU();
 
       TabCVDV.DrawMode = TabDrawMode.OwnerDrawFixed;
       TabCVDV.Padding = new Point(20, 6);
@@ -308,7 +312,7 @@ namespace TMV.UI.JPCB.JP
     }
 
     #region "frmCW_Load"
-    private void V_SetTree()
+    private void V_SetTree() //
     {
       ResourcesTree1.VertScrollVisibility = ScrollVisibility.Never;
       ResourcesTree1.OptionsView.ShowIndicator = false;
@@ -330,15 +334,15 @@ namespace TMV.UI.JPCB.JP
 
       checked { ++SchedulerControl_KH_SCC.ActiveView.FirstVisibleResourceIndex; }
     }
-    private void V_GetKieu_Xem_Loai_SC()
+    private void V_GetKieu_Xem_Loai_SC() //
     {
-      M_Loai_SC = "1";
+      M_Loai_SC = "1"; // GJ
       M_Kieu_Xem = "TIEN_DO";
       M_Stt_Rec_Ro = "";
     }
-    private void V_LoadTabVisible()
+    private void V_LoadTabVisible() //
     {
-      DataSet dataSet = new DataSet(); // CP_RO_CVDV_Config
+      DataSet dataSet = JpcbJpBO.Instance().JPVisibleTabs(Globals.LoginDlrId, Globals.LoginUserID); // CP_RO_CVDV_Config
       dt_configTab = dataSet.Tables[0].Copy();
       int num = checked(dataSet.Tables[0].Rows.Count - 1);
       int index1 = 0;
@@ -389,7 +393,7 @@ namespace TMV.UI.JPCB.JP
 
       dataSet.Dispose();
     }
-    private void V_CreateTimeALl()
+    private void V_CreateTimeALl() //
     {
       DataTable dataTable = CreateTime().Copy();
       if (_TabVisible3)
@@ -447,7 +451,7 @@ namespace TMV.UI.JPCB.JP
       else
         Timer_Data_Cho_SC.Start();
     }
-    private void V_Load_System_KH_SC()
+    private void V_Load_System_KH_SC() //
     {
       bool flag = false;
       Timer_Data_KH_SCC.Stop();
@@ -542,19 +546,19 @@ namespace TMV.UI.JPCB.JP
       object obj = (sender as TabControl).GetTabRect(0);
       Rectangle rectangle = new Rectangle();
       Rectangle layoutRectangle = obj != null ? (Rectangle)obj : rectangle;
-      SolidBrush solidBrush = new SolidBrush(System.Drawing.Color.Black);
+      SolidBrush solidBrush = new SolidBrush(Color.Black);
       StringFormat format = new StringFormat();
       format.Alignment = StringAlignment.Center;
       format.LineAlignment = StringAlignment.Center;
       if (Convert.ToBoolean((int)(e.State & DrawItemState.Selected)))
       {
-        Font font = new Font(TabCVDV.Font.FontFamily, (sender as Font).Size, FontStyle.Bold);
-        e.Graphics.FillRectangle((Brush)new SolidBrush(Color.OrangeRed), e.Bounds);
-        solidBrush = new SolidBrush(System.Drawing.Color.White);
-        e.Graphics.DrawString(tabPage.Text, font, (Brush)solidBrush, (RectangleF)layoutRectangle, format);
+        Font font = new Font(TabCVDV.Font.FontFamily, TabCVDV.Font.Size, FontStyle.Bold);
+        e.Graphics.FillRectangle(new SolidBrush(Color.OrangeRed), e.Bounds);
+        solidBrush = new SolidBrush(Color.White);
+        e.Graphics.DrawString(tabPage.Text, font, solidBrush, layoutRectangle, format);
       }
       else
-        e.Graphics.DrawString(tabPage.Text, e.Font, (Brush)solidBrush, (RectangleF)layoutRectangle, format);
+        e.Graphics.DrawString(tabPage.Text, e.Font, solidBrush, layoutRectangle, format);
 
       solidBrush.Dispose();
     }
@@ -1422,23 +1426,23 @@ namespace TMV.UI.JPCB.JP
       V_AddHanderLabel_KH_SCC();
       V_GetHieghtSplitContainerKH_SC();
     }
-    private void V_GetTimeChangeLoai_SC()
+    private void V_GetTimeChangeLoai_SC() //
     {
       bool flag = false;
       Timer_Data_KH_SCC.Stop();
       Timer_Data_KH_SCC.Enabled = flag;
       CbbTime_Data_KH_SCC.Enabled = flag;
-      M_Loai_KH_SCC = M_Loai_SC;
+      M_Loai_KH_SCC = M_Loai_SC;  // GJ or BP
     }
-    private void V_Visible_KH_SCC()
+    private void V_Visible_KH_SCC() //
     {
       string str = "TIẾN ĐỘ SỬA CHỮA CHUNG";
-      if (M_Loai_KH_SCC.Trim() == "2")
+      if (M_Loai_KH_SCC.Trim() == "2") // BP
         str = "TIẾN ĐỘ SỬA ĐỒNG SƠN";
       if (M_Kieu_Xem.Trim() == "HEN")
         str = "LỊCH HẸN SỬA ";
 
-      if (M_Kieu_Xem.Trim().Trim() == "HEN" | M_Loai_KH_SCC.Trim() == "2")
+      if (M_Kieu_Xem.Trim() == "HEN" | M_Loai_KH_SCC.Trim() == "2") // BP
         SplitContainer2.SplitterDistance = 1;
 
       Tab3.Text = str;
@@ -1450,65 +1454,65 @@ namespace TMV.UI.JPCB.JP
     }
     private void V_LoadDatabas_Ngam_Dinh_KH_SCC()
     {
-      DataSet dataSet = new DataSet(); // CP_RO_CVDV_KH_SCC_Ngam_Dinh"
+      DataSet dataSet = JpcbJpBO.Instance().GetJPConfig(Globals.LoginDlrId, "GJ"); // CP_RO_CVDV_KH_SCC_Ngam_Dinh
 
-      Dt_ConFigColor_KH_SCC = dataSet.Tables[0].Copy();
-      Dt_Set_SCC = dataSet.Tables[1].Copy();
-      Dt_Buoc_Nhay_KH_SCC = dataSet.Tables[2].Copy();
-      Dt_Do_Rong_KH_SCC = dataSet.Tables[3].Copy();
-      DmCVDV_Loc_KH_SCC = dataSet.Tables[4].Copy();
+      Dt_ConFigColor_KH_SCC = dataSet.Tables[0].Copy(); ///
+      Dt_Set_SCC = dataSet.Tables[1].Copy(); ///
+      Dt_Buoc_Nhay_KH_SCC = dataSet.Tables[2].Copy(); ///
+      Dt_Do_Rong_KH_SCC = dataSet.Tables[3].Copy(); ///
+      DmCVDV_Loc_KH_SCC = dataSet.Tables[4].Copy(); ///
       DmCVDV_KH_SCC = DmCVDV_Loc_KH_SCC.Copy();
       CyberFunc.V_DeleteRowEmpty(DmCVDV_KH_SCC, "Ma_HS");
       Dv_DmCVDV_KH_SCC = new DataView(DmCVDV_KH_SCC);
+      //DmCVDV_KH_SCC_H = dataSet.Tables[5].Copy();
 
-      DmCVDV_KH_SCC_H = dataSet.Tables[5].Copy();
-      DmKhoang_Loc_KH_SCC = dataSet.Tables[6].Copy();
+      DmKhoang_Loc_KH_SCC = dataSet.Tables[6].Copy(); ///
       DmKhoang_KH_SCC = DmKhoang_Loc_KH_SCC.Copy();
       CyberFunc.V_DeleteRowEmpty(DmKhoang_KH_SCC, "Ma_khoang");
       Dv_DmKhoang_KH_SCC = new DataView(DmKhoang_KH_SCC);
+      //DmKhoang_KH_SCC_H = dataSet.Tables[7].Copy();
 
-      DmKhoang_KH_SCC_H = dataSet.Tables[7].Copy();
-      DmTo_Loc_KH_SCC = dataSet.Tables[8].Copy();
-      DmTo_KH_SCC = DmTo_Loc_KH_SCC.Copy();
-      CyberFunc.V_DeleteRowEmpty(DmTo_KH_SCC, "Ma_TO");
-      Dv_DmTo_KH_SCC = new DataView(DmTo_KH_SCC);
+      //DmTo_Loc_KH_SCC = dataSet.Tables[8].Copy();
+      //DmTo_KH_SCC = DmTo_Loc_KH_SCC.Copy();
+      //CyberFunc.V_DeleteRowEmpty(DmTo_KH_SCC, "Ma_TO");
+      //Dv_DmTo_KH_SCC = new DataView(DmTo_KH_SCC);
+      //DmTo_KH_SCC_H = dataSet.Tables[9].Copy();
 
-      DmTo_KH_SCC_H = dataSet.Tables[9].Copy();
-      DmKTV_Loc_KH_SCC = dataSet.Tables[10].Copy();
-      DmKTV_KH_SCC = DmKTV_Loc_KH_SCC.Copy();
-      CyberFunc.V_DeleteRowEmpty(DmKTV_KH_SCC, "Ma_HS");
-      Dv_DmKTV_KH_SCC = new DataView(DmKTV_KH_SCC);
+      //DmKTV_Loc_KH_SCC = dataSet.Tables[10].Copy(); 
+      //DmKTV_KH_SCC = DmKTV_Loc_KH_SCC.Copy();
+      //CyberFunc.V_DeleteRowEmpty(DmKTV_KH_SCC, "Ma_HS");
+      //Dv_DmKTV_KH_SCC = new DataView(DmKTV_KH_SCC);
+      //DmKTV_KH_SCC_H = dataSet.Tables[11].Copy();
 
-      DmKTV_KH_SCC_H = dataSet.Tables[11].Copy();
-      Dt_Data_KTV_KH_SCC = dataSet.Tables[12].Copy();
-      Dv_Data_KTV_KH_SCC = new DataView(Dt_Data_KTV_KH_SCC);
-      DmCd_Loc_KH_SCC = dataSet.Tables[13].Copy();
-      DmCd_KH_SCC = DmCd_Loc_KH_SCC.Copy();
-      CyberFunc.V_DeleteRowEmpty(DmCd_KH_SCC, "Ma_CD");
-      Dv_DmCd_KH_SCC = new DataView(DmCd_KH_SCC);
+      //Dt_Data_KTV_KH_SCC = dataSet.Tables[12].Copy();
+      //Dv_Data_KTV_KH_SCC = new DataView(Dt_Data_KTV_KH_SCC);
+      //DmCd_Loc_KH_SCC = dataSet.Tables[13].Copy();
+      //DmCd_KH_SCC = DmCd_Loc_KH_SCC.Copy();
+      //CyberFunc.V_DeleteRowEmpty(DmCd_KH_SCC, "Ma_CD");
+      //Dv_DmCd_KH_SCC = new DataView(DmCd_KH_SCC);
+      //DmCd_KH_SCC_H = dataSet.Tables[14].Copy();
 
-      DmCd_KH_SCC_H = dataSet.Tables[14].Copy();
-      DmLoai_Xem_Loc_KH_SCC = dataSet.Tables[15].Copy();
+      DmLoai_Xem_Loc_KH_SCC = dataSet.Tables[15].Copy(); ///
       DmLoai_Xem_KH_SCC = DmLoai_Xem_Loc_KH_SCC.Copy();
       CyberFunc.V_DeleteRowEmpty(DmLoai_Xem_KH_SCC, "Loai");
       Dv_DmLoai_Xem_KH_SCC = new DataView(DmLoai_Xem_KH_SCC);
 
-      DmMucSBD_Loc_KH_SCC = dataSet.Tables[16].Copy();
-      DmMucSBD_KH_SCC = DmMucSBD_Loc_KH_SCC.Copy();
-      CyberFunc.V_DeleteRowEmpty(DmMucSBD_KH_SCC, "Muc_SBD");
-      Dv_DmMucSBD_KH_SCC = new DataView(DmMucSBD_KH_SCC);
+      //DmMucSBD_Loc_KH_SCC = dataSet.Tables[16].Copy();
+      //DmMucSBD_KH_SCC = DmMucSBD_Loc_KH_SCC.Copy();
+      //CyberFunc.V_DeleteRowEmpty(DmMucSBD_KH_SCC, "Muc_SBD");
+      //Dv_DmMucSBD_KH_SCC = new DataView(DmMucSBD_KH_SCC);
 
-      DmMucSDS_Loc_KH_SCC = dataSet.Tables[17].Copy();
-      DmMucSDS_KH_SCC = DmMucSDS_Loc_KH_SCC.Copy();
-      CyberFunc.V_DeleteRowEmpty(DmMucSDS_KH_SCC, "Muc_SDS");
-      Dv_DmMucSDS_KH_SCC = new DataView(DmMucSDS_KH_SCC);
+      //DmMucSDS_Loc_KH_SCC = dataSet.Tables[17].Copy();
+      //DmMucSDS_KH_SCC = DmMucSDS_Loc_KH_SCC.Copy();
+      //CyberFunc.V_DeleteRowEmpty(DmMucSDS_KH_SCC, "Muc_SDS");
+      //Dv_DmMucSDS_KH_SCC = new DataView(DmMucSDS_KH_SCC);
 
-      DmTang_Loc_KH_SCC = dataSet.Tables[19].Copy();
-      DmTang_KH_SCC = DmTang_Loc_KH_SCC.Copy();
-      CyberFunc.V_DeleteRowEmpty(DmTang_KH_SCC, "Tang");
-      Dv_DmTang_KH_SCC = new DataView(DmTang_KH_SCC);
+      //DmTang_Loc_KH_SCC = dataSet.Tables[19].Copy();
+      //DmTang_KH_SCC = DmTang_Loc_KH_SCC.Copy();
+      //CyberFunc.V_DeleteRowEmpty(DmTang_KH_SCC, "Tang");
+      //Dv_DmTang_KH_SCC = new DataView(DmTang_KH_SCC);
 
-      DmDungSC = dataSet.Tables[19].Copy();
+      //DmDungSC = dataSet.Tables[19].Copy();
 
       if (dataSet.Tables.Count > 20)
         Dt_Khoang_H = dataSet.Tables[20].Copy();
@@ -1520,8 +1524,8 @@ namespace TMV.UI.JPCB.JP
 
       M_StartHour = Convert.ToInt32(Dt_Set_SCC.Rows[0]["StartHour"]);
       M_FinishHour = Convert.ToInt32(Dt_Set_SCC.Rows[0]["FinishHour"]);
-      M_StartMINUTE = Convert.ToInt32(Dt_Set_SCC.Rows[0]["StartMINUTE"]);
-      M_FinishMINUTE = Convert.ToInt32(Dt_Set_SCC.Rows[0]["FinishMINUTE"]);
+      M_StartMINUTE = Convert.ToInt32(Dt_Set_SCC.Rows[0]["StartMinute"]);
+      M_FinishMINUTE = Convert.ToInt32(Dt_Set_SCC.Rows[0]["FinishMinute"]);
       M_Ngay_LimitInterval_Min = Convert.ToDateTime(Dt_Set_SCC.Rows[0]["Ngay_LimitInterval_Min"]);
       M_Ngay_LimitInterval_Max = Convert.ToDateTime(Dt_Set_SCC.Rows[0]["Ngay_LimitInterval_Max"]);
       M_Thu_Bay = Dt_Set_SCC.Rows[0]["Thu_Bay"].ToString().Trim();
@@ -1545,7 +1549,7 @@ namespace TMV.UI.JPCB.JP
 
       CyberFunc.V_FillComBoxDefaul(CbbGio_Xem, Dt_Xem_Gio, "Gio_Xem", "Ten");
     }
-    private void Fill_Cbb(int _All)
+    private void Fill_Cbb(int _All) //
     {
       CyberFunc.V_FillComBoxDefaul(CbbCVDV_KH_SCC, DmCVDV_Loc_KH_SCC, "Ma_Hs", "Ten_Hs", "Ngam_Dinh");
       CyberFunc.V_FillComBoxDefaul(CbbKhoang_KH_SCC, DmKhoang_Loc_KH_SCC, "Ma_Khoang", "Ten_Khoang", "Ngam_Dinh");
@@ -1562,12 +1566,12 @@ namespace TMV.UI.JPCB.JP
       CyberFunc.V_FillComBoxDefaul(CbbMa_BN_KH_SCC, Dt_Buoc_Nhay_KH_SCC, "Ma_BN", "Ten_BN", "Ngam_Dinh");
       CyberFunc.V_FillComBoxDefaul(CbbDo_Rong_KH_SCC, Dt_Do_Rong_KH_SCC, "Ma_Width", "Ten_Width", "Ngam_Dinh");
     }
-    private void V_CyberSetTime_KH_SCC()
+    private void V_CyberSetTime_KH_SCC() //
     {
-      Decimal num1 = new Decimal(M_StartHour);
-      Decimal num2 = new Decimal(M_StartMINUTE);
-      Decimal num3 = new Decimal(M_FinishHour);
-      Decimal num4 = new Decimal(M_FinishMINUTE);
+      int num1 = M_StartHour;
+      int num2 = M_StartMINUTE;
+      int num3 = M_FinishHour;
+      int num4 = M_FinishMINUTE;
 
       if (SchedulerControl_KH_SCC.ActiveViewType == SchedulerViewType.Gantt)
       {
@@ -1576,15 +1580,15 @@ namespace TMV.UI.JPCB.JP
         try
         {
           scales.Clear();
-          TimeScaleLessThanDay scaleLessThanDay1 = new TimeScaleLessThanDay(TimeSpan.FromHours(1.0), M_StartHour, M_FinishHour, M_Thu_Bay, M_Chu_Nhat);
+          TimeScaleLessThanDay scaleLessThanDay1 = new TimeScaleLessThanDay(TimeSpan.FromHours(1), M_StartHour, M_FinishHour, M_Thu_Bay, M_Chu_Nhat);
           TimeScaleLessThanDay scaleLessThanDay2 = new TimeScaleLessThanDay(TimeSpan.FromMinutes(Convert.ToDouble(CyberFunc.V_GetvalueCombox(CbbMa_BN_KH_SCC))), M_StartHour, M_FinishHour, M_Thu_Bay, M_Chu_Nhat);
-          scales.Add((TimeScale)new TimeScaleYear());
-          scales.Add((TimeScale)new TimeScaleQuarter());
-          scales.Add((TimeScale)new TimeScaleMonth());
-          scales.Add((TimeScale)new TimeScaleWeek());
-          scales.Add((TimeScale)new CyberTimeScaleDay(M_StartHour, M_FinishHour, M_Ngay_LimitInterval_Min, M_Ngay_LimitInterval_Max));
-          scales.Add((TimeScale)scaleLessThanDay1);
-          scales.Add((TimeScale)scaleLessThanDay2);
+          scales.Add(new TimeScaleYear());
+          scales.Add(new TimeScaleQuarter());
+          scales.Add(new TimeScaleMonth());
+          scales.Add(new TimeScaleWeek());
+          scales.Add(new CyberTimeScaleDay(M_StartHour, M_FinishHour, M_Ngay_LimitInterval_Min, M_Ngay_LimitInterval_Max));
+          scales.Add(scaleLessThanDay1);
+          scales.Add(scaleLessThanDay2);
         }
         finally
         {
@@ -1608,8 +1612,8 @@ namespace TMV.UI.JPCB.JP
           return;
 
         SchedulerControl_KH_SCC.Views.DayView.ShowWorkTimeOnly = true;
-        TimeSpan timeSpan1 = new TimeSpan(Convert.ToInt32(num1), Convert.ToInt32(num2), 0);
-        TimeSpan timeSpan2 = new TimeSpan(Convert.ToInt32(num3), Convert.ToInt32(num4), 0);
+        TimeSpan timeSpan1 = new TimeSpan(num1, num2, 0);
+        TimeSpan timeSpan2 = new TimeSpan(num3, num4, 0);
         SchedulerControl_KH_SCC.Views.DayView.WorkTime.End = new TimeSpan(M_FinishHour, M_FinishMINUTE, 0);
         SchedulerControl_KH_SCC.Views.DayView.WorkTime.Start = timeSpan1;
         SchedulerControl_KH_SCC.Views.DayView.WorkTime.End = timeSpan2;
@@ -1623,7 +1627,7 @@ namespace TMV.UI.JPCB.JP
       string upper = CyberFunc.V_GetvalueCombox(CbbLoai_Xem_KH_SCC).ToString().Trim().ToUpper();
       DateTime date = Convert.ToDateTime(TxtM_Ngay_Ct_KH_SCC.EditValue);
 
-      DataSet dataSet = new DataSet(); // CP_RO_CVDV_KH_SCC_DATA
+      DataSet dataSet = JpcbJpBO.Instance().GetJPData(Globals.LoginDlrId, "GJ", date); // CP_RO_CVDV_KH_SCC_DATA
       int num = checked(dataSet.Tables.Count - 1);
       int index = 0;
       while (index <= num)
@@ -1634,9 +1638,9 @@ namespace TMV.UI.JPCB.JP
       if (status == "1")
       {
         LabTotal.Text = "";
-        Dt_Data_KH_SCC = (DataTable)null;
-        Dt_Data_Xe_KH_SCC = (DataTable)null;
-        Dt_Data_Parent_KH_SCC = (DataTable)null;
+        Dt_Data_KH_SCC = null;
+        Dt_Data_Xe_KH_SCC = null;
+        Dt_Data_Parent_KH_SCC = null;
         if (dataSet.Tables.Count > 0)
         {
           Dt_Data_KH_SCC = dataSet.Tables[0].Copy();
@@ -1674,16 +1678,16 @@ namespace TMV.UI.JPCB.JP
       else if (_Stt_Rec_Ro_Load.Trim() == "" & _Stt_Rec_Load.Trim() == "")
       {
         Dt_Data_KH_SCC.Clear();
-        Dt_Data_KH_SCC.Load((IDataReader)dataSet.Tables[0].CreateDataReader());
+        Dt_Data_KH_SCC.Load(dataSet.Tables[0].CreateDataReader());
         if (dataSet.Tables.Count > 1 & Dt_Data_Xe_KH_SCC != null)
         {
           Dt_Data_Xe_KH_SCC.Clear();
-          Dt_Data_Xe_KH_SCC.Load((IDataReader)dataSet.Tables[1].CreateDataReader());
+          Dt_Data_Xe_KH_SCC.Load(dataSet.Tables[1].CreateDataReader());
         }
         if (dataSet.Tables.Count > 2 & Dt_Data_Parent_KH_SCC != null)
         {
           Dt_Data_Parent_KH_SCC.Clear();
-          Dt_Data_Parent_KH_SCC.Load((IDataReader)dataSet.Tables[2].CreateDataReader());
+          Dt_Data_Parent_KH_SCC.Load(dataSet.Tables[2].CreateDataReader());
         }
       }
       else
@@ -1691,7 +1695,7 @@ namespace TMV.UI.JPCB.JP
         if (dataSet.Tables.Count > 0 & Dt_Data_KH_SCC != null)
         {
           V_Delete_KH_SCC_DATA(Dt_Data_KH_SCC, _Stt_Rec_Ro_Load, _Stt_Rec_Load);
-          Dt_Data_KH_SCC.Load((IDataReader)dataSet.Tables[0].CreateDataReader());
+          Dt_Data_KH_SCC.Load(dataSet.Tables[0].CreateDataReader());
         }
         if (dataSet.Tables.Count > 1 & Dt_Data_Xe_KH_SCC != null)
         {
@@ -1701,8 +1705,7 @@ namespace TMV.UI.JPCB.JP
       }
       dataSet.Dispose();
 
-      V_Update_Ten3();
-      V_Dang_Sua_Chua((object)"");
+      V_Dang_Sua_Chua("");
       SchedulerControl_KH_SCC.EndUpdate();
 
       V_Filter_KH_SCC(new object(), new EventArgs());
@@ -1714,7 +1717,7 @@ namespace TMV.UI.JPCB.JP
 
       V_start_Flass(status);
     }
-    private void V_AddHander_KH_SCC()
+    private void V_AddHander_KH_SCC() //
     {
       CbbGio_Xem.SelectedIndexChanged -= new EventHandler(V_Gio_Xem);
       LabLock.Click -= new EventHandler(V_Lock_Data);
@@ -1815,7 +1818,7 @@ namespace TMV.UI.JPCB.JP
       buttRemove_Filter.Click -= new EventHandler(V_Remove_Filter);
       buttRemove_Filter.Click += new EventHandler(V_Remove_Filter);
     }
-    private void V_SetSchedulerControl_KH_SCC()
+    private void V_SetSchedulerControl_KH_SCC() //
     {
       SchedulerControl_KH_SCC.DateNavigationBar.Visible = false;
       SchedulerControl_KH_SCC.ActiveViewType = SchedulerViewType.Gantt;
@@ -1831,7 +1834,7 @@ namespace TMV.UI.JPCB.JP
       if (DmKhoang_KH_SCC.Columns.Contains("Image"))
         SchedulerStorage_KH_SCC.Resources.Mappings.Image = DmKhoang_KH_SCC.Columns["Image"].ColumnName.ToString().Trim();
 
-      SchedulerStorage_KH_SCC.Appointments.DataSource = (object)Dv_Data_KH_SCC;
+      SchedulerStorage_KH_SCC.Appointments.DataSource = Dv_Data_KH_SCC;
       SchedulerStorage_KH_SCC.Appointments.Mappings.AllDay = "AllDay";
       SchedulerStorage_KH_SCC.Appointments.Mappings.AppointmentId = Dt_Data_KH_SCC.Columns["Stt_Rec"].ColumnName;
 
@@ -1853,17 +1856,17 @@ namespace TMV.UI.JPCB.JP
 
       SchedulerControl_KH_SCC.OptionsView.ToolTipVisibility = ToolTipVisibility.Always;
 
-      if (M_Loai_KH_SCC.Trim() == "2" & M_Kieu_Xem != "HEN")
-        SchedulerControl_KH_SCC.GanttView.Appearance.Appointment.ForeColor = System.Drawing.Color.Navy;
+      if (M_Loai_KH_SCC.Trim() == "2" & M_Kieu_Xem != "HEN") // BP
+        SchedulerControl_KH_SCC.GanttView.Appearance.Appointment.ForeColor = Color.Navy;
       else
-        SchedulerControl_KH_SCC.GanttView.Appearance.Appointment.ForeColor = System.Drawing.Color.White;
+        SchedulerControl_KH_SCC.GanttView.Appearance.Appointment.ForeColor = Color.White;
 
       SchedulerControl_KH_SCC.GanttView.Appearance.Appointment.Font = new Font(SchedulerControl_KH_SCC.DayView.Appearance.Appointment.Font.FontFamily, 10f);
       SchedulerControl_KH_SCC.Views.GanttView.AppointmentDisplayOptions.StartTimeVisibility = AppointmentTimeVisibility.Never;
       SchedulerControl_KH_SCC.Views.GanttView.AppointmentDisplayOptions.EndTimeVisibility = AppointmentTimeVisibility.Never;
       SchedulerControl_KH_SCC.Views.GanttView.AppointmentDisplayOptions.SnapToCellsMode = AppointmentSnapToCellsMode.Disabled;
     }
-    private void V_SetRowHeight_KH_SCC()
+    private void V_SetRowHeight_KH_SCC() //
     {
       if (!_TabVisible3)
         return;
@@ -1888,7 +1891,7 @@ namespace TMV.UI.JPCB.JP
 
       SchedulerControl_KH_SCC.Views.GanttView.ResourcesPerPage = Convert.ToInt32(d1_1);
     }
-    private void V_Auto_Data_KH_SCC(object sender, EventArgs e)
+    private void V_Auto_Data_KH_SCC(object sender, EventArgs e) //
     {
       Timer_Data_KH_SCC.Enabled = ChkAuto_Data_KH_SCC.Checked;
       CbbTime_Data_KH_SCC.Enabled = ChkAuto_Data_KH_SCC.Checked;
@@ -1897,30 +1900,31 @@ namespace TMV.UI.JPCB.JP
         d1 = 3000M;
       Timer_Data_KH_SCC.Interval = Convert.ToInt32(d1);
     }
-    private void V_Buoc_Nhay_KH_SCC(object sender, EventArgs e)
+    private void V_Buoc_Nhay_KH_SCC(object sender, EventArgs e) //
     {
       V_CyberSetTime_KH_SCC();
       V_Do_Rong_KH_SCC(sender, e);
     }
-    private void V_Do_Rong_KH_SCC(object sender, EventArgs e)
+    private void V_Do_Rong_KH_SCC(object sender, EventArgs e) //
     {
       int index = 0;
       do
       {
         if (SchedulerControl_KH_SCC.GanttView.Scales[index].Visible)
           SchedulerControl_KH_SCC.Views.GanttView.Scales[index].Width = Convert.ToInt32(CyberFunc.V_GetvalueCombox(CbbDo_Rong_KH_SCC));
+
         checked { ++index; }
       }
       while (index <= 6);
     }
-    private void V_Load_Cho_Lap_KH()
+    private void V_Load_Cho_Lap_KH() //
     {
       V_LoadData_Cho_Lap_KH("1", "");
       V_Fill_Cho_Lap_KH();
       V_Fill_Sua_Xong_KH();
       V_AddHander_Cho_Lap_KH();
 
-      if (M_Kieu_Xem.Trim() != "HEN" & M_Loai_KH_SCC.Trim() == "1")
+      if (M_Kieu_Xem.Trim() != "HEN" & M_Loai_KH_SCC.Trim() == "1") // GJ
         V_DragDropGridview_KH_SCC();
 
       if (M_Kieu_Xem.Trim() == "HEN" | Dt_Sua_Xong_KH == null)
@@ -1952,14 +1956,14 @@ namespace TMV.UI.JPCB.JP
         dataSet?.Dispose();
       }
     }
-    private void V_LoadTimeLine()
+    private void V_LoadTimeLine() //
     {
       TimeIntervalCollection visibleIntervals = SchedulerControl_KH_SCC.ActiveView.GetVisibleIntervals();
       TimeSpan timeSpan = visibleIntervals[checked(visibleIntervals.Count - 1)].End - visibleIntervals[0].Start;
       timeSpan = new TimeSpan(checked((long)Math.Round(unchecked((double)timeSpan.Ticks / 2.0))));
       SchedulerControl_KH_SCC.Start = DateTime.Now.AddTicks(checked(-timeSpan.Ticks));
     }
-    private void V_AddHanderLabel_KH_SCC()
+    private void V_AddHanderLabel_KH_SCC() //
     {
       Lab_SCC_01.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
       Lab_SCC_02.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
@@ -2012,7 +2016,7 @@ namespace TMV.UI.JPCB.JP
     {
       // TODO
     }
-    private void ResizeLabel_KH_SCC(Label lab)
+    private void ResizeLabel_KH_SCC(Label lab) //
     {
       try
       {
@@ -2292,7 +2296,7 @@ namespace TMV.UI.JPCB.JP
         SplashScreenManager.ShowForm(this, typeof(frmLoading), true, true, false);
 
       string str = CyberFunc.V_GetvalueCombox(CbbLoai_Xem_KH_SCC);
-      if (M_Loai_KH_SCC == "2")
+      if (M_Loai_KH_SCC == "2") // BP
         V_Load_DATA_KH_SCC("0", "", "");
 
       V_SetSchedulerSetValue();
@@ -2339,7 +2343,7 @@ namespace TMV.UI.JPCB.JP
     private void SchedulerControl_KH_SCC_AppointmentDrop(object sender, AppointmentDragEventArgs e)
     {
       Appointment editedAppointment = e.EditedAppointment;
-      if (CyberFunc.V_GetvalueCombox(CbbLoai_Xem_KH_SCC).Trim() != "05" & M_Loai_KH_SCC.Trim() == "2")
+      if (CyberFunc.V_GetvalueCombox(CbbLoai_Xem_KH_SCC).Trim() != "05" & M_Loai_KH_SCC.Trim() == "2") // BP
         e.Allow = false;
       else
       {
@@ -2572,26 +2576,26 @@ namespace TMV.UI.JPCB.JP
           if (str3.Trim() == "1")
           {
             if (flag)
-              e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, (float)emSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
+              e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, emSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
             else
-              e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, (float)emSize, FontStyle.Bold | FontStyle.Underline);
+              e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, emSize, FontStyle.Bold | FontStyle.Underline);
           }
           else if (flag)
-            e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, (float)emSize, FontStyle.Bold | FontStyle.Italic);
+            e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, emSize, FontStyle.Bold | FontStyle.Italic);
           else
-            e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, (float)emSize, FontStyle.Bold);
+            e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, emSize, FontStyle.Bold);
         }
         else if (str3.Trim() == "1")
         {
           if (flag)
-            e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, (float)emSize, FontStyle.Italic | FontStyle.Underline);
+            e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, emSize, FontStyle.Italic | FontStyle.Underline);
           else
-            e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, (float)emSize, FontStyle.Underline);
+            e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, emSize, FontStyle.Underline);
         }
         else if (flag)
-          e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, (float)emSize, FontStyle.Italic);
+          e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, emSize, FontStyle.Italic);
         else
-          e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, (float)emSize, FontStyle.Regular);
+          e.ViewInfo.Appearance.Font = new Font(Font.FontFamily, emSize, FontStyle.Regular);
       }
       catch (Exception ex)
       {
@@ -2642,7 +2646,7 @@ namespace TMV.UI.JPCB.JP
     }
     private void schedulerControl_CustomDrawDayHeader(object sender, DevExpress.XtraScheduler.CustomDrawObjectEventArgs e)
     {
-      if (M_Kieu_Xem.Trim().ToUpper() == "HEN" | M_Loai_KH_SCC.Trim() == "1")
+      if (M_Kieu_Xem.Trim().ToUpper() == "HEN" | M_Loai_KH_SCC.Trim() == "1") // GJ
         return;
 
       DateTime now = DateTime.Now;
@@ -2711,7 +2715,7 @@ namespace TMV.UI.JPCB.JP
 
       if (dataSource.Table.Columns.Contains("BackColor_Cot"))
       {
-        Brush brush = (Brush)new SolidBrush(CyberColor.GetBackColor(Convert.ToString(dataSource[nodeIndex]["BackColor_Cot"])));
+        Brush brush = new SolidBrush(CyberColor.GetBackColor(Convert.ToString(dataSource[nodeIndex]["BackColor_Cot"])));
         e.Cache.FillRectangle(brush, e.Bounds);
         flag1 = true;
       }
@@ -2722,7 +2726,7 @@ namespace TMV.UI.JPCB.JP
       }
       if (dataSource.Table.Columns.Contains("ForeColor_Cot"))
       {
-        Brush foreBrush = (Brush)new SolidBrush(CyberColor.GetForeColor(Convert.ToString(dataSource[nodeIndex]["ForeColor_Cot"])));
+        Brush foreBrush = new SolidBrush(CyberColor.GetForeColor(Convert.ToString(dataSource[nodeIndex]["ForeColor_Cot"])));
         e.Cache.DrawString(e.CellText, e.Appearance.Font, foreBrush, e.Bounds, e.Appearance.GetStringFormat());
         flag1 = true;
       }
@@ -2777,9 +2781,9 @@ namespace TMV.UI.JPCB.JP
     {
       string upper = TabCVDV.TabPages[TabCVDV.SelectedIndex].Name.ToString().Trim().ToUpper();
       if (upper == "TAB8")
-        V_Refresh_HonHop((object)null, (EventArgs)null);
+        V_Refresh_HonHop(null, null);
       else if (upper == "TAB9")
-        V_Refresh_Dung((object)null, (EventArgs)null);
+        V_Refresh_Dung(null, null);
     }
     private void V_Du_Kien_Giao(object sender, EventArgs e) => V_Filter_KH_SCC(sender, e);
     private void V_Du_All_Xe_Cd(object sender, EventArgs e)
@@ -2787,7 +2791,7 @@ namespace TMV.UI.JPCB.JP
       if (ChkShow_All_Cd_Xe.Checked)
       {
         if (CbbCD_KH_SCC.Items.Count > 0)
-          CbbCD_KH_SCC.SelectedValue = (object)"";
+          CbbCD_KH_SCC.SelectedValue = "";
 
         CbbCD_KH_SCC.Enabled = false;
       }
@@ -2890,12 +2894,9 @@ namespace TMV.UI.JPCB.JP
       }
       SchedulerControl_KH_SCC.EndUpdate();
     }
-    private void V_Update_Ten3()
+    private void V_Dang_Sua_Chua(string _StrKhoang)
     {
-    }
-    private void V_Dang_Sua_Chua(object _StrKhoang)
-    {
-      if (M_Kieu_Xem == "HEN" || M_Loai_KH_SCC != "1")
+      if (M_Kieu_Xem == "HEN" || M_Loai_KH_SCC != "1") // GJ
         return;
 
       DateTime date = Convert.ToDateTime(TxtM_Ngay_Ct_KH_SCC.EditValue);
@@ -3129,7 +3130,7 @@ namespace TMV.UI.JPCB.JP
       if (str1.Trim() == "")
         return filterKhSccTo;
 
-      if (M_Loai_KH_SCC.Trim().Trim() == "1" | M_Kieu_Xem.Trim() == "HEN")
+      if (M_Loai_KH_SCC.Trim().Trim() == "1" | M_Kieu_Xem.Trim() == "HEN")  // GJ
         filterKhSccTo = filterKhSccTo + " AND Ma_To = '" + str1.Trim() + "'";
 
       else if (_Loai_Tb.ToString().ToUpper() == "XE")
@@ -3326,7 +3327,7 @@ namespace TMV.UI.JPCB.JP
         num2 = V_Dem_Xe(Dv_Data_KH_SCC);
       if (Dt_Lenh_Giao_Trong_Ngay != null)
         num3 = Dv_Lenh_Giao_Trong_Ngay.Count;
-      if (M_Loai_KH_SCC == "2")
+      if (M_Loai_KH_SCC == "2") // BP
         num1 = -1;
 
       LabTotal.Text = "";
@@ -3430,7 +3431,7 @@ namespace TMV.UI.JPCB.JP
       {
         string _Id = !DmKhoang_KH_SCC.Columns.Contains("Ma_Khoang_Tmp") ? "Ma_Khoang" : "Ma_Khoang_Tmp";
         string _Caption = !(M_Loai_KH_SCC == "2" & str == "01") ? (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_khoang") : "Ten_Khoang_Tmp") : (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten_khoang") ? "Ten_khoang2" : "Ten_khoang") : "Ten_Khoang_Tmp");
-        if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1")
+        if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1") // GJ
           V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong, Dt_Khoang_H);
         else
           V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong);
@@ -3443,7 +3444,7 @@ namespace TMV.UI.JPCB.JP
         {
           string _Id = !DmKhoang_KH_SCC.Columns.Contains("Ma_Khoang_Tmp") ? "Ma_Khoang" : "Ma_Khoang_Tmp";
           string _Caption = !(M_Loai_KH_SCC == "2" & str == "01") ? (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_khoang") : "Ten_Khoang_Tmp") : (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten_khoang") ? "Ten_khoang2" : "Ten_khoang") : "Ten_Khoang_Tmp");
-          if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1")
+          if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1") // GJ
             V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong, Dt_Khoang_H);
           else
             V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong);
@@ -3457,7 +3458,7 @@ namespace TMV.UI.JPCB.JP
         {
           string _Id = !DmKhoang_KH_SCC.Columns.Contains("Ma_Khoang_Tmp") ? "Ma_Khoang" : "Ma_Khoang_Tmp";
           string _Caption = !(M_Loai_KH_SCC == "2" & str == "01") ? (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_khoang") : "Ten_Khoang_Tmp") : (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten_khoang") ? "Ten_khoang2" : "Ten_khoang") : "Ten_Khoang_Tmp");
-          if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1")
+          if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1") // GJ
             V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong, Dt_Khoang_H);
           else
             V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong);
@@ -3471,7 +3472,7 @@ namespace TMV.UI.JPCB.JP
         {
           string _Id = !DmKhoang_KH_SCC.Columns.Contains("Ma_Khoang_Tmp") ? "Ma_Khoang" : "Ma_Khoang_Tmp";
           string _Caption = !(M_Loai_KH_SCC == "2" & str == "01") ? (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_khoang") : "Ten_Khoang_Tmp") : (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten_khoang") ? "Ten_khoang2" : "Ten_khoang") : "Ten_Khoang_Tmp");
-          if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1")
+          if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1") // GJ
             V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong, Dt_Khoang_H);
           else
             V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong);
@@ -3483,7 +3484,7 @@ namespace TMV.UI.JPCB.JP
         {
           string _Id = !Dt_Data_Xe_KH_SCC.Columns.Contains("Stt_rec_Ro_Tmp") ? "Stt_rec_Ro" : "Stt_rec_Ro_Tmp";
           string _Caption = !Dt_Data_Xe_KH_SCC.Columns.Contains("Ma_Xe_Tmp") ? (Dt_Data_Xe_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ma_Xe") : "Ma_Xe_Tmp";
-          if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "2")
+          if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "2")  // BP
             V_SetScheduler(Dv_Data_Xe_KH_SCC, _Id, _Caption, _Do_Rong, Dt_Xe_H);
           else
             V_SetScheduler(Dv_Data_Xe_KH_SCC, _Id, _Caption, _Do_Rong);
@@ -3492,7 +3493,7 @@ namespace TMV.UI.JPCB.JP
         {
           string _Id = !DmKhoang_KH_SCC.Columns.Contains("Ma_Khoang_Tmp") ? "Ma_Khoang" : "Ma_Khoang_Tmp";
           string _Caption = !(M_Loai_KH_SCC == "2" & str == "01") ? (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_khoang") : "Ten_Khoang_Tmp") : (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten_khoang") ? "Ten_khoang2" : "Ten_khoang") : "Ten_Khoang_Tmp");
-          if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1")
+          if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1") // GJ
             V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong, Dt_Khoang_H);
           else
             V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong);
@@ -3506,7 +3507,7 @@ namespace TMV.UI.JPCB.JP
         {
           string _Id = !DmKhoang_KH_SCC.Columns.Contains("Ma_Khoang_Tmp") ? "Ma_Khoang" : "Ma_Khoang_Tmp";
           string _Caption = !(M_Loai_KH_SCC == "2" & str == "01") ? (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_khoang") : "Ten_Khoang_Tmp") : (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten_khoang") ? "Ten_khoang2" : "Ten_khoang") : "Ten_Khoang_Tmp");
-          if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1")
+          if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1") // GJ
             V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong, Dt_Khoang_H);
           else
             V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong);
@@ -3516,12 +3517,11 @@ namespace TMV.UI.JPCB.JP
       {
         string _Id = !DmKhoang_KH_SCC.Columns.Contains("Ma_Khoang_Tmp") ? "Ma_Khoang" : "Ma_Khoang_Tmp";
         string _Caption = !(M_Loai_KH_SCC == "2" & str == "01") ? (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_khoang") : "Ten_Khoang_Tmp") : (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten_khoang") ? "Ten_khoang2" : "Ten_khoang") : "Ten_Khoang_Tmp");
-        if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1")
+        if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1") // GJ
           V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong, Dt_Khoang_H);
         else
           V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong);
       }
-      V_Update_Ten3();
     }
     private void V_SetScheduler(DataView _Dv_DataSource, string _Id, string _Caption, Decimal _Do_Rong, DataTable _Dt_Head_tree = null)
     {
@@ -3530,10 +3530,10 @@ namespace TMV.UI.JPCB.JP
 
       V_AddResourcesTree(_Dv_DataSource, _Dt_Head_tree);
 
-      SchedulerStorage_KH_SCC.Resources.DataSource = (object)null;
+      SchedulerStorage_KH_SCC.Resources.DataSource = null;
       SchedulerStorage_KH_SCC.Resources.Mappings.Id = "";
       SchedulerStorage_KH_SCC.Resources.Mappings.Caption = "";
-      SchedulerStorage_KH_SCC.Resources.DataSource = (object)_Dv_DataSource;
+      SchedulerStorage_KH_SCC.Resources.DataSource = _Dv_DataSource;
       SchedulerStorage_KH_SCC.Resources.Mappings.Id = _Dv_DataSource.Table.Columns[_Id].ColumnName.ToString().Trim();
       SchedulerStorage_KH_SCC.Resources.Mappings.Caption = _Dv_DataSource.Table.Columns[_Caption].ColumnName.ToString().Trim();
 
@@ -3548,7 +3548,7 @@ namespace TMV.UI.JPCB.JP
 
       SchedulerStorage_KH_SCC.Appointments.Mappings.ResourceId = Dt_Data_KH_SCC.Columns[_Id].ColumnName;
 
-      if (Dt_Data_KH_SCC.Columns.Contains("ten_CD") & M_Loai_KH_SCC.Trim() == "2" & M_Kieu_Xem != "HEN")
+      if (Dt_Data_KH_SCC.Columns.Contains("ten_CD") & M_Loai_KH_SCC.Trim() == "2" & M_Kieu_Xem != "HEN") // BP
         SchedulerStorage_KH_SCC.Appointments.Mappings.Subject = Dt_Data_KH_SCC.Columns["ten_CD"].ColumnName;
       else
         SchedulerStorage_KH_SCC.Appointments.Mappings.Subject = Dt_Data_KH_SCC.Columns["Ma_Xe"].ColumnName;
@@ -3556,7 +3556,7 @@ namespace TMV.UI.JPCB.JP
       if (Dt_Data_Parent_KH_SCC == null || !(Dt_Data_Parent_KH_SCC.Columns.Contains("DependentId") & Dt_Data_Parent_KH_SCC.Columns.Contains("ParentId") & Dt_Data_Parent_KH_SCC.Columns.Contains("Type")))
         return;
 
-      SchedulerStorage_KH_SCC.AppointmentDependencies.DataSource = (object)Dt_Data_Parent_KH_SCC;
+      SchedulerStorage_KH_SCC.AppointmentDependencies.DataSource = Dt_Data_Parent_KH_SCC;
       SchedulerStorage_KH_SCC.AppointmentDependencies.Mappings.DependentId = Dt_Data_Parent_KH_SCC.Columns["DependentId"].ColumnName;
       SchedulerStorage_KH_SCC.AppointmentDependencies.Mappings.ParentId = Dt_Data_Parent_KH_SCC.Columns["ParentId"].ColumnName;
       SchedulerStorage_KH_SCC.AppointmentDependencies.Mappings.Type = Dt_Data_Parent_KH_SCC.Columns["Type"].ColumnName;
@@ -3625,7 +3625,7 @@ namespace TMV.UI.JPCB.JP
               column.AppearanceCell.TextOptions.WordWrap = WordWrap.Wrap;
               column.AppearanceCell.TextOptions.VAlignment = VertAlignment.Center;
               column.Width = Convert.ToInt32(row["Field_Width"]);
-              ResourcesTree1.Columns.Add((TreeListColumn)column);
+              ResourcesTree1.Columns.Add(column);
             }
           }
         }
@@ -3989,7 +3989,7 @@ namespace TMV.UI.JPCB.JP
     }
     private void V_DragDropGridview_KH_SCC()
     {
-      _keotha2Grid = new GridviewDragDrop(Master_Cho_Lap_KH, (Control)SchedulerControl_KH_SCC);
+      _keotha2Grid = new GridviewDragDrop(Master_Cho_Lap_KH, SchedulerControl_KH_SCC);
       SchedulerControl_KH_SCC.DragDrop -= new DragEventHandler(Master_Cho_Lap_KH_DragDrop);
       SchedulerControl_KH_SCC.DragDrop += new DragEventHandler(Master_Cho_Lap_KH_DragDrop);
     }
@@ -4158,7 +4158,7 @@ namespace TMV.UI.JPCB.JP
             new EventHandler(V_Tao_Tien_Do_Cho_Lap_KH), Shortcut.F4,
             ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
 
-      if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC.Trim() == "2")
+      if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC.Trim() == "2") // BP
         PopupMenu.ItemLinks.Add(
           new CyberMenuPopup(sender, 0, "Tạo nhanh kế hoạch sửa chữa đồng sơn", 
             new EventHandler(V_Tao_Tien_Do_Cho_Lap_KHALL), Shortcut.None,

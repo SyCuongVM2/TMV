@@ -46,6 +46,7 @@
     <Compile Include="AppHandler.cs" />
     <Compile Include="Auth\AppUsersDAO.cs" />
     <Compile Include="JPCB\JpcbCwDAO.cs" />
+    <Compile Include="JPCB\JpcbJpDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlConnect.cs" />
     <Compile Include="SqlDataAccess.cs" />

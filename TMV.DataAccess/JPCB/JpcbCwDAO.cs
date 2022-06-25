@@ -35,7 +35,7 @@ namespace TMV.DataAccess.JPCB
     {
       return SqlDataAccess.ExecuteDataset(
         SqlConnect.ConnectionString,
-        Constants.Instance().AppJpcbPkgGetConfigs,
+        Constants.Instance().AppJpcbPkgCWGetConfigs,
         new object[] {
           Globals.DB_GetNull(tenantId),
           Globals.DB_GetNull(type) // CW, GJ, BP
@@ -57,7 +57,7 @@ namespace TMV.DataAccess.JPCB
     {
       return SqlDataAccess.ExecuteDataset(
         SqlConnect.ConnectionString,
-        Constants.Instance().AppJpcbPkgGetCWData,
+        Constants.Instance().AppJpcbPkgCWGetData,
         new object[] {
           Globals.DB_GetNull(tenantId),
           Globals.DB_GetNull(type), // CW, GJ, BP
@@ -70,7 +70,7 @@ namespace TMV.DataAccess.JPCB
     {
       return SqlDataAccess.ExecuteDataset(
         SqlConnect.ConnectionString,
-        Constants.Instance().AppJpcbPkgStartFinishCW,
+        Constants.Instance().AppJpcbPkgCWStartFinish,
         new object[] {
           Globals.DB_GetNull(userId),
           Globals.DB_GetNull(tenantId),
@@ -106,7 +106,7 @@ namespace TMV.DataAccess.JPCB
     {
       return SqlDataAccess.ExecuteDataset(
         SqlConnect.ConnectionString,
-        Constants.Instance().AppJpcbPkgGetCWDetail,
+        Constants.Instance().AppJpcbPkgCWGetDetail,
         new object[] {
           Globals.DB_GetNull(tenantId),
           Globals.DB_GetNull(Id)
@@ -130,7 +130,7 @@ namespace TMV.DataAccess.JPCB
     {
       return SqlDataAccess.ExecuteDataset(
         SqlConnect.ConnectionString,
-        Constants.Instance().AppJpcbPkgAddOrUpdateCW,
+        Constants.Instance().AppJpcbPkgCWAddOrUpdate,
         new object[] {
           Globals.DB_GetNull(userId),
           Globals.DB_GetNull(tenantId),
@@ -148,7 +148,7 @@ namespace TMV.DataAccess.JPCB
     {
       return SqlDataAccess.ExecuteDataset(
         SqlConnect.ConnectionString,
-        Constants.Instance().AppJpcbPkgDeleteCWPlan,
+        Constants.Instance().AppJpcbPkgCWDeletePlan,
         new object[] {
           Globals.DB_GetNull(tenantId),
           Globals.DB_GetNull(Id)

@@ -471,7 +471,7 @@ namespace TMV.UI.JPCB.CW
       this.SchedulerControl.OptionsView.ResourceHeaders.RotateCaption = false;
       this.SchedulerControl.OptionsView.ToolTipVisibility = DevExpress.XtraScheduler.ToolTipVisibility.Always;
       this.SchedulerControl.Size = new System.Drawing.Size(674, 628);
-      this.SchedulerControl.Start = new System.DateTime(2017, 12, 31, 0, 0, 0, 0);
+      this.SchedulerControl.Start = new System.DateTime(2017, 1, 1, 0, 0, 0, 0);
       this.SchedulerControl.TabIndex = 0;
       this.SchedulerControl.Text = "schedulerControl1";
       this.SchedulerControl.Views.DayView.TimeRulers.Add(timeRuler1);

@@ -51,18 +51,27 @@
     public string AppAuthPkgUpdateFailedLogin = "AppAuthPkgUpdateFailedLogin";
     #endregion
 
-    #region "JPCB"
-    public string AppJpcbPkgGetConfigs = "AppJpcbPkgGetConfigs";
+    #region "Common"
     public string AppJpcbPkgGetConfigsDefault = "AppJpcbPkgGetConfigsDefault";
-    public string AppJpcbPkgGetCWData = "AppJpcbPkgGetCWData";
-    public string AppJpcbPkgStartFinishCW = "AppJpcbPkgStartFinishCW";
     public string AppJpcbPkgGetWorkingTime = "AppJpcbPkgGetWorkingTime";
     public string AppJpcbPkgGetWorkshops = "AppJpcbPkgGetWorkshops";
-    public string AppJpcbPkgGetCWDetail = "AppJpcbPkgGetCWDetail";
     public string AppJpcbPkgCalcWorkingTime = "AppJpcbPkgCalcWorkingTime";
-    public string AppJpcbPkgAddOrUpdateCW = "AppJpcbPkgAddOrUpdateCW";
-    public string AppJpcbPkgDeleteCWPlan = "AppJpcbPkgDeleteCWPlan";
+    #endregion
+
+    #region "CW"
+    public string AppJpcbPkgCWGetConfigs = "AppJpcbPkgCWGetConfigs";
+    public string AppJpcbPkgCWGetData = "AppJpcbPkgCWGetData";
+    public string AppJpcbPkgCWStartFinish = "AppJpcbPkgCWStartFinish";
+    public string AppJpcbPkgCWGetDetail = "AppJpcbPkgCWGetDetail";
+    public string AppJpcbPkgCWAddOrUpdate = "AppJpcbPkgCWAddOrUpdate";
+    public string AppJpcbPkgCWDeletePlan = "AppJpcbPkgCWDeletePlan";
     public string AppJpcbPkgCWGoback = "AppJpcbPkgCWGoback";
+    #endregion
+
+    #region "JP"
+    public string AppJpcbPkgJPVisibleTabs = "AppJpcbPkgJPVisibleTabs";
+    public string AppJpcbPkgJPGetConfigs = "AppJpcbPkgJPGetConfigs";
+    public string AppJpcbPkgJPGetData = "AppJpcbPkgJPGetData";
     #endregion
   }
 }

@@ -1,0 +1,55 @@
+﻿using System;
+using System.Data;
+using TMV.DataAccess.JPCB;
+
+namespace TMV.BusinessObject.JPCB
+{
+  public class JpcbJpBO
+  {
+    #region "Constructor"
+    private static JpcbJpBO _instance;
+    private static object _syncLock = new object();
+
+    protected JpcbJpBO()
+    {
+    }
+    public static JpcbJpBO Instance()
+    {
+      if (_instance == null)
+      {
+        lock (_syncLock)
+        {
+          if (_instance == null)
+            _instance = new JpcbJpBO();
+        }
+      }
+      return _instance;
+    }
+    protected void Dispose()
+    {
+      _instance = null;
+    }
+    #endregion
+
+    public DataSet JPVisibleTabs(int tenantId, decimal userId)
+    {
+      return JpcbJpDAO.Instance().JPVisibleTabs(tenantId, userId);
+    }
+    public DataSet GetJPConfig(int tenantId, string type)
+    {
+      return JpcbJpDAO.Instance().GetJPConfig(tenantId, type);
+    }
+    public DataSet GetConfigDefault(int tenantId, DateTime date)
+    {
+      return JpcbJpDAO.Instance().GetConfigDefault(tenantId, date);
+    }
+    public DataSet GetJPData(int tenantId, string type, DateTime dateView)
+    {
+      return JpcbJpDAO.Instance().GetJPData(
+        tenantId,
+        (type == "GJ") ? 2 : 1,
+        dateView
+      );
+    }
+  }
+}
