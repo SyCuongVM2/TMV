@@ -67,7 +67,7 @@ namespace TMV.UI.JPCB.JP
       this.SplitContainer_Tien_Do = new System.Windows.Forms.SplitContainer();
       this.ResourcesTree1 = new DevExpress.XtraScheduler.UI.ResourcesTree();
       this.SchedulerControl_KH_SCC = new DevExpress.XtraScheduler.SchedulerControl();
-      this.SchedulerStorage_KH_SCC = new DevExpress.XtraScheduler.SchedulerDataStorage(this.components);
+      this.SchedulerStorage_KH_SCC = new DevExpress.XtraScheduler.SchedulerStorage(this.components);
       this.ToolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
       this.TxtMa_Xe_KH_SCC = new System.Windows.Forms.TextBox();
       this.TxtSo_RO_KH_SCC = new System.Windows.Forms.TextBox();
@@ -135,9 +135,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkUu_Tien = new System.Windows.Forms.CheckBox();
       this.LabTotal = new System.Windows.Forms.Label();
       this.Panel1 = new System.Windows.Forms.Panel();
-      this.CbbMuc_SBD_KH_SCC = new System.Windows.Forms.ComboBox();
       this.CbbCD_KH_SCC = new System.Windows.Forms.ComboBox();
-      this.CbbMuc_SDS_KH_SCC = new System.Windows.Forms.ComboBox();
       this.CbbTo_KH_SCC = new System.Windows.Forms.ComboBox();
       this.CbbKhoang_KH_SCC = new System.Windows.Forms.ComboBox();
       this.CbbCVDV_KH_SCC = new System.Windows.Forms.ComboBox();
@@ -147,7 +145,6 @@ namespace TMV.UI.JPCB.JP
       this.CmdUp_TG_GX_KH_SCC = new DevExpress.XtraEditors.SimpleButton();
       this.CmdRefresh_KH_SCC = new DevExpress.XtraEditors.SimpleButton();
       this.CbbGio_Xem = new System.Windows.Forms.ComboBox();
-      this.CbbTang_KH_SCC = new System.Windows.Forms.ComboBox();
       this.CbbDo_Rong_KH_SCC = new System.Windows.Forms.ComboBox();
       this.CbbMa_BN_KH_SCC = new System.Windows.Forms.ComboBox();
       this.CbbTime_Data_KH_SCC = new System.Windows.Forms.ComboBox();
@@ -333,7 +330,7 @@ namespace TMV.UI.JPCB.JP
       this.Tab1.Controls.Add(this.SplitContainer_Hen);
       this.Tab1.Location = new System.Drawing.Point(4, 28);
       this.Tab1.Name = "Tab1";
-      this.Tab1.Size = new System.Drawing.Size(1936, 680);
+      this.Tab1.Size = new System.Drawing.Size(1938, 1038);
       this.Tab1.TabIndex = 3;
       this.Tab1.Text = "Xe hẹn";
       this.Tab1.UseVisualStyleBackColor = true;
@@ -359,8 +356,8 @@ namespace TMV.UI.JPCB.JP
       this.SplitContainer_Hen.Panel2.Controls.Add(this.CbbCVDV_Hen);
       this.SplitContainer_Hen.Panel2.Controls.Add(this.CbbTime_Data_Hen);
       this.SplitContainer_Hen.Panel2.Controls.Add(this.ChkAuto_Data_Hen);
-      this.SplitContainer_Hen.Size = new System.Drawing.Size(1936, 680);
-      this.SplitContainer_Hen.SplitterDistance = 634;
+      this.SplitContainer_Hen.Size = new System.Drawing.Size(1938, 1038);
+      this.SplitContainer_Hen.SplitterDistance = 967;
       this.SplitContainer_Hen.TabIndex = 0;
       // 
       // Master_Hen
@@ -370,7 +367,7 @@ namespace TMV.UI.JPCB.JP
       this.Master_Hen.MainView = this.Master_HenGRV;
       this.Master_Hen.MenuManager = this.BarManager1;
       this.Master_Hen.Name = "Master_Hen";
-      this.Master_Hen.Size = new System.Drawing.Size(1936, 634);
+      this.Master_Hen.Size = new System.Drawing.Size(1938, 967);
       this.Master_Hen.TabIndex = 2;
       this.Master_Hen.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.Master_HenGRV});
@@ -403,7 +400,7 @@ namespace TMV.UI.JPCB.JP
       // 
       this.ChkHen_SDS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkHen_SDS.AutoSize = true;
-      this.ChkHen_SDS.Location = new System.Drawing.Point(995, 0);
+      this.ChkHen_SDS.Location = new System.Drawing.Point(995, 25);
       this.ChkHen_SDS.Name = "ChkHen_SDS";
       this.ChkHen_SDS.Size = new System.Drawing.Size(103, 23);
       this.ChkHen_SDS.TabIndex = 22;
@@ -415,7 +412,7 @@ namespace TMV.UI.JPCB.JP
       // 
       this.ChkHen_SBD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkHen_SBD.AutoSize = true;
-      this.ChkHen_SBD.Location = new System.Drawing.Point(867, -1);
+      this.ChkHen_SBD.Location = new System.Drawing.Point(867, 24);
       this.ChkHen_SBD.Name = "ChkHen_SBD";
       this.ChkHen_SBD.Size = new System.Drawing.Size(112, 23);
       this.ChkHen_SBD.TabIndex = 21;
@@ -427,7 +424,7 @@ namespace TMV.UI.JPCB.JP
       // 
       this.ChkHen_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkHen_SCC.AutoSize = true;
-      this.ChkHen_SCC.Location = new System.Drawing.Point(786, -1);
+      this.ChkHen_SCC.Location = new System.Drawing.Point(786, 24);
       this.ChkHen_SCC.Name = "ChkHen_SCC";
       this.ChkHen_SCC.Size = new System.Drawing.Size(64, 23);
       this.ChkHen_SCC.TabIndex = 20;
@@ -439,7 +436,7 @@ namespace TMV.UI.JPCB.JP
       // 
       this.TxtM_Ngay_Ct_hen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.TxtM_Ngay_Ct_hen.EditValue = null;
-      this.TxtM_Ngay_Ct_hen.Location = new System.Drawing.Point(611, -3);
+      this.TxtM_Ngay_Ct_hen.Location = new System.Drawing.Point(611, 22);
       this.TxtM_Ngay_Ct_hen.Name = "TxtM_Ngay_Ct_hen";
       this.TxtM_Ngay_Ct_hen.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -454,7 +451,7 @@ namespace TMV.UI.JPCB.JP
       this.CbbTo_Hen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbTo_Hen.ForeColor = System.Drawing.Color.Navy;
       this.CbbTo_Hen.FormattingEnabled = true;
-      this.CbbTo_Hen.Location = new System.Drawing.Point(453, -4);
+      this.CbbTo_Hen.Location = new System.Drawing.Point(453, 21);
       this.CbbTo_Hen.Name = "CbbTo_Hen";
       this.CbbTo_Hen.Size = new System.Drawing.Size(139, 27);
       this.CbbTo_Hen.TabIndex = 7;
@@ -465,7 +462,7 @@ namespace TMV.UI.JPCB.JP
       this.CbbCVDV_Hen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbCVDV_Hen.ForeColor = System.Drawing.Color.Navy;
       this.CbbCVDV_Hen.FormattingEnabled = true;
-      this.CbbCVDV_Hen.Location = new System.Drawing.Point(192, -4);
+      this.CbbCVDV_Hen.Location = new System.Drawing.Point(192, 21);
       this.CbbCVDV_Hen.Name = "CbbCVDV_Hen";
       this.CbbCVDV_Hen.Size = new System.Drawing.Size(244, 27);
       this.CbbCVDV_Hen.TabIndex = 6;
@@ -476,7 +473,7 @@ namespace TMV.UI.JPCB.JP
       this.CbbTime_Data_Hen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbTime_Data_Hen.ForeColor = System.Drawing.Color.Navy;
       this.CbbTime_Data_Hen.FormattingEnabled = true;
-      this.CbbTime_Data_Hen.Location = new System.Drawing.Point(96, -4);
+      this.CbbTime_Data_Hen.Location = new System.Drawing.Point(96, 21);
       this.CbbTime_Data_Hen.Name = "CbbTime_Data_Hen";
       this.CbbTime_Data_Hen.Size = new System.Drawing.Size(78, 27);
       this.CbbTime_Data_Hen.TabIndex = 5;
@@ -485,7 +482,7 @@ namespace TMV.UI.JPCB.JP
       // 
       this.ChkAuto_Data_Hen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkAuto_Data_Hen.AutoSize = true;
-      this.ChkAuto_Data_Hen.Location = new System.Drawing.Point(21, -2);
+      this.ChkAuto_Data_Hen.Location = new System.Drawing.Point(21, 23);
       this.ChkAuto_Data_Hen.Name = "ChkAuto_Data_Hen";
       this.ChkAuto_Data_Hen.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
       this.ChkAuto_Data_Hen.Size = new System.Drawing.Size(69, 23);
@@ -519,7 +516,7 @@ namespace TMV.UI.JPCB.JP
       // 
       this.SplitContainerKH_SC.Panel2.Controls.Add(this.Panel1);
       this.SplitContainerKH_SC.Size = new System.Drawing.Size(1932, 1032);
-      this.SplitContainerKH_SC.SplitterDistance = 970;
+      this.SplitContainerKH_SC.SplitterDistance = 995;
       this.SplitContainerKH_SC.TabIndex = 0;
       // 
       // SplitContainer1
@@ -538,7 +535,7 @@ namespace TMV.UI.JPCB.JP
       // 
       this.SplitContainer1.Panel2.Controls.Add(this.TabSua_Xong_Mau_XE);
       this.SplitContainer1.Panel2.Controls.Add(this.LabTotal);
-      this.SplitContainer1.Size = new System.Drawing.Size(1932, 970);
+      this.SplitContainer1.Size = new System.Drawing.Size(1932, 995);
       this.SplitContainer1.SplitterDistance = 1575;
       this.SplitContainer1.TabIndex = 0;
       // 
@@ -556,8 +553,8 @@ namespace TMV.UI.JPCB.JP
       // SplitContainer2.Panel2
       // 
       this.SplitContainer2.Panel2.Controls.Add(this.SplitContainer_Tien_Do);
-      this.SplitContainer2.Size = new System.Drawing.Size(1573, 968);
-      this.SplitContainer2.SplitterDistance = 326;
+      this.SplitContainer2.Size = new System.Drawing.Size(1573, 993);
+      this.SplitContainer2.SplitterDistance = 185;
       this.SplitContainer2.TabIndex = 0;
       // 
       // Master_Cho_Lap_KH
@@ -568,7 +565,7 @@ namespace TMV.UI.JPCB.JP
       this.Master_Cho_Lap_KH.MainView = this.Master_Cho_Lap_KHGRV;
       this.Master_Cho_Lap_KH.MenuManager = this.BarManager1;
       this.Master_Cho_Lap_KH.Name = "Master_Cho_Lap_KH";
-      this.Master_Cho_Lap_KH.Size = new System.Drawing.Size(326, 916);
+      this.Master_Cho_Lap_KH.Size = new System.Drawing.Size(185, 941);
       this.Master_Cho_Lap_KH.TabIndex = 1;
       this.Master_Cho_Lap_KH.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.Master_Cho_Lap_KHGRV});
@@ -599,9 +596,9 @@ namespace TMV.UI.JPCB.JP
       this.GBLoc_Xe.Controls.Add(this.TxtMa_Xe_Cho_Lap_KH);
       this.GBLoc_Xe.Controls.Add(this.TxtSo_Ro_Cho_Lap_KH);
       this.GBLoc_Xe.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.GBLoc_Xe.Location = new System.Drawing.Point(0, 916);
+      this.GBLoc_Xe.Location = new System.Drawing.Point(0, 941);
       this.GBLoc_Xe.Name = "GBLoc_Xe";
-      this.GBLoc_Xe.Size = new System.Drawing.Size(326, 52);
+      this.GBLoc_Xe.Size = new System.Drawing.Size(185, 52);
       this.GBLoc_Xe.TabIndex = 0;
       this.GBLoc_Xe.TabStop = false;
       // 
@@ -648,8 +645,8 @@ namespace TMV.UI.JPCB.JP
       // SplitContainer_Tien_Do.Panel2
       // 
       this.SplitContainer_Tien_Do.Panel2.Controls.Add(this.SchedulerControl_KH_SCC);
-      this.SplitContainer_Tien_Do.Size = new System.Drawing.Size(1243, 968);
-      this.SplitContainer_Tien_Do.SplitterDistance = 259;
+      this.SplitContainer_Tien_Do.Size = new System.Drawing.Size(1384, 993);
+      this.SplitContainer_Tien_Do.SplitterDistance = 288;
       this.SplitContainer_Tien_Do.TabIndex = 0;
       // 
       // ResourcesTree1
@@ -669,7 +666,7 @@ namespace TMV.UI.JPCB.JP
       this.ResourcesTree1.OptionsView.TreeLineStyle = DevExpress.XtraTreeList.LineStyle.None;
       this.ResourcesTree1.SchedulerControl = this.SchedulerControl_KH_SCC;
       this.ResourcesTree1.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-      this.ResourcesTree1.Size = new System.Drawing.Size(259, 968);
+      this.ResourcesTree1.Size = new System.Drawing.Size(288, 993);
       this.ResourcesTree1.TabIndex = 0;
       // 
       // SchedulerControl_KH_SCC
@@ -696,7 +693,7 @@ namespace TMV.UI.JPCB.JP
       this.SchedulerControl_KH_SCC.OptionsView.ResourceHeaders.Height = 80;
       this.SchedulerControl_KH_SCC.OptionsView.ResourceHeaders.RotateCaption = false;
       this.SchedulerControl_KH_SCC.OptionsView.ToolTipVisibility = DevExpress.XtraScheduler.ToolTipVisibility.Always;
-      this.SchedulerControl_KH_SCC.Size = new System.Drawing.Size(980, 968);
+      this.SchedulerControl_KH_SCC.Size = new System.Drawing.Size(1092, 993);
       this.SchedulerControl_KH_SCC.Start = new System.DateTime(2022, 5, 26, 0, 0, 0, 0);
       this.SchedulerControl_KH_SCC.TabIndex = 0;
       this.SchedulerControl_KH_SCC.Text = "SchedulerControl1";
@@ -710,24 +707,7 @@ namespace TMV.UI.JPCB.JP
       // 
       // SchedulerStorage_KH_SCC
       // 
-      // 
-      // 
-      // 
       this.SchedulerStorage_KH_SCC.AppointmentDependencies.AutoReload = false;
-      // 
-      // 
-      // 
-      this.SchedulerStorage_KH_SCC.Appointments.Labels.CreateNewLabel(0, "None", "&None", System.Drawing.SystemColors.Window);
-      this.SchedulerStorage_KH_SCC.Appointments.Labels.CreateNewLabel(1, "Important", "&Important", System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(194)))), ((int)(((byte)(190))))));
-      this.SchedulerStorage_KH_SCC.Appointments.Labels.CreateNewLabel(2, "Business", "&Business", System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(213)))), ((int)(((byte)(255))))));
-      this.SchedulerStorage_KH_SCC.Appointments.Labels.CreateNewLabel(3, "Personal", "&Personal", System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(244)))), ((int)(((byte)(156))))));
-      this.SchedulerStorage_KH_SCC.Appointments.Labels.CreateNewLabel(4, "Vacation", "&Vacation", System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(228)))), ((int)(((byte)(199))))));
-      this.SchedulerStorage_KH_SCC.Appointments.Labels.CreateNewLabel(5, "Must Attend", "Must &Attend", System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(206)))), ((int)(((byte)(147))))));
-      this.SchedulerStorage_KH_SCC.Appointments.Labels.CreateNewLabel(6, "Travel Required", "&Travel Required", System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(244)))), ((int)(((byte)(255))))));
-      this.SchedulerStorage_KH_SCC.Appointments.Labels.CreateNewLabel(7, "Needs Preparation", "&Needs Preparation", System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(219)))), ((int)(((byte)(152))))));
-      this.SchedulerStorage_KH_SCC.Appointments.Labels.CreateNewLabel(8, "Birthday", "&Birthday", System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(207)))), ((int)(((byte)(233))))));
-      this.SchedulerStorage_KH_SCC.Appointments.Labels.CreateNewLabel(9, "Anniversary", "&Anniversary", System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(233)))), ((int)(((byte)(223))))));
-      this.SchedulerStorage_KH_SCC.Appointments.Labels.CreateNewLabel(10, "Phone Call", "Phone &Call", System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(247)))), ((int)(((byte)(165))))));
       // 
       // ToolTipController1
       // 
@@ -740,9 +720,9 @@ namespace TMV.UI.JPCB.JP
       this.TxtMa_Xe_KH_SCC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.TxtMa_Xe_KH_SCC.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
       this.TxtMa_Xe_KH_SCC.ForeColor = System.Drawing.Color.Navy;
-      this.TxtMa_Xe_KH_SCC.Location = new System.Drawing.Point(1117, 26);
+      this.TxtMa_Xe_KH_SCC.Location = new System.Drawing.Point(1155, 28);
       this.TxtMa_Xe_KH_SCC.Name = "TxtMa_Xe_KH_SCC";
-      this.TxtMa_Xe_KH_SCC.Size = new System.Drawing.Size(120, 27);
+      this.TxtMa_Xe_KH_SCC.Size = new System.Drawing.Size(137, 27);
       this.TxtMa_Xe_KH_SCC.TabIndex = 16;
       this.TxtMa_Xe_KH_SCC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
       this.ToolTipController1.SetToolTip(this.TxtMa_Xe_KH_SCC, "Tìm kiếm theo biển số");
@@ -755,9 +735,9 @@ namespace TMV.UI.JPCB.JP
       this.TxtSo_RO_KH_SCC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.TxtSo_RO_KH_SCC.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
       this.TxtSo_RO_KH_SCC.ForeColor = System.Drawing.Color.Navy;
-      this.TxtSo_RO_KH_SCC.Location = new System.Drawing.Point(997, 26);
+      this.TxtSo_RO_KH_SCC.Location = new System.Drawing.Point(1001, 28);
       this.TxtSo_RO_KH_SCC.Name = "TxtSo_RO_KH_SCC";
-      this.TxtSo_RO_KH_SCC.Size = new System.Drawing.Size(114, 27);
+      this.TxtSo_RO_KH_SCC.Size = new System.Drawing.Size(148, 27);
       this.TxtSo_RO_KH_SCC.TabIndex = 15;
       this.TxtSo_RO_KH_SCC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
       this.ToolTipController1.SetToolTip(this.TxtSo_RO_KH_SCC, "Tìm kiếm theo RO");
@@ -765,9 +745,9 @@ namespace TMV.UI.JPCB.JP
       // 
       // ChkShow_All_Cd_Xe
       // 
-      this.ChkShow_All_Cd_Xe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.ChkShow_All_Cd_Xe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.ChkShow_All_Cd_Xe.AutoSize = true;
-      this.ChkShow_All_Cd_Xe.Location = new System.Drawing.Point(930, 31);
+      this.ChkShow_All_Cd_Xe.Location = new System.Drawing.Point(973, 31);
       this.ChkShow_All_Cd_Xe.Name = "ChkShow_All_Cd_Xe";
       this.ChkShow_All_Cd_Xe.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
       this.ChkShow_All_Cd_Xe.Size = new System.Drawing.Size(22, 21);
@@ -777,9 +757,9 @@ namespace TMV.UI.JPCB.JP
       // 
       // ChkDu_kien_giaoCVDV
       // 
-      this.ChkDu_kien_giaoCVDV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.ChkDu_kien_giaoCVDV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.ChkDu_kien_giaoCVDV.AutoSize = true;
-      this.ChkDu_kien_giaoCVDV.Location = new System.Drawing.Point(904, 31);
+      this.ChkDu_kien_giaoCVDV.Location = new System.Drawing.Point(947, 31);
       this.ChkDu_kien_giaoCVDV.Name = "ChkDu_kien_giaoCVDV";
       this.ChkDu_kien_giaoCVDV.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
       this.ChkDu_kien_giaoCVDV.Size = new System.Drawing.Size(22, 21);
@@ -793,7 +773,7 @@ namespace TMV.UI.JPCB.JP
       this.LabLock.BackColor = System.Drawing.Color.Green;
       this.LabLock.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
       this.LabLock.ForeColor = System.Drawing.Color.White;
-      this.LabLock.Location = new System.Drawing.Point(577, 24);
+      this.LabLock.Location = new System.Drawing.Point(495, 24);
       this.LabLock.Name = "LabLock";
       this.LabLock.Size = new System.Drawing.Size(85, 33);
       this.LabLock.TabIndex = 6;
@@ -810,7 +790,7 @@ namespace TMV.UI.JPCB.JP
       this.TabSua_Xong_Mau_XE.Location = new System.Drawing.Point(0, 0);
       this.TabSua_Xong_Mau_XE.Name = "TabSua_Xong_Mau_XE";
       this.TabSua_Xong_Mau_XE.SelectedIndex = 0;
-      this.TabSua_Xong_Mau_XE.Size = new System.Drawing.Size(351, 910);
+      this.TabSua_Xong_Mau_XE.Size = new System.Drawing.Size(351, 935);
       this.TabSua_Xong_Mau_XE.TabIndex = 1;
       // 
       // TabPage_Sua_Xong
@@ -819,7 +799,7 @@ namespace TMV.UI.JPCB.JP
       this.TabPage_Sua_Xong.Location = new System.Drawing.Point(4, 28);
       this.TabPage_Sua_Xong.Name = "TabPage_Sua_Xong";
       this.TabPage_Sua_Xong.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPage_Sua_Xong.Size = new System.Drawing.Size(343, 878);
+      this.TabPage_Sua_Xong.Size = new System.Drawing.Size(343, 903);
       this.TabPage_Sua_Xong.TabIndex = 0;
       this.TabPage_Sua_Xong.Text = "Sửa xong";
       this.TabPage_Sua_Xong.UseVisualStyleBackColor = true;
@@ -831,7 +811,7 @@ namespace TMV.UI.JPCB.JP
       this.Master_Sua_Xong_KH.MainView = this.Master_Sua_Xong_KHGRV;
       this.Master_Sua_Xong_KH.MenuManager = this.BarManager1;
       this.Master_Sua_Xong_KH.Name = "Master_Sua_Xong_KH";
-      this.Master_Sua_Xong_KH.Size = new System.Drawing.Size(337, 872);
+      this.Master_Sua_Xong_KH.Size = new System.Drawing.Size(337, 897);
       this.Master_Sua_Xong_KH.TabIndex = 0;
       this.Master_Sua_Xong_KH.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.Master_Sua_Xong_KHGRV});
@@ -916,7 +896,7 @@ namespace TMV.UI.JPCB.JP
       this.TabPage_Bang_Mau.Location = new System.Drawing.Point(4, 28);
       this.TabPage_Bang_Mau.Name = "TabPage_Bang_Mau";
       this.TabPage_Bang_Mau.Padding = new System.Windows.Forms.Padding(3);
-      this.TabPage_Bang_Mau.Size = new System.Drawing.Size(342, 892);
+      this.TabPage_Bang_Mau.Size = new System.Drawing.Size(343, 878);
       this.TabPage_Bang_Mau.TabIndex = 1;
       this.TabPage_Bang_Mau.Text = "Bảng màu";
       this.TabPage_Bang_Mau.UseVisualStyleBackColor = true;
@@ -1426,7 +1406,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkSBD_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkSBD_KH_SCC.AutoSize = true;
       this.ChkSBD_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkSBD_KH_SCC.Location = new System.Drawing.Point(137, 847);
+      this.ChkSBD_KH_SCC.Location = new System.Drawing.Point(137, 832);
       this.ChkSBD_KH_SCC.Name = "ChkSBD_KH_SCC";
       this.ChkSBD_KH_SCC.Size = new System.Drawing.Size(55, 23);
       this.ChkSBD_KH_SCC.TabIndex = 14;
@@ -1439,7 +1419,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkIs_GJ_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkIs_GJ_KH_SCC.AutoSize = true;
       this.ChkIs_GJ_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkIs_GJ_KH_SCC.Location = new System.Drawing.Point(26, 847);
+      this.ChkIs_GJ_KH_SCC.Location = new System.Drawing.Point(26, 832);
       this.ChkIs_GJ_KH_SCC.Name = "ChkIs_GJ_KH_SCC";
       this.ChkIs_GJ_KH_SCC.Size = new System.Drawing.Size(53, 23);
       this.ChkIs_GJ_KH_SCC.TabIndex = 13;
@@ -1452,7 +1432,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkIs_EM_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkIs_EM_KH_SCC.AutoSize = true;
       this.ChkIs_EM_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkIs_EM_KH_SCC.Location = new System.Drawing.Point(137, 818);
+      this.ChkIs_EM_KH_SCC.Location = new System.Drawing.Point(137, 803);
       this.ChkIs_EM_KH_SCC.Name = "ChkIs_EM_KH_SCC";
       this.ChkIs_EM_KH_SCC.Size = new System.Drawing.Size(56, 23);
       this.ChkIs_EM_KH_SCC.TabIndex = 12;
@@ -1465,7 +1445,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkDung_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkDung_KH_SCC.AutoSize = true;
       this.ChkDung_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkDung_KH_SCC.Location = new System.Drawing.Point(26, 818);
+      this.ChkDung_KH_SCC.Location = new System.Drawing.Point(26, 803);
       this.ChkDung_KH_SCC.Name = "ChkDung_KH_SCC";
       this.ChkDung_KH_SCC.Size = new System.Drawing.Size(74, 23);
       this.ChkDung_KH_SCC.TabIndex = 11;
@@ -1478,7 +1458,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkSDS_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkSDS_KH_SCC.AutoSize = true;
       this.ChkSDS_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkSDS_KH_SCC.Location = new System.Drawing.Point(137, 789);
+      this.ChkSDS_KH_SCC.Location = new System.Drawing.Point(137, 774);
       this.ChkSDS_KH_SCC.Name = "ChkSDS_KH_SCC";
       this.ChkSDS_KH_SCC.Size = new System.Drawing.Size(55, 23);
       this.ChkSDS_KH_SCC.TabIndex = 10;
@@ -1491,7 +1471,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkFV_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkFV_KH_SCC.AutoSize = true;
       this.ChkFV_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkFV_KH_SCC.Location = new System.Drawing.Point(26, 789);
+      this.ChkFV_KH_SCC.Location = new System.Drawing.Point(26, 774);
       this.ChkFV_KH_SCC.Name = "ChkFV_KH_SCC";
       this.ChkFV_KH_SCC.Size = new System.Drawing.Size(53, 23);
       this.ChkFV_KH_SCC.TabIndex = 9;
@@ -1504,7 +1484,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkCho_Rua_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkCho_Rua_KH_SCC.AutoSize = true;
       this.ChkCho_Rua_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkCho_Rua_KH_SCC.Location = new System.Drawing.Point(137, 760);
+      this.ChkCho_Rua_KH_SCC.Location = new System.Drawing.Point(137, 745);
       this.ChkCho_Rua_KH_SCC.Name = "ChkCho_Rua_KH_SCC";
       this.ChkCho_Rua_KH_SCC.Size = new System.Drawing.Size(92, 23);
       this.ChkCho_Rua_KH_SCC.TabIndex = 8;
@@ -1517,7 +1497,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkDang_Rua_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkDang_Rua_KH_SCC.AutoSize = true;
       this.ChkDang_Rua_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkDang_Rua_KH_SCC.Location = new System.Drawing.Point(26, 760);
+      this.ChkDang_Rua_KH_SCC.Location = new System.Drawing.Point(26, 745);
       this.ChkDang_Rua_KH_SCC.Name = "ChkDang_Rua_KH_SCC";
       this.ChkDang_Rua_KH_SCC.Size = new System.Drawing.Size(101, 23);
       this.ChkDang_Rua_KH_SCC.TabIndex = 7;
@@ -1530,7 +1510,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkCho_Giao_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkCho_Giao_KH_SCC.AutoSize = true;
       this.ChkCho_Giao_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkCho_Giao_KH_SCC.Location = new System.Drawing.Point(137, 731);
+      this.ChkCho_Giao_KH_SCC.Location = new System.Drawing.Point(137, 716);
       this.ChkCho_Giao_KH_SCC.Name = "ChkCho_Giao_KH_SCC";
       this.ChkCho_Giao_KH_SCC.Size = new System.Drawing.Size(98, 23);
       this.ChkCho_Giao_KH_SCC.TabIndex = 6;
@@ -1543,7 +1523,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkEM60_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkEM60_KH_SCC.AutoSize = true;
       this.ChkEM60_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkEM60_KH_SCC.Location = new System.Drawing.Point(26, 731);
+      this.ChkEM60_KH_SCC.Location = new System.Drawing.Point(26, 716);
       this.ChkEM60_KH_SCC.Name = "ChkEM60_KH_SCC";
       this.ChkEM60_KH_SCC.Size = new System.Drawing.Size(74, 23);
       this.ChkEM60_KH_SCC.TabIndex = 5;
@@ -1556,7 +1536,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkPM90_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkPM90_KH_SCC.AutoSize = true;
       this.ChkPM90_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkPM90_KH_SCC.Location = new System.Drawing.Point(137, 702);
+      this.ChkPM90_KH_SCC.Location = new System.Drawing.Point(137, 687);
       this.ChkPM90_KH_SCC.Name = "ChkPM90_KH_SCC";
       this.ChkPM90_KH_SCC.Size = new System.Drawing.Size(74, 23);
       this.ChkPM90_KH_SCC.TabIndex = 4;
@@ -1569,7 +1549,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkSCL_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkSCL_KH_SCC.AutoSize = true;
       this.ChkSCL_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkSCL_KH_SCC.Location = new System.Drawing.Point(26, 702);
+      this.ChkSCL_KH_SCC.Location = new System.Drawing.Point(26, 687);
       this.ChkSCL_KH_SCC.Name = "ChkSCL_KH_SCC";
       this.ChkSCL_KH_SCC.Size = new System.Drawing.Size(62, 23);
       this.ChkSCL_KH_SCC.TabIndex = 3;
@@ -1582,7 +1562,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkGiao_Ngay_Kh_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkGiao_Ngay_Kh_SCC.AutoSize = true;
       this.ChkGiao_Ngay_Kh_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkGiao_Ngay_Kh_SCC.Location = new System.Drawing.Point(137, 673);
+      this.ChkGiao_Ngay_Kh_SCC.Location = new System.Drawing.Point(137, 658);
       this.ChkGiao_Ngay_Kh_SCC.Name = "ChkGiao_Ngay_Kh_SCC";
       this.ChkGiao_Ngay_Kh_SCC.Size = new System.Drawing.Size(106, 23);
       this.ChkGiao_Ngay_Kh_SCC.TabIndex = 2;
@@ -1595,7 +1575,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkUu_Tien.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkUu_Tien.AutoSize = true;
       this.ChkUu_Tien.ForeColor = System.Drawing.Color.Blue;
-      this.ChkUu_Tien.Location = new System.Drawing.Point(26, 673);
+      this.ChkUu_Tien.Location = new System.Drawing.Point(26, 658);
       this.ChkUu_Tien.Name = "ChkUu_Tien";
       this.ChkUu_Tien.Size = new System.Drawing.Size(87, 23);
       this.ChkUu_Tien.TabIndex = 1;
@@ -1609,7 +1589,7 @@ namespace TMV.UI.JPCB.JP
       this.LabTotal.Dock = System.Windows.Forms.DockStyle.Bottom;
       this.LabTotal.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold);
       this.LabTotal.ForeColor = System.Drawing.Color.White;
-      this.LabTotal.Location = new System.Drawing.Point(0, 910);
+      this.LabTotal.Location = new System.Drawing.Point(0, 935);
       this.LabTotal.Name = "LabTotal";
       this.LabTotal.Size = new System.Drawing.Size(351, 58);
       this.LabTotal.TabIndex = 0;
@@ -1619,9 +1599,7 @@ namespace TMV.UI.JPCB.JP
       // Panel1
       // 
       this.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.Panel1.Controls.Add(this.CbbMuc_SBD_KH_SCC);
       this.Panel1.Controls.Add(this.CbbCD_KH_SCC);
-      this.Panel1.Controls.Add(this.CbbMuc_SDS_KH_SCC);
       this.Panel1.Controls.Add(this.CbbTo_KH_SCC);
       this.Panel1.Controls.Add(this.CbbKhoang_KH_SCC);
       this.Panel1.Controls.Add(this.CbbCVDV_KH_SCC);
@@ -1636,50 +1614,26 @@ namespace TMV.UI.JPCB.JP
       this.Panel1.Controls.Add(this.CmdRefresh_KH_SCC);
       this.Panel1.Controls.Add(this.LabLock);
       this.Panel1.Controls.Add(this.CbbGio_Xem);
-      this.Panel1.Controls.Add(this.CbbTang_KH_SCC);
       this.Panel1.Controls.Add(this.CbbDo_Rong_KH_SCC);
       this.Panel1.Controls.Add(this.CbbMa_BN_KH_SCC);
       this.Panel1.Controls.Add(this.CbbTime_Data_KH_SCC);
       this.Panel1.Controls.Add(this.ChkAuto_Data_KH_SCC);
       this.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.Panel1.Location = new System.Drawing.Point(0, -5);
+      this.Panel1.Location = new System.Drawing.Point(0, -30);
       this.Panel1.Name = "Panel1";
       this.Panel1.Size = new System.Drawing.Size(1932, 63);
       this.Panel1.TabIndex = 0;
       // 
-      // CbbMuc_SBD_KH_SCC
-      // 
-      this.CbbMuc_SBD_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.CbbMuc_SBD_KH_SCC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-      this.CbbMuc_SBD_KH_SCC.ForeColor = System.Drawing.Color.Navy;
-      this.CbbMuc_SBD_KH_SCC.FormattingEnabled = true;
-      this.CbbMuc_SBD_KH_SCC.Location = new System.Drawing.Point(1241, 27);
-      this.CbbMuc_SBD_KH_SCC.Name = "CbbMuc_SBD_KH_SCC";
-      this.CbbMuc_SBD_KH_SCC.Size = new System.Drawing.Size(77, 27);
-      this.CbbMuc_SBD_KH_SCC.TabIndex = 24;
-      // 
       // CbbCD_KH_SCC
       // 
-      this.CbbCD_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.CbbCD_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.CbbCD_KH_SCC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbCD_KH_SCC.ForeColor = System.Drawing.Color.Navy;
       this.CbbCD_KH_SCC.FormattingEnabled = true;
-      this.CbbCD_KH_SCC.Location = new System.Drawing.Point(803, 25);
+      this.CbbCD_KH_SCC.Location = new System.Drawing.Point(1300, 28);
       this.CbbCD_KH_SCC.Name = "CbbCD_KH_SCC";
-      this.CbbCD_KH_SCC.Size = new System.Drawing.Size(93, 27);
+      this.CbbCD_KH_SCC.Size = new System.Drawing.Size(131, 27);
       this.CbbCD_KH_SCC.TabIndex = 23;
-      // 
-      // CbbMuc_SDS_KH_SCC
-      // 
-      this.CbbMuc_SDS_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.CbbMuc_SDS_KH_SCC.BackColor = System.Drawing.SystemColors.Window;
-      this.CbbMuc_SDS_KH_SCC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-      this.CbbMuc_SDS_KH_SCC.ForeColor = System.Drawing.Color.Navy;
-      this.CbbMuc_SDS_KH_SCC.FormattingEnabled = true;
-      this.CbbMuc_SDS_KH_SCC.Location = new System.Drawing.Point(1326, 27);
-      this.CbbMuc_SDS_KH_SCC.Name = "CbbMuc_SDS_KH_SCC";
-      this.CbbMuc_SDS_KH_SCC.Size = new System.Drawing.Size(105, 27);
-      this.CbbMuc_SDS_KH_SCC.TabIndex = 22;
       // 
       // CbbTo_KH_SCC
       // 
@@ -1687,9 +1641,9 @@ namespace TMV.UI.JPCB.JP
       this.CbbTo_KH_SCC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbTo_KH_SCC.ForeColor = System.Drawing.Color.Navy;
       this.CbbTo_KH_SCC.FormattingEnabled = true;
-      this.CbbTo_KH_SCC.Location = new System.Drawing.Point(1437, 27);
+      this.CbbTo_KH_SCC.Location = new System.Drawing.Point(1437, 28);
       this.CbbTo_KH_SCC.Name = "CbbTo_KH_SCC";
-      this.CbbTo_KH_SCC.Size = new System.Drawing.Size(105, 27);
+      this.CbbTo_KH_SCC.Size = new System.Drawing.Size(115, 27);
       this.CbbTo_KH_SCC.TabIndex = 21;
       // 
       // CbbKhoang_KH_SCC
@@ -1698,7 +1652,7 @@ namespace TMV.UI.JPCB.JP
       this.CbbKhoang_KH_SCC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbKhoang_KH_SCC.ForeColor = System.Drawing.Color.Navy;
       this.CbbKhoang_KH_SCC.FormattingEnabled = true;
-      this.CbbKhoang_KH_SCC.Location = new System.Drawing.Point(1548, 26);
+      this.CbbKhoang_KH_SCC.Location = new System.Drawing.Point(1558, 28);
       this.CbbKhoang_KH_SCC.Name = "CbbKhoang_KH_SCC";
       this.CbbKhoang_KH_SCC.Size = new System.Drawing.Size(105, 27);
       this.CbbKhoang_KH_SCC.TabIndex = 20;
@@ -1709,22 +1663,22 @@ namespace TMV.UI.JPCB.JP
       this.CbbCVDV_KH_SCC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbCVDV_KH_SCC.ForeColor = System.Drawing.Color.Navy;
       this.CbbCVDV_KH_SCC.FormattingEnabled = true;
-      this.CbbCVDV_KH_SCC.Location = new System.Drawing.Point(1659, 26);
+      this.CbbCVDV_KH_SCC.Location = new System.Drawing.Point(1669, 28);
       this.CbbCVDV_KH_SCC.Name = "CbbCVDV_KH_SCC";
-      this.CbbCVDV_KH_SCC.Size = new System.Drawing.Size(111, 27);
+      this.CbbCVDV_KH_SCC.Size = new System.Drawing.Size(126, 27);
       this.CbbCVDV_KH_SCC.TabIndex = 19;
       // 
       // TxtM_Ngay_Ct_KH_SCC
       // 
       this.TxtM_Ngay_Ct_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.TxtM_Ngay_Ct_KH_SCC.EditValue = null;
-      this.TxtM_Ngay_Ct_KH_SCC.Location = new System.Drawing.Point(1776, 27);
+      this.TxtM_Ngay_Ct_KH_SCC.Location = new System.Drawing.Point(1801, 29);
       this.TxtM_Ngay_Ct_KH_SCC.Name = "TxtM_Ngay_Ct_KH_SCC";
       this.TxtM_Ngay_Ct_KH_SCC.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
       this.TxtM_Ngay_Ct_KH_SCC.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-      this.TxtM_Ngay_Ct_KH_SCC.Size = new System.Drawing.Size(150, 26);
+      this.TxtM_Ngay_Ct_KH_SCC.Size = new System.Drawing.Size(125, 26);
       this.TxtM_Ngay_Ct_KH_SCC.TabIndex = 18;
       // 
       // buttRemove_Filter
@@ -1732,11 +1686,11 @@ namespace TMV.UI.JPCB.JP
       this.buttRemove_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.buttRemove_Filter.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("buttRemove_Filter.ImageOptions.Image")));
       this.buttRemove_Filter.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-      this.buttRemove_Filter.Location = new System.Drawing.Point(758, 23);
+      this.buttRemove_Filter.Location = new System.Drawing.Point(676, 23);
       this.buttRemove_Filter.Name = "buttRemove_Filter";
       this.buttRemove_Filter.Size = new System.Drawing.Size(39, 34);
       this.buttRemove_Filter.TabIndex = 10;
-      this.buttRemove_Filter.ToolTip = "Cập nhập thời gian giao xe";
+      this.buttRemove_Filter.ToolTip = "Xóa tìm kiếm";
       this.buttRemove_Filter.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information;
       // 
       // CbbLoai_Xem_KH_SCC
@@ -1745,7 +1699,7 @@ namespace TMV.UI.JPCB.JP
       this.CbbLoai_Xem_KH_SCC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbLoai_Xem_KH_SCC.ForeColor = System.Drawing.Color.Navy;
       this.CbbLoai_Xem_KH_SCC.FormattingEnabled = true;
-      this.CbbLoai_Xem_KH_SCC.Location = new System.Drawing.Point(379, 26);
+      this.CbbLoai_Xem_KH_SCC.Location = new System.Drawing.Point(288, 26);
       this.CbbLoai_Xem_KH_SCC.Name = "CbbLoai_Xem_KH_SCC";
       this.CbbLoai_Xem_KH_SCC.Size = new System.Drawing.Size(93, 27);
       this.CbbLoai_Xem_KH_SCC.TabIndex = 9;
@@ -1755,7 +1709,7 @@ namespace TMV.UI.JPCB.JP
       this.CmdUp_TG_GX_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.CmdUp_TG_GX_KH_SCC.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("CmdUp_TG_GX_KH_SCC.ImageOptions.Image")));
       this.CmdUp_TG_GX_KH_SCC.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-      this.CmdUp_TG_GX_KH_SCC.Location = new System.Drawing.Point(713, 24);
+      this.CmdUp_TG_GX_KH_SCC.Location = new System.Drawing.Point(631, 24);
       this.CmdUp_TG_GX_KH_SCC.Name = "CmdUp_TG_GX_KH_SCC";
       this.CmdUp_TG_GX_KH_SCC.Size = new System.Drawing.Size(39, 34);
       this.CmdUp_TG_GX_KH_SCC.TabIndex = 8;
@@ -1767,7 +1721,7 @@ namespace TMV.UI.JPCB.JP
       this.CmdRefresh_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.CmdRefresh_KH_SCC.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("CmdRefresh_KH_SCC.ImageOptions.Image")));
       this.CmdRefresh_KH_SCC.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-      this.CmdRefresh_KH_SCC.Location = new System.Drawing.Point(668, 24);
+      this.CmdRefresh_KH_SCC.Location = new System.Drawing.Point(586, 24);
       this.CmdRefresh_KH_SCC.Name = "CmdRefresh_KH_SCC";
       this.CmdRefresh_KH_SCC.Size = new System.Drawing.Size(39, 34);
       this.CmdRefresh_KH_SCC.TabIndex = 7;
@@ -1780,21 +1734,10 @@ namespace TMV.UI.JPCB.JP
       this.CbbGio_Xem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbGio_Xem.ForeColor = System.Drawing.Color.Navy;
       this.CbbGio_Xem.FormattingEnabled = true;
-      this.CbbGio_Xem.Location = new System.Drawing.Point(478, 26);
+      this.CbbGio_Xem.Location = new System.Drawing.Point(387, 26);
       this.CbbGio_Xem.Name = "CbbGio_Xem";
-      this.CbbGio_Xem.Size = new System.Drawing.Size(93, 27);
+      this.CbbGio_Xem.Size = new System.Drawing.Size(102, 27);
       this.CbbGio_Xem.TabIndex = 5;
-      // 
-      // CbbTang_KH_SCC
-      // 
-      this.CbbTang_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.CbbTang_KH_SCC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-      this.CbbTang_KH_SCC.ForeColor = System.Drawing.Color.Navy;
-      this.CbbTang_KH_SCC.FormattingEnabled = true;
-      this.CbbTang_KH_SCC.Location = new System.Drawing.Point(281, 26);
-      this.CbbTang_KH_SCC.Name = "CbbTang_KH_SCC";
-      this.CbbTang_KH_SCC.Size = new System.Drawing.Size(93, 27);
-      this.CbbTang_KH_SCC.TabIndex = 4;
       // 
       // CbbDo_Rong_KH_SCC
       // 
@@ -1802,9 +1745,9 @@ namespace TMV.UI.JPCB.JP
       this.CbbDo_Rong_KH_SCC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbDo_Rong_KH_SCC.ForeColor = System.Drawing.Color.Navy;
       this.CbbDo_Rong_KH_SCC.FormattingEnabled = true;
-      this.CbbDo_Rong_KH_SCC.Location = new System.Drawing.Point(199, 26);
+      this.CbbDo_Rong_KH_SCC.Location = new System.Drawing.Point(215, 26);
       this.CbbDo_Rong_KH_SCC.Name = "CbbDo_Rong_KH_SCC";
-      this.CbbDo_Rong_KH_SCC.Size = new System.Drawing.Size(76, 27);
+      this.CbbDo_Rong_KH_SCC.Size = new System.Drawing.Size(66, 27);
       this.CbbDo_Rong_KH_SCC.TabIndex = 3;
       // 
       // CbbMa_BN_KH_SCC
@@ -1815,7 +1758,7 @@ namespace TMV.UI.JPCB.JP
       this.CbbMa_BN_KH_SCC.FormattingEnabled = true;
       this.CbbMa_BN_KH_SCC.Location = new System.Drawing.Point(117, 26);
       this.CbbMa_BN_KH_SCC.Name = "CbbMa_BN_KH_SCC";
-      this.CbbMa_BN_KH_SCC.Size = new System.Drawing.Size(76, 27);
+      this.CbbMa_BN_KH_SCC.Size = new System.Drawing.Size(92, 27);
       this.CbbMa_BN_KH_SCC.TabIndex = 2;
       // 
       // CbbTime_Data_KH_SCC
@@ -1847,7 +1790,7 @@ namespace TMV.UI.JPCB.JP
       this.Tab8.Location = new System.Drawing.Point(4, 28);
       this.Tab8.Name = "Tab8";
       this.Tab8.Padding = new System.Windows.Forms.Padding(3);
-      this.Tab8.Size = new System.Drawing.Size(1936, 829);
+      this.Tab8.Size = new System.Drawing.Size(1938, 1038);
       this.Tab8.TabIndex = 1;
       this.Tab8.Text = "Xe hỗn hợp";
       this.Tab8.UseVisualStyleBackColor = true;
@@ -1859,7 +1802,7 @@ namespace TMV.UI.JPCB.JP
       this.Master_HonHop.MainView = this.Master_HonHopGRV;
       this.Master_HonHop.MenuManager = this.BarManager1;
       this.Master_HonHop.Name = "Master_HonHop";
-      this.Master_HonHop.Size = new System.Drawing.Size(1930, 759);
+      this.Master_HonHop.Size = new System.Drawing.Size(1932, 968);
       this.Master_HonHop.TabIndex = 1;
       this.Master_HonHop.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.Master_HonHopGRV});
@@ -1894,9 +1837,9 @@ namespace TMV.UI.JPCB.JP
       this.GroupBox1.Controls.Add(this.CbbTime_Data_HonHop);
       this.GroupBox1.Controls.Add(this.ChkAuto_Data_HonHop);
       this.GroupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.GroupBox1.Location = new System.Drawing.Point(3, 762);
+      this.GroupBox1.Location = new System.Drawing.Point(3, 971);
       this.GroupBox1.Name = "GroupBox1";
-      this.GroupBox1.Size = new System.Drawing.Size(1930, 64);
+      this.GroupBox1.Size = new System.Drawing.Size(1932, 64);
       this.GroupBox1.TabIndex = 0;
       this.GroupBox1.TabStop = false;
       // 
@@ -1940,7 +1883,7 @@ namespace TMV.UI.JPCB.JP
       this.Tab9.Controls.Add(this.GroupBox2);
       this.Tab9.Location = new System.Drawing.Point(4, 28);
       this.Tab9.Name = "Tab9";
-      this.Tab9.Size = new System.Drawing.Size(1936, 829);
+      this.Tab9.Size = new System.Drawing.Size(1938, 1038);
       this.Tab9.TabIndex = 2;
       this.Tab9.Text = "Xe dừng";
       this.Tab9.UseVisualStyleBackColor = true;
@@ -1952,7 +1895,7 @@ namespace TMV.UI.JPCB.JP
       this.Master_Dung.MainView = this.Master_DungGRV;
       this.Master_Dung.MenuManager = this.BarManager1;
       this.Master_Dung.Name = "Master_Dung";
-      this.Master_Dung.Size = new System.Drawing.Size(1936, 765);
+      this.Master_Dung.Size = new System.Drawing.Size(1938, 974);
       this.Master_Dung.TabIndex = 2;
       this.Master_Dung.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.Master_DungGRV});
@@ -1987,9 +1930,9 @@ namespace TMV.UI.JPCB.JP
       this.GroupBox2.Controls.Add(this.CbbTime_Data_Dung);
       this.GroupBox2.Controls.Add(this.ChkAuto_Data_Dung);
       this.GroupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.GroupBox2.Location = new System.Drawing.Point(0, 765);
+      this.GroupBox2.Location = new System.Drawing.Point(0, 974);
       this.GroupBox2.Name = "GroupBox2";
-      this.GroupBox2.Size = new System.Drawing.Size(1936, 64);
+      this.GroupBox2.Size = new System.Drawing.Size(1938, 64);
       this.GroupBox2.TabIndex = 1;
       this.GroupBox2.TabStop = false;
       // 
@@ -2213,7 +2156,6 @@ namespace TMV.UI.JPCB.JP
     private System.Windows.Forms.ComboBox CbbTime_Data_KH_SCC;
     private System.Windows.Forms.ComboBox CbbMa_BN_KH_SCC;
     private System.Windows.Forms.ComboBox CbbDo_Rong_KH_SCC;
-    private System.Windows.Forms.ComboBox CbbTang_KH_SCC;
     private System.Windows.Forms.ComboBox CbbGio_Xem;
     private System.Windows.Forms.Label LabLock;
     private DevExpress.XtraEditors.SimpleButton CmdRefresh_KH_SCC;
@@ -2228,7 +2170,6 @@ namespace TMV.UI.JPCB.JP
     private System.Windows.Forms.ComboBox CbbCVDV_KH_SCC;
     private System.Windows.Forms.ComboBox CbbKhoang_KH_SCC;
     private System.Windows.Forms.ComboBox CbbCD_KH_SCC;
-    private System.Windows.Forms.ComboBox CbbMuc_SDS_KH_SCC;
     private System.Windows.Forms.ComboBox CbbTo_KH_SCC;
     private System.Windows.Forms.SplitContainer SplitContainer2;
     private System.Windows.Forms.Label LabTotal;
@@ -2244,7 +2185,7 @@ namespace TMV.UI.JPCB.JP
     private System.Windows.Forms.TextBox TxtSo_Ro_Cho_Lap_KH;
     private System.Windows.Forms.SplitContainer SplitContainer_Tien_Do;
     private DevExpress.XtraScheduler.SchedulerControl SchedulerControl_KH_SCC;
-    private DevExpress.XtraScheduler.SchedulerDataStorage SchedulerStorage_KH_SCC;
+    private DevExpress.XtraScheduler.SchedulerStorage SchedulerStorage_KH_SCC;
     private DevExpress.Utils.ToolTipController ToolTipController1;
     private DevExpress.XtraScheduler.UI.ResourcesTree ResourcesTree1;
     private System.Windows.Forms.GroupBox GroupBox1;
@@ -2317,7 +2258,6 @@ namespace TMV.UI.JPCB.JP
     private System.Windows.Forms.Timer Timer_Data_Cho_SC;
     private System.Windows.Forms.Timer Timer_Data_honHop;
     private System.Windows.Forms.Timer Timer_Data_Dung;
-    private System.Windows.Forms.ComboBox CbbMuc_SBD_KH_SCC;
     private System.Windows.Forms.Timer Timer_FlassTab;
     private DevExpress.XtraBars.PopupMenu PopupMenu;
     private DevExpress.XtraBars.PopupMenu PopupMenuSchedulerControl;

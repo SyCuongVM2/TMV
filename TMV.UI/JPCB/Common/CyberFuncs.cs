@@ -69,7 +69,10 @@ namespace TMV.UI.JPCB.Common
       string str = "";
       try
       {
-        str = _Cbb.SelectedValue.ToString().Trim();
+        if (_Cbb.DataSource != null)
+          str = _Cbb.SelectedValue.ToString().Trim();
+        else
+          str = "";
       }
       catch (Exception ex)
       {

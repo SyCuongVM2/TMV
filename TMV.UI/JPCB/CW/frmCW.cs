@@ -2043,8 +2043,7 @@ namespace TMV.UI.JPCB.CW
           },
           Rows = {
             new object[]{ "Ma_Hs", "CVDV", "CM", "L", "100" },
-            new object[]{ "Giao_Xe", "Giao Xe", "CM", "L", "100" },
-            // new object[]{ "Ma_Xe", "BKS", "CM", "C", "100" }
+            new object[]{ "Giao_Xe", "Giao Xe", "CM", "L", "100" }
           }
         };
 

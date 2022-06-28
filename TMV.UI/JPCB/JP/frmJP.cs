@@ -353,7 +353,7 @@ namespace TMV.UI.JPCB.JP
         {
           if (TabCVDV.TabPages[index2].Name.ToString().ToUpper().Trim() == dataSet.Tables[0].Rows[index1]["Tab_Name"].ToString().ToUpper().Trim())
           {
-            TabCVDV.TabPages[index2].Text =  dataSet.Tables[0].Rows[index1]["Tab_Caption"].ToString();
+            TabCVDV.TabPages[index2].Text = dataSet.Tables[0].Rows[index1]["Tab_Caption"].ToString();
             if (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() != "1")
             {
               TabCVDV.TabPages.Remove(TabCVDV.TabPages[index2]);
@@ -364,30 +364,32 @@ namespace TMV.UI.JPCB.JP
           checked { index2 += -1; }
         }
 
-        if (dataSet.Tables[0].Rows[index1]["Stt"] == (object)1)
+        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "1")
           _TabVisible1 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
-        if (dataSet.Tables[0].Rows[index1]["Stt"] == (object)2)
+        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "2")
           _TabVisible2 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
-        if (dataSet.Tables[0].Rows[index1]["Stt"] == (object)3)
+        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "3")
           _TabVisible3 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
-        if (dataSet.Tables[0].Rows[index1]["Stt"] == (object)4)
+        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "4")
           _TabVisible4 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
-        if (dataSet.Tables[0].Rows[index1]["Stt"] == (object)5)
+        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "5")
           _TabVisible5 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
-        if (dataSet.Tables[0].Rows[index1]["Stt"] == (object)6)
+        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "6")
           _TabVisible6 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
-        if (dataSet.Tables[0].Rows[index1]["Stt"] == (object)7)
+        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "7")
           _TabVisible7 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
-        if (dataSet.Tables[0].Rows[index1]["Stt"] == (object)8)
+        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "8")
           _TabVisible8 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
-        if (dataSet.Tables[0].Rows[index1]["Stt"] == (object)9)
+        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "9")
           _TabVisible9 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
-        if (dataSet.Tables[0].Rows[index1]["Stt"] == (object)10)
+        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "10")
           _TabVisible10 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
-        if (dataSet.Tables[0].Rows[index1]["Stt"] == (object)11)
+        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "11")
           _TabVisible11 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
+
         checked { ++index1; }
       }
+
       if (dataSet.Tables.Count > 1)
         Dt_Right = dataSet.Tables[1].Copy();
 
@@ -543,16 +545,16 @@ namespace TMV.UI.JPCB.JP
     private void V_DrawItem(object sender, DrawItemEventArgs e)
     {
       TabPage tabPage = (sender as TabControl).SelectedTab;
-      object obj = (sender as TabControl).GetTabRect(0);
+      Rectangle obj = (sender as TabControl).GetTabRect(0);
       Rectangle rectangle = new Rectangle();
-      Rectangle layoutRectangle = obj != null ? (Rectangle)obj : rectangle;
+      Rectangle layoutRectangle = obj != null ? obj : rectangle;
       SolidBrush solidBrush = new SolidBrush(Color.Black);
       StringFormat format = new StringFormat();
       format.Alignment = StringAlignment.Center;
       format.LineAlignment = StringAlignment.Center;
-      if (Convert.ToBoolean((int)(e.State & DrawItemState.Selected)))
+      if (Convert.ToBoolean(e.State & DrawItemState.Selected))
       {
-        Font font = new Font(TabCVDV.Font.FontFamily, TabCVDV.Font.Size, FontStyle.Bold);
+        Font font = new Font(TabCVDV.Font.Name, tabPage.Font.Size, FontStyle.Bold);
         e.Graphics.FillRectangle(new SolidBrush(Color.OrangeRed), e.Bounds);
         solidBrush = new SolidBrush(Color.White);
         e.Graphics.DrawString(tabPage.Text, font, solidBrush, layoutRectangle, format);
@@ -1460,13 +1462,14 @@ namespace TMV.UI.JPCB.JP
       Dt_Set_SCC = dataSet.Tables[1].Copy(); ///
       Dt_Buoc_Nhay_KH_SCC = dataSet.Tables[2].Copy(); ///
       Dt_Do_Rong_KH_SCC = dataSet.Tables[3].Copy(); ///
+
       DmCVDV_Loc_KH_SCC = dataSet.Tables[4].Copy(); ///
       DmCVDV_KH_SCC = DmCVDV_Loc_KH_SCC.Copy();
       CyberFunc.V_DeleteRowEmpty(DmCVDV_KH_SCC, "Ma_HS");
       Dv_DmCVDV_KH_SCC = new DataView(DmCVDV_KH_SCC);
       //DmCVDV_KH_SCC_H = dataSet.Tables[5].Copy();
 
-      DmKhoang_Loc_KH_SCC = dataSet.Tables[6].Copy(); ///
+      DmKhoang_Loc_KH_SCC = dataSet.Tables[5].Copy(); ///
       DmKhoang_KH_SCC = DmKhoang_Loc_KH_SCC.Copy();
       CyberFunc.V_DeleteRowEmpty(DmKhoang_KH_SCC, "Ma_khoang");
       Dv_DmKhoang_KH_SCC = new DataView(DmKhoang_KH_SCC);
@@ -1483,16 +1486,16 @@ namespace TMV.UI.JPCB.JP
       //CyberFunc.V_DeleteRowEmpty(DmKTV_KH_SCC, "Ma_HS");
       //Dv_DmKTV_KH_SCC = new DataView(DmKTV_KH_SCC);
       //DmKTV_KH_SCC_H = dataSet.Tables[11].Copy();
-
       //Dt_Data_KTV_KH_SCC = dataSet.Tables[12].Copy();
       //Dv_Data_KTV_KH_SCC = new DataView(Dt_Data_KTV_KH_SCC);
-      //DmCd_Loc_KH_SCC = dataSet.Tables[13].Copy();
-      //DmCd_KH_SCC = DmCd_Loc_KH_SCC.Copy();
-      //CyberFunc.V_DeleteRowEmpty(DmCd_KH_SCC, "Ma_CD");
-      //Dv_DmCd_KH_SCC = new DataView(DmCd_KH_SCC);
+
+      DmCd_Loc_KH_SCC = dataSet.Tables[6].Copy(); ///
+      DmCd_KH_SCC = DmCd_Loc_KH_SCC.Copy();
+      CyberFunc.V_DeleteRowEmpty(DmCd_KH_SCC, "Ma_CD");
+      Dv_DmCd_KH_SCC = new DataView(DmCd_KH_SCC);
       //DmCd_KH_SCC_H = dataSet.Tables[14].Copy();
 
-      DmLoai_Xem_Loc_KH_SCC = dataSet.Tables[15].Copy(); ///
+      DmLoai_Xem_Loc_KH_SCC = dataSet.Tables[7].Copy(); ///
       DmLoai_Xem_KH_SCC = DmLoai_Xem_Loc_KH_SCC.Copy();
       CyberFunc.V_DeleteRowEmpty(DmLoai_Xem_KH_SCC, "Loai");
       Dv_DmLoai_Xem_KH_SCC = new DataView(DmLoai_Xem_KH_SCC);
@@ -1514,11 +1517,11 @@ namespace TMV.UI.JPCB.JP
 
       //DmDungSC = dataSet.Tables[19].Copy();
 
-      if (dataSet.Tables.Count > 20)
-        Dt_Khoang_H = dataSet.Tables[20].Copy();
+      if (dataSet.Tables.Count > 8)
+        Dt_Khoang_H = dataSet.Tables[8].Copy();
 
-      if (dataSet.Tables.Count > 21)
-        Dt_Xe_H = dataSet.Tables[21].Copy();
+      if (dataSet.Tables.Count > 9)
+        Dt_Xe_H = dataSet.Tables[9].Copy();
 
       Fill_Cbb(1);
 
@@ -1554,15 +1557,12 @@ namespace TMV.UI.JPCB.JP
       CyberFunc.V_FillComBoxDefaul(CbbCVDV_KH_SCC, DmCVDV_Loc_KH_SCC, "Ma_Hs", "Ten_Hs", "Ngam_Dinh");
       CyberFunc.V_FillComBoxDefaul(CbbKhoang_KH_SCC, DmKhoang_Loc_KH_SCC, "Ma_Khoang", "Ten_Khoang", "Ngam_Dinh");
       CyberFunc.V_FillComBoxDefaul(CbbTo_KH_SCC, DmTo_Loc_KH_SCC, "Ma_To", "Ten_To", "Ngam_Dinh");
-      CyberFunc.V_FillComBoxDefaul(CbbMuc_SDS_KH_SCC, DmCd_Loc_KH_SCC, "Ma_CD", "Ten_CD", "Ngam_Dinh");
-      CyberFunc.V_FillComBoxDefaul(CbbMuc_SBD_KH_SCC, DmMucSBD_Loc_KH_SCC, "Muc_SBD", "ten_SBD", "Ngam_Dinh");
-      CyberFunc.V_FillComBoxDefaul(CbbMuc_SDS_KH_SCC, DmMucSDS_Loc_KH_SCC, "Muc_SDS", "ten_SDS", "Ngam_Dinh");
+      CyberFunc.V_FillComBoxDefaul(CbbCD_KH_SCC, DmCd_Loc_KH_SCC, "Ma_CD", "Ten_CD", "Ngam_Dinh");
       
       if (_All != 1)
         return;
       
       CyberFunc.V_FillComBoxDefaul(CbbLoai_Xem_KH_SCC, DmLoai_Xem_Loc_KH_SCC, "Loai", "Ten_Loai", "Ngam_Dinh");
-      CyberFunc.V_FillComBoxDefaul(CbbTang_KH_SCC, DmTang_Loc_KH_SCC, "Tang", "Ten_Tang", "Ngam_Dinh");
       CyberFunc.V_FillComBoxDefaul(CbbMa_BN_KH_SCC, Dt_Buoc_Nhay_KH_SCC, "Ma_BN", "Ten_BN", "Ngam_Dinh");
       CyberFunc.V_FillComBoxDefaul(CbbDo_Rong_KH_SCC, Dt_Do_Rong_KH_SCC, "Ma_Width", "Ten_Width", "Ngam_Dinh");
     }
@@ -1588,7 +1588,8 @@ namespace TMV.UI.JPCB.JP
           scales.Add(new TimeScaleWeek());
           scales.Add(new CyberTimeScaleDay(M_StartHour, M_FinishHour, M_Ngay_LimitInterval_Min, M_Ngay_LimitInterval_Max));
           scales.Add(scaleLessThanDay1);
-          scales.Add(scaleLessThanDay2);
+          //scales.Add(scaleLessThanDay2);
+          scales.Add(new TimeScale15Minutes());  // TimeScale15Minutes: TODO
         }
         finally
         {
@@ -1599,10 +1600,11 @@ namespace TMV.UI.JPCB.JP
           SchedulerControl_KH_SCC.GanttView.Scales[4].Visible = true;
           SchedulerControl_KH_SCC.GanttView.Scales[5].Visible = true;
           SchedulerControl_KH_SCC.Views.GanttView.Scales[6].DisplayFormat = "mm";
-          if (CbbMa_BN_KH_SCC.SelectedValue == (object)60)
+          if (CbbMa_BN_KH_SCC.SelectedValue.ToString() == "60")
             SchedulerControl_KH_SCC.GanttView.Scales[6].Visible = false;
           else
             SchedulerControl_KH_SCC.GanttView.Scales[6].Visible = true;
+
           scales.EndUpdate();
         }
       }
@@ -1746,13 +1748,10 @@ namespace TMV.UI.JPCB.JP
       ChkSBD_KH_SCC.Click -= new EventHandler(V_ChkSBD_KH_SCC);
       ChkIs_EM_KH_SCC.Click -= new EventHandler(V_ChkIs_EM_KH_SCC);
       ChkIs_GJ_KH_SCC.Click -= new EventHandler(V_ChkIs_GJ_KH_SCC);
-      CbbMuc_SBD_KH_SCC.SelectedIndexChanged -= new EventHandler(V_Filter_KH_SCC);
-      CbbMuc_SDS_KH_SCC.SelectedIndexChanged -= new EventHandler(V_Filter_KH_SCC);
       CbbCVDV_KH_SCC.SelectedValueChanged -= new EventHandler(V_Filter_KH_SCC);
       CbbKhoang_KH_SCC.SelectedValueChanged -= new EventHandler(V_Filter_KH_SCC);
       CbbTo_KH_SCC.SelectedValueChanged -= new EventHandler(V_Filter_KH_SCC);
       CbbCD_KH_SCC.SelectedValueChanged -= new EventHandler(V_Filter_KH_SCC);
-      CbbTang_KH_SCC.SelectedValueChanged -= new EventHandler(V_Filter_KH_SCC);
       TxtMa_Xe_KH_SCC.TextChanged -= new EventHandler(V_Filter_KH_SCC);
       TxtSo_RO_KH_SCC.TextChanged -= new EventHandler(V_So_RO_KH_SCC);
       SchedulerControl_KH_SCC.AppointmentDrop -= new AppointmentDragEventHandler(SchedulerControl_KH_SCC_AppointmentDrop);
@@ -1790,13 +1789,10 @@ namespace TMV.UI.JPCB.JP
       ChkSBD_KH_SCC.Click += new EventHandler(V_ChkSBD_KH_SCC);
       ChkIs_EM_KH_SCC.Click += new EventHandler(V_ChkIs_EM_KH_SCC);
       ChkIs_GJ_KH_SCC.Click += new EventHandler(V_ChkIs_GJ_KH_SCC);
-      CbbMuc_SBD_KH_SCC.SelectedIndexChanged += new EventHandler(V_Filter_KH_SCC);
-      CbbMuc_SDS_KH_SCC.SelectedIndexChanged += new EventHandler(V_Filter_KH_SCC);
       CbbCVDV_KH_SCC.SelectedValueChanged += new EventHandler(V_Filter_KH_SCC);
       CbbKhoang_KH_SCC.SelectedValueChanged += new EventHandler(V_Filter_KH_SCC);
       CbbTo_KH_SCC.SelectedValueChanged += new EventHandler(V_Filter_KH_SCC);
       CbbCD_KH_SCC.SelectedValueChanged += new EventHandler(V_Filter_KH_SCC);
-      CbbTang_KH_SCC.SelectedValueChanged += new EventHandler(V_Filter_KH_SCC);
       TxtMa_Xe_KH_SCC.TextChanged += new EventHandler(V_Filter_KH_SCC);
       TxtSo_RO_KH_SCC.TextChanged += new EventHandler(V_So_RO_KH_SCC);
       SchedulerControl_KH_SCC.AppointmentDrop += new AppointmentDragEventHandler(SchedulerControl_KH_SCC_AppointmentDrop);
@@ -2030,7 +2026,7 @@ namespace TMV.UI.JPCB.JP
         MessageBox.Show(ex.Message);
       }
     }
-    private void V_GetHieghtSplitContainerKH_SC() => SplitContainerKH_SC.SplitterDistance = checked(SplitContainerKH_SC.Size.Height - 5 - Panel1.Height);
+    private void V_GetHieghtSplitContainerKH_SC() => SplitContainerKH_SC.SplitterDistance = checked(SplitContainerKH_SC.Size.Height - Panel1.Height + 15);
     #endregion
 
     #region "V_AddHander_KH_SCC"
@@ -2454,12 +2450,12 @@ namespace TMV.UI.JPCB.JP
     {
       TimeCell objectInfo1 = (TimeCell)e.ObjectInfo;
       DateTime start;
-      if (objectInfo1.Resource.RowHandle == (object)0)
-        objectInfo1.Appearance.BackColor = System.Drawing.Color.White;
+      if (objectInfo1.Resource.RowHandle.ToString() == "0")
+        objectInfo1.Appearance.BackColor = Color.White;
       else
       {
-        DataRowView row = (DataRowView)objectInfo1.Resource.GetRow((ISchedulerStorageBase)SchedulerControl_KH_SCC.Storage);
-        if (row.Row.Table.Columns.Contains("backColor"))
+        DataRowView row = (DataRowView)objectInfo1.Resource.GetRow(SchedulerControl_KH_SCC.Storage);
+        if (row != null && row.Row.Table.Columns.Contains("backColor"))
         {
           start = objectInfo1.Interval.Start;
           if (start.Hour != M_FinishHour)
@@ -2469,18 +2465,18 @@ namespace TMV.UI.JPCB.JP
       if ((SchedulerControl_KH_SCC.ActiveViewType == SchedulerViewType.Timeline || SchedulerControl_KH_SCC.ActiveViewType == SchedulerViewType.Gantt) && e.ObjectInfo is TimeCell)
       {
         TimeCell objectInfo2 = e.ObjectInfo as TimeCell;
-        if (objectInfo2.Resource.RowHandle == (object)0)
+        if (objectInfo2.Resource.RowHandle.ToString() == "0")
           return;
 
         start = objectInfo2.Interval.Start;
         if (start.Minute == 0)
-          objectInfo2.Appearance.BorderColor = System.Drawing.Color.Blue;
+          objectInfo2.Appearance.BorderColor = Color.Blue;
         start = objectInfo2.Interval.Start;
         if (start.Hour == M_FinishHour)
-          objectInfo2.Appearance.BackColor = System.Drawing.Color.LightSteelBlue;
+          objectInfo2.Appearance.BackColor = Color.LightSteelBlue;
         start = objectInfo2.Interval.Start;
         if (start.Hour == 12)
-          objectInfo2.Appearance.BackColor = System.Drawing.Color.LightSteelBlue;
+          objectInfo2.Appearance.BackColor = Color.LightSteelBlue;
       }
       e.DrawDefault();
       e.Handled = true;
@@ -2791,7 +2787,7 @@ namespace TMV.UI.JPCB.JP
       if (ChkShow_All_Cd_Xe.Checked)
       {
         if (CbbCD_KH_SCC.Items.Count > 0)
-          CbbCD_KH_SCC.SelectedValue = "";
+          CbbCD_KH_SCC.SelectedValue = "0";
 
         CbbCD_KH_SCC.Enabled = false;
       }
@@ -3076,21 +3072,12 @@ namespace TMV.UI.JPCB.JP
       string Left3 = CyberFunc.V_GetvalueCombox(CbbCD_KH_SCC);
       if (_DT_Filter.Columns.Contains("Ma_CD") & Left3 != "")
         filterKhScc = filterKhScc + " AND Ma_CD = '" + Left3.Trim() + "'";
-      string Left4 = CyberFunc.V_GetvalueCombox(CbbTang_KH_SCC);
-      if (_DT_Filter.Columns.Contains("Tang") & Left4 != "")
-        filterKhScc = filterKhScc + " AND Tang = '" + Left4.Trim() + "'";
       string text1 = TxtMa_Xe_KH_SCC.Text;
       if (_DT_Filter.Columns.Contains("Ma_Xe") & text1 != "")
         filterKhScc = filterKhScc + " AND Ma_Xe LIKE '%" + text1.Trim() + "%'";
       string text2 = TxtSo_RO_KH_SCC.Text;
       if (_DT_Filter.Columns.Contains("So_RO") & text2 != "")
         filterKhScc = filterKhScc + " AND So_RO LIKE '%" + text2.Trim() + "%'";
-      string str1 = CyberFunc.V_GetvalueCombox(CbbMuc_SBD_KH_SCC);
-      if (ChkSBD_KH_SCC.Checked & str1.Trim() != "" && _DT_Filter.Columns.Contains("Muc_SBD"))
-        filterKhScc = filterKhScc + " AND Muc_SBD = '" + str1.Trim() + "'";
-      string str2 = CyberFunc.V_GetvalueCombox(CbbMuc_SDS_KH_SCC);
-      if (ChkSDS_KH_SCC.Checked & str2.Trim() != "" && _DT_Filter.Columns.Contains("Muc_SDS"))
-        filterKhScc = filterKhScc + " AND Muc_SDS = '" + str2.Trim() + "'";
       if (ChkUu_Tien.Checked & _DT_Filter.Columns.Contains("Uu_Tien"))
         filterKhScc += " AND Uu_Tien = '1'";
       if (ChkFV_KH_SCC.Checked & _DT_Filter.Columns.Contains("first_visit"))
@@ -3403,14 +3390,14 @@ namespace TMV.UI.JPCB.JP
       if (DmLoai_Xem_Loc_KH_SCC != null && DmLoai_Xem_Loc_KH_SCC.Columns.Contains("Loai"))
       {
         DataRow[] dataRowArray = DmLoai_Xem_Loc_KH_SCC.Select("Loai='" + str + "'");
-        if (DmLoai_Xem_Loc_KH_SCC.Columns.Contains("ShowHead") && dataRowArray.Length > 0 && dataRowArray[0]["ShowHead"] == (object)0)
+        if (DmLoai_Xem_Loc_KH_SCC.Columns.Contains("ShowHead") && dataRowArray.Length > 0 && dataRowArray[0]["ShowHead"].ToString() == "0")
           flag1 = false;
-        if (DmLoai_Xem_Loc_KH_SCC.Columns.Contains("Show_ResourcesTree") && dataRowArray.Length > 0 && dataRowArray[0]["Show_ResourcesTree"] == (object)0)
+        if (DmLoai_Xem_Loc_KH_SCC.Columns.Contains("Show_ResourcesTree") && dataRowArray.Length > 0 && dataRowArray[0]["Show_ResourcesTree"].ToString() == "0")
           flag2 = false;
       }
       ResourcesTree1.Visible = flag2;
       SchedulerControl_KH_SCC.Views.GanttView.ShowResourceHeaders = flag1;
-      Decimal _Do_Rong = 0M;
+      decimal _Do_Rong = 0M;
       if (DmLoai_Xem_KH_SCC.Columns.Contains("Do_Rong"))
       {
         int num = checked(DmLoai_Xem_KH_SCC.Rows.Count - 1);
@@ -3427,7 +3414,7 @@ namespace TMV.UI.JPCB.JP
       }
 
       string Left = str;
-      if (Left == "01")
+      if (Left == "01") // Khoang (GJ)
       {
         string _Id = !DmKhoang_KH_SCC.Columns.Contains("Ma_Khoang_Tmp") ? "Ma_Khoang" : "Ma_Khoang_Tmp";
         string _Caption = !(M_Loai_KH_SCC == "2" & str == "01") ? (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_khoang") : "Ten_Khoang_Tmp") : (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten_khoang") ? "Ten_khoang2" : "Ten_khoang") : "Ten_Khoang_Tmp");
@@ -3436,7 +3423,7 @@ namespace TMV.UI.JPCB.JP
         else
           V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong);
       }
-      else if (Left == "02")
+      else if (Left == "02") // CVDV
       {
         if (DmCVDV_KH_SCC != null)
           V_SetScheduler(Dv_DmCVDV_KH_SCC, !DmCVDV_KH_SCC.Columns.Contains("Ma_Hs_Tmp") ? "Ma_Hs" : "Ma_Hs_Tmp", !DmCVDV_KH_SCC.Columns.Contains("Ten_Hs_Tmp") ? (DmCVDV_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_HS") : "Ten_Hs_Tmp", _Do_Rong);
@@ -3450,7 +3437,7 @@ namespace TMV.UI.JPCB.JP
             V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong);
         }
       }
-      else if (Left == "03")
+      else if (Left == "03") // Tổ
       {
         if (DmTo_KH_SCC != null)
           V_SetScheduler(Dv_DmTo_KH_SCC, !DmTo_KH_SCC.Columns.Contains("Ma_To_Tmp") ? "Ma_To" : "Ma_To_Tmp", !DmTo_KH_SCC.Columns.Contains("Ten_To_Tmp") ? (DmTo_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_To") : "Ten_To_Tmp", _Do_Rong);
@@ -3464,7 +3451,7 @@ namespace TMV.UI.JPCB.JP
             V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong);
         }
       }
-      else if (Left == "04")
+      else if (Left == "04") // Công đoạn
       {
         if (DmCd_KH_SCC != null)
           V_SetScheduler(Dv_DmCd_KH_SCC, !DmCd_KH_SCC.Columns.Contains("Ma_CD_Tmp") ? "Ma_CD" : "Ma_CD_Tmp", !DmCd_KH_SCC.Columns.Contains("Ten_CD_Tmp") ? (DmCd_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_CD") : "Ten_CD_Tmp", _Do_Rong);
@@ -3478,7 +3465,7 @@ namespace TMV.UI.JPCB.JP
             V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong);
         }
       }
-      else if (Left == "05")
+      else if (Left == "05") // Theo xe (BP)
       {
         if (Dt_Data_Xe_KH_SCC != null)
         {
@@ -3499,7 +3486,7 @@ namespace TMV.UI.JPCB.JP
             V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong);
         }
       }
-      else if (Left == "06")
+      else if (Left == "06") // KTV chính
       {
         if (Dt_Data_KTV_KH_SCC != null)
           V_SetScheduler(Dv_Data_KTV_KH_SCC, !Dt_Data_KTV_KH_SCC.Columns.Contains("Ma_KTV_Tmp") ? "Ma_KTV" : "Ma_KTV_Tmp", !Dt_Data_KTV_KH_SCC.Columns.Contains("Ten_KTV_Tmp") ? (Dt_Data_KTV_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_KTV") : "Ten_KTV_Tmp", _Do_Rong);
@@ -3523,7 +3510,7 @@ namespace TMV.UI.JPCB.JP
           V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong);
       }
     }
-    private void V_SetScheduler(DataView _Dv_DataSource, string _Id, string _Caption, Decimal _Do_Rong, DataTable _Dt_Head_tree = null)
+    private void V_SetScheduler(DataView _Dv_DataSource, string _Id, string _Caption, decimal _Do_Rong, DataTable _Dt_Head_tree = null)
     {
       if (_Dv_DataSource == null)
         return;
@@ -3543,7 +3530,7 @@ namespace TMV.UI.JPCB.JP
       if (_Dv_DataSource.Table.Columns.Contains("Image"))
         SchedulerStorage_KH_SCC.Resources.Mappings.Image = _Dv_DataSource.Table.Columns["Image"].ColumnName.ToString().Trim();
 
-      if (Decimal.Compare(_Do_Rong, 0M) > 0)
+      if (decimal.Compare(_Do_Rong, 0M) > 0)
         SchedulerControl_KH_SCC.OptionsView.ResourceHeaders.Height = Convert.ToInt32(_Do_Rong);
 
       SchedulerStorage_KH_SCC.Appointments.Mappings.ResourceId = Dt_Data_KH_SCC.Columns[_Id].ColumnName;
@@ -3599,11 +3586,10 @@ namespace TMV.UI.JPCB.JP
               ResourceTreeColumn column = new ResourceTreeColumn();
               RepositoryItemMemoEdit repositoryItemMemoEdit = new RepositoryItemMemoEdit();
               repositoryItemMemoEdit.BorderStyle = BorderStyles.Default;
-              column.ColumnEdit = (RepositoryItem)repositoryItemMemoEdit;
+              column.ColumnEdit = repositoryItemMemoEdit;
               column.OptionsColumn.AllowSort = false;
               Left1 = Left1 + Convert.ToInt32(row["Field_Width"]);
-              var test = row["Field_Name"];
-              column.FieldName = _Dv_DataSource.Table.Columns["Field_Name"].ColumnName; // TODO
+              column.FieldName = Convert.ToString(row["Field_Name"]);
               column.Caption = Convert.ToString(row["Field_Head1"]);
               column.Visible = true;
               column.AppearanceHeader.Options.UseTextOptions = true;
@@ -3652,16 +3638,16 @@ namespace TMV.UI.JPCB.JP
       int num2 = 0;
       while (num2 <= num1)
       {
-        SchedulerStorage_KH_SCC.Appointments.Labels[num2].Color = CyberColor.GetBackColor(Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["BackColor"]));
-        SchedulerStorage_KH_SCC.Appointments.Labels[num2].DisplayName = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
-        SchedulerStorage_KH_SCC.Appointments.Labels[num2].MenuCaption = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
+        SchedulerStorage_KH_SCC.Appointments.Labels.GetById(num2).Color = CyberColor.GetBackColor(Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["BackColor"]));
+        SchedulerStorage_KH_SCC.Appointments.Labels.GetById(num2).DisplayName = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
+        SchedulerStorage_KH_SCC.Appointments.Labels.GetById(num2).MenuCaption = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
         V_SetColorlabel_SCC(num2, Dt_ConFigColor_KH_SCC.Rows[num2]);
         checked { ++num2; }
       }
     }
     private void V_SetColorlabel_SCC(int _i, DataRow _Dr)
     {
-      if (_i > 19)
+      if (_i > 20)
         return;
 
       int num = checked(_i + 1);
@@ -3669,13 +3655,12 @@ namespace TMV.UI.JPCB.JP
       switch (num)
       {
         case 1:
-          var test = _Dr["Ten_Color"];
           Lab_SCC1_01.Visible = flag;
           Lab_SCC_01.Visible = true;
           Lab_SCC1_01.Text = _Dr["Ten_Color"].ToString();
           Lab_SCC_01.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
           Lab_SCC_01.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_01.Tag = (object)_Dr["Ma_Color"].ToString().Trim();
+          Lab_SCC_01.Tag = _Dr["Ma_Color"].ToString().Trim();
           break;
         case 2:
           Lab_SCC1_02.Visible = flag;
@@ -3683,7 +3668,7 @@ namespace TMV.UI.JPCB.JP
           Lab_SCC1_02.Text = _Dr["Ten_Color"].ToString();
           Lab_SCC_02.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
           Lab_SCC_02.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_02.Tag = (object)_Dr["Ma_Color"].ToString().Trim();
+          Lab_SCC_02.Tag = _Dr["Ma_Color"].ToString().Trim();
           break;
         case 3:
           Lab_SCC1_03.Visible = flag;
@@ -3699,7 +3684,7 @@ namespace TMV.UI.JPCB.JP
           Lab_SCC1_04.Text = _Dr["Ten_Color"].ToString();
           Lab_SCC_04.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
           Lab_SCC_04.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_04.Tag = (object)_Dr["Ma_Color"].ToString().Trim();
+          Lab_SCC_04.Tag = _Dr["Ma_Color"].ToString().Trim();
           break;
         case 5:
           Lab_SCC1_05.Visible = flag;
@@ -3707,7 +3692,7 @@ namespace TMV.UI.JPCB.JP
           Lab_SCC1_05.Text = _Dr["Ten_Color"].ToString();
           Lab_SCC_05.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
           Lab_SCC_05.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_05.Tag = (object)_Dr["Ma_Color"].ToString().Trim();
+          Lab_SCC_05.Tag = _Dr["Ma_Color"].ToString().Trim();
           break;
         case 6:
           Lab_SCC1_06.Visible = flag;
@@ -3715,7 +3700,7 @@ namespace TMV.UI.JPCB.JP
           Lab_SCC1_06.Text = _Dr["Ten_Color"].ToString();
           Lab_SCC_06.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
           Lab_SCC_06.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_06.Tag = (object)_Dr["Ma_Color"].ToString().Trim();
+          Lab_SCC_06.Tag = _Dr["Ma_Color"].ToString().Trim();
           break;
         case 7:
           Lab_SCC1_07.Visible = flag;
@@ -3723,7 +3708,7 @@ namespace TMV.UI.JPCB.JP
           Lab_SCC1_07.Text = _Dr["Ten_Color"].ToString();
           Lab_SCC_07.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
           Lab_SCC_07.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_07.Tag = (object)_Dr["Ma_Color"].ToString().Trim();
+          Lab_SCC_07.Tag = _Dr["Ma_Color"].ToString().Trim();
           break;
         case 8:
           Lab_SCC1_08.Visible = flag;
@@ -3731,7 +3716,7 @@ namespace TMV.UI.JPCB.JP
           Lab_SCC1_08.Text = _Dr["Ten_Color"].ToString();
           Lab_SCC_08.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
           Lab_SCC_08.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_08.Tag = (object)_Dr["Ma_Color"].ToString().Trim();
+          Lab_SCC_08.Tag = _Dr["Ma_Color"].ToString().Trim();
           break;
         case 9:
           Lab_SCC1_09.Visible = flag;
@@ -3739,7 +3724,7 @@ namespace TMV.UI.JPCB.JP
           Lab_SCC1_09.Text = _Dr["Ten_Color"].ToString();
           Lab_SCC_09.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
           Lab_SCC_09.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_09.Tag = (object)_Dr["Ma_Color"].ToString().Trim();
+          Lab_SCC_09.Tag = _Dr["Ma_Color"].ToString().Trim();
           break;
         case 10:
           Lab_SCC1_10.Visible = flag;
@@ -3752,7 +3737,7 @@ namespace TMV.UI.JPCB.JP
           Lab_SCC1_11.Text = _Dr["Ten_Color"].ToString();
           Lab_SCC_11.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
           Lab_SCC_11.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_11.Tag = (object)_Dr["Ma_Color"].ToString().Trim();
+          Lab_SCC_11.Tag = _Dr["Ma_Color"].ToString().Trim();
           break;
         case 12:
           Lab_SCC1_12.Visible = flag;
@@ -3760,7 +3745,7 @@ namespace TMV.UI.JPCB.JP
           Lab_SCC1_12.Text = _Dr["Ten_Color"].ToString();
           Lab_SCC_12.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
           Lab_SCC_12.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_12.Tag = (object)_Dr["Ma_Color"].ToString().Trim();
+          Lab_SCC_12.Tag = _Dr["Ma_Color"].ToString().Trim();
           break;
         case 13:
           Lab_SCC1_13.Visible = flag;
@@ -3768,7 +3753,7 @@ namespace TMV.UI.JPCB.JP
           Lab_SCC1_13.Text = _Dr["Ten_Color"].ToString();
           Lab_SCC_13.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
           Lab_SCC_13.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_13.Tag = (object)_Dr["Ma_Color"].ToString().Trim();
+          Lab_SCC_13.Tag = _Dr["Ma_Color"].ToString().Trim();
           break;
         case 14:
           Lab_SCC1_14.Visible = flag;
@@ -3776,7 +3761,7 @@ namespace TMV.UI.JPCB.JP
           Lab_SCC1_14.Text = _Dr["Ten_Color"].ToString();
           Lab_SCC_14.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
           Lab_SCC_14.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_14.Tag = (object)_Dr["Ma_Color"].ToString().Trim();
+          Lab_SCC_14.Tag = _Dr["Ma_Color"].ToString().Trim();
           break;
         case 15:
           Lab_SCC1_15.Visible = flag;
@@ -3784,7 +3769,7 @@ namespace TMV.UI.JPCB.JP
           Lab_SCC1_15.Text = _Dr["Ten_Color"].ToString();
           Lab_SCC_15.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
           Lab_SCC_15.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_15.Tag = (object)_Dr["Ma_Color"].ToString().Trim();
+          Lab_SCC_15.Tag = _Dr["Ma_Color"].ToString().Trim();
           break;
         case 16:
           Lab_SCC1_16.Visible = flag;
@@ -3792,7 +3777,7 @@ namespace TMV.UI.JPCB.JP
           Lab_SCC1_16.Text = _Dr["Ten_Color"].ToString();
           Lab_SCC_16.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
           Lab_SCC_16.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_16.Tag = (object)_Dr["Ma_Color"].ToString().Trim();
+          Lab_SCC_16.Tag = _Dr["Ma_Color"].ToString().Trim();
           break;
         case 17:
           Lab_SCC1_17.Visible = flag;
@@ -3800,7 +3785,7 @@ namespace TMV.UI.JPCB.JP
           Lab_SCC1_17.Text = _Dr["Ten_Color"].ToString();
           Lab_SCC_17.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
           Lab_SCC_17.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_17.Tag = (object)_Dr["Ma_Color"].ToString().Trim();
+          Lab_SCC_17.Tag = _Dr["Ma_Color"].ToString().Trim();
           break;
         case 18:
           Lab_SCC1_18.Visible = flag;
@@ -3808,7 +3793,7 @@ namespace TMV.UI.JPCB.JP
           Lab_SCC1_18.Text = _Dr["Ten_Color"].ToString();
           Lab_SCC_18.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
           Lab_SCC_18.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_18.Tag = (object)_Dr["Ma_Color"].ToString().Trim();
+          Lab_SCC_18.Tag = _Dr["Ma_Color"].ToString().Trim();
           break;
         case 19:
           Lab_SCC1_19.Visible = flag;
@@ -3816,7 +3801,7 @@ namespace TMV.UI.JPCB.JP
           Lab_SCC1_19.Text = _Dr["Ten_Color"].ToString();
           Lab_SCC_19.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
           Lab_SCC_19.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_19.Tag = (object)_Dr["Ma_Color"].ToString().Trim();
+          Lab_SCC_19.Tag = _Dr["Ma_Color"].ToString().Trim();
           break;
         case 20:
           Lab_SCC1_20.Visible = flag;
@@ -3824,7 +3809,7 @@ namespace TMV.UI.JPCB.JP
           Lab_SCC1_20.Text = _Dr["Ten_Color"].ToString();
           Lab_SCC_20.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
           Lab_SCC_20.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_20.Tag = (object)_Dr["Ma_Color"].ToString().Trim();
+          Lab_SCC_20.Tag = _Dr["Ma_Color"].ToString().Trim();
           break;
       }
     }
@@ -3834,7 +3819,7 @@ namespace TMV.UI.JPCB.JP
     private void V_LoadData_Cho_Lap_KH(string status, string _Stt_rec_Ro)
     {
       DateTime date = DateTime.Now.Date;
-      DataSet dataSet = new DataSet(); // TODO: CP_RO_CVDV_Cho_Lap_KH
+      DataSet dataSet = JpcbJpBO.Instance().GetJPCholapKHSuaxong(Globals.LoginDlrId, "GJ", date); // CP_RO_CVDV_Cho_Lap_KH
       int num = checked(dataSet.Tables.Count - 1);
       int index = 0;
       while (index <= num)
@@ -3868,18 +3853,21 @@ namespace TMV.UI.JPCB.JP
             CyberFunc.V_SetSortView(ref Dv_Sua_Xong_KH, dataSet.Tables[5]);
         }
         dataSet.Dispose();
-        CyberColor.V_GetColorBold2(Dt_Cho_Lap_KH, ref _Bold_Cho_Lap_KH, ref _BackColor_Cho_Lap_KH, ref _BackColor2_Cho_Lap_KH, ref _Forecolor_Cho_Lap_KH, ref _Underline_Cho_Lap_KH, ref _FieldBold_Cho_Lap_KH, ref _FieldBackColor_Cho_Lap_KH, ref _FieldBackColor2_Cho_Lap_KH, ref _FieldForecolor_Cho_Lap_KH, ref _FieldUnderline_Cho_Lap_KH);
+        CyberColor.V_GetColorBold2(Dt_Cho_Lap_KH, ref _Bold_Cho_Lap_KH, ref _BackColor_Cho_Lap_KH, ref _BackColor2_Cho_Lap_KH, 
+                                                  ref _Forecolor_Cho_Lap_KH, ref _Underline_Cho_Lap_KH, ref _FieldBold_Cho_Lap_KH, 
+                                                  ref _FieldBackColor_Cho_Lap_KH, ref _FieldBackColor2_Cho_Lap_KH, ref _FieldForecolor_Cho_Lap_KH, 
+                                                  ref _FieldUnderline_Cho_Lap_KH);
       }
       else
       {
         if (_Stt_rec_Ro.Trim() == "")
         {
           Dt_Cho_Lap_KH.Clear();
-          Dt_Cho_Lap_KH.Load((IDataReader)dataSet.Tables[0].CreateDataReader());
+          Dt_Cho_Lap_KH.Load(dataSet.Tables[0].CreateDataReader());
           if (Dt_Sua_Xong_KH != null & dataSet.Tables.Count > 1)
           {
             Dt_Sua_Xong_KH.Clear();
-            Dt_Sua_Xong_KH.Load((IDataReader)dataSet.Tables[1].CreateDataReader());
+            Dt_Sua_Xong_KH.Load(dataSet.Tables[1].CreateDataReader());
           }
         }
         else
@@ -3887,24 +3875,26 @@ namespace TMV.UI.JPCB.JP
           if (Dt_Cho_Lap_KH != null)
             CyberFunc.DeleteDatatable(ref Dt_Cho_Lap_KH, "Stt_rec_Ro ='" + _Stt_rec_Ro.Trim() + "'");
           if (Dt_Cho_Lap_KH != null)
-            Dt_Cho_Lap_KH.Load((IDataReader)dataSet.Tables[0].CreateDataReader());
+            Dt_Cho_Lap_KH.Load(dataSet.Tables[0].CreateDataReader());
           if (Dt_Sua_Xong_KH != null)
             CyberFunc.DeleteDatatable(ref Dt_Sua_Xong_KH, "Stt_rec_Ro ='" + _Stt_rec_Ro.Trim() + "'");
           if (Dt_Sua_Xong_KH != null)
-            Dt_Sua_Xong_KH.Load((IDataReader)dataSet.Tables[1].CreateDataReader());
+            Dt_Sua_Xong_KH.Load(dataSet.Tables[1].CreateDataReader());
         }
         dataSet.Dispose();
+
         if (Dt_Cho_Lap_KH != null)
           Dt_Cho_Lap_KH.AcceptChanges();
         if (Dt_Sua_Xong_KH != null)
           Dt_Sua_Xong_KH.AcceptChanges();
+
         T_tinh_So_Xe();
       }
     }
     private void V_LoadDataMoLenhTrongNgay(string _Stt_rec_Ro)
     {
       DateTime date = Convert.ToDateTime(TxtM_Ngay_Ct_KH_SCC.EditValue);
-      DataSet dataSet = new DataSet(); // TODO: CP_RO_CVDV_MoLenh_Trong_Ngay
+      DataSet dataSet = JpcbJpBO.Instance().GetJPMolenhGiaoxe(Globals.LoginDlrId, "GJ", date); // CP_RO_CVDV_MoLenh_Trong_Ngay
       int num = checked(dataSet.Tables.Count - 1);
       int index = 0;
       while (index <= num)
@@ -3919,37 +3909,24 @@ namespace TMV.UI.JPCB.JP
     }
     private void V_Fill_Cho_Lap_KH()
     {
-      bool flag = false;
-      int num1 = 50;
-      int Left = num1;
-      if (Dv_Cho_Lap_KH == null)
-        flag = true;
-      else
+      int Left = 0;
+      int num2 = checked(Dv_Cho_Lap_KH_H.Count - 1);
+      int recordIndex = 0;
+      while (recordIndex <= num2)
       {
-        int num2 = checked(Dv_Cho_Lap_KH_H.Count - 1);
-        int recordIndex = 0;
-        while (recordIndex <= num2)
-        {
-          Left = Left + Convert.ToInt32(Dv_Cho_Lap_KH_H[recordIndex]["Field_Width"]);
-          checked { ++recordIndex; }
-        }
+        Left = Left + Convert.ToInt32(Dv_Cho_Lap_KH_H[recordIndex]["Field_Width"]);
+        checked { ++recordIndex; }
       }
-      if (Left == num1)
-        Left = 0;
 
       SplitContainer2.SplitterDistance = Left;
-      Master_Cho_Lap_KH.DataSource = (object)Dv_Cho_Lap_KH;
+      Master_Cho_Lap_KH.DataSource = Dv_Cho_Lap_KH;
       Master_Cho_Lap_KHGRV.GridControl = Master_Cho_Lap_KH;
-      //TODO
-      //Cyber.Fill.Sys cyberFill = CyberFill;
-      //GridView masterChoLapKhgrv = Master_Cho_Lap_KHGRV;
-      //ref GridView local = ref masterChoLapKhgrv;
-      //string lan = M_LAN;
-      //DataView dvChoLapKhH = Dv_Cho_Lap_KH_H;
-      //DataView dvChoLapKh = Dv_Cho_Lap_KH;
-      //cyberFill.V_FillReports(ref local, lan, dvChoLapKhH, dvChoLapKh);
-      //Master_Cho_Lap_KHGRV = masterChoLapKhgrv;
-      Master_Cho_Lap_KHGRV.Appearance.SelectedRow.BackColor = System.Drawing.Color.YellowGreen;
+      GridView masterChoLapKhgrv = Master_Cho_Lap_KHGRV;
+      DataView dvChoLapKhH = Dv_Cho_Lap_KH_H;
+      DataView dvChoLapKh = Dv_Cho_Lap_KH;
+      CyberFunc.V_FillReports(ref masterChoLapKhgrv, dvChoLapKhH, dvChoLapKh);
+      Master_Cho_Lap_KHGRV = masterChoLapKhgrv;
+      Master_Cho_Lap_KHGRV.Appearance.SelectedRow.BackColor = Color.YellowGreen;
       Master_Cho_Lap_KHGRV.OptionsSelection.MultiSelect = false;
     }
     private void V_Fill_Sua_Xong_KH()
@@ -3957,19 +3934,15 @@ namespace TMV.UI.JPCB.JP
       if (Dv_Sua_Xong_KH == null)
         return;
 
-      Master_Sua_Xong_KH.DataSource = (object)Dv_Sua_Xong_KH;
+      Master_Sua_Xong_KH.DataSource = Dv_Sua_Xong_KH;
       Master_Sua_Xong_KHGRV.GridControl = Master_Sua_Xong_KH;
 
-      //TODO
-      //Cyber.Fill.Sys cyberFill = CyberFill;
-      //GridView masterSuaXongKhgrv = Master_Sua_Xong_KHGRV;
-      //ref GridView local = ref masterSuaXongKhgrv;
-      //string lan = M_LAN;
-      //DataView dvSuaXongKhH = Dv_Sua_Xong_KH_H;
-      //DataView dvSuaXongKh = Dv_Sua_Xong_KH;
-      //cyberFill.V_FillReports(ref local, lan, dvSuaXongKhH, dvSuaXongKh);
-      //Master_Sua_Xong_KHGRV = masterSuaXongKhgrv;
-      Master_Sua_Xong_KHGRV.Appearance.SelectedRow.BackColor = System.Drawing.Color.YellowGreen;
+      GridView masterSuaXongKhgrv = Master_Sua_Xong_KHGRV;
+      DataView dvSuaXongKhH = Dv_Sua_Xong_KH_H;
+      DataView dvSuaXongKh = Dv_Sua_Xong_KH;
+      CyberFunc.V_FillReports(ref masterSuaXongKhgrv, dvSuaXongKhH, dvSuaXongKh);
+      Master_Sua_Xong_KHGRV = masterSuaXongKhgrv;
+      Master_Sua_Xong_KHGRV.Appearance.SelectedRow.BackColor = Color.YellowGreen;
       Master_Sua_Xong_KHGRV.OptionsSelection.MultiSelect = false;
     }
     private void V_AddHander_Cho_Lap_KH()
@@ -4469,12 +4442,12 @@ namespace TMV.UI.JPCB.JP
       // Save_OK = false;
       Close();
     }
-    private void V_Tao_Sua_Tien_Do_KH_SCC( string _Mode, string _ma_Ct, string _Stt_rec, string _Stt_rec_RO, string _So_Ro, DateTime _Ngay_BD, DateTime _Ngay_KT, string _ma_khoang, string _Ma_CVDV, string _Ma_To, string _Ma_Xe, string _Ma_CD, string _Ma_KTV)
+    private void V_Tao_Sua_Tien_Do_KH_SCC(string _Mode, string _ma_Ct, string _Stt_rec, string _Stt_rec_RO, string _So_Ro, DateTime _Ngay_BD, DateTime _Ngay_KT, string _ma_khoang, string _Ma_CVDV, string _Ma_To, string _Ma_Xe, string _Ma_CD, string _Ma_KTV)
     {
       if (!V_ChkStt_Rec(_Stt_rec) || _ma_Ct.Trim() == "" || _Mode == "S" & !V_Chk_Righ(_Stt_rec, "SUA"))
         return;
 
-      DataTable dataTable = (DataTable)null;
+      DataTable dataTable = null;
       string upper = _ma_Ct.ToString().Trim().ToUpper();
       if (upper == M_Ma_CT_PKH.ToString().Trim().ToUpper())
         dataTable = new DataTable(); // TODO

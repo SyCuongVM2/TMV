@@ -76,5 +76,29 @@ namespace TMV.DataAccess.JPCB
         }
       );
     }
+    public DataSet GetJPCholapKHSuaxong(int tenantId, int type, DateTime dateView)
+    {
+      return SqlDataAccess.ExecuteDataset(
+        SqlConnect.ConnectionString,
+        Constants.Instance().AppJpcbPkgJPCholapKHSuaxong,
+        new object[] {
+          Globals.DB_GetNull(tenantId),
+          Globals.DB_GetNull(type),
+          Globals.DB_GetNull(dateView)
+        }
+      );
+    }
+    public DataSet GetJPMolenhGiaoxe(int tenantId, int type, DateTime dateView)
+    {
+      return SqlDataAccess.ExecuteDataset(
+        SqlConnect.ConnectionString,
+        Constants.Instance().AppJpcbPkgJPMolenhGiaoxe,
+        new object[] {
+          Globals.DB_GetNull(tenantId),
+          Globals.DB_GetNull(type),
+          Globals.DB_GetNull(dateView)
+        }
+      );
+    }
   }
 }

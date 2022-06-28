@@ -51,5 +51,21 @@ namespace TMV.BusinessObject.JPCB
         dateView
       );
     }
+    public DataSet GetJPCholapKHSuaxong(int tenantId, string type, DateTime dateView)
+    {
+      return JpcbJpDAO.Instance().GetJPCholapKHSuaxong(
+        tenantId,
+        (type == "GJ") ? 2 : 1,
+        dateView
+      );
+    }
+    public DataSet GetJPMolenhGiaoxe(int tenantId, string type, DateTime dateView)
+    {
+      return JpcbJpDAO.Instance().GetJPMolenhGiaoxe(
+        tenantId,
+        (type == "GJ") ? 2 : 1,
+        dateView
+      );
+    }
   }
 }
