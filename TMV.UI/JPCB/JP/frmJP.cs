@@ -1,5 +1,4 @@
 ﻿using DevExpress.Images;
-using DevExpress.Services;
 using DevExpress.Utils;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors.Controls;
@@ -10,7 +9,6 @@ using DevExpress.XtraScheduler.Drawing;
 using DevExpress.XtraScheduler.Native;
 using DevExpress.XtraSplashScreen;
 using DevExpress.XtraTreeList;
-using DevExpress.XtraTreeList.Columns;
 using System;
 using System.Data;
 using System.Drawing;
@@ -1568,11 +1566,6 @@ namespace TMV.UI.JPCB.JP
     }
     private void V_CyberSetTime_KH_SCC() //
     {
-      int num1 = M_StartHour;
-      int num2 = M_StartMINUTE;
-      int num3 = M_FinishHour;
-      int num4 = M_FinishMINUTE;
-
       if (SchedulerControl_KH_SCC.ActiveViewType == SchedulerViewType.Gantt)
       {
         TimeScaleCollection scales = SchedulerControl_KH_SCC.GanttView.Scales;
@@ -1582,28 +1575,17 @@ namespace TMV.UI.JPCB.JP
           scales.Clear();
           TimeScaleLessThanDay scaleLessThanDay1 = new TimeScaleLessThanDay(TimeSpan.FromHours(1), M_StartHour, M_FinishHour, M_Thu_Bay, M_Chu_Nhat);
           TimeScaleLessThanDay scaleLessThanDay2 = new TimeScaleLessThanDay(TimeSpan.FromMinutes(Convert.ToDouble(CyberFunc.V_GetvalueCombox(CbbMa_BN_KH_SCC))), M_StartHour, M_FinishHour, M_Thu_Bay, M_Chu_Nhat);
-          scales.Add(new TimeScaleYear());
-          scales.Add(new TimeScaleQuarter());
-          scales.Add(new TimeScaleMonth());
-          scales.Add(new TimeScaleWeek());
           scales.Add(new CyberTimeScaleDay(M_StartHour, M_FinishHour, M_Ngay_LimitInterval_Min, M_Ngay_LimitInterval_Max));
           scales.Add(scaleLessThanDay1);
-          //scales.Add(scaleLessThanDay2);
-          scales.Add(new TimeScale15Minutes());  // TimeScale15Minutes: TODO
+          scales.Add(scaleLessThanDay2);
         }
         finally
         {
-          SchedulerControl_KH_SCC.GanttView.Scales[0].Visible = false;
-          SchedulerControl_KH_SCC.GanttView.Scales[1].Visible = false;
-          SchedulerControl_KH_SCC.GanttView.Scales[2].Visible = false;
-          SchedulerControl_KH_SCC.GanttView.Scales[3].Visible = false;
-          SchedulerControl_KH_SCC.GanttView.Scales[4].Visible = true;
-          SchedulerControl_KH_SCC.GanttView.Scales[5].Visible = true;
-          SchedulerControl_KH_SCC.Views.GanttView.Scales[6].DisplayFormat = "mm";
+          SchedulerControl_KH_SCC.GanttView.Scales[2].DisplayFormat = "mm";
           if (CbbMa_BN_KH_SCC.SelectedValue.ToString() == "60")
-            SchedulerControl_KH_SCC.GanttView.Scales[6].Visible = false;
+            SchedulerControl_KH_SCC.GanttView.Scales[2].Visible = false;
           else
-            SchedulerControl_KH_SCC.GanttView.Scales[6].Visible = true;
+            SchedulerControl_KH_SCC.GanttView.Scales[2].Visible = true;
 
           scales.EndUpdate();
         }
@@ -1614,15 +1596,15 @@ namespace TMV.UI.JPCB.JP
           return;
 
         SchedulerControl_KH_SCC.Views.DayView.ShowWorkTimeOnly = true;
-        TimeSpan timeSpan1 = new TimeSpan(num1, num2, 0);
-        TimeSpan timeSpan2 = new TimeSpan(num3, num4, 0);
+        TimeSpan timeSpan1 = new TimeSpan(M_StartHour, M_StartMINUTE, 0);
+        TimeSpan timeSpan2 = new TimeSpan(M_FinishHour, M_FinishMINUTE, 0);
         SchedulerControl_KH_SCC.Views.DayView.WorkTime.End = new TimeSpan(M_FinishHour, M_FinishMINUTE, 0);
         SchedulerControl_KH_SCC.Views.DayView.WorkTime.Start = timeSpan1;
         SchedulerControl_KH_SCC.Views.DayView.WorkTime.End = timeSpan2;
         SchedulerControl_KH_SCC.Views.DayView.TimeScale = TimeSpan.FromMinutes(Convert.ToDouble(CyberFunc.V_GetvalueCombox(CbbMa_BN_KH_SCC)));
       }
     }
-    public void V_Load_DATA_KH_SCC(string status, string _Stt_Rec_Ro_Load, string _Stt_Rec_Load)
+    private void V_Load_DATA_KH_SCC(string status, string _Stt_Rec_Ro_Load, string _Stt_Rec_Load)
     {
       SchedulerStorage_KH_SCC.Appointments.AutoReload = false;
       SchedulerControl_KH_SCC.BeginUpdate();
@@ -1818,7 +1800,7 @@ namespace TMV.UI.JPCB.JP
     {
       SchedulerControl_KH_SCC.DateNavigationBar.Visible = false;
       SchedulerControl_KH_SCC.ActiveViewType = SchedulerViewType.Gantt;
-      SchedulerControl_KH_SCC.Views.GanttView.Scales[6].Width = Convert.ToInt32(Dt_Set_SCC.Rows[0]["HourWidth"]);
+      SchedulerControl_KH_SCC.Views.GanttView.Scales[2].Width = Convert.ToInt32(Dt_Set_SCC.Rows[0]["HourWidth"]);
       SchedulerControl_KH_SCC.Views.GanttView.ResourcesPerPage = Convert.ToInt32(Dt_Set_SCC.Rows[0]["RowPage"]);
       SchedulerControl_KH_SCC.GroupType = SchedulerGroupType.Resource;
 
@@ -1867,8 +1849,8 @@ namespace TMV.UI.JPCB.JP
       if (!_TabVisible3)
         return;
 
-      Decimal num = 0M;
-      Decimal d1_1 = 0M;
+      decimal num = 0M;
+      decimal d1_1 = 0M;
       if (Dt_Set_SCC == null || Dt_Set_SCC.Rows.Count == 0)
         return;
 
@@ -1876,13 +1858,13 @@ namespace TMV.UI.JPCB.JP
         num = Convert.ToDecimal(Dt_Set_SCC.Rows[0]["RowHeight"]);
       if (Dt_Set_SCC.Columns.Contains("RowPage"))
         d1_1 = Convert.ToDecimal(Dt_Set_SCC.Rows[0]["RowPage"]);
-      if (((ulong)-(Decimal.Compare(num, 0M) == 0 ? 1 : 0) & (ulong)Convert.ToInt64(d1_1)) > 0UL)
+      if (((ulong)-(decimal.Compare(num, 0M) == 0 ? 1 : 0) & (ulong)Convert.ToInt64(d1_1)) > 0UL)
         return;
 
-      Decimal d1_2 = new Decimal(checked(SchedulerControl_KH_SCC.Size.Height - 70));
-      if (Decimal.Compare(num, 0M) > 0)
-        d1_1 = Convert.ToDecimal(Math.Round(Decimal.Divide(d1_2, num), 0, MidpointRounding.AwayFromZero));
-      if (Decimal.Compare(d1_1, 0M) <= 0)
+      decimal d1_2 = new decimal(checked(SchedulerControl_KH_SCC.Size.Height - 70));
+      if (decimal.Compare(num, 0M) > 0)
+        d1_1 = Convert.ToDecimal(Math.Round(decimal.Divide(d1_2, num), 0, MidpointRounding.AwayFromZero));
+      if (decimal.Compare(d1_1, 0M) <= 0)
         return;
 
       SchedulerControl_KH_SCC.Views.GanttView.ResourcesPerPage = Convert.ToInt32(d1_1);
@@ -1891,9 +1873,10 @@ namespace TMV.UI.JPCB.JP
     {
       Timer_Data_KH_SCC.Enabled = ChkAuto_Data_KH_SCC.Checked;
       CbbTime_Data_KH_SCC.Enabled = ChkAuto_Data_KH_SCC.Checked;
-      Decimal d1 = CyberFunc.V_StringToNumeric(CbbTime_Data_KH_SCC);
-      if (Decimal.Compare(d1, 0M) <= 0)
+      decimal d1 = CyberFunc.V_StringToNumeric(CbbTime_Data_KH_SCC);
+      if (decimal.Compare(d1, 0M) <= 0)
         d1 = 3000M;
+
       Timer_Data_KH_SCC.Interval = Convert.ToInt32(d1);
     }
     private void V_Buoc_Nhay_KH_SCC(object sender, EventArgs e) //
@@ -1911,7 +1894,7 @@ namespace TMV.UI.JPCB.JP
 
         checked { ++index; }
       }
-      while (index <= 6);
+      while (index <= 2);
     }
     private void V_Load_Cho_Lap_KH() //
     {
@@ -2008,7 +1991,7 @@ namespace TMV.UI.JPCB.JP
       LabTotal.Click += new EventHandler(Label_Xem_BC_KH_SCC);
     }
     private void Label_Paint_KH_SCC(object sender, PaintEventArgs e) => ResizeLabel_KH_SCC((Label)sender);
-    public void Label_Xem_BC_KH_SCC(object sender, EventArgs e)
+    private void Label_Xem_BC_KH_SCC(object sender, EventArgs e)
     {
       // TODO
     }
@@ -2019,7 +2002,7 @@ namespace TMV.UI.JPCB.JP
         if (!lab.Visible)
           return;
 
-        string str = lab.Tag.ToString();
+        string str = lab.Tag != null ? lab.Tag.ToString() : "";
       }
       catch (Exception ex)
       {
@@ -2662,7 +2645,7 @@ namespace TMV.UI.JPCB.JP
         Rectangle rectangle = Rectangle.Inflate(e.Bounds, -2, -2);
         e.Cache.FillRectangle(new LinearGradientBrush(e.Bounds, Color.FromArgb(125, 181, 178), Color.FromArgb(175, 231, 228), LinearGradientMode.Vertical), rectangle);
         StringFormat stringFormat = headerCaption.TextOptions.GetStringFormat(TextOptions.DefaultOptionsCenteredWithEllipsis);
-        e.Cache.DrawString(objectInfo.Caption, headerCaption.Font, (Brush)new SolidBrush(Color.Black), rectangle, stringFormat);
+        e.Cache.DrawString(objectInfo.Caption, headerCaption.Font, new SolidBrush(Color.Black), rectangle, stringFormat);
       }
       e.Handled = true;
     }
@@ -2678,13 +2661,14 @@ namespace TMV.UI.JPCB.JP
         return;
 
       int nodeIndex = ResourcesTree1.GetNodeIndex(e.Node);
-      bool flag1 = false;
+
       bool flag2 = false;
       string str1 = "0";
       if (dataSource.Table.Columns.Contains("Bold_Cot"))
         str1 = dataSource[nodeIndex]["Bold_Cot"].ToString().Trim();
       else if (dataSource.Table.Columns.Contains("Bold"))
         str1 = dataSource[nodeIndex]["Bold"].ToString().Trim();
+
       if (str1.Trim() == "1")
         flag2 = true;
 
@@ -2694,6 +2678,7 @@ namespace TMV.UI.JPCB.JP
         str2 = dataSource[nodeIndex]["Underline_Cot"].ToString().Trim();
       else if (dataSource.Table.Columns.Contains("Underline"))
         str2 = dataSource[nodeIndex]["Underline"].ToString().Trim();
+
       if (str2.Trim() == "1")
         flag3 = true;
 
@@ -2713,18 +2698,14 @@ namespace TMV.UI.JPCB.JP
       {
         Brush brush = new SolidBrush(CyberColor.GetBackColor(Convert.ToString(dataSource[nodeIndex]["BackColor_Cot"])));
         e.Cache.FillRectangle(brush, e.Bounds);
-        flag1 = true;
       }
       else if (dataSource.Table.Columns.Contains("BackColor"))
-      {
         e.Appearance.BackColor = CyberColor.GetBackColor(Convert.ToString(dataSource[nodeIndex]["BackColor"]));
-        flag1 = true;
-      }
+
       if (dataSource.Table.Columns.Contains("ForeColor_Cot"))
       {
         Brush foreBrush = new SolidBrush(CyberColor.GetForeColor(Convert.ToString(dataSource[nodeIndex]["ForeColor_Cot"])));
         e.Cache.DrawString(e.CellText, e.Appearance.Font, foreBrush, e.Bounds, e.Appearance.GetStringFormat());
-        flag1 = true;
       }
       else if (dataSource.Table.Columns.Contains("ForeColor"))
         e.Appearance.ForeColor = CyberColor.GetForeColor(Convert.ToString(dataSource[nodeIndex]["ForeColor"]));
@@ -2751,6 +2732,7 @@ namespace TMV.UI.JPCB.JP
       int integer = Convert.ToInt32(FindItemInArr(e.Column.FieldName.ToUpper(), str5.ToUpper(), ";"));
       if (integer < 0)
         return;
+
       try
       {
         if (strArray1.Length >= integer & strArray1.Length > 0 & strArray1.Length > integer)
@@ -2896,7 +2878,7 @@ namespace TMV.UI.JPCB.JP
         return;
 
       DateTime date = Convert.ToDateTime(TxtM_Ngay_Ct_KH_SCC.EditValue);
-      DataSet dataSet = new DataSet(); // CP_RO_CVDV_DangSC
+      DataSet dataSet = JpcbJpBO.Instance().GetJPDangSuaChua(Globals.LoginDlrId, "GJ", date); // CP_RO_CVDV_DangSC
       if (dataSet.Tables.Count == 0)
         dataSet.Dispose();
       else
@@ -3211,12 +3193,16 @@ namespace TMV.UI.JPCB.JP
         return;
 
       string Left = V_GetFilter_KH_SCC(Dt_Cho_Lap_KH);
+
       if (TxtMa_Xe_Cho_Lap_KH.Text != "" & Dt_Cho_Lap_KH.Columns.Contains("Ma_Xe"))
         Left = Left + " AND Ma_Xe Like '*" + TxtMa_Xe_Cho_Lap_KH.Text.Trim() + "*'";
+
       if (TxtSo_Ro_Cho_Lap_KH.Text != "" & Dt_Cho_Lap_KH.Columns.Contains("So_Ro"))
         Left = Left + " AND So_Ro Like '*" + TxtSo_Ro_Cho_Lap_KH.Text.Trim() + "*'";
+
       if (ChkDu_kien_giaoCVDV.Checked)
         Left = Left + V_GetFilter_Ngay_giao(Convert.ToDateTime(TxtM_Ngay_Ct_KH_SCC.EditValue), Dt_Cho_Lap_KH);
+
       try
       {
         Dv_Cho_Lap_KH.RowFilter = Left;
@@ -3255,46 +3241,48 @@ namespace TMV.UI.JPCB.JP
       while (recordIndex <= num)
       {
         string Left = Dv_Data_KH_SCC[recordIndex]["Id_BackColor"].ToString().Trim();
+
         if (Left == "0")
-          Lab_SCC_01.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_01.Text), 1M).ToString();
+          Lab_SCC_01.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_01.Text), 1M).ToString();
         else if (Left == "1")
-          Lab_SCC_02.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_02.Text), 1M).ToString();
+          Lab_SCC_02.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_02.Text), 1M).ToString();
         else if (Left == "2")
-          Lab_SCC_03.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_03.Text), 1M).ToString();
+          Lab_SCC_03.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_03.Text), 1M).ToString();
         else if (Left == "3")
-          Lab_SCC_04.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_04.Text), 1M).ToString();
+          Lab_SCC_04.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_04.Text), 1M).ToString();
         else if (Left == "4")
-          Lab_SCC_05.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_05.Text), 1M).ToString();
+          Lab_SCC_05.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_05.Text), 1M).ToString();
         else if (Left == "5")
-          Lab_SCC_06.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_06.Text), 1M).ToString();
+          Lab_SCC_06.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_06.Text), 1M).ToString();
         else if (Left == "6")
-          Lab_SCC_07.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_07.Text), 1M).ToString();
+          Lab_SCC_07.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_07.Text), 1M).ToString();
         else if (Left == "7")
-          Lab_SCC_08.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_08.Text), 1M).ToString();
+          Lab_SCC_08.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_08.Text), 1M).ToString();
         else if (Left == "8")
-          Lab_SCC_09.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_09.Text), 1M).ToString();
+          Lab_SCC_09.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_09.Text), 1M).ToString();
         else if (Left == "9")
-          Lab_SCC_10.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_10.Text), 1M).ToString();
+          Lab_SCC_10.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_10.Text), 1M).ToString();
         else if (Left == "10")
-          Lab_SCC_11.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_11.Text), 1M).ToString();
+          Lab_SCC_11.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_11.Text), 1M).ToString();
         else if (Left == "11")
-          Lab_SCC_12.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_12.Text), 1M).ToString();
+          Lab_SCC_12.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_12.Text), 1M).ToString();
         else if (Left == "12")
-          Lab_SCC_13.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_13.Text), 1M).ToString();
+          Lab_SCC_13.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_13.Text), 1M).ToString();
         else if (Left == "13")
-          Lab_SCC_14.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_14.Text), 1M).ToString();
+          Lab_SCC_14.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_14.Text), 1M).ToString();
         else if (Left == "14")
-          Lab_SCC_15.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_15.Text), 1M).ToString();
+          Lab_SCC_15.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_15.Text), 1M).ToString();
         else if (Left == "15")
-          Lab_SCC_16.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_16.Text), 1M).ToString();
+          Lab_SCC_16.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_16.Text), 1M).ToString();
         else if (Left == "16")
-          Lab_SCC_17.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_17.Text), 1M).ToString();
+          Lab_SCC_17.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_17.Text), 1M).ToString();
         else if (Left == "17")
-          Lab_SCC_18.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_18.Text), 1M).ToString();
+          Lab_SCC_18.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_18.Text), 1M).ToString();
         else if (Left == "18")
-          Lab_SCC_19.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_19.Text), 1M).ToString();
+          Lab_SCC_19.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_19.Text), 1M).ToString();
         else if (Left == "19")
-          Lab_SCC_20.Text = Decimal.Add(Convert.ToDecimal(Lab_SCC_20.Text), 1M).ToString();
+          Lab_SCC_20.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_20.Text), 1M).ToString();
+
         checked { ++recordIndex; }
       }
 
@@ -3308,20 +3296,26 @@ namespace TMV.UI.JPCB.JP
       int num1 = -1;
       int num2 = -1;
       int num3 = -1;
+
       if (Dt_Mo_Lenh_Trong_Ngay != null)
         num1 = Dv_Mo_Lenh_Trong_Ngay.Count;
+
       if (Dt_Data_KH_SCC != null)
         num2 = V_Dem_Xe(Dv_Data_KH_SCC);
+
       if (Dt_Lenh_Giao_Trong_Ngay != null)
         num3 = Dv_Lenh_Giao_Trong_Ngay.Count;
+
       if (M_Loai_KH_SCC == "2") // BP
         num1 = -1;
 
       LabTotal.Text = "";
       if (num1 != -1)
         LabTotal.Text = num1.ToString();
+
       if (num2 != -1)
         LabTotal.Text = LabTotal.Text + (LabTotal.Text.Length != 0 ? "/" : "") + num2.ToString();
+
       if (num3 == -1)
         return;
 
@@ -4066,7 +4060,6 @@ namespace TMV.UI.JPCB.JP
       string str1 = "";
       string str2 = "";
       string str3 = "";
-      string str4 = "";
       string str5 = "";
       string maCtPkh = M_Ma_CT_PKH;
       string str6 = "";
@@ -4507,7 +4500,7 @@ namespace TMV.UI.JPCB.JP
       }
       return flag;
     }
-    public bool V_GetExistsField(DataTable _Dt_Right, string _Fieldname) => _Dt_Right.Columns.Contains(_Fieldname) && _Dt_Right.Rows[0][_Fieldname].ToString().Trim() == "1";
+    private bool V_GetExistsField(DataTable _Dt_Right, string _Fieldname) => _Dt_Right.Columns.Contains(_Fieldname) && _Dt_Right.Rows[0][_Fieldname].ToString().Trim() == "1";
     private void V_Tao_Moi_SDSALL(string _Mode, string _ma_Ct, string _Stt_rec, string _Stt_rec_RO, string _So_Ro, DateTime _Ngay_BD, DateTime _Ngay_KT, string _ma_khoang, string _Ma_CVDV, string _Ma_To, string _Ma_Xe, string _Ma_CD, string _Ma_KTV)
     {
       if (!V_ChkStt_Rec(_Stt_rec) || _ma_Ct.Trim() == "")

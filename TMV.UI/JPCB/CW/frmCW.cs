@@ -21,9 +21,6 @@ namespace TMV.UI.JPCB.CW
   public partial class frmCW : DevExpress.XtraEditors.XtraForm
   {
     #region "variables"
-    public string M_Loai_SC = "1";
-    public string M_Tang = "1";
-    public string M_Loai_KH = "3";
     private CyberColumnGridView EditMa_Xe_Cho = new CyberColumnGridView();
     private CyberColumnGridView EditMa_Xe_Dang_Rua = new CyberColumnGridView();
     private CyberColumnGridView EditMa_Xe_Rua_Xong = new CyberColumnGridView();
@@ -124,7 +121,6 @@ namespace TMV.UI.JPCB.CW
       Timer_Data.Enabled = false;
       ChkAuto_Data.Checked = false;
 
-      V_GetKieu_Xem_Loai();
       V_SetTree();
       V_SetRowHeight_KH();
       V_CreateTime_Kieu_Xem_RX();
@@ -137,11 +133,6 @@ namespace TMV.UI.JPCB.CW
     }
 
     #region "frmCW_Load"
-    private void V_GetKieu_Xem_Loai()
-    {
-      M_Loai_SC = "2";
-      M_Loai_KH = "3";
-    }
     private void V_SetTree()
     {
       ResourcesTree1.VertScrollVisibility = ScrollVisibility.Never;
@@ -445,7 +436,7 @@ namespace TMV.UI.JPCB.CW
         SchedulerControl.OptionsView.ResourceHeaders.Height = 30;
       }
 
-      SchedulerControl.Views.GanttView.Scales[6].Width = Convert.ToInt32(Dt_Set_SCC.Rows[0]["HourWidth"]);
+      SchedulerControl.Views.GanttView.Scales[2].Width = Convert.ToInt32(Dt_Set_SCC.Rows[0]["HourWidth"]);
       SchedulerControl.Views.GanttView.ResourcesPerPage = Convert.ToInt32(Dt_Set_SCC.Rows[0]["RowPage"]);
       SchedulerControl.GroupType = SchedulerGroupType.Resource;
 
@@ -1359,21 +1350,23 @@ namespace TMV.UI.JPCB.CW
         return;
 
       int nodeIndex = ResourcesTree1.GetNodeIndex(e.Node);
-      bool flag1 = false;
       bool flag2 = false;
       string str1 = "0";
       if (dataSource.Table.Columns.Contains("Bold_Cot"))
         str1 = dataSource[nodeIndex]["Bold_Cot"].ToString().Trim();
       else if (dataSource.Table.Columns.Contains("Bold"))
         str1 = dataSource[nodeIndex]["Bold"].ToString().Trim();
+
       if (str1.Trim() == "1")
         flag2 = true;
+
       bool flag3 = false;
       string str2 = "0";
       if (dataSource.Table.Columns.Contains("Underline_Cot"))
         str2 = dataSource[nodeIndex]["Underline_Cot"].ToString().Trim();
       else if (dataSource.Table.Columns.Contains("Underline"))
         str2 = dataSource[nodeIndex]["Underline"].ToString().Trim();
+
       if (str2.Trim() == "1")
         flag3 = true;
 
@@ -1393,19 +1386,14 @@ namespace TMV.UI.JPCB.CW
       {
         Brush brush = new SolidBrush(CyberColor.GetBackColor(Convert.ToString(dataSource[nodeIndex]["BackColor_Cot"])));
         e.Cache.FillRectangle(brush, e.Bounds);
-        flag1 = true;
       }
       else if (dataSource.Table.Columns.Contains("BackColor"))
-      {
         e.Appearance.BackColor = CyberColor.GetBackColor(Convert.ToString(dataSource[nodeIndex]["BackColor"]));
-        flag1 = true;
-      }
 
       if (dataSource.Table.Columns.Contains("ForeColor_Cot"))
       {
         Brush foreBrush = new SolidBrush(CyberColor.GetForeColor(Convert.ToString(dataSource[nodeIndex]["ForeColor_Cot"])));
         e.Cache.DrawString(e.CellText, e.Appearance.Font, foreBrush, e.Bounds, e.Appearance.GetStringFormat());
-        flag1 = true;
       }
       else
       {
@@ -2315,36 +2303,25 @@ namespace TMV.UI.JPCB.CW
       if (SchedulerControl.ActiveViewType == SchedulerViewType.Gantt)
       {
         TimeScaleCollection scales = SchedulerControl.GanttView.Scales;
-        SchedulerControl.GanttView.Scales.BeginUpdate();
+        scales.BeginUpdate();
         try
         {
           scales.Clear();
           TimeScaleLessThanDay scaleLessThanDay1 = new TimeScaleLessThanDay(TimeSpan.FromHours(1), num1, num3, M_Thu_Bay, M_Chu_Nhat);
-          TimeScaleLessThanDay scaleLessThanDay2 = new TimeScaleLessThanDay(TimeSpan.FromMinutes(15), num1, num3, M_Thu_Bay, M_Chu_Nhat);
-          scales.Add(new TimeScaleYear());
-          scales.Add(new TimeScaleQuarter());
-          scales.Add(new TimeScaleMonth());
-          scales.Add(new TimeScaleWeek());
-          scales.Add(new CyberTimeScaleDay(num1, num3, Startdate1, limitIntervalMaxRx));  // TimeScaleDay: dd/MM
-          scales.Add(scaleLessThanDay1);  // TimeScaleHour
-          scales.Add(scaleLessThanDay2);  // TimeScale15Minutes: TODO
-          //Convert.ToDouble(CyberFunc.V_GetvalueCombox(CbbMa_BN))
+          TimeScaleLessThanDay scaleLessThanDay2 = new TimeScaleLessThanDay(TimeSpan.FromMinutes(Convert.ToDouble(CyberFunc.V_GetvalueCombox(CbbMa_BN))), num1, num3, M_Thu_Bay, M_Chu_Nhat);
+          scales.Add(new CyberTimeScaleDay(num1, num3, Startdate1, limitIntervalMaxRx));
+          scales.Add(scaleLessThanDay1);
+          scales.Add(scaleLessThanDay2);
         }
         finally
         {
-          SchedulerControl.GanttView.Scales[0].Visible = false; // Year
-          SchedulerControl.GanttView.Scales[1].Visible = false; // Quarter
-          SchedulerControl.GanttView.Scales[2].Visible = false; // Month
-          SchedulerControl.GanttView.Scales[3].Visible = false; // Week
-          SchedulerControl.GanttView.Scales[4].Visible = true;  // dd/MM
-          SchedulerControl.GanttView.Scales[5].Visible = true;  // 01:00:00
-          SchedulerControl.Views.GanttView.Scales[6].DisplayFormat = "mm";  // 08:00:00
+          SchedulerControl.Views.GanttView.Scales[2].DisplayFormat = "mm";
           if (CbbMa_BN.SelectedValue.ToString() == "60")
-            SchedulerControl.GanttView.Scales[6].Visible = false;
+            SchedulerControl.GanttView.Scales[2].Visible = false;
           else
-            SchedulerControl.GanttView.Scales[6].Visible = true;
+            SchedulerControl.GanttView.Scales[2].Visible = true;
 
-          SchedulerControl.GanttView.Scales.EndUpdate();
+          scales.EndUpdate();
         }
       }
       else if (SchedulerControl.ActiveViewType == SchedulerViewType.Day)
@@ -2383,7 +2360,7 @@ namespace TMV.UI.JPCB.CW
             SchedulerControl.Views.GanttView.Scales[index].Width = Convert.ToInt32(CyberFunc.V_GetvalueCombox(CbbDo_Rong));
           checked { ++index; }
         }
-        while (index <= 6);
+        while (index <= 2);
       }
 
       if (SchedulerControl.ActiveViewType != SchedulerViewType.Day)
