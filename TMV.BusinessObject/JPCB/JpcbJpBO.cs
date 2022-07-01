@@ -75,5 +75,13 @@ namespace TMV.BusinessObject.JPCB
         dateView
       );
     }
+    public DataSet GetJPXeDung(int tenantId, string type, DateTime dateView)
+    {
+      return JpcbJpDAO.Instance().GetJPXeDung(
+        tenantId,
+        (type == "GJ") ? 2 : 1,
+        dateView
+      );
+    }
   }
 }

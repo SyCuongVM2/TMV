@@ -75,6 +75,7 @@
     public string AppJpcbPkgJPCholapKHSuaxong = "AppJpcbPkgJPCholapKHSuaxong";
     public string AppJpcbPkgJPMolenhGiaoxe = "AppJpcbPkgJPMolenhGiaoxe";
     public string AppJpcbPkgJPDangSuaChua = "AppJpcbPkgJPDangSuaChua";
+    public string AppJpcbPkgJPXeDung = "AppJpcbPkgJPXeDung";
     #endregion
   }
 }

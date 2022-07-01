@@ -75,7 +75,6 @@ namespace TMV.UI.JPCB.CW
     private DataView Dv_Rua_Xong_H;
     private CyberColor CyberColor = new CyberColor();
     private CyberFuncs CyberFunc = new CyberFuncs();
-    private CalcTime CalcTime = new CalcTime();
     private bool _Bold_Cho_KH = false;
     private bool _BackColor_Cho_KH = false;
     private bool _BackColor2_Cho_KH = false;
@@ -779,6 +778,7 @@ namespace TMV.UI.JPCB.CW
       DateTime t2 = DateTime.Now.Date;
       t2 = t2.AddHours(23.0);
       t2 = t2.AddMinutes(59.0);
+
       SchedulerHeader objectInfo = e.ObjectInfo as SchedulerHeader;
       AppearanceObject headerCaption = objectInfo.Appearance.HeaderCaption;
 
@@ -789,7 +789,7 @@ namespace TMV.UI.JPCB.CW
       {
         e.Cache.FillRectangle(new LinearGradientBrush(e.Bounds, Color.FromArgb(175, 231, 228), Color.FromArgb(125, 181, 178), LinearGradientMode.Vertical), e.Bounds);
         Rectangle rectangle = Rectangle.Inflate(e.Bounds, -2, -2);
-        e.Cache.FillRectangle((Brush)new LinearGradientBrush(e.Bounds, Color.FromArgb(125, 181, 178), Color.FromArgb(175, 231, 228), LinearGradientMode.Vertical), rectangle);
+        e.Cache.FillRectangle(new LinearGradientBrush(e.Bounds, Color.FromArgb(125, 181, 178), Color.FromArgb(175, 231, 228), LinearGradientMode.Vertical), rectangle);
         StringFormat stringFormat = headerCaption.TextOptions.GetStringFormat(TextOptions.DefaultOptionsCenteredWithEllipsis);
         e.Cache.DrawString(objectInfo.Caption, headerCaption.Font, new SolidBrush(Color.Black), rectangle, stringFormat);
       }

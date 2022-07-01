@@ -112,5 +112,17 @@ namespace TMV.DataAccess.JPCB
         }
       );
     }
+    public DataSet GetJPXeDung(int tenantId, int type, DateTime dateView)
+    {
+      return SqlDataAccess.ExecuteDataset(
+        SqlConnect.ConnectionString,
+        Constants.Instance().AppJpcbPkgJPXeDung,
+        new object[] {
+          Globals.DB_GetNull(tenantId),
+          Globals.DB_GetNull(type),
+          Globals.DB_GetNull(dateView)
+        }
+      );
+    }
   }
 }
