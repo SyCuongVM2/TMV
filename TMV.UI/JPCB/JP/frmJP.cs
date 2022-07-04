@@ -26,110 +26,17 @@ namespace TMV.UI.JPCB.JP
     #region "variables"
     private CyberFuncs CyberFunc = new CyberFuncs();
     private CyberColor CyberColor = new CyberColor();
-    private bool _TabVisible1 = false;
-    private bool _TabVisible2 = false;
     private bool _TabVisible3 = false;
-    private bool _TabVisible4 = false;
-    private bool _TabVisible5 = false;
-    private bool _TabVisible6 = false;
-    private bool _TabVisible7 = false;
-    private bool _TabVisible8 = false;
     private bool _TabVisible9 = false;
-    private bool _TabVisible10 = false;
-    private bool _TabVisible11 = false;
-    private bool _TabVisible12 = false;
-    private DataTable DmCVDV;
-    private DataTable Dt_CVDV_Hen;
-    private DataTable Dt_CVDV_Cho_Tiep_Don;
-    private DataTable Dt_CVDV_KH_SCC;
-    private DataTable Dt_CVDV_Cho_Rua;
-    private DataTable Dt_CVDV_Dang_Rua;
-    private DataTable Dt_CVDV_Cho_Giao;
-    private DataTable Dt_CVDV_Cho_SC;
-    private DataTable Dt_CVDV_HonHop;
     private DataTable Dt_CVDV_Dung;
-    private DataTable Dt_CVDV_ChayThu;
-    private DataTable Dt_CVDV_ThemGio;
-    private DataTable Dt_Time_Hen;
-    private DataTable Dt_Time_Cho_Tiep_Don;
     private DataTable Dt_Time_KH_SCC;
-    private DataTable Dt_Time_Cho_Rua;
-    private DataTable Dt_Time_Dang_Rua;
-    private DataTable Dt_Time_Cho_Giao;
-    private DataTable Dt_Time_Cho_SC;
-    private DataTable Dt_Time_Honhop;
     private DataTable Dt_Time_Dung;
-    private DataTable Dt_Time_ChayThu;
-    private DataTable Dt_Time_ThemGio;
-    private DataTable Dt_To_Hen;
-    private DataTable Dt_To_Cho_Tiep_Don;
-    private DataTable Dt_To_Cho_Lap_KH;
-    private DataTable Dt_To_KH_SCC;
-    private DataTable Dt_To_Cho_Rua;
-    private DataTable Dt_To_Dang_Rua;
-    private DataTable Dt_To_Cho_Giao;
-    private DataTable Dt_To_Cho_SC;
-    private DataTable Dt_Khoang_Hen;
-    private DataTable Dt_Khoang_Cho_Tiep_Don;
-    private DataTable Dt_Khoang_Cho_Lap_KH;
-    private DataTable Dt_Khoang_KH_SCC;
-    private DataTable Dt_Khoang_Cho_Rua;
-    private DataTable Dt_Khoang_Dang_Rua;
-    private DataTable Dt_Khoang_Cho_Giao;
-    private DataTable Dt_Khoang_Cho_SC;
-    private string _CP_Hen = "CP_RO_CVDV_Hen";
-    private string _CP_Cho_SC = "CP_RO_CVDV_Cho_SC";
-    private string _CP_HonHop = "CP_RO_CVDV_Honhop";
-    private string _CP_Dung = "CP_RO_CVDV_Dung";
     private string M_Ma_CT_DLH = "DLH";
     private string M_Ma_CT_PKH = "PKH";
     private string M_Ma_CT_PDC = "PDC";
     private string M_Kieu_Xem = "TIEN_DO";
     private string M_Loai_SC = "1"; // 1: GJ, 2: BP
     private string M_Stt_Rec_Ro = "";
-    private DataTable dt_configTab;
-    private DataTable Dt_Hen;
-    private DataTable Dt_Hen_H;
-    private DataView Dv_Hen;
-    private DataView Dv_Hen_H;
-    private DataTable Dt_Cho_SC;
-    private DataTable Dt_Cho_SC_H;
-    private DataView Dv_Cho_SC;
-    private DataView Dv_Cho_SC_H;
-    private bool _Bold_Hen = false;
-    private bool _BackColor_Hen = false;
-    private bool _BackColor2_Hen = false;
-    private bool _Forecolor_Hen = false;
-    private string _FieldBold_Hen = "";
-    private string _FieldBackColor_Hen = "";
-    private string _FieldBackColor2_Hen = "";
-    private string _FieldForecolor_Hen = "";
-    private string _Loai_SC_hen = "0";
-    private bool _Bold_Cho_SC = false;
-    private bool _BackColor_Cho_SC = false;
-    private bool _BackColor2_Cho_SC = false;
-    private bool _Forecolor_Cho_SC = false;
-    private string _FieldBold_Cho_SC = "";
-    private string _FieldBackColor_Cho_SC = "";
-    private string _FieldBackColor2_Cho_SC = "";
-    private string _FieldForecolor_Cho_SC = "";
-    private string _Loai_SC_Cho_SC = "3";
-    private DataTable Dt_HonHop;
-    private DataTable Dt_HonHop_H;
-    private DataView Dv_HonHop;
-    private DataView Dv_HonHop_H;
-    private bool _Bold_HonHop = false;
-    private bool _BackColor_HonHop = false;
-    private bool _BackColor2_HonHop = false;
-    private bool _ForeColor_HonHop = false;
-    private bool _BorderColor_HonHop = false;
-    private bool _Underline_HonHop = false;
-    private string _FieldBold_HonHop = "";
-    private string _FieldBackColor_HonHop = "";
-    private string _FieldBackColor2_HonHop = "";
-    private string _FieldForeColor_HonHop = "";
-    private string _FieldBorderColor_HonHop = "";
-    private string _FieldUnderline_HonHop = "";
     private DataTable Dt_Dung;
     private DataTable Dt_Dung_H;
     private DataView Dv_Dung;
@@ -138,13 +45,11 @@ namespace TMV.UI.JPCB.JP
     private bool _BackColor_Dung = false;
     private bool _BackColor2_Dung = false;
     private bool _ForeColor_Dung = false;
-    private bool _BorderColor_Dung = false;
     private bool _Underline_Dung = false;
     private string _FieldBold_Dung = "";
     private string _FieldBackColor_Dung = "";
     private string _FieldBackColor2_Dung = "";
     private string _FieldForeColor_Dung = "";
-    private string _FieldBorderColor_Dung = "";
     private string _FieldUnderline_Dung = "";
     private DataTable Dt_Cho_Lap_KH;
     private DataTable Dt_Cho_Lap_KH_H;
@@ -178,8 +83,6 @@ namespace TMV.UI.JPCB.JP
     private string _FieldBackColor2_Sua_Xong_KH = "";
     private string _FieldForecolor_Sua_Xong_KH = "";
     private string _FieldUnderline_Sua_Xong_KH = "";
-    private string _CP_Cho_Lap_KH = "";
-    private GridviewDragDrop _keotha2Grid = new GridviewDragDrop();
     private int M_StartHour;
     private int M_FinishHour;
     private int M_StartMINUTE;
@@ -220,23 +123,14 @@ namespace TMV.UI.JPCB.JP
     private DataTable DmTo_Loc_KH_SCC;
     private DataTable DmKTV_Loc_KH_SCC;
     private DataTable DmCd_Loc_KH_SCC;
-    private DataTable DmMucSBD_Loc_KH_SCC;
-    private DataTable DmMucSDS_Loc_KH_SCC;
     private DataTable DmLoai_Xem_Loc_KH_SCC;
-    private DataTable DmTang_Loc_KH_SCC;
     private DataTable DmCVDV_KH_SCC;
     private DataTable DmKhoang_KH_SCC;
     private DataTable DmTo_KH_SCC;
     private DataTable DmKTV_KH_SCC;
     private DataTable DmCd_KH_SCC;
-    private DataTable DmMucSBD_KH_SCC;
-    private DataTable DmMucSDS_KH_SCC;
     private DataTable DmLoai_Xem_KH_SCC;
-    private DataTable DmTang_KH_SCC;
     private DataTable DmDungSC;
-    private DataTable DmChayThu;
-    private DataTable DmKCSCD;
-    private DataTable DmQGate;
     private DataTable DmCVDV_KH_SCC_H;
     private DataTable DmKhoang_KH_SCC_H;
     private DataTable DmTo_KH_SCC_H;
@@ -247,21 +141,8 @@ namespace TMV.UI.JPCB.JP
     private DataView Dv_DmTo_KH_SCC;
     private DataView Dv_DmKTV_KH_SCC;
     private DataView Dv_DmCd_KH_SCC;
-    private DataView Dv_DmMucSBD_KH_SCC;
-    private DataView Dv_DmMucSDS_KH_SCC;
-    private DataView Dv_DmLoai_Xem_KH_SCC;
-    private DataView Dv_DmTang_KH_SCC;
     private DataTable Dt_Khoang_H;
     private DataTable Dt_Xe_H;
-    private string M_Loai_XemOld = "";
-    private int Flass = 0;
-    private int Stt_Flass = 0;
-    private string ForeColor_Flass = "";
-    private string BackColor_Flass = "";
-    private DataTable dt_TabChange;
-    private int Interval = 1000;
-    private int Show_iconNew = 0;
-    private string Caption = "";
     #endregion
 
     public frmJP()
@@ -279,6 +160,7 @@ namespace TMV.UI.JPCB.JP
 
       Text = "BẢNG THEO DÕI SỬA CHỮA";
       V_SetTree();
+
       IMouseHandlerService service = (IMouseHandlerService)SchedulerControl_KH_SCC.GetService(typeof(IMouseHandlerService));
       if (service != null)
       {
@@ -287,19 +169,16 @@ namespace TMV.UI.JPCB.JP
         SchedulerControl_KH_SCC.AddService(typeof(IMouseHandlerService), serviceInstance);
       }
       SchedulerControl_KH_SCC.MouseWheel += new MouseEventHandler(V_SchedulerControl_KH_SCC_MouseWheel);
+
       V_GetKieu_Xem_Loai_SC();
-      LabLock.Visible = (M_Kieu_Xem.Trim().ToUpper() != "HEN");
+      LabLock.Visible = (M_Kieu_Xem.Trim().ToUpper() != "HEN"); // TIEN_DO
       TxtM_Ngay_Ct_KH_SCC.EditValue = DateTime.Today.Date;
 
       V_LoadTabVisible();
       V_CreateTimeALl();
 
-      //if (_TabVisible1)
-      //  V_Load_System_Hen();
       if (_TabVisible3)
         V_Load_System_KH_SC();
-      //if (_TabVisible8)
-      //  V_Load_System_HonHop();
       if (_TabVisible9)
         V_Load_System_Dung();
 
@@ -342,7 +221,6 @@ namespace TMV.UI.JPCB.JP
     private void V_LoadTabVisible() //
     {
       DataSet dataSet = JpcbJpBO.Instance().JPVisibleTabs(Globals.LoginDlrId, Globals.LoginUserID); // CP_RO_CVDV_Config
-      dt_configTab = dataSet.Tables[0].Copy();
       int num = checked(dataSet.Tables[0].Rows.Count - 1);
       int index1 = 0;
       while (index1 <= num)
@@ -363,34 +241,16 @@ namespace TMV.UI.JPCB.JP
           checked { index2 += -1; }
         }
 
-        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "1")
-          _TabVisible1 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
-        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "2")
-          _TabVisible2 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
         if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "3")
           _TabVisible3 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
-        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "4")
-          _TabVisible4 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
-        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "5")
-          _TabVisible5 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
-        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "6")
-          _TabVisible6 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
-        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "7")
-          _TabVisible7 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
-        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "8")
-          _TabVisible8 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
         if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "9")
           _TabVisible9 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
-        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "10")
-          _TabVisible10 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
-        if (dataSet.Tables[0].Rows[index1]["Stt"].ToString() == "11")
-          _TabVisible11 = (dataSet.Tables[0].Rows[index1]["Is_Visible"].ToString().Trim() == "1");
 
         checked { ++index1; }
       }
 
       if (dataSet.Tables.Count > 1)
-        Dt_Right = dataSet.Tables[1].Copy();
+        Dt_Right = dataSet.Tables[1].Copy(); // TODO
 
       dataSet.Dispose();
     }
@@ -399,8 +259,6 @@ namespace TMV.UI.JPCB.JP
       DataTable dataTable = CreateTime().Copy();
       if (_TabVisible3)
         Dt_Time_KH_SCC = dataTable.Copy();
-      if (_TabVisible8)
-        Dt_Time_Honhop = dataTable.Copy();
       if (_TabVisible9)
         Dt_Time_Dung = dataTable.Copy();
     }
@@ -429,29 +287,6 @@ namespace TMV.UI.JPCB.JP
         new object[]{ "600000", "10 phút", "", "0" },
       }
     };
-    private void V_Load_System_Hen()
-    {
-      bool flag = false;
-      Timer_Data_hen.Stop();
-      Timer_Data_hen.Enabled = flag;
-      CbbTime_Data_Hen.Enabled = flag;
-
-      V_Load_System_CVDV(ref Dt_CVDV_Hen);
-      V_Load_System_TO(ref Dt_To_Hen);
-
-      if (Dt_Time_Hen == null)
-        Dt_Time_Hen = CreateTime().Copy();
-
-      V_LoadData_Hen("1");
-      V_Fill_Hen();
-      V_AddHander_Hen();
-      Master_HenGRV.ColumnPanelRowHeight = 30;
-
-      if (!flag)
-        Timer_Data_Cho_SC.Stop();
-      else
-        Timer_Data_Cho_SC.Start();
-    }
     private void V_Load_System_KH_SC() //
     {
       bool flag = false;
@@ -469,23 +304,6 @@ namespace TMV.UI.JPCB.JP
         Timer_Data_KH_SCC.Stop();
       else
         Timer_Data_KH_SCC.Start();
-    }
-    private void V_Load_System_HonHop()
-    {
-      bool flag = false;
-      Timer_Data_honHop.Stop();
-      Timer_Data_honHop.Enabled = flag;
-      CbbTime_Data_HonHop.Enabled = flag;
-
-      V_Load_System_CVDV(ref Dt_CVDV_HonHop);
-      if (Dt_Time_Honhop == null)
-        Dt_Time_Honhop = CreateTime().Copy();
-
-      V_LoadData_HonHop("1");
-      V_Fill_HonHop();
-      V_AddHander_HonHop();
-
-      Master_HonHopGRV.ColumnPanelRowHeight = 30;
     }
     private void V_Load_System_Dung()
     {
@@ -507,20 +325,11 @@ namespace TMV.UI.JPCB.JP
     }
     private void V_LoadHonHop_Dung_ChayTHU()
     {
-      CmdHonHop.Visible = _TabVisible8;
       CmdDung.Visible = _TabVisible9;
-      CmdHonHop.Click -= new EventHandler(V_HonHop);
       CmdDung.Click -= new EventHandler(V_Dung);
-      CmdHonHop.Click += new EventHandler(V_HonHop);
       CmdDung.Click += new EventHandler(V_Dung);
 
-      V_SetCaptionSo_Xe(Dt_HonHop, CmdHonHop);
       V_SetCaptionSo_Xe(Dt_Dung, CmdDung);
-    }
-    private void V_HonHop(object sender, EventArgs e)
-    {
-      V_SelectTabPage("TAB8");
-      V_SetCaptionSo_Xe(Dt_HonHop, CmdHonHop);
     }
     private void V_Dung(object sender, EventArgs e)
     {
@@ -546,7 +355,7 @@ namespace TMV.UI.JPCB.JP
       TabPage tabPage = (sender as TabControl).TabPages[e.Index];
       Rectangle obj = (sender as TabControl).GetTabRect(e.Index);
       Rectangle rectangle = new Rectangle();
-      Rectangle layoutRectangle = obj != null ? obj : rectangle;
+      Rectangle layoutRectangle = (obj != null) ? obj : rectangle;
       SolidBrush solidBrush = new SolidBrush(Color.Black);
       StringFormat format = new StringFormat();
       format.Alignment = StringAlignment.Center;
@@ -574,9 +383,6 @@ namespace TMV.UI.JPCB.JP
       else
         Timer_Data_hen.Stop();
     }
-    #endregion
-
-    #region "V_Load_System_Hen"
     private void V_Load_System_CVDV(ref DataTable _DT_CVDV)
     {
       if (_DT_CVDV != null)
@@ -584,381 +390,11 @@ namespace TMV.UI.JPCB.JP
 
       if (DmCVDV_Loc_KH_SCC != null)
         _DT_CVDV = DmCVDV_Loc_KH_SCC.Copy();
-      else if (Dt_CVDV_Hen != null)
-        _DT_CVDV = Dt_CVDV_Hen.Copy();
-      else if (Dt_CVDV_Cho_Tiep_Don != null)
-        _DT_CVDV = Dt_CVDV_Cho_Tiep_Don.Copy();
-      else
-      {
-        DataSet dataSet = new DataSet(); // TODO: CP_RO_CVDV_Load_DSCVDV
-        _DT_CVDV = dataSet.Tables[0].Copy();
-      }
     }
-    private void V_Load_System_TO(ref DataTable _DT_TO)
-    {
-      if (_DT_TO != null)
-        return;
-
-      DataSet dataSet = new DataSet(); // TODO: CP_RO_CVDV_Load_DSTo
-      _DT_TO = dataSet.Tables[0].Copy();
-    }
-    private void V_LoadData_Hen(string status, string _Stt_Rec = "")
-    {
-      if (status == "1")
-      {
-        TxtM_Ngay_Ct_hen.EditValue = DateTime.Now.Date;
-        ChkHen_SBD.Checked = false;
-        ChkHen_SCC.Checked = false;
-        ChkHen_SDS.Checked = false;
-      }
-
-      DateTime date1 = DateTime.Now.Date;
-      DateTime date2 = Convert.ToDateTime(TxtM_Ngay_Ct_hen.EditValue);
-      DataSet dataSet = new DataSet(); // TODO: CP_RO_CVDV_Hen
-      int num1 = checked(dataSet.Tables.Count - 1);
-      int index1 = 0;
-      while (index1 <= num1)
-      {
-        CyberFunc.SetNotNullTable(dataSet.Tables[index1]);
-        checked { ++index1; }
-      }
-      if (status.ToUpper().Trim() == "1")
-      {
-        Dt_Hen = dataSet.Tables[0].Copy();
-        Dv_Hen = new DataView(Dt_Hen);
-        Dt_Hen_H = dataSet.Tables[1].Copy();
-        Dv_Hen_H = new DataView(Dt_Hen_H);
-        dataSet.Dispose();
-        CyberColor.V_GetColorBold(Dt_Hen, ref _Bold_Hen, ref _BackColor_Hen, ref _BackColor2_Hen, ref _Forecolor_Hen, ref _FieldBold_Hen, ref _FieldBackColor_Hen, ref _FieldBackColor2_Hen, ref _FieldForecolor_Hen);
-      }
-      else
-      {
-        if (_Stt_Rec.Trim() == "")
-        {
-          Dt_Hen.Clear();
-          int num2 = checked(dataSet.Tables[0].Rows.Count - 1);
-          int index2 = 0;
-          while (index2 <= num2)
-          {
-            Dt_Hen.ImportRow(dataSet.Tables[0].Rows[index2]);
-            checked { ++index2; }
-          }
-          Dt_Hen.AcceptChanges();
-        }
-        else if (dataSet.Tables[0].Rows.Count == 0)
-        {
-          int index3 = checked(Dt_Hen.Rows.Count - 1);
-          while (index3 >= 0)
-          {
-            if (Dt_Hen.Rows[index3]["Stt_Rec"].ToString().Trim() == _Stt_Rec)
-            {
-              Dt_Hen.Rows[index3].Delete();
-              break;
-            }
-            checked { index3 += -1; }
-          }
-          Dt_Hen.AcceptChanges();
-        }
-        else
-        {
-          int num3 = checked(Dt_Hen.Rows.Count - 1);
-          bool flag = false;
-          int _Irow = -1;
-          int num4 = num3;
-          int index4 = 0;
-          while (index4 <= num4)
-          {
-            if (Dt_Hen.Rows[index4]["Stt_Rec"].ToString().Trim() == _Stt_Rec)
-            {
-              _Irow = index4;
-              flag = true;
-              break;
-            }
-            checked { ++index4; }
-          }
-          if (flag)
-            CyberFunc.V_UpdateRowtoRow(dataSet.Tables[0].Rows[0], Dt_Hen, _Irow);
-          else
-            Dt_Hen.ImportRow(dataSet.Tables[0].Rows[0]);
-
-          Dt_Hen.AcceptChanges();
-        }
-        dataSet.Dispose();
-      }
-    }
-    private void V_AddHander_Hen()
-    {
-      ChkAuto_Data_Hen.CheckedChanged += new EventHandler(V_Auto_Data_Hen);
-      CbbTime_Data_Hen.SelectedValueChanged += new EventHandler(V_Auto_Data_Hen);
-      Timer_Data_hen.Tick += new EventHandler(V_Timer_Data_hen);
-      CbbCVDV_Hen.SelectedIndexChanged += new EventHandler(V_CVDV_Hen);
-      CbbTo_Hen.SelectedIndexChanged += new EventHandler(V_CVDV_Hen);
-      ChkHen_SCC.CheckedChanged += new EventHandler(V_CVDV_Hen);
-      ChkHen_SBD.CheckedChanged += new EventHandler(V_CVDV_Hen);
-      ChkHen_SDS.CheckedChanged += new EventHandler(V_CVDV_Hen);
-      TxtM_Ngay_Ct_hen.TextChanged += new EventHandler(V_Ngay_Ct_Hen);
-      Master_HenGRV.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(Master_HenGRV_PopupMenuShowing);
-      Master_HenGRV.RowCellStyle += new RowCellStyleEventHandler(Master_HenGRV_RowCellStyle);
-    }
-    private void V_Refresh_Hen(object sender, EventArgs e) => V_LoadData_Hen("0");
-    private void V_Xac_Nhan_Hen(object sender, EventArgs e)
-    {
-      int dataSourceRowIndex = Master_HenGRV.GetFocusedDataSourceRowIndex();
-      if (dataSourceRowIndex < 0)
-        return;
-
-      string str = Dv_Hen[dataSourceRowIndex]["Stt_Rec"].ToString().Trim();
-      DataSet ds = new DataSet(); // TODO: CP_RO_CVDV_Hen_ChangePost
-      if (str == "" || ds.Tables[0] == null)
-        return;
-
-      V_LoadData_Hen("0", str);
-
-      if (!(str.Trim() != "" & Dt_Data_KH_SCC != null))
-        return;
-
-      V_Load_DATA_KH_SCC("0", "", str);
-    }
-    private void V_Go_Xac_Nhan_Hen(object sender, EventArgs e)
-    {
-      int dataSourceRowIndex = Master_HenGRV.GetFocusedDataSourceRowIndex();
-      if (dataSourceRowIndex < 0)
-        return;
-
-      string str = Dv_Hen[dataSourceRowIndex]["Stt_Rec"].ToString().Trim();
-      DataSet ds = new DataSet(); // TODO: CP_RO_CVDV_Hen_ChangePost
-      if (str == "" || ds.Tables[0] == null)
-        return;
-
-      V_LoadData_Hen("0", str);
-
-      if (!(str.Trim() != "" & Dt_Data_KH_SCC != null))
-        return;
-
-      V_Load_DATA_KH_SCC("0", "", str);
-    }
-    private void V_Huy_Hen(object sender, EventArgs e)
-    {
-      int dataSourceRowIndex = Master_HenGRV.GetFocusedDataSourceRowIndex();
-      if (dataSourceRowIndex < 0)
-        return;
-
-      string str = Dv_Hen[dataSourceRowIndex]["Stt_Rec"].ToString().Trim();
-      DataSet ds = new DataSet(); // TODO: CP_RO_CVDV_Hen_ChangePost
-      if (str == "" || ds.Tables[0] == null)
-        return;
-
-      V_LoadData_Hen("0", str);
-
-      if (!(str.Trim() != "" & Dt_Data_KH_SCC != null))
-        return;
-
-      V_Load_DATA_KH_SCC("0", "", str);
-    }
-    private void V_IN_Phieu_Hen(object sender, EventArgs e)
-    {
-      // TODO: CP_RO_CVDV_Hen_Print
-    }
-    private void V_Tao_Hen(object sender, EventArgs e)
-    {
-      DataTable dataTable = new DataTable(); // TODO: open form (FrmCVDV_DLHen)
-      if (dataTable == null || dataTable.Rows.Count == 0 || !dataTable.Columns.Contains("Stt_Rec_Ro_Load") | !dataTable.Columns.Contains("Stt_Rec_Load"))
-        return;
-
-      string str = dataTable.Rows[0]["Stt_Rec_Ro_Load"].ToString().Trim();
-      V_LoadData_Hen("0", str);
-
-      if (!(str.Trim() != "" & Dt_Data_KH_SCC != null))
-        return;
-
-      V_Load_DATA_KH_SCC("0", "", str);
-    }
-    private void V_Sua_Hen(object sender, EventArgs e)
-    {
-      int dataSourceRowIndex = Master_HenGRV.GetFocusedDataSourceRowIndex();
-      if (dataSourceRowIndex < 0)
-        return;
-
-      string str1 = Dv_Hen[dataSourceRowIndex]["Stt_Rec"].ToString().Trim();
-      if (str1 == "")
-        return;
-
-      DataTable dataTable = new DataTable(); // TODO: open form (FrmCVDV_DLHen)
-      if (dataTable == null || dataTable.Rows.Count == 0 || !dataTable.Columns.Contains("Stt_Rec_Ro_Load") | !dataTable.Columns.Contains("Stt_Rec_Load"))
-        return;
-
-      string str3 = dataTable.Rows[0]["Stt_Rec_Ro_Load"].ToString().Trim();
-
-      V_LoadData_Hen("0", str3);
-
-      if (!(str3.Trim() != "" & Dt_Data_KH_SCC != null))
-        return;
-
-      V_Load_DATA_KH_SCC("0", "", str3);
-    }
-    private void V_Hen_Call(object sender, EventArgs e)
-    {
-      int dataSourceRowIndex = Master_HenGRV.GetFocusedDataSourceRowIndex();
-      if (dataSourceRowIndex < 0)
-        return;
-
-      string str = Dv_Hen[dataSourceRowIndex]["Stt_Rec"].ToString().Trim();
-      if (str == "")
-        return;
-
-      DataTable dataTable = new DataTable(); // TODO: open form (FrmCVDV_DLHen_Call)
-      if (dataTable == null)
-        return;
-
-      V_LoadData_Hen("0", str);
-    }
-    private void V_ExportExcel_Hen(object sender, EventArgs e)
-    {
-      // TODO
-    }
-    private void V_Loc_Hen(object sender, EventArgs e)
-    {
-      // TODO: open form (FrmCVDV_DLHen_Filter)
-    }
-    private void V_History_Hen(object sender, EventArgs e)
-    {
-      int dataSourceRowIndex = Master_HenGRV.GetFocusedDataSourceRowIndex();
-      if (dataSourceRowIndex < 0)
-        return;
-
-      string Left = Dv_Hen[dataSourceRowIndex]["Stt_Rec"].ToString().Trim();
-      if (Left == "")
-        return;
-
-      // TODO: open form (FrmCVDV_DLHen_Filter)
-    }
-    private void V_Fill_Hen()
-    {
-      CyberFunc.V_FillComBoxDefaul(CbbTo_Hen, Dt_To_Hen, "Ma_To", "Ten_To");
-      CyberFunc.V_FillComBoxDefaul(CbbCVDV_Hen, Dt_CVDV_Hen, "Ma_Hs", "Ten_Hs");
-      CyberFunc.V_FillComBoxDefaul(CbbTime_Data_Hen, Dt_Time_Hen, "TG", "Ten_TG");
-
-      Master_Hen.DataSource = Dv_Hen;
-      Master_HenGRV.GridControl = Master_Hen;
-
-      GridView masterHenGrv = Master_HenGRV;
-      ref GridView local = ref masterHenGrv;
-      DataView dvHenH = Dv_Hen_H;
-      DataView dvHen = Dv_Hen;
-      CyberFunc.V_FillReports(ref local, dvHenH, dvHen);
-
-      Master_HenGRV = masterHenGrv;
-      Master_HenGRV.Appearance.SelectedRow.BackColor = Color.YellowGreen;
-      Master_HenGRV.OptionsSelection.MultiSelect = false;
-      CbbTime_Data_Hen.DataSource = Dt_Time_Hen;
-    }
-    private void Master_HenGRV_RowCellStyle(object sender, RowCellStyleEventArgs e) => GRV_RowCellStyle(sender, e, Master_HenGRV, _Bold_Hen, _BackColor_Hen, _BackColor2_Hen, _Forecolor_Hen, _FieldBold_Hen, _FieldBackColor_Hen, _FieldBackColor2_Hen, _FieldForecolor_Hen);
-    private void Master_HenGRV_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
-    {
-      int rowHandle = e != null ? e.HitInfo.RowHandle : -1;
-      PopupMenu.ItemLinks.Clear();
-
-      PopupMenu.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Tạo lịch hẹn", 
-          new EventHandler(V_Tao_Hen), Shortcut.F4,
-          ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
-      PopupMenu.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Sửa lịch hẹn", 
-          new EventHandler(V_Sua_Hen), Shortcut.F3,
-          ImageResourceCache.Default.GetImage("images/actions/edit_16x16.png"), true), false);
-      PopupMenu.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Xem lịch hẹn", 
-          new EventHandler(V_Loc_Hen), Shortcut.F2,
-          ImageResourceCache.Default.GetImage("images/actions/historyitem_16x16.png"), true), true);
-      PopupMenu.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Gọi xác nhận lịch hẹn", 
-          new EventHandler(V_Hen_Call), Shortcut.F6, null, true), true);
-      PopupMenu.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Xác nhận lịch", 
-          new EventHandler(V_Xac_Nhan_Hen), Shortcut.F10,
-          ImageResourceCache.Default.GetImage("images/actions/showworktimeonly_16x16.png"), true), false);
-      PopupMenu.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Gỡ nhận lịch", 
-          new EventHandler(V_Go_Xac_Nhan_Hen), Shortcut.F11,
-          ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true), false);
-      PopupMenu.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Hủy", 
-          new EventHandler(V_Huy_Hen), Shortcut.F8,
-          ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true), true);
-      PopupMenu.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "In phiếu hẹn", 
-          new EventHandler(V_IN_Phieu_Hen), Shortcut.F7,
-          ImageResourceCache.Default.GetImage("images/actions/preview_16x16.png"), true), false);
-      PopupMenu.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Lịch sử sửa lịch hẹn", 
-          new EventHandler(V_History_Hen), Shortcut.None,
-          ImageResourceCache.Default.GetImage("images/actions/historyitem_16x16.png"), true), true);
-      PopupMenu.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Export Excel", 
-          new EventHandler(V_ExportExcel_Hen), Shortcut.F12,
-          ImageResourceCache.Default.GetImage("images/actions/exporttoxlsx_16x16.png"), true), false);
-      PopupMenu.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Làm tươi dữ liệu", 
-          new EventHandler(V_Refresh_Hen), Shortcut.F5,
-          ImageResourceCache.Default.GetImage("images/actions/refresh2_16x16.png"), true), false);
-      PopupMenu.ItemLinks.Add(
-        new CyberMenuPopup(sender, rowHandle, "Quay ra", 
-          new EventHandler(V_Quay_Ra),
-          ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true), true);
-      
-      PopupMenu.ShowPopup(Control.MousePosition);
-      if (e == null)
-        return;
-
-      PopupMenu.ShowPopup(Control.MousePosition);
-    }
-    private void V_Auto_Data_Hen(object sender, EventArgs e)
-    {
-      Decimal numeric = CyberFunc.V_StringToNumeric(CbbTime_Data_Hen);
-      CheckBox chkAutoDataHen = ChkAuto_Data_Hen;
-      ref CheckBox local1 = ref chkAutoDataHen;
-      ComboBox cbbTimeDataHen = CbbTime_Data_Hen;
-      Timer timerDataHen = Timer_Data_hen;
-      ref Timer local2 = ref timerDataHen;
-      Decimal num = numeric;
-      V_EnabledTime(ref local1, cbbTimeDataHen, ref local2, num);
-      Timer_Data_hen = timerDataHen;
-      ChkAuto_Data_Hen = chkAutoDataHen;
-    }
-    private void V_Timer_Data_hen(object sender, EventArgs e)
-    {
-      if (!ChkAuto_Data_Hen.Enabled)
-        return;
-
-      V_Refresh_Hen(sender, e);
-    }
-    private void V_Ngay_Ct_Hen(object sender, EventArgs e) => V_Refresh_Hen(sender, e);
-    private void V_CVDV_Hen(object sender, EventArgs e) => V_Filter_Hen();
-    private void V_Filter_Hen()
-    {
-      if (!Dt_Hen.Columns.Contains("Ma_Hs"))
-        return;
-
-      string Left1 = CyberFunc.V_GetvalueCombox(CbbCVDV_Hen);
-      string str = "1=1";
-      if (Left1 != "")
-        str = str + " AND Ma_HS = '" + Left1.Trim() + "'";
-      if (ChkHen_SCC.Checked)
-        str += " AND SCC = '1'";
-      if (ChkHen_SBD.Checked)
-        str += " AND SBD = '1'";
-      if (ChkHen_SDS.Checked)
-        str += " AND SDS = '1'";
-      string Left2 = CyberFunc.V_GetvalueCombox(CbbTo_Hen);
-      if (Left2 != "" & Dt_Hen.Columns.Contains("ma_To"))
-        str = str + " AND ma_To = '" + Left2.Trim() + "'";
-
-      Dv_Hen.RowFilter = str;
-    }
-    private void V_EnabledTime(ref CheckBox Chk, ComboBox _Cbb, ref Timer _Timer, Decimal _Value)
+    private void V_EnabledTime(ref CheckBox Chk, ComboBox _Cbb, ref Timer _Timer, decimal _Value)
     {
       bool flag = Chk.Checked;
-      if (Decimal.Compare(_Value, 0M) <= 0)
+      if (decimal.Compare(_Value, 0M) <= 0)
         flag = false;
 
       _Cbb.Enabled = flag;
@@ -967,275 +403,15 @@ namespace TMV.UI.JPCB.JP
         _Timer.Start();
       else
         _Timer.Stop();
+
       if (!flag)
         return;
-      if (Decimal.Compare(_Value, 0M) <= 0)
+
+      if (decimal.Compare(_Value, 0M) <= 0)
         _Value = 3000M;
 
       _Timer.Interval = Convert.ToInt32(_Value);
     }
-    private void GRV_RowCellStyle(object sender, RowCellStyleEventArgs e, GridView _GRV, bool _Bold, bool _BackColor, bool _BackColor2, bool _Forecolor, string _FieldBold, string _FieldBackColor, string _FieldBackColor2, string _FieldForecolor)
-    {
-      //NewLateBinding.LateGet(
-      //  sender, 
-      //  (System.Type)null, 
-      //  "IsCellSelected", 
-      //  new object[2]
-      //  {
-      //    (object) e.RowHandle,
-      //    (object) e.Column
-      //  }, 
-      //  (string[])null, 
-      //  (System.Type[])null, 
-      //  (bool[])null
-      //)
-
-      //NewLateBinding.LateGet(
-      //  (object)_Dv_DataSource.Table.Columns, 
-      //  (System.Type)null, 
-      //  "Item", 
-      //  new object[1]
-      //  {
-      //    RuntimeHelpers.GetObjectValue(row["Field_Name"])
-      //  }, 
-      //  (string[])null, 
-      //  (System.Type[])null, 
-      //  (bool[])null
-      //)
-
-      GridView view = sender as GridView;
-      if (!view.IsCellSelected(e.RowHandle, e.Column))
-      {
-        if (_Bold && _GRV.GetRowCellDisplayText(e.RowHandle, _FieldBold).ToString().Trim() == "1")
-          e.Appearance.Font = new Font(Font.FontFamily, Font.Size, FontStyle.Bold);
-        if (_BackColor)
-        {
-          string ColorName = _GRV.GetRowCellDisplayText(e.RowHandle, _FieldBackColor).ToString().Trim();
-          e.Appearance.BackColor = CyberColor.GetBacColorkReports(ColorName);
-        }
-        if (_BackColor2)
-        {
-          string ColorName = _GRV.GetRowCellDisplayText(e.RowHandle, _FieldBackColor2).ToString().Trim();
-          if (ColorName.Trim() != "")
-            e.Appearance.BackColor2 = CyberColor.GetBacColorkReports(ColorName);
-        }
-        if (!_Forecolor)
-          return;
-        string ColorName1 = _GRV.GetRowCellDisplayText(e.RowHandle, _FieldForecolor).ToString().Trim();
-        e.Appearance.ForeColor = CyberColor.GetForeColor(ColorName1);
-      }
-      else
-        e.Appearance.BackColor = Color.Silver;
-    }
-    #endregion
-
-    #region "V_Load_System_HonHop"
-    private void V_LoadData_HonHop(string status, string _Stt_Rec = "")
-    {
-      DataSet dataSet = new DataSet(); // TODO: CP_RO_CVDV_Honhop
-      int num = checked(dataSet.Tables.Count - 1);
-      int index = 0;
-      while (index <= num)
-      {
-        CyberFunc.SetNotNullTable(dataSet.Tables[index]);
-        checked { ++index; }
-      }
-      if (status.ToUpper().Trim() == "1")
-      {
-        Dt_HonHop = dataSet.Tables[0].Copy();
-        Dv_HonHop = new DataView(Dt_HonHop);
-        Dt_HonHop_H = dataSet.Tables[1].Copy();
-        Dv_HonHop_H = new DataView(Dt_HonHop_H);
-
-        if (dataSet.Tables.Count >= 3)
-          CyberFunc.V_SetSortView(ref Dv_HonHop, dataSet.Tables[2]);
-
-        dataSet.Dispose();
-        CyberColor.V_GetColorBold2(Dt_HonHop, ref _Bold_HonHop, ref _BackColor_HonHop, ref _BackColor2_HonHop, ref _ForeColor_HonHop, ref _Underline_HonHop, ref _FieldBold_HonHop, ref _FieldBackColor_HonHop, ref _FieldBackColor2_HonHop, ref _FieldForeColor_HonHop, ref _FieldUnderline_HonHop);
-      }
-      else
-      {
-        if (_Stt_Rec.Trim() == "")
-        {
-          if (Dt_HonHop != null)
-            Dt_HonHop.Clear();
-          if (Dt_HonHop != null)
-            Dt_HonHop.Load((IDataReader)dataSet.Tables[0].CreateDataReader());
-        }
-        else
-        {
-          if (Dt_HonHop != null)
-            CyberFunc.DeleteDatatable(ref Dt_HonHop, "Stt_rec ='" + _Stt_Rec.Trim() + "'");
-          if (Dt_HonHop != null)
-            Dt_HonHop.Load((IDataReader)dataSet.Tables[0].CreateDataReader());
-        }
-        Dt_HonHop.AcceptChanges();
-        dataSet.Dispose();
-        V_SetCaptionSo_Xe(Dt_HonHop, CmdHonHop);
-      }
-    }
-    private void V_AddHander_HonHop()
-    {
-      ChkAuto_Data_HonHop.CheckedChanged += new EventHandler(V_Auto_Data_HonHop);
-      CbbTime_Data_HonHop.SelectedValueChanged += new EventHandler(V_Auto_Data_HonHop);
-      Timer_Data_honHop.Tick += new EventHandler(V_Timer_Data_HonHop);
-      CbbCVDV_HonHop.SelectedIndexChanged += new EventHandler(V_CVDV_HonHop);
-      Master_HonHopGRV.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(Master_HonHopGRV_PopupMenuShowing);
-      Master_HonHopGRV.RowCellStyle += new RowCellStyleEventHandler(Master_HonHopGRV_RowCellStyle);
-    }
-    private void V_ExportExcel_HonHop(object sender, EventArgs e)
-    {
-      // TODO
-    }
-    private void V_Fill_HonHop()
-    {
-      CyberFunc.V_FillComBoxDefaul(CbbCVDV_HonHop, Dt_CVDV_HonHop, "Ma_Hs", "Ten_Hs");
-      CyberFunc.V_FillComBoxDefaul(CbbTime_Data_HonHop, Dt_Time_Honhop, "TG", "Ten_TG");
-
-      Master_HonHop.DataSource = Dv_HonHop;
-      Master_HonHopGRV.GridControl = Master_HonHop;
-      GridView masterHonHopGrv = Master_HonHopGRV;
-      ref GridView local = ref masterHonHopGrv;
-      DataView dvHonHopH = Dv_HonHop_H;
-      DataView dvHonHop = Dv_HonHop;
-      CyberFunc.V_FillReports(ref local, dvHonHopH, dvHonHop);
-
-      Master_HonHopGRV = masterHonHopGrv;
-      Master_HonHopGRV.Appearance.SelectedRow.BackColor = Color.YellowGreen;
-      Master_HonHopGRV.OptionsSelection.MultiSelect = false;
-      CbbTime_Data_HonHop.DataSource = Dt_Time_Honhop;
-    }
-    private void Master_HonHopGRV_RowCellStyle(object sender, RowCellStyleEventArgs e) => GRV_RowCellStyle2(sender, e, Master_HonHopGRV, _Bold_HonHop, _BackColor_HonHop, _BackColor2_HonHop, _ForeColor_HonHop, _Underline_HonHop, _FieldBold_HonHop, _FieldBackColor_HonHop, _FieldBackColor2_HonHop, _FieldForeColor_HonHop, _FieldUnderline_HonHop);
-    private void Master_HonHopGRV_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
-    {
-      int rowHandle = e != null ? e.HitInfo.RowHandle : -1;
-      PopupMenu.ItemLinks.Clear();
-
-      PopupMenu.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Tạo thông điệp chuyển tầng", 
-          new EventHandler(V_TaoChuyenTang_HonHop), Shortcut.F3,
-          ImageResourceCache.Default.GetImage("images/actions/edit_16x16.png"), true), false);
-      PopupMenu.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Nhận thông điệp chuyển tầng", 
-          new EventHandler(V_NhanChuyenTang_HonHop), Shortcut.F4,
-          ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
-      PopupMenu.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Hủy thông điệp", 
-          new EventHandler(V_HuyChuyenTang_HonHop), Shortcut.F6,
-          ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true), false);
-      PopupMenu.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Xem thông điệp chuyển tầng", 
-          new EventHandler(V_XemChuyenTang_HonHop), Shortcut.F7,
-          ImageResourceCache.Default.GetImage("images/actions/preview_16x16.png"), true), false);
-      PopupMenu.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Export Excel", 
-          new EventHandler(V_ExportExcel_HonHop), Shortcut.F12,
-          ImageResourceCache.Default.GetImage("images/actions/exporttoxlsx_16x16.png"), true), false);
-      PopupMenu.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Làm tươi dữ liệu", 
-          new EventHandler(V_Refresh_HonHop), Shortcut.F5,
-          ImageResourceCache.Default.GetImage("images/actions/refresh2_16x16.png"), true), false);
-      PopupMenu.ItemLinks.Add(
-        new CyberMenuPopup(sender, rowHandle, "Quay ra", 
-          new EventHandler(V_Quay_Ra),
-          ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true), true);
-      PopupMenu.ShowPopup(Control.MousePosition);
-      
-      if (e == null)
-        return;
-
-      PopupMenu.ShowPopup(Control.MousePosition);
-    }
-    private void V_TaoChuyenTang_HonHop(object sender, EventArgs e)
-    {
-      int dataSourceRowIndex = Master_HonHopGRV.GetFocusedDataSourceRowIndex();
-      if (dataSourceRowIndex < 0)
-        return;
-
-      string str = "";
-      if (Dt_HonHop.Columns.Contains("Stt_Rec_Ro"))
-        str = Convert.ToString(Dv_HonHop[dataSourceRowIndex]["Stt_Rec_Ro"]);
-
-      DataSet ds = new DataSet(); // TODO: open form (FrmChuyentang)
-      if (ds.Tables[0] == null)
-        return;
-
-      V_LoadData_HonHop("0", str);
-      V_Load_DATA_KH_SCC("0", "", str);
-    }
-    private void V_NhanChuyenTang_HonHop(object sender, EventArgs e)
-    {
-      int dataSourceRowIndex = Master_HonHopGRV.GetFocusedDataSourceRowIndex();
-      if (dataSourceRowIndex < 0)
-        return;
-
-      string str = "";
-      if (Dt_HonHop.Columns.Contains("Stt_Rec_Ro"))
-        str = Convert.ToString(Dv_HonHop[dataSourceRowIndex]["Stt_Rec_Ro"]);
-
-      DataSet ds = new DataSet(); // TODO: open form (FrmChuyentang)
-      if (ds.Tables[0] == null)
-        return;
-
-      V_LoadData_HonHop("0", str);
-      V_Load_DATA_KH_SCC("0", "", str);
-    }
-    private void V_HuyChuyenTang_HonHop(object sender, EventArgs e)
-    {
-      int dataSourceRowIndex = Master_HonHopGRV.GetFocusedDataSourceRowIndex();
-      if (dataSourceRowIndex < 0)
-        return;
-
-      string str = "";
-      if (Dt_HonHop.Columns.Contains("Stt_Rec_Ro"))
-        str = Convert.ToString(Dv_HonHop[dataSourceRowIndex]["Stt_Rec_Ro"]);
-
-      DataSet ds = new DataSet(); // TODO: open form (FrmChuyentang)
-      if (ds.Tables[0] == null)
-        return;
-
-      V_LoadData_HonHop("0", str);
-      V_Load_DATA_KH_SCC("0", "", str);
-    }
-    private void V_XemChuyenTang_HonHop(object sender, EventArgs e)
-    {
-      // TODO
-    }
-    private void V_Auto_Data_HonHop(object sender, EventArgs e)
-    {
-      Decimal numeric = CyberFunc.V_StringToNumeric(CbbTime_Data_HonHop);
-      CheckBox chkAutoDataHonHop = ChkAuto_Data_HonHop;
-      ref CheckBox local1 = ref chkAutoDataHonHop;
-      System.Windows.Forms.ComboBox cbbTimeDataHonHop = CbbTime_Data_HonHop;
-      Timer timerDataHonHop = Timer_Data_honHop;
-      ref Timer local2 = ref timerDataHonHop;
-      Decimal num = numeric;
-      V_EnabledTime(ref local1, cbbTimeDataHonHop, ref local2, num);
-      Timer_Data_honHop = timerDataHonHop;
-      ChkAuto_Data_HonHop = chkAutoDataHonHop;
-    }
-    private void V_Timer_Data_HonHop(object sender, EventArgs e)
-    {
-      if (!ChkAuto_Data_HonHop.Enabled)
-        return;
-
-      V_Refresh_HonHop(sender, e);
-    }
-    private void V_Ngay_Ct_HonHop(object sender, EventArgs e) => V_Refresh_HonHop(sender, e);
-    private void V_CVDV_HonHop(object sender, EventArgs e) => V_Filter_HonHop();
-    private void V_Filter_HonHop()
-    {
-      if (!Dt_HonHop.Columns.Contains("Ma_Hs"))
-        return;
-
-      string Left = CyberFunc.V_GetvalueCombox(CbbCVDV_HonHop);
-      string str = "1=1";
-      if (Left != "")
-        str = str + " AND Ma_HS = '" + Left.Trim() + "'";
-
-      Dv_HonHop.RowFilter = str;
-    }
-    private void V_Refresh_HonHop(object sender, EventArgs e) => V_LoadData_HonHop("0");
     #endregion
 
     #region "V_Load_System_Dung"
@@ -1443,7 +619,7 @@ namespace TMV.UI.JPCB.JP
       if (M_Loai_KH_SCC.Trim() == "2") // BP
         str = "TIẾN ĐỘ SỬA ĐỒNG SƠN";
       if (M_Kieu_Xem.Trim() == "HEN")
-        str = "LỊCH HẸN SỬA ";
+        str = "LỊCH HẸN SỬA";
 
       if (M_Kieu_Xem.Trim() == "HEN" | M_Loai_KH_SCC.Trim() == "2") // BP
         SplitContainer2.SplitterDistance = 1;
@@ -1499,22 +675,6 @@ namespace TMV.UI.JPCB.JP
       DmLoai_Xem_Loc_KH_SCC = dataSet.Tables[7].Copy(); ///
       DmLoai_Xem_KH_SCC = DmLoai_Xem_Loc_KH_SCC.Copy();
       CyberFunc.V_DeleteRowEmpty(DmLoai_Xem_KH_SCC, "Loai");
-      Dv_DmLoai_Xem_KH_SCC = new DataView(DmLoai_Xem_KH_SCC);
-
-      //DmMucSBD_Loc_KH_SCC = dataSet.Tables[16].Copy();
-      //DmMucSBD_KH_SCC = DmMucSBD_Loc_KH_SCC.Copy();
-      //CyberFunc.V_DeleteRowEmpty(DmMucSBD_KH_SCC, "Muc_SBD");
-      //Dv_DmMucSBD_KH_SCC = new DataView(DmMucSBD_KH_SCC);
-
-      //DmMucSDS_Loc_KH_SCC = dataSet.Tables[17].Copy();
-      //DmMucSDS_KH_SCC = DmMucSDS_Loc_KH_SCC.Copy();
-      //CyberFunc.V_DeleteRowEmpty(DmMucSDS_KH_SCC, "Muc_SDS");
-      //Dv_DmMucSDS_KH_SCC = new DataView(DmMucSDS_KH_SCC);
-
-      //DmTang_Loc_KH_SCC = dataSet.Tables[19].Copy();
-      //DmTang_KH_SCC = DmTang_Loc_KH_SCC.Copy();
-      //CyberFunc.V_DeleteRowEmpty(DmTang_KH_SCC, "Tang");
-      //Dv_DmTang_KH_SCC = new DataView(DmTang_KH_SCC);
 
       //DmDungSC = dataSet.Tables[19].Copy();
 
@@ -1580,7 +740,8 @@ namespace TMV.UI.JPCB.JP
           TimeScaleLessThanDay scaleLessThanDay2 = new TimeScaleLessThanDay(TimeSpan.FromMinutes(Convert.ToDouble(CyberFunc.V_GetvalueCombox(CbbMa_BN_KH_SCC))), M_StartHour, M_FinishHour, M_Thu_Bay, M_Chu_Nhat);
           scales.Add(new CyberTimeScaleDay(M_StartHour, M_FinishHour, M_Ngay_LimitInterval_Min, M_Ngay_LimitInterval_Max));
           scales.Add(scaleLessThanDay1);
-          scales.Add(scaleLessThanDay2);
+          //scales.Add(scaleLessThanDay2);
+          scales.Add(new TimeScale15Minutes());
         }
         finally
         {
@@ -1700,8 +861,6 @@ namespace TMV.UI.JPCB.JP
 
       if (status == "0")
         V_Lock_Xem();
-
-      V_start_Flass(status);
     }
     private void V_AddHander_KH_SCC() //
     {
@@ -2273,8 +1432,7 @@ namespace TMV.UI.JPCB.JP
     {
       bool enableTimerKhScc = V_GetEnableTimer_KH_SCC();
 
-      if (!SplashScreenManager.Default.IsSplashFormVisible)
-        SplashScreenManager.ShowForm(this, typeof(frmLoading), true, true, false);
+      SplashScreenManager.ShowForm(this, typeof(frmLoading), true, true, false);
 
       string str = CyberFunc.V_GetvalueCombox(CbbLoai_Xem_KH_SCC);
       if (M_Loai_KH_SCC == "2") // BP
@@ -2282,10 +1440,7 @@ namespace TMV.UI.JPCB.JP
 
       V_SetSchedulerSetValue();
 
-      if (SplashScreenManager.Default.IsSplashFormVisible)
-        SplashScreenManager.CloseForm(false);
-
-      M_Loai_XemOld = str;
+      SplashScreenManager.CloseForm(false);
 
       if (!enableTimerKhScc)
         return;
@@ -2457,6 +1612,7 @@ namespace TMV.UI.JPCB.JP
         start = objectInfo2.Interval.Start;
         if (start.Minute == 0)
           objectInfo2.Appearance.BorderColor = Color.Blue;
+
         start = objectInfo2.Interval.Start;
         if (start.Hour == M_FinishHour)
           objectInfo2.Appearance.BackColor = Color.LightSteelBlue;
@@ -2481,10 +1637,10 @@ namespace TMV.UI.JPCB.JP
         if (!(_BorderColor_Data_KH_SCC & dataRowArray.Length > 0) || dataRowArray[0][_BorderColorField_Data_KH_SCC].ToString().Trim() == "")
           return;
 
-        Decimal d1 = 2M;
+        decimal d1 = 2M;
         if (Dt_Data_KH_SCC.Columns.Contains("SizeBorder"))
           d1 = Convert.ToDecimal(dataRowArray[0]["SizeBorder"]);
-        if (Decimal.Compare(d1, 2M) < 0)
+        if (decimal.Compare(d1, 2M) < 0)
           d1 = 2M;
         e.Handled = true;
         Rectangle bounds = e.Bounds;
@@ -2760,9 +1916,8 @@ namespace TMV.UI.JPCB.JP
     private void TabCVDV_SelectedIndexChanged(object sender, EventArgs e)
     {
       string upper = TabCVDV.TabPages[TabCVDV.SelectedIndex].Name.ToString().Trim().ToUpper();
-      if (upper == "TAB8")
-        V_Refresh_HonHop(null, null);
-      else if (upper == "TAB9")
+
+      if (upper == "TAB9")
         V_Refresh_Dung(null, null);
     }
     private void V_Du_Kien_Giao(object sender, EventArgs e) => V_Filter_KH_SCC(sender, e);
@@ -2890,6 +2045,11 @@ namespace TMV.UI.JPCB.JP
     }
     public void V_UpdateTbToTb(DataTable _Dt_Nguon, DataTable _Dt_Dich, string _Field_Key_Nguon, string _Field_Key_Dich, bool _OnRow = false)
     {
+      // _Dt_Nguon: GetJPDangSuaChua
+      // _Dt_Dich: DmKhoang_KH_SCC
+      // _Field_Key_Nguon: Ma_khoang
+      // _Field_Key_Dich: Ma_khoang
+
       if (_Dt_Dich == null | _Dt_Nguon == null | _Field_Key_Dich.Trim() == "" | _Field_Key_Nguon.Trim() == "" || !_Dt_Dich.Columns.Contains(_Field_Key_Dich) || !_Dt_Nguon.Columns.Contains(_Field_Key_Nguon) || _Dt_Dich.Rows.Count == 0 || _Dt_Nguon.Rows.Count == 0)
         return;
 
@@ -2988,60 +2148,6 @@ namespace TMV.UI.JPCB.JP
       SchedulerControl_KH_SCC.EndUpdate();
       T_tinh_So_Xe();
     }
-    private void V_start_Flass(string _Status)
-    {
-      Flass = 5;
-      Interval = 1000;
-      Stt_Flass = 0;
-      BackColor_Flass = "";
-      ForeColor_Flass = "";
-      Show_iconNew = 0;
-
-      DataSet dataSet = new DataSet(); // TODO: CP_RO_CVDV_FlassTab
-      if (dataSet.Tables.Count == 0)
-        dataSet.Dispose();
-      else
-      {
-        int index1 = 0;
-        if (dataSet.Tables.Count < index1)
-        {
-          if (dataSet.Tables[index1].Rows.Count > index1)
-          {
-            if (dataSet.Tables[index1].Columns.Contains("Interval_Timer"))
-              Interval = Convert.ToInt32(dataSet.Tables[index1].Rows[0]["Interval_Timer"]);
-            if (dataSet.Tables[index1].Columns.Contains("So_luotFlass"))
-              Flass = Convert.ToInt32(dataSet.Tables[index1].Rows[0]["So_luotFlass"]);
-            if (dataSet.Tables[index1].Columns.Contains("BackColor_FlassDefault"))
-              BackColor_Flass = Convert.ToString(dataSet.Tables[index1].Rows[0]["BackColor_FlassDefault"]);
-            if (dataSet.Tables[index1].Columns.Contains("ForeColor_FlassDefault"))
-              ForeColor_Flass = Convert.ToString(dataSet.Tables[index1].Rows[0]["ForeColor_FlassDefault"]);
-          }
-        }
-        int index2 = checked(index1 + 1);
-        if (dataSet.Tables.Count > index2)
-        {
-          if (_Status == "1")
-            dt_TabChange = dataSet.Tables[index2].Copy();
-          else
-          {
-            dt_TabChange.Clear();
-            int num = checked(dataSet.Tables[index2].Rows.Count - 1);
-            int index3 = 0;
-            while (index3 <= num)
-            {
-              dt_TabChange.ImportRow(dataSet.Tables[index2].Rows[index3]);
-              checked { ++index3; }
-            }
-            dt_TabChange.AcceptChanges();
-          }
-        }
-
-        dataSet.Dispose();
-        Timer_FlassTab.Interval = Interval;
-        Timer_FlassTab.Enabled = true;
-        Timer_FlassTab.Start();
-      }
-    }
     #endregion
 
     #region "V_Filter_KH_SCC"
@@ -3106,10 +2212,10 @@ namespace TMV.UI.JPCB.JP
 
       if (M_Loai_KH_SCC.Trim().Trim() == "1" | M_Kieu_Xem.Trim() == "HEN")  // GJ
         filterKhSccTo = filterKhSccTo + " AND Ma_To = '" + str1.Trim() + "'";
-
       else if (_Loai_Tb.ToString().ToUpper() == "XE")
       {
         string str2 = filterKhSccTo + " AND (";
+
         if (_DT_Filter.Columns.Contains("ma_To"))
           str2 = str2 + "(Ma_To = '" + str1.Trim() + "')";
         if (_DT_Filter.Columns.Contains("ma_To2"))
@@ -3122,12 +2228,16 @@ namespace TMV.UI.JPCB.JP
           str2 = str2 + "OR (ma_To5 = '" + str1.Trim() + "')";
         if (_DT_Filter.Columns.Contains("ma_To6"))
           str2 = str2 + "OR (ma_To6 = '" + str1.Trim() + "')";
+
         filterKhSccTo = str2 + ")";
       }
       return filterKhSccTo;
     }
     private string V_GetFilterOneField(string Value_Filter, DataTable _DT_Filter, string Field_Filter, bool Filter_Or, bool Filter_Like, bool Show_AND_OR)
     {
+      // Value_Filter: CbbKhoang_KH_SCC
+      // _DT_Filter: DmKhoang_KH_SCC
+      // Field_Filter: Ma_khoang
       string filterOneField1 = "";
       Value_Filter = Value_Filter.Trim();
       string str = "";
@@ -3961,7 +3071,6 @@ namespace TMV.UI.JPCB.JP
     }
     private void V_DragDropGridview_KH_SCC()
     {
-      _keotha2Grid = new GridviewDragDrop(Master_Cho_Lap_KH, SchedulerControl_KH_SCC);
       SchedulerControl_KH_SCC.DragDrop -= new DragEventHandler(Master_Cho_Lap_KH_DragDrop);
       SchedulerControl_KH_SCC.DragDrop += new DragEventHandler(Master_Cho_Lap_KH_DragDrop);
     }

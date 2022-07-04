@@ -477,6 +477,10 @@ namespace TMV.UI.JPCB.CW
       this.SchedulerControl.Views.DayView.TimeRulers.Add(timeRuler1);
       this.SchedulerControl.Views.FullWeekView.Enabled = true;
       this.SchedulerControl.Views.FullWeekView.TimeRulers.Add(timeRuler2);
+      timeScaleYear1.Enabled = false;
+      timeScaleQuarter1.Enabled = false;
+      timeScaleMonth1.Enabled = false;
+      timeScaleWeek1.Enabled = false;
       this.SchedulerControl.Views.GanttView.Scales.Add(timeScaleYear1);
       this.SchedulerControl.Views.GanttView.Scales.Add(timeScaleQuarter1);
       this.SchedulerControl.Views.GanttView.Scales.Add(timeScaleMonth1);

@@ -62,9 +62,7 @@
       <Name>TMV.ObjectInfo</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SP\JP\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="SP\AppAuthPkgGetById.sql" />
     <Content Include="SP\AppAuthPkgGetByTenant.sql" />
@@ -86,6 +84,7 @@
     <Content Include="SP\CW\AppJpcbPkgStartFinishCW.sql" />
     <Content Include="SP\CW\CalcCloneRepairTime.sql" />
     <Content Include="SP\CW\CalcWorkingTime.sql" />
+    <Content Include="SP\JP\funcs.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
