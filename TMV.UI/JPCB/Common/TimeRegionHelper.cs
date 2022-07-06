@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraScheduler;
 using DevExpress.XtraScheduler.Native;
@@ -87,7 +88,7 @@ namespace TMV.UI.JPCB.Common
       return dateTime.DayOfWeek == DayOfWeek.Sunday || dateTime.DayOfWeek == DayOfWeek.Saturday;
     }
 
-    private static SvgImage GetResourceSvgImage(string resourceName)
+    public static SvgImage GetResourceSvgImage(string resourceName)
     {
       using (Stream stream = GetResourceStream(resourceName))
       {
@@ -96,7 +97,7 @@ namespace TMV.UI.JPCB.Common
     }
     private static Stream GetResourceStream(string resourceName)
     {
-      Stream result = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName);
+      Stream result = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(Application.ProductName + "." +resourceName);
       if (result != null)
         return result;
 

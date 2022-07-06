@@ -1,5 +1,6 @@
 ﻿using DevExpress.Images;
 using DevExpress.Utils;
+using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
@@ -301,6 +302,7 @@ namespace TMV.UI.JPCB.CW
       SchedulerControl.LimitInterval.Start = M_Ngay_LimitInterval_Min;
       SchedulerControl.LimitInterval.End = M_Ngay_LimitInterval_Max_RX;
       SchedulerControl.Start = Convert.ToDateTime(Dt_Set_SCC.Rows[0]["Ngay_Ct"]);
+      V_CustomDrawTimeRegion();
 
       // Add default selected CVDV
       DataRow row = DmCVDV_Loc_KH_SCC.NewRow();
@@ -590,6 +592,7 @@ namespace TMV.UI.JPCB.CW
       SchedulerControl.LimitInterval.Start = M_Ngay_LimitInterval_Min;
       SchedulerControl.LimitInterval.End = M_Ngay_LimitInterval_Max_RX;
       SchedulerControl.Start = Convert.ToDateTime(Dt_Set_SCC.Rows[0]["Ngay_Ct"]);
+      V_CustomDrawTimeRegion();
       V_LoadDatabases("0", "");
       V_SetScheduler_SetValue_RX();
 
@@ -1477,6 +1480,37 @@ namespace TMV.UI.JPCB.CW
         str1 = dataSource[recordIndex]["Stt_Rec"].ToString().Trim();
       if (recordIndex >= 0)
         str2 = dataSource[recordIndex]["Ma_Xe"].ToString().Trim();
+    }
+    private void V_CustomDrawTimeRegion()
+    {
+      int H_Sang2 = Convert.ToInt32(Dt_Set_SCC.Rows[0]["H_Sang2"]);
+      int M_Sang2 = Convert.ToInt32(Dt_Set_SCC.Rows[0]["M_Sang2"]);
+      int H_Chieu1 = Convert.ToInt32(Dt_Set_SCC.Rows[0]["H_Chieu1"]);
+      int M_Chieu1 = Convert.ToInt32(Dt_Set_SCC.Rows[0]["M_Chieu1"]);
+
+      TimeRegion timeRegion1 = new TimeRegion();
+      timeRegion1.Start = Convert.ToDateTime(Dt_Set_SCC.Rows[0]["Ngay_Ct"]).Date + new TimeSpan(H_Sang2, M_Sang2, 0);
+      timeRegion1.End = Convert.ToDateTime(Dt_Set_SCC.Rows[0]["Ngay_Ct"]).Date + new TimeSpan(H_Chieu1, M_Chieu1, 0);
+      timeRegion1.Recurrence = new RecurrenceInfo();
+      timeRegion1.Recurrence.Start = timeRegion1.Start;
+      timeRegion1.Recurrence.Type = RecurrenceType.Weekly;
+      timeRegion1.Recurrence.WeekDays = WeekDays.WorkDays;
+      SchedulerControl.TimeRegions.Add(timeRegion1);
+
+      SvgImage svgImage = TimeRegionHelper.GetResourceSvgImage("Resources.Images.Dinner.svg");
+      SchedulerControl.CustomDrawTimeRegion += (s, e) => {
+        if (e.TimeRegion == timeRegion1)
+        {
+          e.DrawDefault();
+          Rectangle bounds = new Rectangle(e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height);
+          double scaleFactor = (double)bounds.Height / svgImage.Height;
+          Image img = svgImage.Render(null, Math.Min(scaleFactor, 1));
+          int x = e.Bounds.Location.X + (e.Bounds.Width / 2 - img.Width / 2);
+          int y = e.Bounds.Location.Y + (e.Bounds.Height / 2 - img.Height / 2);
+          e.Cache.DrawImage(img, new Point(x, y));
+          e.Handled = true;
+        }
+      };
     }
     private void Options_MouseHover(object sender, EventArgs e)
     {

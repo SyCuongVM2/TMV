@@ -291,6 +291,9 @@
     <Content Include="Resources\Images\ButtonSearch.png" />
     <Content Include="Resources\Images\Close.png" />
     <Content Include="Resources\Images\delete-16x16.png" />
+    <EmbeddedResource Include="Resources\Images\Dinner.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Resources\Images\EDITITEM.GIF" />
     <Content Include="Resources\Images\edtError.png" />
     <Content Include="Resources\Images\Error.png" />
