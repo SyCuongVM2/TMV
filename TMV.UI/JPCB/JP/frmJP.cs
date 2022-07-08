@@ -652,10 +652,10 @@ namespace TMV.UI.JPCB.JP
       Dv_DmKhoang_KH_SCC = new DataView(DmKhoang_KH_SCC);
       //DmKhoang_KH_SCC_H = dataSet.Tables[7].Copy();
 
-      //DmTo_Loc_KH_SCC = dataSet.Tables[8].Copy();
-      //DmTo_KH_SCC = DmTo_Loc_KH_SCC.Copy();
-      //CyberFunc.V_DeleteRowEmpty(DmTo_KH_SCC, "Ma_TO");
-      //Dv_DmTo_KH_SCC = new DataView(DmTo_KH_SCC);
+      DmTo_Loc_KH_SCC = dataSet.Tables[6].Copy();
+      DmTo_KH_SCC = DmTo_Loc_KH_SCC.Copy();
+      CyberFunc.V_DeleteRowEmpty(DmTo_KH_SCC, "Ma_TO");
+      Dv_DmTo_KH_SCC = new DataView(DmTo_KH_SCC);
       //DmTo_KH_SCC_H = dataSet.Tables[9].Copy();
 
       //DmKTV_Loc_KH_SCC = dataSet.Tables[10].Copy(); 
@@ -666,23 +666,23 @@ namespace TMV.UI.JPCB.JP
       //Dt_Data_KTV_KH_SCC = dataSet.Tables[12].Copy();
       //Dv_Data_KTV_KH_SCC = new DataView(Dt_Data_KTV_KH_SCC);
 
-      DmCd_Loc_KH_SCC = dataSet.Tables[6].Copy(); ///
+      DmCd_Loc_KH_SCC = dataSet.Tables[7].Copy(); ///
       DmCd_KH_SCC = DmCd_Loc_KH_SCC.Copy();
       CyberFunc.V_DeleteRowEmpty(DmCd_KH_SCC, "Ma_CD");
       Dv_DmCd_KH_SCC = new DataView(DmCd_KH_SCC);
       //DmCd_KH_SCC_H = dataSet.Tables[14].Copy();
 
-      DmLoai_Xem_Loc_KH_SCC = dataSet.Tables[7].Copy(); ///
+      DmLoai_Xem_Loc_KH_SCC = dataSet.Tables[8].Copy(); ///
       DmLoai_Xem_KH_SCC = DmLoai_Xem_Loc_KH_SCC.Copy();
       CyberFunc.V_DeleteRowEmpty(DmLoai_Xem_KH_SCC, "Loai");
 
       //DmDungSC = dataSet.Tables[19].Copy();
 
-      if (dataSet.Tables.Count > 8)
-        Dt_Khoang_H = dataSet.Tables[8].Copy();
-
       if (dataSet.Tables.Count > 9)
-        Dt_Xe_H = dataSet.Tables[9].Copy();
+        Dt_Khoang_H = dataSet.Tables[9].Copy();
+
+      if (dataSet.Tables.Count > 10)
+        Dt_Xe_H = dataSet.Tables[10].Copy();
 
       Fill_Cbb(1);
 
@@ -956,6 +956,7 @@ namespace TMV.UI.JPCB.JP
       ChkShow_All_Cd_Xe.CheckedChanged += new EventHandler(V_Du_All_Xe_Cd);
       buttRemove_Filter.Click -= new EventHandler(V_Remove_Filter);
       buttRemove_Filter.Click += new EventHandler(V_Remove_Filter);
+      // AppointmentFlyoutShowing: customize flyout (tooltip)
     }
     private void V_SetSchedulerControl_KH_SCC() //
     {
@@ -992,6 +993,11 @@ namespace TMV.UI.JPCB.JP
         SchedulerControl_KH_SCC.Views.GanttView.AppointmentDisplayOptions.PercentCompleteDisplayType = PercentCompleteDisplayType.None;
       if (Dt_Data_KH_SCC.Columns.Contains("Type"))
         SchedulerStorage_KH_SCC.Appointments.Mappings.Type = Dt_Data_KH_SCC.Columns["Type"].ColumnName;
+
+      // Add custom fields to appointment
+      SchedulerStorage_KH_SCC.Appointments.CustomFieldMappings.Clear();
+      SchedulerStorage_KH_SCC.Appointments.CustomFieldMappings.Add(new AppointmentCustomFieldMapping("T_Type", Dt_Data_KH_SCC.Columns["T_Type"].ColumnName));
+      SchedulerStorage_KH_SCC.Appointments.CustomFieldMappings.Add(new AppointmentCustomFieldMapping("A_Status", Dt_Data_KH_SCC.Columns["A_Status"].ColumnName));
 
       SchedulerControl_KH_SCC.OptionsView.ToolTipVisibility = ToolTipVisibility.Always;
 
@@ -1369,7 +1375,7 @@ namespace TMV.UI.JPCB.JP
       if (e == null)
         return;
       
-      PopupMenuSchedulerControl.ShowPopup(Control.MousePosition);
+      PopupMenuSchedulerControl.ShowPopup(MousePosition);
     }
     private void V_Lap_F3F4_KH_SCC(object sender, AppointmentFormEventArgs e) => e.Handled = true;
     private void V_Sua_Tien_Do_KH_SCC(object sender, EventArgs e)
@@ -1501,7 +1507,7 @@ namespace TMV.UI.JPCB.JP
           MessageBox.Show(ex.Message);
         }
       }
-      if (str.ToString().Trim() == "" || !V_ChkStt_Rec(str) || (-(V_GetMa_Ct(str) == "PKH" & M_Kieu_Xem == "HEN" ? 1 : 0) & str.IndexOf("FN")) != 0 || !V_Chk_Righ(str, "KEO_THA"))
+      if (str.ToString().Trim() == "" || !V_Chk_Righ(str, "KEO_THA"))
         return false;
 
       string _Stt_Rec_Ro = "";
@@ -1525,11 +1531,9 @@ namespace TMV.UI.JPCB.JP
       V_GetFromSetSchedulerOld(ref _ma_khoangOld, ref _Ma_CVDVOld, ref _Ma_ToOld, ref _Ma_XeOld, ref _Ma_CDOld, ref _Ma_KTVOld, _Appointment);
       
       DataSet dataSet = new DataSet(); //TODO: CP_RO_CVDV_KH_SCC_Save_Keo_Tha
-      bool flag = (dataSet.Tables[0].Rows.Count == 0);
+      bool flag = (dataSet.Tables.Count == 0);
       dataSet.Dispose();
 
-      if (flag)
-        V_PercentComplete_KH_SCC(str);
       if (flag)
         V_Load_DATA_KH_SCC("0", "", str);
 
@@ -1550,8 +1554,8 @@ namespace TMV.UI.JPCB.JP
       if (dataRowView == null)
         return;
 
-      if (Dt_Data_KH_SCC.Columns.Contains("ma_khoang"))
-        _ma_khoangOld = dataRowView["Ma_khoang"].ToString().Trim();
+      if (Dt_Data_KH_SCC.Columns.Contains("Id_khoang"))
+        _ma_khoangOld = dataRowView["Id_khoang"].ToString().Trim();
       if (Dt_Data_KH_SCC.Columns.Contains("Ma_Hs"))
         _Ma_CVDVOld = dataRowView["Ma_Hs"].ToString().Trim();
       if (Dt_Data_KH_SCC.Columns.Contains("Ma_To"))
@@ -2525,7 +2529,7 @@ namespace TMV.UI.JPCB.JP
       string Left = str;
       if (Left == "01") // Khoang (GJ)
       {
-        string _Id = !DmKhoang_KH_SCC.Columns.Contains("Ma_Khoang_Tmp") ? "Ma_Khoang" : "Ma_Khoang_Tmp";
+        string _Id = !DmKhoang_KH_SCC.Columns.Contains("Id_Khoang_Tmp") ? "Id_Khoang" : "Id_Khoang_Tmp";
         string _Caption = !(M_Loai_KH_SCC == "2" & str == "01") ? (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_khoang") : "Ten_Khoang_Tmp") : (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten_khoang") ? "Ten_khoang2" : "Ten_khoang") : "Ten_Khoang_Tmp");
         if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1") // GJ
           V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong, Dt_Khoang_H);
@@ -2538,7 +2542,7 @@ namespace TMV.UI.JPCB.JP
           V_SetScheduler(Dv_DmCVDV_KH_SCC, !DmCVDV_KH_SCC.Columns.Contains("Ma_Hs_Tmp") ? "Ma_Hs" : "Ma_Hs_Tmp", !DmCVDV_KH_SCC.Columns.Contains("Ten_Hs_Tmp") ? (DmCVDV_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_HS") : "Ten_Hs_Tmp", _Do_Rong);
         else
         {
-          string _Id = !DmKhoang_KH_SCC.Columns.Contains("Ma_Khoang_Tmp") ? "Ma_Khoang" : "Ma_Khoang_Tmp";
+          string _Id = !DmKhoang_KH_SCC.Columns.Contains("Id_Khoang_Tmp") ? "Id_Khoang" : "Id_Khoang_Tmp";
           string _Caption = !(M_Loai_KH_SCC == "2" & str == "01") ? (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_khoang") : "Ten_Khoang_Tmp") : (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten_khoang") ? "Ten_khoang2" : "Ten_khoang") : "Ten_Khoang_Tmp");
           if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1") // GJ
             V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong, Dt_Khoang_H);
@@ -2552,7 +2556,7 @@ namespace TMV.UI.JPCB.JP
           V_SetScheduler(Dv_DmTo_KH_SCC, !DmTo_KH_SCC.Columns.Contains("Ma_To_Tmp") ? "Ma_To" : "Ma_To_Tmp", !DmTo_KH_SCC.Columns.Contains("Ten_To_Tmp") ? (DmTo_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_To") : "Ten_To_Tmp", _Do_Rong);
         else
         {
-          string _Id = !DmKhoang_KH_SCC.Columns.Contains("Ma_Khoang_Tmp") ? "Ma_Khoang" : "Ma_Khoang_Tmp";
+          string _Id = !DmKhoang_KH_SCC.Columns.Contains("Id_Khoang_Tmp") ? "Id_Khoang" : "Id_Khoang_Tmp";
           string _Caption = !(M_Loai_KH_SCC == "2" & str == "01") ? (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_khoang") : "Ten_Khoang_Tmp") : (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten_khoang") ? "Ten_khoang2" : "Ten_khoang") : "Ten_Khoang_Tmp");
           if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1") // GJ
             V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong, Dt_Khoang_H);
@@ -2566,7 +2570,7 @@ namespace TMV.UI.JPCB.JP
           V_SetScheduler(Dv_DmCd_KH_SCC, !DmCd_KH_SCC.Columns.Contains("Ma_CD_Tmp") ? "Ma_CD" : "Ma_CD_Tmp", !DmCd_KH_SCC.Columns.Contains("Ten_CD_Tmp") ? (DmCd_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_CD") : "Ten_CD_Tmp", _Do_Rong);
         else
         {
-          string _Id = !DmKhoang_KH_SCC.Columns.Contains("Ma_Khoang_Tmp") ? "Ma_Khoang" : "Ma_Khoang_Tmp";
+          string _Id = !DmKhoang_KH_SCC.Columns.Contains("Id_Khoang_Tmp") ? "Id_Khoang" : "Id_Khoang_Tmp";
           string _Caption = !(M_Loai_KH_SCC == "2" & str == "01") ? (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_khoang") : "Ten_Khoang_Tmp") : (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten_khoang") ? "Ten_khoang2" : "Ten_khoang") : "Ten_Khoang_Tmp");
           if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1") // GJ
             V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong, Dt_Khoang_H);
@@ -2587,7 +2591,7 @@ namespace TMV.UI.JPCB.JP
         }
         else
         {
-          string _Id = !DmKhoang_KH_SCC.Columns.Contains("Ma_Khoang_Tmp") ? "Ma_Khoang" : "Ma_Khoang_Tmp";
+          string _Id = !DmKhoang_KH_SCC.Columns.Contains("Id_Khoang_Tmp") ? "Id_Khoang" : "Id_Khoang_Tmp";
           string _Caption = !(M_Loai_KH_SCC == "2" & str == "01") ? (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_khoang") : "Ten_Khoang_Tmp") : (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten_khoang") ? "Ten_khoang2" : "Ten_khoang") : "Ten_Khoang_Tmp");
           if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1") // GJ
             V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong, Dt_Khoang_H);
@@ -2601,7 +2605,7 @@ namespace TMV.UI.JPCB.JP
           V_SetScheduler(Dv_Data_KTV_KH_SCC, !Dt_Data_KTV_KH_SCC.Columns.Contains("Ma_KTV_Tmp") ? "Ma_KTV" : "Ma_KTV_Tmp", !Dt_Data_KTV_KH_SCC.Columns.Contains("Ten_KTV_Tmp") ? (Dt_Data_KTV_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_KTV") : "Ten_KTV_Tmp", _Do_Rong);
         else
         {
-          string _Id = !DmKhoang_KH_SCC.Columns.Contains("Ma_Khoang_Tmp") ? "Ma_Khoang" : "Ma_Khoang_Tmp";
+          string _Id = !DmKhoang_KH_SCC.Columns.Contains("Id_Khoang_Tmp") ? "Id_Khoang" : "Id_Khoang_Tmp";
           string _Caption = !(M_Loai_KH_SCC == "2" & str == "01") ? (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_khoang") : "Ten_Khoang_Tmp") : (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten_khoang") ? "Ten_khoang2" : "Ten_khoang") : "Ten_Khoang_Tmp");
           if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1") // GJ
             V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong, Dt_Khoang_H);
@@ -2611,7 +2615,7 @@ namespace TMV.UI.JPCB.JP
       }
       else
       {
-        string _Id = !DmKhoang_KH_SCC.Columns.Contains("Ma_Khoang_Tmp") ? "Ma_Khoang" : "Ma_Khoang_Tmp";
+        string _Id = !DmKhoang_KH_SCC.Columns.Contains("Id_Khoang_Tmp") ? "Id_Khoang" : "Id_Khoang_Tmp";
         string _Caption = !(M_Loai_KH_SCC == "2" & str == "01") ? (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten3") ? "Ten3" : "Ten_khoang") : "Ten_Khoang_Tmp") : (!DmKhoang_KH_SCC.Columns.Contains("Ten_Khoang_Tmp") ? (DmKhoang_KH_SCC.Columns.Contains("Ten_khoang") ? "Ten_khoang2" : "Ten_khoang") : "Ten_Khoang_Tmp");
         if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "1") // GJ
           V_SetScheduler(Dv_DmKhoang_KH_SCC, _Id, _Caption, _Do_Rong, Dt_Khoang_H);
@@ -2644,10 +2648,14 @@ namespace TMV.UI.JPCB.JP
 
       SchedulerStorage_KH_SCC.Appointments.Mappings.ResourceId = Dt_Data_KH_SCC.Columns[_Id].ColumnName;
 
-      if (Dt_Data_KH_SCC.Columns.Contains("ten_CD") & M_Loai_KH_SCC.Trim() == "2" & M_Kieu_Xem != "HEN") // BP
-        SchedulerStorage_KH_SCC.Appointments.Mappings.Subject = Dt_Data_KH_SCC.Columns["ten_CD"].ColumnName;
+      if (Dt_Data_KH_SCC.Columns.Contains("Ten_CD") & M_Loai_KH_SCC.Trim() == "2" & M_Kieu_Xem != "HEN") // BP
+        SchedulerStorage_KH_SCC.Appointments.Mappings.Subject = Dt_Data_KH_SCC.Columns["Ten_CD"].ColumnName;
       else
         SchedulerStorage_KH_SCC.Appointments.Mappings.Subject = Dt_Data_KH_SCC.Columns["Ma_Xe"].ColumnName;
+
+      // add cutom resource fields
+      SchedulerStorage_KH_SCC.Resources.CustomFieldMappings.Clear();
+      SchedulerStorage_KH_SCC.Resources.CustomFieldMappings.Add(new ResourceCustomFieldMapping("Ma_Khoang", _Dv_DataSource.Table.Columns["Ma_Khoang"].ColumnName));
 
       if (Dt_Data_Parent_KH_SCC == null || !(Dt_Data_Parent_KH_SCC.Columns.Contains("DependentId") & Dt_Data_Parent_KH_SCC.Columns.Contains("ParentId") & Dt_Data_Parent_KH_SCC.Columns.Contains("Type")))
         return;
@@ -3027,7 +3035,7 @@ namespace TMV.UI.JPCB.JP
         checked { ++recordIndex; }
       }
 
-      SplitContainer2.SplitterDistance = Left;
+      SplitContainer2.SplitterDistance = Left - 230;
       Master_Cho_Lap_KH.DataSource = Dv_Cho_Lap_KH;
       Master_Cho_Lap_KHGRV.GridControl = Master_Cho_Lap_KH;
       GridView masterChoLapKhgrv = Master_Cho_Lap_KHGRV;

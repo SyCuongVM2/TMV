@@ -1503,7 +1503,7 @@ namespace TMV.UI.JPCB.CW
         {
           e.DrawDefault();
           Rectangle bounds = new Rectangle(e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height);
-          double scaleFactor = (double)bounds.Height / svgImage.Height;
+          double scaleFactor = bounds.Height / svgImage.Height;
           Image img = svgImage.Render(null, Math.Min(scaleFactor, 1));
           int x = e.Bounds.Location.X + (e.Bounds.Width / 2 - img.Width / 2);
           int y = e.Bounds.Location.Y + (e.Bounds.Height / 2 - img.Height / 2);
