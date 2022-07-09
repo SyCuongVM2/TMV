@@ -83,5 +83,19 @@ namespace TMV.BusinessObject.JPCB
         dateView
       );
     }
+    public DataSet UpdateKeothaResize(decimal userId, int tenantId, string roType, decimal id, string table,
+                                      DateTime from, DateTime to, int workshop)
+    {
+      return JpcbJpDAO.Instance().UpdateKeothaResize(
+        userId,
+        tenantId,
+        roType,
+        id,
+        table,
+        from,
+        to,
+        workshop
+      );
+    }
   }
 }

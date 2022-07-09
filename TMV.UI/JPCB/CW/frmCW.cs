@@ -1494,7 +1494,7 @@ namespace TMV.UI.JPCB.CW
       timeRegion1.Recurrence = new RecurrenceInfo();
       timeRegion1.Recurrence.Start = timeRegion1.Start;
       timeRegion1.Recurrence.Type = RecurrenceType.Weekly;
-      timeRegion1.Recurrence.WeekDays = WeekDays.WorkDays;
+      // timeRegion1.Recurrence.WeekDays = WeekDays.WorkDays;
       SchedulerControl.TimeRegions.Add(timeRegion1);
 
       SvgImage svgImage = TimeRegionHelper.GetResourceSvgImage("Resources.Images.Dinner.svg");

@@ -76,6 +76,7 @@
     public string AppJpcbPkgJPMolenhGiaoxe = "AppJpcbPkgJPMolenhGiaoxe";
     public string AppJpcbPkgJPDangSuaChua = "AppJpcbPkgJPDangSuaChua";
     public string AppJpcbPkgJPXeDung = "AppJpcbPkgJPXeDung";
+    public string AppJpcbPkgJPUpdateKeothaResize = "AppJpcbPkgJPUpdateKeothaResize";
     #endregion
   }
 }

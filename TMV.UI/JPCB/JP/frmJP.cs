@@ -1496,11 +1496,13 @@ namespace TMV.UI.JPCB.JP
     private bool V_Update_Keo_Tha_KH_SCC(Appointment _Appointment)
     {
       string str = "";
+      string _T_Type = "";
       if (SchedulerControl_KH_SCC.SelectedAppointments.Count > 0)
       {
         try
         {
           str = SchedulerControl_KH_SCC.SelectedAppointments[0].Id.ToString();
+          _T_Type = SchedulerControl_KH_SCC.SelectedAppointments[0].CustomFields["T_Type"].ToString();
         }
         catch (Exception ex)
         {
@@ -1530,14 +1532,19 @@ namespace TMV.UI.JPCB.JP
       V_GetFromSetScheduler(ref start, ref end, ref _Stt_Rec_Ro, ref _So_Ro, ref _ma_khoang, ref _Ma_CVDV, ref _Ma_To, ref _Ma_Xe, ref _Ma_CD, ref _Ma_KTV, _Appointment);
       V_GetFromSetSchedulerOld(ref _ma_khoangOld, ref _Ma_CVDVOld, ref _Ma_ToOld, ref _Ma_XeOld, ref _Ma_CDOld, ref _Ma_KTVOld, _Appointment);
       
-      DataSet dataSet = new DataSet(); //TODO: CP_RO_CVDV_KH_SCC_Save_Keo_Tha
-      bool flag = (dataSet.Tables.Count == 0);
-      dataSet.Dispose();
-
-      if (flag)
+      DataSet ds = JpcbJpBO.Instance().UpdateKeothaResize(Globals.LoginUserID, Globals.LoginDlrId, 
+                                                          "GJ", 
+                                                          Convert.ToInt32(str),
+                                                          _T_Type,
+                                                          start,
+                                                          end,
+                                                          Convert.ToInt32(_ma_khoang)); // CP_RO_CVDV_KH_SCC_Save_Keo_Tha
+      if (ds.Tables != null && ds.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS")
+      {
         V_Load_DATA_KH_SCC("0", "", str);
-
-      return flag;
+        return true;
+      }
+      return false;
     }
     private void V_GetFromSetSchedulerOld(ref string _ma_khoangOld, ref string _Ma_CVDVOld, ref string _Ma_ToOld, ref string _Ma_XeOld, ref string _Ma_CDOld, ref string _Ma_KTVOld, Appointment _Appointment = null)
     {
@@ -1568,9 +1575,6 @@ namespace TMV.UI.JPCB.JP
         return;
 
       _Ma_KTVOld = dataRowView["Ma_KTV"].ToString().Trim();
-    }
-    private void V_PercentComplete_KH_SCC(string _Stt_rec = "", string _So_Ro = "")
-    {
     }
     private void SchedulerControl_KH_SCC_AppointmentResized(object sender, AppointmentResizeEventArgs e)
     {
@@ -1774,7 +1778,7 @@ namespace TMV.UI.JPCB.JP
         string Left = str2;
         appointmentImageInfo.Image = (Left == "1") ? ImageResourceCache.Default.GetImage("images/tasks/status_16x16.png") :
                                      (Left == "2") ? ImageResourceCache.Default.GetImage("images/communication/radio_16x16.png") :
-                                     (Left == "3") ? ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png") :
+                                     (Left == "3") ? ImageResourceCache.Default.GetImage("images/scheduling/time_16x16.png") :
                                      (Left == "4") ? ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png") :
                                                      ImageResourceCache.Default.GetImage("images/communication/wifi_16x16.png");
         e.ImageInfoList.Add(appointmentImageInfo);
@@ -1958,41 +1962,44 @@ namespace TMV.UI.JPCB.JP
       if (_Dt == null)
         return;
 
-      int num = checked(_Dt.Rows.Count - 1);
-      if (_Stt_Rec_Ro_Load.Trim() == "" & _Stt_Rec_Load.Trim() == "")
-      {
-        _Dt.Clear();
-        _Dt.AcceptChanges();
-      }
-      else
-      {
-        bool flag1 = false;
-        bool flag2 = false;
-        if (_Dt.Columns.Contains("Stt_Rec_Ro"))
-          flag1 = true;
-        if (_Dt.Columns.Contains("Stt_Rec"))
-          flag2 = true;
-        if (flag1 && _Stt_Rec_Ro_Load.Trim() == "")
-          flag1 = false;
-        if (flag2 && _Stt_Rec_Load.Trim() == "")
-          flag2 = false;
-        if (!flag1 & !flag2)
-          return;
+      _Dt.Clear();
+      _Dt.AcceptChanges();
 
-        int index = checked(_Dt.Rows.Count - 1);
-        while (index >= 0)
-        {
-          if (flag1 & flag2 && _Dt.Rows[index]["Stt_Rec_RO"].ToString().Trim().Contains(_Stt_Rec_Ro_Load.Trim()) & _Dt.Rows[index]["Stt_Rec"].ToString().Trim().Contains(_Stt_Rec_Load.Trim()))
-            _Dt.Rows[index].Delete();
-          if (flag1 & !flag2 && _Dt.Rows[index]["Stt_Rec_RO"].ToString().Trim().Contains(_Stt_Rec_Ro_Load.Trim()))
-            _Dt.Rows[index].Delete();
-          if (!flag1 & flag2 && _Dt.Rows[index]["Stt_Rec"].ToString().Trim().Contains(_Stt_Rec_Load.Trim()))
-            _Dt.Rows[index].Delete();
+      //int num = checked(_Dt.Rows.Count - 1);
+      //if (_Stt_Rec_Ro_Load.Trim() == "" & _Stt_Rec_Load.Trim() == "")
+      //{
+      //  _Dt.Clear();
+      //  _Dt.AcceptChanges();
+      //}
+      //else
+      //{
+      //  bool flag1 = false;
+      //  bool flag2 = false;
+      //  if (_Dt.Columns.Contains("Stt_Rec_Ro"))
+      //    flag1 = true;
+      //  if (_Dt.Columns.Contains("Stt_Rec"))
+      //    flag2 = true;
+      //  if (flag1 && _Stt_Rec_Ro_Load.Trim() == "")
+      //    flag1 = false;
+      //  if (flag2 && _Stt_Rec_Load.Trim() == "")
+      //    flag2 = false;
+      //  if (!flag1 & !flag2)
+      //    return;
 
-          checked { index += -1; }
-        }
-        _Dt.AcceptChanges();
-      }
+      //  int index = checked(_Dt.Rows.Count - 1);
+      //  while (index >= 0)
+      //  {
+      //    if (flag1 & flag2 && _Dt.Rows[index]["Stt_Rec_RO"].ToString().Trim().Contains(_Stt_Rec_Ro_Load.Trim()) & _Dt.Rows[index]["Stt_Rec"].ToString().Trim().Contains(_Stt_Rec_Load.Trim()))
+      //      _Dt.Rows[index].Delete();
+      //    if (flag1 & !flag2 && _Dt.Rows[index]["Stt_Rec_RO"].ToString().Trim().Contains(_Stt_Rec_Ro_Load.Trim()))
+      //      _Dt.Rows[index].Delete();
+      //    if (!flag1 & flag2 && _Dt.Rows[index]["Stt_Rec"].ToString().Trim().Contains(_Stt_Rec_Load.Trim()))
+      //      _Dt.Rows[index].Delete();
+
+      //    checked { index += -1; }
+      //  }
+      //  _Dt.AcceptChanges();
+      //}
     }
     private void V_UpdateAndInsertDataxe(ref DataTable _Dt)
     {
@@ -2655,7 +2662,7 @@ namespace TMV.UI.JPCB.JP
 
       // add cutom resource fields
       SchedulerStorage_KH_SCC.Resources.CustomFieldMappings.Clear();
-      SchedulerStorage_KH_SCC.Resources.CustomFieldMappings.Add(new ResourceCustomFieldMapping("Ma_Khoang", _Dv_DataSource.Table.Columns["Ma_Khoang"].ColumnName));
+      SchedulerStorage_KH_SCC.Resources.CustomFieldMappings.Add(new ResourceCustomFieldMapping(_Id, _Dv_DataSource.Table.Columns[_Id].ColumnName));
 
       if (Dt_Data_Parent_KH_SCC == null || !(Dt_Data_Parent_KH_SCC.Columns.Contains("DependentId") & Dt_Data_Parent_KH_SCC.Columns.Contains("ParentId") & Dt_Data_Parent_KH_SCC.Columns.Contains("Type")))
         return;
