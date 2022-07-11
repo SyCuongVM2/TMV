@@ -67,46 +67,6 @@ namespace TMV.UI.JPCB.JP
       this.Master_Sua_Xong_KH = new DevExpress.XtraGrid.GridControl();
       this.Master_Sua_Xong_KHGRV = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.TabPage_Bang_Mau = new System.Windows.Forms.TabPage();
-      this.Lab_SCC1_20 = new System.Windows.Forms.Label();
-      this.Lab_SCC1_19 = new System.Windows.Forms.Label();
-      this.Lab_SCC1_18 = new System.Windows.Forms.Label();
-      this.Lab_SCC1_17 = new System.Windows.Forms.Label();
-      this.Lab_SCC1_16 = new System.Windows.Forms.Label();
-      this.Lab_SCC1_15 = new System.Windows.Forms.Label();
-      this.Lab_SCC1_14 = new System.Windows.Forms.Label();
-      this.Lab_SCC1_13 = new System.Windows.Forms.Label();
-      this.Lab_SCC1_12 = new System.Windows.Forms.Label();
-      this.Lab_SCC1_11 = new System.Windows.Forms.Label();
-      this.Lab_SCC1_10 = new System.Windows.Forms.Label();
-      this.Lab_SCC1_09 = new System.Windows.Forms.Label();
-      this.Lab_SCC1_08 = new System.Windows.Forms.Label();
-      this.Lab_SCC1_07 = new System.Windows.Forms.Label();
-      this.Lab_SCC1_06 = new System.Windows.Forms.Label();
-      this.Lab_SCC1_05 = new System.Windows.Forms.Label();
-      this.Lab_SCC1_04 = new System.Windows.Forms.Label();
-      this.Lab_SCC1_03 = new System.Windows.Forms.Label();
-      this.Lab_SCC_20 = new System.Windows.Forms.Label();
-      this.Lab_SCC_19 = new System.Windows.Forms.Label();
-      this.Lab_SCC_18 = new System.Windows.Forms.Label();
-      this.Lab_SCC_17 = new System.Windows.Forms.Label();
-      this.Lab_SCC_16 = new System.Windows.Forms.Label();
-      this.Lab_SCC_15 = new System.Windows.Forms.Label();
-      this.Lab_SCC_14 = new System.Windows.Forms.Label();
-      this.Lab_SCC_13 = new System.Windows.Forms.Label();
-      this.Lab_SCC_12 = new System.Windows.Forms.Label();
-      this.Lab_SCC_11 = new System.Windows.Forms.Label();
-      this.Lab_SCC_10 = new System.Windows.Forms.Label();
-      this.Lab_SCC_09 = new System.Windows.Forms.Label();
-      this.Lab_SCC_08 = new System.Windows.Forms.Label();
-      this.Lab_SCC_07 = new System.Windows.Forms.Label();
-      this.Lab_SCC_06 = new System.Windows.Forms.Label();
-      this.Lab_SCC_05 = new System.Windows.Forms.Label();
-      this.Lab_SCC_04 = new System.Windows.Forms.Label();
-      this.Lab_SCC_03 = new System.Windows.Forms.Label();
-      this.Lab_SCC1_02 = new System.Windows.Forms.Label();
-      this.Lab_SCC_02 = new System.Windows.Forms.Label();
-      this.Lab_SCC_01 = new System.Windows.Forms.Label();
-      this.Lab_SCC1_01 = new System.Windows.Forms.Label();
       this.ChkSBD_KH_SCC = new System.Windows.Forms.CheckBox();
       this.ChkIs_GJ_KH_SCC = new System.Windows.Forms.CheckBox();
       this.ChkIs_EM_KH_SCC = new System.Windows.Forms.CheckBox();
@@ -638,46 +598,6 @@ namespace TMV.UI.JPCB.JP
       // 
       // TabPage_Bang_Mau
       // 
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_20);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_19);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_18);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_17);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_16);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_15);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_14);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_13);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_12);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_11);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_10);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_09);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_08);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_07);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_06);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_05);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_04);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_03);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_20);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_19);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_18);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_17);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_16);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_15);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_14);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_13);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_12);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_11);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_10);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_09);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_08);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_07);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_06);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_05);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_04);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_03);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_02);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_02);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC_01);
-      this.TabPage_Bang_Mau.Controls.Add(this.Lab_SCC1_01);
       this.TabPage_Bang_Mau.Controls.Add(this.ChkSBD_KH_SCC);
       this.TabPage_Bang_Mau.Controls.Add(this.ChkIs_GJ_KH_SCC);
       this.TabPage_Bang_Mau.Controls.Add(this.ChkIs_EM_KH_SCC);
@@ -700,512 +620,12 @@ namespace TMV.UI.JPCB.JP
       this.TabPage_Bang_Mau.Text = "Bảng màu";
       this.TabPage_Bang_Mau.UseVisualStyleBackColor = true;
       // 
-      // Lab_SCC1_20
-      // 
-      this.Lab_SCC1_20.AutoSize = true;
-      this.Lab_SCC1_20.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_20.Location = new System.Drawing.Point(180, 585);
-      this.Lab_SCC1_20.Name = "Lab_SCC1_20";
-      this.Lab_SCC1_20.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_20.TabIndex = 54;
-      this.Lab_SCC1_20.Text = "Đang sửa chữa";
-      this.Lab_SCC1_20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_20.Visible = false;
-      // 
-      // Lab_SCC1_19
-      // 
-      this.Lab_SCC1_19.AutoSize = true;
-      this.Lab_SCC1_19.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_19.Location = new System.Drawing.Point(180, 557);
-      this.Lab_SCC1_19.Name = "Lab_SCC1_19";
-      this.Lab_SCC1_19.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_19.TabIndex = 53;
-      this.Lab_SCC1_19.Text = "Đang sửa chữa";
-      this.Lab_SCC1_19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_19.Visible = false;
-      // 
-      // Lab_SCC1_18
-      // 
-      this.Lab_SCC1_18.AutoSize = true;
-      this.Lab_SCC1_18.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_18.Location = new System.Drawing.Point(180, 528);
-      this.Lab_SCC1_18.Name = "Lab_SCC1_18";
-      this.Lab_SCC1_18.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_18.TabIndex = 52;
-      this.Lab_SCC1_18.Text = "Đang sửa chữa";
-      this.Lab_SCC1_18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_18.Visible = false;
-      // 
-      // Lab_SCC1_17
-      // 
-      this.Lab_SCC1_17.AutoSize = true;
-      this.Lab_SCC1_17.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_17.Location = new System.Drawing.Point(180, 500);
-      this.Lab_SCC1_17.Name = "Lab_SCC1_17";
-      this.Lab_SCC1_17.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_17.TabIndex = 51;
-      this.Lab_SCC1_17.Text = "Đang sửa chữa";
-      this.Lab_SCC1_17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_17.Visible = false;
-      // 
-      // Lab_SCC1_16
-      // 
-      this.Lab_SCC1_16.AutoSize = true;
-      this.Lab_SCC1_16.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_16.Location = new System.Drawing.Point(180, 477);
-      this.Lab_SCC1_16.Name = "Lab_SCC1_16";
-      this.Lab_SCC1_16.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_16.TabIndex = 50;
-      this.Lab_SCC1_16.Text = "Đang sửa chữa";
-      this.Lab_SCC1_16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_16.Visible = false;
-      // 
-      // Lab_SCC1_15
-      // 
-      this.Lab_SCC1_15.AutoSize = true;
-      this.Lab_SCC1_15.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_15.Location = new System.Drawing.Point(180, 449);
-      this.Lab_SCC1_15.Name = "Lab_SCC1_15";
-      this.Lab_SCC1_15.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_15.TabIndex = 49;
-      this.Lab_SCC1_15.Text = "Đang sửa chữa";
-      this.Lab_SCC1_15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_15.Visible = false;
-      // 
-      // Lab_SCC1_14
-      // 
-      this.Lab_SCC1_14.AutoSize = true;
-      this.Lab_SCC1_14.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_14.Location = new System.Drawing.Point(180, 420);
-      this.Lab_SCC1_14.Name = "Lab_SCC1_14";
-      this.Lab_SCC1_14.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_14.TabIndex = 48;
-      this.Lab_SCC1_14.Text = "Đang sửa chữa";
-      this.Lab_SCC1_14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_14.Visible = false;
-      // 
-      // Lab_SCC1_13
-      // 
-      this.Lab_SCC1_13.AutoSize = true;
-      this.Lab_SCC1_13.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_13.Location = new System.Drawing.Point(180, 392);
-      this.Lab_SCC1_13.Name = "Lab_SCC1_13";
-      this.Lab_SCC1_13.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_13.TabIndex = 47;
-      this.Lab_SCC1_13.Text = "Đang sửa chữa";
-      this.Lab_SCC1_13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_13.Visible = false;
-      // 
-      // Lab_SCC1_12
-      // 
-      this.Lab_SCC1_12.AutoSize = true;
-      this.Lab_SCC1_12.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_12.Location = new System.Drawing.Point(180, 361);
-      this.Lab_SCC1_12.Name = "Lab_SCC1_12";
-      this.Lab_SCC1_12.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_12.TabIndex = 46;
-      this.Lab_SCC1_12.Text = "Đang sửa chữa";
-      this.Lab_SCC1_12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_12.Visible = false;
-      // 
-      // Lab_SCC1_11
-      // 
-      this.Lab_SCC1_11.AutoSize = true;
-      this.Lab_SCC1_11.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_11.Location = new System.Drawing.Point(180, 333);
-      this.Lab_SCC1_11.Name = "Lab_SCC1_11";
-      this.Lab_SCC1_11.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_11.TabIndex = 45;
-      this.Lab_SCC1_11.Text = "Đang sửa chữa";
-      this.Lab_SCC1_11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_11.Visible = false;
-      // 
-      // Lab_SCC1_10
-      // 
-      this.Lab_SCC1_10.AutoSize = true;
-      this.Lab_SCC1_10.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_10.Location = new System.Drawing.Point(180, 304);
-      this.Lab_SCC1_10.Name = "Lab_SCC1_10";
-      this.Lab_SCC1_10.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_10.TabIndex = 44;
-      this.Lab_SCC1_10.Text = "Đang sửa chữa";
-      this.Lab_SCC1_10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_10.Visible = false;
-      // 
-      // Lab_SCC1_09
-      // 
-      this.Lab_SCC1_09.AutoSize = true;
-      this.Lab_SCC1_09.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_09.Location = new System.Drawing.Point(180, 276);
-      this.Lab_SCC1_09.Name = "Lab_SCC1_09";
-      this.Lab_SCC1_09.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_09.TabIndex = 43;
-      this.Lab_SCC1_09.Text = "Đang sửa chữa";
-      this.Lab_SCC1_09.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_09.Visible = false;
-      // 
-      // Lab_SCC1_08
-      // 
-      this.Lab_SCC1_08.AutoSize = true;
-      this.Lab_SCC1_08.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_08.Location = new System.Drawing.Point(180, 245);
-      this.Lab_SCC1_08.Name = "Lab_SCC1_08";
-      this.Lab_SCC1_08.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_08.TabIndex = 42;
-      this.Lab_SCC1_08.Text = "Đang sửa chữa";
-      this.Lab_SCC1_08.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_08.Visible = false;
-      // 
-      // Lab_SCC1_07
-      // 
-      this.Lab_SCC1_07.AutoSize = true;
-      this.Lab_SCC1_07.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_07.Location = new System.Drawing.Point(180, 217);
-      this.Lab_SCC1_07.Name = "Lab_SCC1_07";
-      this.Lab_SCC1_07.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_07.TabIndex = 41;
-      this.Lab_SCC1_07.Text = "Đang sửa chữa";
-      this.Lab_SCC1_07.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_07.Visible = false;
-      // 
-      // Lab_SCC1_06
-      // 
-      this.Lab_SCC1_06.AutoSize = true;
-      this.Lab_SCC1_06.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_06.Location = new System.Drawing.Point(180, 188);
-      this.Lab_SCC1_06.Name = "Lab_SCC1_06";
-      this.Lab_SCC1_06.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_06.TabIndex = 40;
-      this.Lab_SCC1_06.Text = "Đang sửa chữa";
-      this.Lab_SCC1_06.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_06.Visible = false;
-      // 
-      // Lab_SCC1_05
-      // 
-      this.Lab_SCC1_05.AutoSize = true;
-      this.Lab_SCC1_05.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_05.Location = new System.Drawing.Point(180, 160);
-      this.Lab_SCC1_05.Name = "Lab_SCC1_05";
-      this.Lab_SCC1_05.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_05.TabIndex = 39;
-      this.Lab_SCC1_05.Text = "Đang sửa chữa";
-      this.Lab_SCC1_05.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_05.Visible = false;
-      // 
-      // Lab_SCC1_04
-      // 
-      this.Lab_SCC1_04.AutoSize = true;
-      this.Lab_SCC1_04.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_04.Location = new System.Drawing.Point(180, 132);
-      this.Lab_SCC1_04.Name = "Lab_SCC1_04";
-      this.Lab_SCC1_04.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_04.TabIndex = 38;
-      this.Lab_SCC1_04.Text = "Đang sửa chữa";
-      this.Lab_SCC1_04.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_04.Visible = false;
-      // 
-      // Lab_SCC1_03
-      // 
-      this.Lab_SCC1_03.AutoSize = true;
-      this.Lab_SCC1_03.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_03.Location = new System.Drawing.Point(180, 104);
-      this.Lab_SCC1_03.Name = "Lab_SCC1_03";
-      this.Lab_SCC1_03.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_03.TabIndex = 37;
-      this.Lab_SCC1_03.Text = "Đang sửa chữa";
-      this.Lab_SCC1_03.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_03.Visible = false;
-      // 
-      // Lab_SCC_20
-      // 
-      this.Lab_SCC_20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_20.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_20.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_20.Location = new System.Drawing.Point(180, 645);
-      this.Lab_SCC_20.Name = "Lab_SCC_20";
-      this.Lab_SCC_20.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_20.TabIndex = 36;
-      this.Lab_SCC_20.Text = "20";
-      this.Lab_SCC_20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_20.Visible = false;
-      // 
-      // Lab_SCC_19
-      // 
-      this.Lab_SCC_19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_19.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_19.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_19.Location = new System.Drawing.Point(180, 611);
-      this.Lab_SCC_19.Name = "Lab_SCC_19";
-      this.Lab_SCC_19.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_19.TabIndex = 35;
-      this.Lab_SCC_19.Text = "19";
-      this.Lab_SCC_19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_19.Visible = false;
-      // 
-      // Lab_SCC_18
-      // 
-      this.Lab_SCC_18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_18.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_18.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_18.Location = new System.Drawing.Point(28, 626);
-      this.Lab_SCC_18.Name = "Lab_SCC_18";
-      this.Lab_SCC_18.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_18.TabIndex = 34;
-      this.Lab_SCC_18.Text = "18";
-      this.Lab_SCC_18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_18.Visible = false;
-      // 
-      // Lab_SCC_17
-      // 
-      this.Lab_SCC_17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_17.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_17.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_17.Location = new System.Drawing.Point(28, 594);
-      this.Lab_SCC_17.Name = "Lab_SCC_17";
-      this.Lab_SCC_17.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_17.TabIndex = 33;
-      this.Lab_SCC_17.Text = "17";
-      this.Lab_SCC_17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_17.Visible = false;
-      // 
-      // Lab_SCC_16
-      // 
-      this.Lab_SCC_16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_16.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_16.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_16.Location = new System.Drawing.Point(28, 560);
-      this.Lab_SCC_16.Name = "Lab_SCC_16";
-      this.Lab_SCC_16.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_16.TabIndex = 32;
-      this.Lab_SCC_16.Text = "16";
-      this.Lab_SCC_16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_16.Visible = false;
-      // 
-      // Lab_SCC_15
-      // 
-      this.Lab_SCC_15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_15.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_15.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_15.Location = new System.Drawing.Point(28, 526);
-      this.Lab_SCC_15.Name = "Lab_SCC_15";
-      this.Lab_SCC_15.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_15.TabIndex = 31;
-      this.Lab_SCC_15.Text = "15";
-      this.Lab_SCC_15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_15.Visible = false;
-      // 
-      // Lab_SCC_14
-      // 
-      this.Lab_SCC_14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_14.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_14.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_14.Location = new System.Drawing.Point(28, 490);
-      this.Lab_SCC_14.Name = "Lab_SCC_14";
-      this.Lab_SCC_14.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_14.TabIndex = 30;
-      this.Lab_SCC_14.Text = "14";
-      this.Lab_SCC_14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_14.Visible = false;
-      // 
-      // Lab_SCC_13
-      // 
-      this.Lab_SCC_13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_13.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_13.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_13.Location = new System.Drawing.Point(28, 455);
-      this.Lab_SCC_13.Name = "Lab_SCC_13";
-      this.Lab_SCC_13.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_13.TabIndex = 29;
-      this.Lab_SCC_13.Text = "13";
-      this.Lab_SCC_13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_13.Visible = false;
-      // 
-      // Lab_SCC_12
-      // 
-      this.Lab_SCC_12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_12.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_12.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_12.Location = new System.Drawing.Point(28, 421);
-      this.Lab_SCC_12.Name = "Lab_SCC_12";
-      this.Lab_SCC_12.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_12.TabIndex = 28;
-      this.Lab_SCC_12.Text = "12";
-      this.Lab_SCC_12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_12.Visible = false;
-      // 
-      // Lab_SCC_11
-      // 
-      this.Lab_SCC_11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_11.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_11.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_11.Location = new System.Drawing.Point(28, 388);
-      this.Lab_SCC_11.Name = "Lab_SCC_11";
-      this.Lab_SCC_11.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_11.TabIndex = 27;
-      this.Lab_SCC_11.Text = "11";
-      this.Lab_SCC_11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_11.Visible = false;
-      // 
-      // Lab_SCC_10
-      // 
-      this.Lab_SCC_10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_10.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_10.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_10.Location = new System.Drawing.Point(28, 355);
-      this.Lab_SCC_10.Name = "Lab_SCC_10";
-      this.Lab_SCC_10.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_10.TabIndex = 26;
-      this.Lab_SCC_10.Text = "10";
-      this.Lab_SCC_10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_10.Visible = false;
-      // 
-      // Lab_SCC_09
-      // 
-      this.Lab_SCC_09.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_09.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_09.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_09.Location = new System.Drawing.Point(28, 321);
-      this.Lab_SCC_09.Name = "Lab_SCC_09";
-      this.Lab_SCC_09.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_09.TabIndex = 25;
-      this.Lab_SCC_09.Text = "9";
-      this.Lab_SCC_09.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_09.Visible = false;
-      // 
-      // Lab_SCC_08
-      // 
-      this.Lab_SCC_08.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_08.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_08.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_08.Location = new System.Drawing.Point(28, 287);
-      this.Lab_SCC_08.Name = "Lab_SCC_08";
-      this.Lab_SCC_08.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_08.TabIndex = 24;
-      this.Lab_SCC_08.Text = "8";
-      this.Lab_SCC_08.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_08.Visible = false;
-      // 
-      // Lab_SCC_07
-      // 
-      this.Lab_SCC_07.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_07.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_07.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_07.Location = new System.Drawing.Point(28, 255);
-      this.Lab_SCC_07.Name = "Lab_SCC_07";
-      this.Lab_SCC_07.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_07.TabIndex = 23;
-      this.Lab_SCC_07.Text = "7";
-      this.Lab_SCC_07.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_07.Visible = false;
-      // 
-      // Lab_SCC_06
-      // 
-      this.Lab_SCC_06.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_06.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_06.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_06.Location = new System.Drawing.Point(28, 221);
-      this.Lab_SCC_06.Name = "Lab_SCC_06";
-      this.Lab_SCC_06.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_06.TabIndex = 22;
-      this.Lab_SCC_06.Text = "6";
-      this.Lab_SCC_06.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_06.Visible = false;
-      // 
-      // Lab_SCC_05
-      // 
-      this.Lab_SCC_05.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_05.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_05.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_05.Location = new System.Drawing.Point(28, 187);
-      this.Lab_SCC_05.Name = "Lab_SCC_05";
-      this.Lab_SCC_05.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_05.TabIndex = 21;
-      this.Lab_SCC_05.Text = "5";
-      this.Lab_SCC_05.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_05.Visible = false;
-      // 
-      // Lab_SCC_04
-      // 
-      this.Lab_SCC_04.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_04.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_04.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_04.Location = new System.Drawing.Point(28, 152);
-      this.Lab_SCC_04.Name = "Lab_SCC_04";
-      this.Lab_SCC_04.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_04.TabIndex = 20;
-      this.Lab_SCC_04.Text = "4";
-      this.Lab_SCC_04.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_04.Visible = false;
-      // 
-      // Lab_SCC_03
-      // 
-      this.Lab_SCC_03.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_03.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_03.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_03.Location = new System.Drawing.Point(28, 117);
-      this.Lab_SCC_03.Name = "Lab_SCC_03";
-      this.Lab_SCC_03.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_03.TabIndex = 19;
-      this.Lab_SCC_03.Text = "3";
-      this.Lab_SCC_03.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_03.Visible = false;
-      // 
-      // Lab_SCC1_02
-      // 
-      this.Lab_SCC1_02.AutoSize = true;
-      this.Lab_SCC1_02.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_02.Location = new System.Drawing.Point(180, 75);
-      this.Lab_SCC1_02.Name = "Lab_SCC1_02";
-      this.Lab_SCC1_02.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_02.TabIndex = 18;
-      this.Lab_SCC1_02.Text = "Đang sửa chữa";
-      this.Lab_SCC1_02.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_02.Visible = false;
-      // 
-      // Lab_SCC_02
-      // 
-      this.Lab_SCC_02.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_02.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_02.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_02.Location = new System.Drawing.Point(28, 83);
-      this.Lab_SCC_02.Name = "Lab_SCC_02";
-      this.Lab_SCC_02.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_02.TabIndex = 17;
-      this.Lab_SCC_02.Text = "2";
-      this.Lab_SCC_02.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_02.Visible = false;
-      // 
-      // Lab_SCC_01
-      // 
-      this.Lab_SCC_01.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.Lab_SCC_01.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-      this.Lab_SCC_01.ForeColor = System.Drawing.Color.Red;
-      this.Lab_SCC_01.Location = new System.Drawing.Point(28, 50);
-      this.Lab_SCC_01.Name = "Lab_SCC_01";
-      this.Lab_SCC_01.Size = new System.Drawing.Size(132, 27);
-      this.Lab_SCC_01.TabIndex = 16;
-      this.Lab_SCC_01.Text = "1";
-      this.Lab_SCC_01.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.Lab_SCC_01.Visible = false;
-      // 
-      // Lab_SCC1_01
-      // 
-      this.Lab_SCC1_01.AutoSize = true;
-      this.Lab_SCC1_01.ForeColor = System.Drawing.Color.Blue;
-      this.Lab_SCC1_01.Location = new System.Drawing.Point(180, 47);
-      this.Lab_SCC1_01.Name = "Lab_SCC1_01";
-      this.Lab_SCC1_01.Size = new System.Drawing.Size(115, 19);
-      this.Lab_SCC1_01.TabIndex = 15;
-      this.Lab_SCC1_01.Text = "Đang sửa chữa";
-      this.Lab_SCC1_01.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.Lab_SCC1_01.Visible = false;
-      // 
       // ChkSBD_KH_SCC
       // 
       this.ChkSBD_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkSBD_KH_SCC.AutoSize = true;
       this.ChkSBD_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkSBD_KH_SCC.Location = new System.Drawing.Point(137, 1755);
+      this.ChkSBD_KH_SCC.Location = new System.Drawing.Point(137, 1754);
       this.ChkSBD_KH_SCC.Name = "ChkSBD_KH_SCC";
       this.ChkSBD_KH_SCC.Size = new System.Drawing.Size(55, 23);
       this.ChkSBD_KH_SCC.TabIndex = 14;
@@ -1218,7 +638,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkIs_GJ_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkIs_GJ_KH_SCC.AutoSize = true;
       this.ChkIs_GJ_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkIs_GJ_KH_SCC.Location = new System.Drawing.Point(26, 1755);
+      this.ChkIs_GJ_KH_SCC.Location = new System.Drawing.Point(26, 1754);
       this.ChkIs_GJ_KH_SCC.Name = "ChkIs_GJ_KH_SCC";
       this.ChkIs_GJ_KH_SCC.Size = new System.Drawing.Size(53, 23);
       this.ChkIs_GJ_KH_SCC.TabIndex = 13;
@@ -1231,7 +651,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkIs_EM_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkIs_EM_KH_SCC.AutoSize = true;
       this.ChkIs_EM_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkIs_EM_KH_SCC.Location = new System.Drawing.Point(137, 1726);
+      this.ChkIs_EM_KH_SCC.Location = new System.Drawing.Point(137, 1725);
       this.ChkIs_EM_KH_SCC.Name = "ChkIs_EM_KH_SCC";
       this.ChkIs_EM_KH_SCC.Size = new System.Drawing.Size(56, 23);
       this.ChkIs_EM_KH_SCC.TabIndex = 12;
@@ -1244,7 +664,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkDung_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkDung_KH_SCC.AutoSize = true;
       this.ChkDung_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkDung_KH_SCC.Location = new System.Drawing.Point(26, 1726);
+      this.ChkDung_KH_SCC.Location = new System.Drawing.Point(26, 1725);
       this.ChkDung_KH_SCC.Name = "ChkDung_KH_SCC";
       this.ChkDung_KH_SCC.Size = new System.Drawing.Size(74, 23);
       this.ChkDung_KH_SCC.TabIndex = 11;
@@ -1257,7 +677,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkSDS_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkSDS_KH_SCC.AutoSize = true;
       this.ChkSDS_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkSDS_KH_SCC.Location = new System.Drawing.Point(137, 1697);
+      this.ChkSDS_KH_SCC.Location = new System.Drawing.Point(137, 1696);
       this.ChkSDS_KH_SCC.Name = "ChkSDS_KH_SCC";
       this.ChkSDS_KH_SCC.Size = new System.Drawing.Size(55, 23);
       this.ChkSDS_KH_SCC.TabIndex = 10;
@@ -1270,7 +690,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkFV_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkFV_KH_SCC.AutoSize = true;
       this.ChkFV_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkFV_KH_SCC.Location = new System.Drawing.Point(26, 1697);
+      this.ChkFV_KH_SCC.Location = new System.Drawing.Point(26, 1696);
       this.ChkFV_KH_SCC.Name = "ChkFV_KH_SCC";
       this.ChkFV_KH_SCC.Size = new System.Drawing.Size(53, 23);
       this.ChkFV_KH_SCC.TabIndex = 9;
@@ -1283,7 +703,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkCho_Rua_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkCho_Rua_KH_SCC.AutoSize = true;
       this.ChkCho_Rua_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkCho_Rua_KH_SCC.Location = new System.Drawing.Point(137, 1668);
+      this.ChkCho_Rua_KH_SCC.Location = new System.Drawing.Point(137, 1667);
       this.ChkCho_Rua_KH_SCC.Name = "ChkCho_Rua_KH_SCC";
       this.ChkCho_Rua_KH_SCC.Size = new System.Drawing.Size(92, 23);
       this.ChkCho_Rua_KH_SCC.TabIndex = 8;
@@ -1296,7 +716,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkDang_Rua_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkDang_Rua_KH_SCC.AutoSize = true;
       this.ChkDang_Rua_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkDang_Rua_KH_SCC.Location = new System.Drawing.Point(26, 1668);
+      this.ChkDang_Rua_KH_SCC.Location = new System.Drawing.Point(26, 1667);
       this.ChkDang_Rua_KH_SCC.Name = "ChkDang_Rua_KH_SCC";
       this.ChkDang_Rua_KH_SCC.Size = new System.Drawing.Size(101, 23);
       this.ChkDang_Rua_KH_SCC.TabIndex = 7;
@@ -1309,7 +729,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkCho_Giao_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkCho_Giao_KH_SCC.AutoSize = true;
       this.ChkCho_Giao_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkCho_Giao_KH_SCC.Location = new System.Drawing.Point(137, 1639);
+      this.ChkCho_Giao_KH_SCC.Location = new System.Drawing.Point(137, 1638);
       this.ChkCho_Giao_KH_SCC.Name = "ChkCho_Giao_KH_SCC";
       this.ChkCho_Giao_KH_SCC.Size = new System.Drawing.Size(98, 23);
       this.ChkCho_Giao_KH_SCC.TabIndex = 6;
@@ -1322,7 +742,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkEM60_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkEM60_KH_SCC.AutoSize = true;
       this.ChkEM60_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkEM60_KH_SCC.Location = new System.Drawing.Point(26, 1639);
+      this.ChkEM60_KH_SCC.Location = new System.Drawing.Point(26, 1638);
       this.ChkEM60_KH_SCC.Name = "ChkEM60_KH_SCC";
       this.ChkEM60_KH_SCC.Size = new System.Drawing.Size(74, 23);
       this.ChkEM60_KH_SCC.TabIndex = 5;
@@ -1335,7 +755,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkPM90_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkPM90_KH_SCC.AutoSize = true;
       this.ChkPM90_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkPM90_KH_SCC.Location = new System.Drawing.Point(137, 1610);
+      this.ChkPM90_KH_SCC.Location = new System.Drawing.Point(137, 1609);
       this.ChkPM90_KH_SCC.Name = "ChkPM90_KH_SCC";
       this.ChkPM90_KH_SCC.Size = new System.Drawing.Size(74, 23);
       this.ChkPM90_KH_SCC.TabIndex = 4;
@@ -1348,7 +768,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkSCL_KH_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkSCL_KH_SCC.AutoSize = true;
       this.ChkSCL_KH_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkSCL_KH_SCC.Location = new System.Drawing.Point(26, 1610);
+      this.ChkSCL_KH_SCC.Location = new System.Drawing.Point(26, 1609);
       this.ChkSCL_KH_SCC.Name = "ChkSCL_KH_SCC";
       this.ChkSCL_KH_SCC.Size = new System.Drawing.Size(62, 23);
       this.ChkSCL_KH_SCC.TabIndex = 3;
@@ -1361,7 +781,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkGiao_Ngay_Kh_SCC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkGiao_Ngay_Kh_SCC.AutoSize = true;
       this.ChkGiao_Ngay_Kh_SCC.ForeColor = System.Drawing.Color.Blue;
-      this.ChkGiao_Ngay_Kh_SCC.Location = new System.Drawing.Point(137, 1581);
+      this.ChkGiao_Ngay_Kh_SCC.Location = new System.Drawing.Point(137, 1580);
       this.ChkGiao_Ngay_Kh_SCC.Name = "ChkGiao_Ngay_Kh_SCC";
       this.ChkGiao_Ngay_Kh_SCC.Size = new System.Drawing.Size(106, 23);
       this.ChkGiao_Ngay_Kh_SCC.TabIndex = 2;
@@ -1374,7 +794,7 @@ namespace TMV.UI.JPCB.JP
       this.ChkUu_Tien.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ChkUu_Tien.AutoSize = true;
       this.ChkUu_Tien.ForeColor = System.Drawing.Color.Blue;
-      this.ChkUu_Tien.Location = new System.Drawing.Point(26, 1581);
+      this.ChkUu_Tien.Location = new System.Drawing.Point(26, 1580);
       this.ChkUu_Tien.Name = "ChkUu_Tien";
       this.ChkUu_Tien.Size = new System.Drawing.Size(87, 23);
       this.ChkUu_Tien.TabIndex = 1;
@@ -1864,46 +1284,6 @@ namespace TMV.UI.JPCB.JP
     private System.Windows.Forms.CheckBox ChkDung_KH_SCC;
     private System.Windows.Forms.CheckBox ChkSDS_KH_SCC;
     private System.Windows.Forms.CheckBox ChkFV_KH_SCC;
-    private System.Windows.Forms.Label Lab_SCC1_01;
-    private System.Windows.Forms.Label Lab_SCC1_02;
-    private System.Windows.Forms.Label Lab_SCC_02;
-    private System.Windows.Forms.Label Lab_SCC_01;
-    private System.Windows.Forms.Label Lab_SCC_20;
-    private System.Windows.Forms.Label Lab_SCC_19;
-    private System.Windows.Forms.Label Lab_SCC_18;
-    private System.Windows.Forms.Label Lab_SCC_17;
-    private System.Windows.Forms.Label Lab_SCC_16;
-    private System.Windows.Forms.Label Lab_SCC_15;
-    private System.Windows.Forms.Label Lab_SCC_14;
-    private System.Windows.Forms.Label Lab_SCC_13;
-    private System.Windows.Forms.Label Lab_SCC_12;
-    private System.Windows.Forms.Label Lab_SCC_11;
-    private System.Windows.Forms.Label Lab_SCC_10;
-    private System.Windows.Forms.Label Lab_SCC_09;
-    private System.Windows.Forms.Label Lab_SCC_08;
-    private System.Windows.Forms.Label Lab_SCC_07;
-    private System.Windows.Forms.Label Lab_SCC_06;
-    private System.Windows.Forms.Label Lab_SCC_05;
-    private System.Windows.Forms.Label Lab_SCC_04;
-    private System.Windows.Forms.Label Lab_SCC_03;
-    private System.Windows.Forms.Label Lab_SCC1_20;
-    private System.Windows.Forms.Label Lab_SCC1_19;
-    private System.Windows.Forms.Label Lab_SCC1_18;
-    private System.Windows.Forms.Label Lab_SCC1_17;
-    private System.Windows.Forms.Label Lab_SCC1_16;
-    private System.Windows.Forms.Label Lab_SCC1_15;
-    private System.Windows.Forms.Label Lab_SCC1_14;
-    private System.Windows.Forms.Label Lab_SCC1_13;
-    private System.Windows.Forms.Label Lab_SCC1_12;
-    private System.Windows.Forms.Label Lab_SCC1_11;
-    private System.Windows.Forms.Label Lab_SCC1_10;
-    private System.Windows.Forms.Label Lab_SCC1_09;
-    private System.Windows.Forms.Label Lab_SCC1_08;
-    private System.Windows.Forms.Label Lab_SCC1_07;
-    private System.Windows.Forms.Label Lab_SCC1_06;
-    private System.Windows.Forms.Label Lab_SCC1_05;
-    private System.Windows.Forms.Label Lab_SCC1_04;
-    private System.Windows.Forms.Label Lab_SCC1_03;
     private System.Windows.Forms.Timer Timer_Data_KH_SCC;
     private System.Windows.Forms.Timer Timer_Data_Cho_SC;
     private System.Windows.Forms.Timer Timer_Data_honHop;

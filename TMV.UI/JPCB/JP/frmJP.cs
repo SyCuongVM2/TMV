@@ -11,6 +11,7 @@ using DevExpress.XtraScheduler.Native;
 using DevExpress.XtraSplashScreen;
 using DevExpress.XtraTreeList;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -26,6 +27,8 @@ namespace TMV.UI.JPCB.JP
     #region "variables"
     private CyberFuncs CyberFunc = new CyberFuncs();
     private CyberColor CyberColor = new CyberColor();
+    List<Label> labelsCount = new List<Label>();
+    List<Label> labelsText = new List<Label>();
     private bool _TabVisible3 = false;
     private bool _TabVisible9 = false;
     private DataTable Dt_CVDV_Dung;
@@ -602,7 +605,6 @@ namespace TMV.UI.JPCB.JP
       Master_Cho_Lap_KHGRV.ColumnPanelRowHeight = 20;
       V_Lock_Xem();
       V_LoadTimeLine();
-      V_AddHanderLabel_KH_SCC();
       V_GetHeightSplitContainerKH_SC();
     }
     private void V_GetTimeChangeLoai_SC() //
@@ -1109,73 +1111,6 @@ namespace TMV.UI.JPCB.JP
       timeSpan = new TimeSpan(checked((long)Math.Round(unchecked(timeSpan.Ticks / 2.0))));
       SchedulerControl_KH_SCC.Start = DateTime.Now.AddTicks(checked(-timeSpan.Ticks));
     }
-    private void V_AddHanderLabel_KH_SCC() //
-    {
-      Lab_SCC_01.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_02.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_03.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_04.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_05.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_06.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_07.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_08.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_09.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_10.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_11.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_12.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_13.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_14.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_15.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_16.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_17.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_18.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_19.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_20.Paint -= new PaintEventHandler(Label_Paint_KH_SCC);
-
-      LabTotal.Click -= new EventHandler(Label_Xem_BC_KH_SCC);
-
-      Lab_SCC_01.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_02.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_03.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_04.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_05.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_06.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_07.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_08.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_09.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_10.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_11.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_12.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_13.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_14.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_15.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_16.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_17.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_18.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_19.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-      Lab_SCC_20.Paint += new PaintEventHandler(Label_Paint_KH_SCC);
-
-      LabTotal.Click += new EventHandler(Label_Xem_BC_KH_SCC);
-    }
-    private void Label_Paint_KH_SCC(object sender, PaintEventArgs e) => ResizeLabel_KH_SCC((Label)sender);
-    private void Label_Xem_BC_KH_SCC(object sender, EventArgs e)
-    {
-      // TODO
-    }
-    private void ResizeLabel_KH_SCC(Label lab) //
-    {
-      try
-      {
-        if (!lab.Visible)
-          return;
-
-        string str = lab.Tag != null ? lab.Tag.ToString() : "";
-      }
-      catch (Exception ex)
-      {
-        MessageBox.Show(ex.Message);
-      }
-    }
     private void V_GetHeightSplitContainerKH_SC() => SplitContainerKH_SC.SplitterDistance = checked(SplitContainerKH_SC.Size.Height - Panel1.Height + 15);
     #endregion
 
@@ -1225,11 +1160,13 @@ namespace TMV.UI.JPCB.JP
     {
       SchedulerControl schedulerControl = (SchedulerControl)sender;
       string str = "";
+      string type = "";
       if (schedulerControl.SelectedAppointments.Count > 0)
       {
         try
         {
           str = schedulerControl.SelectedAppointments[0].Id.ToString();
+          type = schedulerControl.SelectedAppointments[0].CustomFields["T_Type"].ToString();
         }
         catch (Exception ex)
         {
@@ -1302,6 +1239,7 @@ namespace TMV.UI.JPCB.JP
           new CyberMenuPopup(sender, rowHandle, "Tạo đặt chỗ", 
             new EventHandler(V_Tao_Dat_CHo_KH_SCC), Shortcut.F2, ImageResourceCache.Default.GetImage("images/actions/showworktimeonly_16x16.png"), true), false);
       }
+
       if (M_Kieu_Xem != "HEN")
         PopupMenuSchedulerControl.ItemLinks.Add(
           new CyberMenuPopup(sender, rowHandle, "Chuyển lịch hẹn sang kế hoạch sửa chữa", 
@@ -2340,76 +2278,34 @@ namespace TMV.UI.JPCB.JP
     }
     private void T_tinh_So_Xe()
     {
-      string str = "0";
-      Lab_SCC_01.Text = str;
-      Lab_SCC_02.Text = str;
-      Lab_SCC_03.Text = str;
-      Lab_SCC_04.Text = str;
-      Lab_SCC_05.Text = str;
-      Lab_SCC_06.Text = str;
-      Lab_SCC_07.Text = str;
-      Lab_SCC_08.Text = str;
-      Lab_SCC_09.Text = str;
-      Lab_SCC_10.Text = str;
-      Lab_SCC_11.Text = str;
-      Lab_SCC_12.Text = str;
-      Lab_SCC_13.Text = str;
-      Lab_SCC_14.Text = str;
-      Lab_SCC_15.Text = str;
-      Lab_SCC_16.Text = str;
-      Lab_SCC_17.Text = str;
-      Lab_SCC_18.Text = str;
-      Lab_SCC_19.Text = str;
-      Lab_SCC_20.Text = str;
-      int num = checked(Dv_Data_KH_SCC.Count - 1);
-      int recordIndex = 0;
-
-      while (recordIndex <= num)
+      if (labelsCount.Count > 0)
       {
-        string Left = Dv_Data_KH_SCC[recordIndex]["Id_BackColor"].ToString().Trim();
+        int num = checked(Dv_Data_KH_SCC.Count - 1);
+        int recordIndex = 0;
+        while (recordIndex <= num)
+        {
+          int Left = Convert.ToInt32(Dv_Data_KH_SCC[recordIndex]["A_Status"]);
+          string procId = Dv_Data_KH_SCC[recordIndex]["Process_id"].ToString();
+          if (M_Loai_KH_SCC == "1") //GJ
+          {
+            if (Left == 6 || Left == 7)
+              labelsCount.Find(x => x.Name == "Lab_SCC_Quotation_END").Text = decimal.Add(Convert.ToDecimal(labelsCount.Find(x => x.Name == "Lab_SCC_Quotation_END").Text), 1M).ToString();
+            else if (Left == 8 || Left == 9)
+              labelsCount.Find(x => x.Name == "Lab_SCC_Appoinment_END").Text = decimal.Add(Convert.ToDecimal(labelsCount.Find(x => x.Name == "Lab_SCC_Appoinment_END").Text), 1M).ToString();
+            else if (Left == 5)
+              labelsCount.Find(x => x.Name == "Lab_SCC_Plan_END").Text = decimal.Add(Convert.ToDecimal(labelsCount.Find(x => x.Name == "Lab_SCC_Plan_END").Text), 1M).ToString();
+            else if (Left == 2 || Left == 3)
+              labelsCount.Find(x => x.Name == "Lab_SCC_Stop_END").Text = decimal.Add(Convert.ToDecimal(labelsCount.Find(x => x.Name == "Lab_SCC_Stop_END").Text), 1M).ToString();
+            else if (Left == 1)
+              labelsCount.Find(x => x.Name == "Lab_SCC_Actual_END").Text = decimal.Add(Convert.ToDecimal(labelsCount.Find(x => x.Name == "Lab_SCC_Actual_END").Text), 1M).ToString();
+            else if (Left == 4)
+              labelsCount.Find(x => x.Name == "Lab_SCC_Finish_END").Text = decimal.Add(Convert.ToDecimal(labelsCount.Find(x => x.Name == "Lab_SCC_Finish_END").Text), 1M).ToString();
+          }
+          else
+            labelsCount.Find(x => x.Name.Contains(procId + "_END")).Text = decimal.Add(Convert.ToDecimal(labelsCount.Find(x => x.Name.Contains(procId + "_END")).Text), 1M).ToString();
 
-        if (Left == "0")
-          Lab_SCC_01.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_01.Text), 1M).ToString();
-        else if (Left == "1")
-          Lab_SCC_02.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_02.Text), 1M).ToString();
-        else if (Left == "2")
-          Lab_SCC_03.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_03.Text), 1M).ToString();
-        else if (Left == "3")
-          Lab_SCC_04.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_04.Text), 1M).ToString();
-        else if (Left == "4")
-          Lab_SCC_05.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_05.Text), 1M).ToString();
-        else if (Left == "5")
-          Lab_SCC_06.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_06.Text), 1M).ToString();
-        else if (Left == "6")
-          Lab_SCC_07.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_07.Text), 1M).ToString();
-        else if (Left == "7")
-          Lab_SCC_08.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_08.Text), 1M).ToString();
-        else if (Left == "8")
-          Lab_SCC_09.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_09.Text), 1M).ToString();
-        else if (Left == "9")
-          Lab_SCC_10.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_10.Text), 1M).ToString();
-        else if (Left == "10")
-          Lab_SCC_11.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_11.Text), 1M).ToString();
-        else if (Left == "11")
-          Lab_SCC_12.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_12.Text), 1M).ToString();
-        else if (Left == "12")
-          Lab_SCC_13.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_13.Text), 1M).ToString();
-        else if (Left == "13")
-          Lab_SCC_14.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_14.Text), 1M).ToString();
-        else if (Left == "14")
-          Lab_SCC_15.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_15.Text), 1M).ToString();
-        else if (Left == "15")
-          Lab_SCC_16.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_16.Text), 1M).ToString();
-        else if (Left == "16")
-          Lab_SCC_17.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_17.Text), 1M).ToString();
-        else if (Left == "17")
-          Lab_SCC_18.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_18.Text), 1M).ToString();
-        else if (Left == "18")
-          Lab_SCC_19.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_19.Text), 1M).ToString();
-        else if (Left == "19")
-          Lab_SCC_20.Text = decimal.Add(Convert.ToDecimal(Lab_SCC_20.Text), 1M).ToString();
-
-        checked { ++recordIndex; }
+          checked { ++recordIndex; }
+        }
       }
 
       if (M_Kieu_Xem.Trim() == "HEN")
@@ -2445,40 +2341,22 @@ namespace TMV.UI.JPCB.JP
       if (num3 == -1)
         return;
 
+      // Mo lenh trong ngay / So xe DTH / Lenh giao trong ngay
       LabTotal.Text = LabTotal.Text + (LabTotal.Text.Length != 0 ? "/" : "") + num3.ToString();
     }
     private int V_Dem_Xe(DataView _dv)
     {
       int num1 = 0;
-      string arr_txt = "";
-      if (_dv.Table.Columns.Contains("Ma_Xe") & _dv.Table.Columns.Contains("Stt_Rec_RO"))
+      int num2 = checked(_dv.Count - 1);
+      int recordIndex = 0;
+      while (recordIndex <= num2)
       {
-        num1 = 0;
-        int num2 = checked(_dv.Count - 1);
-        int recordIndex = 0;
-        while (recordIndex <= num2)
-        {
-          DataRowView dataRowView = _dv[recordIndex];
-          string Right = Convert.ToString(dataRowView["Stt_Rec_Ro"]).Replace("_THUCHIEN", "").Replace("_FN", "");
-          if (FindItemInArr(dataRowView["Ma_Xe"].ToString() + Right, arr_txt, ";") == 0)
-            checked { ++num1; }
-          arr_txt = arr_txt + ";" + dataRowView["Ma_Xe"].ToString() + Right;
-          checked { ++recordIndex; }
-        }
-      }
-      else if (_dv.Table.Columns.Contains("Ma_Xe"))
-      {
-        num1 = 0;
-        int num3 = checked(_dv.Count - 1);
-        int recordIndex = 0;
-        while (recordIndex <= num3)
-        {
-          DataRowView dataRowView = _dv[recordIndex];
-          if (FindItemInArr(Convert.ToString(dataRowView["Ma_Xe"]), arr_txt, ";") == 0)
-            checked { ++num1; }
-          arr_txt = arr_txt + ";" + dataRowView["Ma_Xe"].ToString();
-          checked { ++recordIndex; }
-        }
+        DataRowView dataRowView = _dv[recordIndex];
+        string Right = Convert.ToString(dataRowView["T_Type"]);
+        if (Right == "A")
+          checked { ++num1; };
+
+        checked { ++recordIndex; }
       }
       return num1;
     }
@@ -2760,182 +2638,41 @@ namespace TMV.UI.JPCB.JP
     {
       int num1 = checked(Dt_ConFigColor_KH_SCC.Rows.Count - 1);
       int num2 = 0;
+      
       while (num2 <= num1)
       {
         SchedulerStorage_KH_SCC.Appointments.Labels.GetById(num2).Color = CyberColor.GetBackColor(Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["BackColor"]));
         SchedulerStorage_KH_SCC.Appointments.Labels.GetById(num2).DisplayName = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
         SchedulerStorage_KH_SCC.Appointments.Labels.GetById(num2).MenuCaption = Convert.ToString(Dt_ConFigColor_KH_SCC.Rows[num2]["Ten_Color"]);
-        V_SetColorlabel_SCC(num2, Dt_ConFigColor_KH_SCC.Rows[num2]);
+        V_SetColorlabel_SCC2(labelsCount, labelsText, num2, Dt_ConFigColor_KH_SCC.Rows[num2]);
         checked { ++num2; }
       }
     }
-    private void V_SetColorlabel_SCC(int _i, DataRow _Dr)
+    private void V_SetColorlabel_SCC2(List<Label> labelsCount, List<Label> labelsText, int i, DataRow _Dr)
     {
-      if (_i > 20)
-        return;
+      labelsCount.Add(new Label());
+      labelsText.Add(new Label());
 
-      int num = checked(_i + 1);
-      bool flag = true;
-      switch (num)
-      {
-        case 1:
-          Lab_SCC1_01.Visible = flag;
-          Lab_SCC_01.Visible = true;
-          Lab_SCC1_01.Text = _Dr["Ten_Color"].ToString();
-          Lab_SCC_01.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
-          Lab_SCC_01.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_01.Tag = _Dr["Ma_Color"].ToString().Trim();
-          break;
-        case 2:
-          Lab_SCC1_02.Visible = flag;
-          Lab_SCC_02.Visible = true;
-          Lab_SCC1_02.Text = _Dr["Ten_Color"].ToString();
-          Lab_SCC_02.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
-          Lab_SCC_02.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_02.Tag = _Dr["Ma_Color"].ToString().Trim();
-          break;
-        case 3:
-          Lab_SCC1_03.Visible = flag;
-          Lab_SCC_03.Visible = true;
-          Lab_SCC1_03.Text = _Dr["Ten_Color"].ToString();
-          Lab_SCC_03.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
-          Lab_SCC_03.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_03.Tag = _Dr["Ma_Color"].ToString().Trim();
-          break;
-        case 4:
-          Lab_SCC1_04.Visible = flag;
-          Lab_SCC_04.Visible = true;
-          Lab_SCC1_04.Text = _Dr["Ten_Color"].ToString();
-          Lab_SCC_04.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
-          Lab_SCC_04.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_04.Tag = _Dr["Ma_Color"].ToString().Trim();
-          break;
-        case 5:
-          Lab_SCC1_05.Visible = flag;
-          Lab_SCC_05.Visible = true;
-          Lab_SCC1_05.Text = _Dr["Ten_Color"].ToString();
-          Lab_SCC_05.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
-          Lab_SCC_05.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_05.Tag = _Dr["Ma_Color"].ToString().Trim();
-          break;
-        case 6:
-          Lab_SCC1_06.Visible = flag;
-          Lab_SCC_06.Visible = true;
-          Lab_SCC1_06.Text = _Dr["Ten_Color"].ToString();
-          Lab_SCC_06.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
-          Lab_SCC_06.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_06.Tag = _Dr["Ma_Color"].ToString().Trim();
-          break;
-        case 7:
-          Lab_SCC1_07.Visible = flag;
-          Lab_SCC_07.Visible = true;
-          Lab_SCC1_07.Text = _Dr["Ten_Color"].ToString();
-          Lab_SCC_07.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
-          Lab_SCC_07.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_07.Tag = _Dr["Ma_Color"].ToString().Trim();
-          break;
-        case 8:
-          Lab_SCC1_08.Visible = flag;
-          Lab_SCC_08.Visible = true;
-          Lab_SCC1_08.Text = _Dr["Ten_Color"].ToString();
-          Lab_SCC_08.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
-          Lab_SCC_08.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_08.Tag = _Dr["Ma_Color"].ToString().Trim();
-          break;
-        case 9:
-          Lab_SCC1_09.Visible = flag;
-          Lab_SCC_09.Visible = true;
-          Lab_SCC1_09.Text = _Dr["Ten_Color"].ToString();
-          Lab_SCC_09.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
-          Lab_SCC_09.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_09.Tag = _Dr["Ma_Color"].ToString().Trim();
-          break;
-        case 10:
-          Lab_SCC1_10.Visible = flag;
-          Lab_SCC_10.Visible = true;
-          Lab_SCC1_10.Text = _Dr["Ten_Color"].ToString();
-          break;
-        case 11:
-          Lab_SCC1_11.Visible = flag;
-          Lab_SCC_11.Visible = true;
-          Lab_SCC1_11.Text = _Dr["Ten_Color"].ToString();
-          Lab_SCC_11.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
-          Lab_SCC_11.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_11.Tag = _Dr["Ma_Color"].ToString().Trim();
-          break;
-        case 12:
-          Lab_SCC1_12.Visible = flag;
-          Lab_SCC_12.Visible = true;
-          Lab_SCC1_12.Text = _Dr["Ten_Color"].ToString();
-          Lab_SCC_12.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
-          Lab_SCC_12.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_12.Tag = _Dr["Ma_Color"].ToString().Trim();
-          break;
-        case 13:
-          Lab_SCC1_13.Visible = flag;
-          Lab_SCC_13.Visible = true;
-          Lab_SCC1_13.Text = _Dr["Ten_Color"].ToString();
-          Lab_SCC_13.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
-          Lab_SCC_13.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_13.Tag = _Dr["Ma_Color"].ToString().Trim();
-          break;
-        case 14:
-          Lab_SCC1_14.Visible = flag;
-          Lab_SCC_14.Visible = true;
-          Lab_SCC1_14.Text = _Dr["Ten_Color"].ToString();
-          Lab_SCC_14.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
-          Lab_SCC_14.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_14.Tag = _Dr["Ma_Color"].ToString().Trim();
-          break;
-        case 15:
-          Lab_SCC1_15.Visible = flag;
-          Lab_SCC_15.Visible = true;
-          Lab_SCC1_15.Text = _Dr["Ten_Color"].ToString();
-          Lab_SCC_15.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
-          Lab_SCC_15.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_15.Tag = _Dr["Ma_Color"].ToString().Trim();
-          break;
-        case 16:
-          Lab_SCC1_16.Visible = flag;
-          Lab_SCC_16.Visible = true;
-          Lab_SCC1_16.Text = _Dr["Ten_Color"].ToString();
-          Lab_SCC_16.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
-          Lab_SCC_16.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_16.Tag = _Dr["Ma_Color"].ToString().Trim();
-          break;
-        case 17:
-          Lab_SCC1_17.Visible = flag;
-          Lab_SCC_17.Visible = true;
-          Lab_SCC1_17.Text = _Dr["Ten_Color"].ToString();
-          Lab_SCC_17.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
-          Lab_SCC_17.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_17.Tag = _Dr["Ma_Color"].ToString().Trim();
-          break;
-        case 18:
-          Lab_SCC1_18.Visible = flag;
-          Lab_SCC_18.Visible = true;
-          Lab_SCC1_18.Text = _Dr["Ten_Color"].ToString();
-          Lab_SCC_18.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
-          Lab_SCC_18.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_18.Tag = _Dr["Ma_Color"].ToString().Trim();
-          break;
-        case 19:
-          Lab_SCC1_19.Visible = flag;
-          Lab_SCC_19.Visible = true;
-          Lab_SCC1_19.Text = _Dr["Ten_Color"].ToString();
-          Lab_SCC_19.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
-          Lab_SCC_19.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_19.Tag = _Dr["Ma_Color"].ToString().Trim();
-          break;
-        case 20:
-          Lab_SCC1_20.Visible = flag;
-          Lab_SCC_20.Visible = true;
-          Lab_SCC1_20.Text = _Dr["Ten_Color"].ToString();
-          Lab_SCC_20.BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
-          Lab_SCC_20.ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
-          Lab_SCC_20.Tag = _Dr["Ma_Color"].ToString().Trim();
-          break;
-      }
+      labelsText[i].Name = "Lab_SCC1_" + i.ToString();
+      labelsText[i].Size = new Size(115, 19);
+      labelsText[i].TextAlign = ContentAlignment.MiddleLeft;
+      labelsText[i].AutoSize = true;
+      labelsText[i].Location = new Point(35, 40 + (i * 55));
+      labelsText[i].ForeColor = Color.Blue;
+      labelsText[i].Text = _Dr["Ten_Color"].ToString();
+
+      labelsCount[i].Name = "Lab_SCC_" + _Dr["Ma_Color"].ToString().Trim() + "_END"; // ProcessId for BP
+      labelsCount[i].Size = new Size(132, 27);
+      labelsCount[i].TextAlign = ContentAlignment.MiddleCenter;
+      labelsCount[i].Font = new Font("Tahoma", 9F, FontStyle.Bold);
+      labelsCount[i].Location = new Point(35, 60 + (i * 55));
+      labelsCount[i].BackColor = CyberColor.GetBackColor(Convert.ToString(_Dr["BackColor"]));
+      labelsCount[i].ForeColor = CyberColor.GetForeColor(Convert.ToString(_Dr["ForeColor"]));
+      labelsCount[i].Tag = _Dr["Ma_Color"].ToString();
+      labelsCount[i].Text = "0";
+
+      TabPage_Bang_Mau.Controls.Add(labelsCount[i]);
+      TabPage_Bang_Mau.Controls.Add(labelsText[i]);
     }
     #endregion
 
