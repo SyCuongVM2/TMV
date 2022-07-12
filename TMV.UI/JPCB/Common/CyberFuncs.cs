@@ -278,7 +278,7 @@ namespace TMV.UI.JPCB.Common
       GRVMaster.KeyDown -= new KeyEventHandler(MasterGRV_KeyDown);
       GRVMaster.CustomDrawRowIndicator += new RowIndicatorCustomDrawEventHandler(MasterGRV_CustomDrawRowIndicator);
       GRVMaster.KeyDown += new KeyEventHandler(MasterGRV_KeyDown);
-      GRVMaster.IndicatorWidth = DvMater.Count < 1000 ? 40 : 55;
+      GRVMaster.IndicatorWidth = DvMater.Count < 1000 ? 45 : 55;
       GRVMaster.ColumnPanelRowHeight = 40;
       GRVMaster.AppearancePrint.HeaderPanel.BackColor = CyberColor.GetBackColorPrintGrid();
       GRVMaster.AppearancePrint.HeaderPanel.ForeColor = CyberColor.GetForeColorPrintGrid();
@@ -306,6 +306,10 @@ namespace TMV.UI.JPCB.Common
         string Field_ReadOnly = Convert.ToString(Dvhead[recordIndex]["Field_ReadOnly"]);
         string Field_Format = Convert.ToString(Dvhead[recordIndex]["Field_Format"]);
 
+        string Field_Visible = "1";
+        if (Dvhead.Table.Columns.Contains("Field_Visible"))
+          Field_Visible = Convert.ToString(Dvhead[recordIndex]["Field_Visible"]);
+
         if (Dvhead.Table.Columns.Contains("BackColor"))
           str1 = Convert.ToString(Dvhead[recordIndex]["BackColor"]);
         if (Dvhead.Table.Columns.Contains("BackColor2"))
@@ -317,7 +321,7 @@ namespace TMV.UI.JPCB.Common
         if (Dvhead.Table.Columns.Contains("ExportExcel"))
           defaultBoolean = (Dvhead[recordIndex]["ExportExcel"] == (object)1) ? DefaultBoolean.True : DefaultBoolean.False;
         
-        GridColumn column = GetColumn(Field_name, Field_Type, Field_Head1, Field_Head2, Field_Width, Field_ReadOnly, Field_Format, DvMater);
+        GridColumn column = GetColumn(DvMater, Field_name, Field_Type, Field_Head1, Field_Head2, Field_Width, Field_ReadOnly, Field_Format, Field_Visible);
         if (column != null)
         {
           GRVMaster.Columns.Add(column);
@@ -328,6 +332,7 @@ namespace TMV.UI.JPCB.Common
           column.OptionsColumn.Printable = defaultBoolean;
           column.AppearanceHeader.Font = new Font("Tahoma", Convert.ToSingle(9M), FontStyle.Regular);
           column.AppearanceCell.Options.UseForeColor = true;
+          //column.AppearanceCell.Options.UseTextOptions = true;
           column.AppearanceCell.ForeColor = Color.Navy;
           column.OptionsFilter.AutoFilterCondition = AutoFilterCondition.Contains;
 
@@ -371,7 +376,7 @@ namespace TMV.UI.JPCB.Common
       return Bs_Sk ? str.Replace(" ", "").Replace("-", "").Replace("_", "").Replace("+", "").Replace(".", "").Replace(",", "").Replace("/", "").Replace(")", "").Replace("(", "").Replace("\\", "").Replace(";", "").Replace("'", "").Replace("<", "").Replace(">", "").Replace("=", "").Replace("@", "").Replace("&", "").Replace("#", "").Replace("$", "").Replace("!", "") : str;
     }
 
-    private GridColumn GetColumn(string Field_name, string Field_Type, string Field_Head1, string Field_Head2, int Field_Width, string Field_ReadOnly, string Field_Format, DataView DvMaster)
+    private GridColumn GetColumn(DataView DvMaster, string Field_name, string Field_Type, string Field_Head1, string Field_Head2, int Field_Width, string Field_ReadOnly, string Field_Format, string Field_Visible = "1")
     {
       GridColumn gridColumn = new GridColumn();
       Field_name = Field_name.Trim();
@@ -419,6 +424,7 @@ namespace TMV.UI.JPCB.Common
             repositoryItemTextEdit.Tag = "CM";
             repositoryItemTextEdit.AllowHtmlDraw = DefaultBoolean.True;
             gridColumn.ColumnEdit = repositoryItemTextEdit;
+            gridColumn.AppearanceCell.TextOptions.HAlignment = HorzAlignment.Far;
             break;
           case "D":
             RepositoryItemDateEdit repositoryItemDateEdit2 = new RepositoryItemDateEdit();
@@ -506,11 +512,13 @@ namespace TMV.UI.JPCB.Common
             gridColumn.ColumnEdit = repositoryItemProgressBar;
             break;
         }
+
         gridColumn.FieldName = Field_name;
         gridColumn.Caption = Field_Head1.Trim();
         gridColumn.Tag = Field_Head2.Trim();
         gridColumn.OptionsColumn.ReadOnly = (Field_ReadOnly == "1");
-        gridColumn.Visible = true;
+        gridColumn.Visible = (Field_Visible == "1");
+
         column = gridColumn;
       }
       return column;
@@ -621,7 +629,7 @@ namespace TMV.UI.JPCB.Common
       {
         Name = "Col_".Trim().ToUpper() + Field_Name.Trim().ToUpper(),
         Caption = Field_Name.Trim(),
-        Tag = (object)Field_Name.Trim(),
+        Tag = Field_Name.Trim(),
         FieldName = Field_Name,
         OptionsColumn = {
           AllowEdit = false

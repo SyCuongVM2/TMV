@@ -4,6 +4,7 @@ using DevExpress.Utils;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraScheduler;
 using DevExpress.XtraScheduler.Drawing;
@@ -1161,12 +1162,14 @@ namespace TMV.UI.JPCB.JP
       SchedulerControl schedulerControl = (SchedulerControl)sender;
       string str = "";
       string type = "";
+      int? status = null;
       if (schedulerControl.SelectedAppointments.Count > 0)
       {
         try
         {
           str = schedulerControl.SelectedAppointments[0].Id.ToString();
           type = schedulerControl.SelectedAppointments[0].CustomFields["T_Type"].ToString();
+          status = Convert.ToInt32(schedulerControl.SelectedAppointments[0].CustomFields["A_Status"]);
         }
         catch (Exception ex)
         {
@@ -1177,6 +1180,40 @@ namespace TMV.UI.JPCB.JP
       e.Menu.Items.Clear();
       int rowHandle = 0;
       PopupMenuSchedulerControl.ItemLinks.Clear();
+
+      if (M_Loai_KH_SCC.Trim() == "1")
+      {
+        if (type == "P")
+        {
+          if (status == 6 || status == 7)
+            PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Xác nhận kế hoạch",
+              new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
+          if (status == 5)
+            PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Thực hiện",
+              new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
+
+          PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Thêm kế hoạch",
+            new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
+          PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Hủy",
+            new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
+        }
+        else
+        {
+          if (status == 2)
+            PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Tiếp tục",
+              new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
+          else if (status != 4 && status != 2)
+          {
+            PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Kết thúc",
+              new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
+            PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Dừng sửa chữa",
+              new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
+          }
+          else if (status == 4)
+            PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Quay lại sửa chữa",
+              new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
+        }
+      }
 
       if (M_Kieu_Xem != "HEN")
         PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Tạo Kế hoạch sửa chữa", 
@@ -2280,6 +2317,12 @@ namespace TMV.UI.JPCB.JP
     {
       if (labelsCount.Count > 0)
       {
+        // clear labels
+        foreach(Label item in labelsCount)
+        {
+          item.Text = "0";
+        }
+
         int num = checked(Dv_Data_KH_SCC.Count - 1);
         int recordIndex = 0;
         while (recordIndex <= num)
@@ -2779,7 +2822,7 @@ namespace TMV.UI.JPCB.JP
         checked { ++recordIndex; }
       }
 
-      SplitContainer2.SplitterDistance = Left - 230;
+      SplitContainer2.SplitterDistance = Left - 380;
       Master_Cho_Lap_KH.DataSource = Dv_Cho_Lap_KH;
       Master_Cho_Lap_KHGRV.GridControl = Master_Cho_Lap_KH;
       GridView masterChoLapKhgrv = Master_Cho_Lap_KHGRV;
@@ -2816,6 +2859,8 @@ namespace TMV.UI.JPCB.JP
       Master_Cho_Lap_KHGRV.RowCellStyle += new RowCellStyleEventHandler(Master_Cho_Lap_KHGRV_RowCellStyle);
       Master_Sua_Xong_KHGRV.RowCellStyle -= new RowCellStyleEventHandler(Master_Sua_Xong_KHGRV_RowCellStyle);
       Master_Sua_Xong_KHGRV.RowCellStyle += new RowCellStyleEventHandler(Master_Sua_Xong_KHGRV_RowCellStyle);
+      Master_Cho_Lap_KHGRV.CustomDrawCell -= new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(Master_Cho_Lap_KHGRV_CustomDrawCell);
+      Master_Cho_Lap_KHGRV.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(Master_Cho_Lap_KHGRV_CustomDrawCell);
       TxtSo_Ro_Cho_Lap_KH.TextChanged -= new EventHandler(V_Loc_Xe_Cho_Lap_KH);
       TxtSo_Ro_Cho_Lap_KH.TextChanged += new EventHandler(V_Loc_Xe_Cho_Lap_KH);
       TxtMa_Xe_Cho_Lap_KH.TextChanged -= new EventHandler(V_Loc_Xe_Cho_Lap_KH);
@@ -3029,12 +3074,12 @@ namespace TMV.UI.JPCB.JP
           new EventHandler(V_Quay_Ra), 
           ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true), true);
 
-      PopupMenu.ShowPopup(Control.MousePosition);
+      PopupMenu.ShowPopup(MousePosition);
 
       if (e == null)
         return;
 
-      PopupMenu.ShowPopup(Control.MousePosition);
+      PopupMenu.ShowPopup(MousePosition);
     }
     private void Master_Sua_Xong_KHGRVPopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
     {
@@ -3069,12 +3114,12 @@ namespace TMV.UI.JPCB.JP
           new EventHandler(V_Quay_Ra),
           ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true), true);
       
-      PopupMenu.ShowPopup(Control.MousePosition);
+      PopupMenu.ShowPopup(MousePosition);
       
       if (e == null)
         return;
 
-      PopupMenu.ShowPopup(Control.MousePosition);
+      PopupMenu.ShowPopup(MousePosition);
     }
     private void Master_Cho_Lap_KHGRV_RowCellStyle(object sender, RowCellStyleEventArgs e)
     {
@@ -3129,6 +3174,20 @@ namespace TMV.UI.JPCB.JP
       }
       else
         e.Appearance.BackColor = Color.Silver;
+    }
+    private void Master_Cho_Lap_KHGRV_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
+    {
+      GridView view = sender as GridView;
+      if (e.Column.FieldName == "Ma_Xe")
+      {
+        int val1 = Convert.ToInt32(view.GetRowCellValue(e.RowHandle, "KH_Hen"));
+        if (val1 == 1)
+        {
+          Image img = ImageResourceCache.Default.GetImage("images/scheduling/time_16x16.png");
+          e.DefaultDraw();
+          e.Cache.DrawImage(img, new Rectangle(e.Bounds.X + (e.Column.Width - 20), e.Bounds.Y + 6, img.Size.Width, img.Size.Height));
+        }
+      }
     }
     #endregion
 
