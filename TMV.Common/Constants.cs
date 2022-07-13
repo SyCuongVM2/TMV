@@ -77,6 +77,10 @@
     public string AppJpcbPkgJPDangSuaChua = "AppJpcbPkgJPDangSuaChua";
     public string AppJpcbPkgJPXeDung = "AppJpcbPkgJPXeDung";
     public string AppJpcbPkgJPUpdateKeothaResize = "AppJpcbPkgJPUpdateKeothaResize";
+    public string AppJpcbPkgJPConfirmPlan = "AppJpcbPkgJPConfirmPlan";
+    public string AppJpcbPkgJPClonePlan = "AppJpcbPkgJPClonePlan";
+    public string AppJpcbPkgJPCancelPlan = "AppJpcbPkgJPCancelPlan";
+    public string AppJpcbPkgJPCancelPlanProgress = "AppJpcbPkgJPCancelPlanProgress";
     #endregion
   }
 }

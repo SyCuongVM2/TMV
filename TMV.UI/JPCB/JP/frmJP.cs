@@ -28,6 +28,7 @@ namespace TMV.UI.JPCB.JP
     #region "variables"
     private CyberFuncs CyberFunc = new CyberFuncs();
     private CyberColor CyberColor = new CyberColor();
+    private CalcTime calcTime = new CalcTime();
     List<Label> labelsCount = new List<Label>();
     List<Label> labelsText = new List<Label>();
     private bool _TabVisible3 = false;
@@ -1001,6 +1002,8 @@ namespace TMV.UI.JPCB.JP
       SchedulerStorage_KH_SCC.Appointments.CustomFieldMappings.Clear();
       SchedulerStorage_KH_SCC.Appointments.CustomFieldMappings.Add(new AppointmentCustomFieldMapping("T_Type", Dt_Data_KH_SCC.Columns["T_Type"].ColumnName));
       SchedulerStorage_KH_SCC.Appointments.CustomFieldMappings.Add(new AppointmentCustomFieldMapping("A_Status", Dt_Data_KH_SCC.Columns["A_Status"].ColumnName));
+      SchedulerStorage_KH_SCC.Appointments.CustomFieldMappings.Add(new AppointmentCustomFieldMapping("Stt_Rec_RO", Dt_Data_KH_SCC.Columns["Stt_Rec_RO"].ColumnName));
+      SchedulerStorage_KH_SCC.Appointments.CustomFieldMappings.Add(new AppointmentCustomFieldMapping("Wait_Id", Dt_Data_KH_SCC.Columns["Wait_Id"].ColumnName));
 
       SchedulerControl_KH_SCC.OptionsView.ToolTipVisibility = ToolTipVisibility.Always;
 
@@ -1159,17 +1162,20 @@ namespace TMV.UI.JPCB.JP
     }
     private void V_PopupMenu_KH_SCC(object sender, DevExpress.XtraScheduler.PopupMenuShowingEventArgs e)
     {
-      SchedulerControl schedulerControl = (SchedulerControl)sender;
-      string str = "";
+      decimal? id = null;
       string type = "";
       int? status = null;
+      decimal? wait = null;
+
+      SchedulerControl schedulerControl = (SchedulerControl)sender;
       if (schedulerControl.SelectedAppointments.Count > 0)
       {
         try
         {
-          str = schedulerControl.SelectedAppointments[0].Id.ToString();
+          id = Convert.ToDecimal(schedulerControl.SelectedAppointments[0].Id);
           type = schedulerControl.SelectedAppointments[0].CustomFields["T_Type"].ToString();
           status = Convert.ToInt32(schedulerControl.SelectedAppointments[0].CustomFields["A_Status"]);
+          wait = Convert.ToDecimal(schedulerControl.SelectedAppointments[0].CustomFields["Wait_Id"]);
         }
         catch (Exception ex)
         {
@@ -1181,172 +1187,71 @@ namespace TMV.UI.JPCB.JP
       int rowHandle = 0;
       PopupMenuSchedulerControl.ItemLinks.Clear();
 
-      if (M_Loai_KH_SCC.Trim() == "1")
+      if (id != null)
       {
-        if (type == "P")
+        if (M_Loai_KH_SCC.Trim() == "1")
         {
-          if (status == 6 || status == 7)
-            PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Xác nhận kế hoạch",
-              new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
-          if (status == 5)
-            PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Thực hiện",
-              new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
-
-          PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Thêm kế hoạch",
-            new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
-          PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Hủy",
-            new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
-        }
-        else
-        {
-          if (status == 2)
-            PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Tiếp tục",
-              new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
-          else if (status != 4 && status != 2)
+          if (type == "P")
           {
-            PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Kết thúc",
-              new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
-            PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Dừng sửa chữa",
-              new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
+            if (status == 6 || status == 7)
+              PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Xác nhận kế hoạch",
+                new EventHandler(V_Confirm_Plan), Shortcut.F4, ImageResourceCache.Default.GetImage("images/edit/edit_16x16.png"), true), false);
+            if (status == 5)
+              PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Thực hiện",
+                new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F5, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
+
+            PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Thêm kế hoạch",
+              new EventHandler(V_Clone_Plan), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/additem_16x16.png"), true), false);
+            PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Hủy",
+              new EventHandler(V_Cancel_Plan), Shortcut.F6, ImageResourceCache.Default.GetImage("images/edit/delete_16x16.png"), true), false);
           }
-          else if (status == 4)
-            PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Quay lại sửa chữa",
-              new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
+          else if (type == "A")
+          {
+            if (status == 2)
+              PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Tiếp tục",
+                new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F3, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
+            else if (status != 4 && status != 2)
+            {
+              PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Kết thúc",
+                new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F7, ImageResourceCache.Default.GetImage("images/edit/edit_16x16.png"), true), false);
+              PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Dừng sửa chữa",
+                new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/remove_16x16.png"), true), false);
+            }
+            else if (status == 4)
+              PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Quay lại sửa chữa",
+                new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true), false);
+          }
         }
-      }
 
-      if (M_Kieu_Xem != "HEN")
-        PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Tạo Kế hoạch sửa chữa", 
-          new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
-
-      if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "2") // BP
-        PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Tạo nhanh KHSC đồng sơn", 
-          new EventHandler(V_Tao_KH_ALLS), Shortcut.F9, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false); // FrmCVDV_KH_SDSALL
-
-      PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Sửa Kế hoạch", 
-        new EventHandler(V_Sua_Tien_Do_KH_SCC), Shortcut.F3, ImageResourceCache.Default.GetImage("images/edit/edit_16x16.png"), true), false);
-      
-      if (M_Kieu_Xem == "HEN")
-        PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Gọi xác nhận lịch hẹn", 
-          new EventHandler(V_Hen_Call_KH_SCC), Shortcut.None, ImageResourceCache.Default.GetImage("images/edit/printernetwork_16x16.png"), true), false); // FrmCVDV_DLHen_Call
-
-      if (M_Kieu_Xem != "HEN")
-      {
-        PopupMenuSchedulerControl.ItemLinks.Add(
-          new CyberMenuPopup(sender, rowHandle, "Chạy thử", 
-            new EventHandler(V_KH_SCC_Chay_Thu), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), true); // FrmCVDV_Chay_Thu
-
-        PopupMenuSchedulerControl.ItemLinks.Add(
-          new CyberMenuPopup(sender, rowHandle, "Dừng chạy thử", 
-            new EventHandler(V_KH_SCC_Chay_Thu_Stop), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true), false);
-
-        PopupMenuSchedulerControl.ItemLinks.Add(
-          new CyberMenuPopup(sender, rowHandle, "Bắt đầu Dừng sửa chữa", 
-            new EventHandler(V_KH_SCC_BD_Dung_SC), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), true); // FrmCVDV_Dung_SC
-
-        PopupMenuSchedulerControl.ItemLinks.Add(
-          new CyberMenuPopup(sender, rowHandle, "Kết thúc Dừng sửa chữa", 
-            new EventHandler(V_Data_KH_SCC_KT_Dung_SC), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true), false);
-
-        PopupMenuSchedulerControl.ItemLinks.Add(
-          new CyberMenuPopup(sender, rowHandle, "Xác nhận lệnh phát sinh", 
-            new EventHandler(V_RO_PS), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), true);
-
-        PopupMenuSchedulerControl.ItemLinks.Add(
-          new CyberMenuPopup(sender, rowHandle, "Q-Gate", 
-            new EventHandler(V_KH_SCC_QGate), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), true);
-        
-        if (M_Loai_KH_SCC == "2") // BP
+        if (M_Kieu_Xem != "HEN")
           PopupMenuSchedulerControl.ItemLinks.Add(
-            new CyberMenuPopup(sender, rowHandle, "KCS công đoạn", 
-              new EventHandler(V_KH_SCC_KCS_CD), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false); // FrmCVDV_KCS_CD
-
-        PopupMenuSchedulerControl.ItemLinks.Add(
-          new CyberMenuPopup(sender, rowHandle, "Tạo thông điệp chuyển tầng", 
-            new EventHandler(V_Chuyen_Tang), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), true); // FrmChuyentang
+            new CyberMenuPopup(sender, 0, "Xem lệnh",
+              new EventHandler(V_Preview), Shortcut.F7, ImageResourceCache.Default.GetImage("images/actions/refresh2_16x16.png"), true), true);
       }
-
-      if (M_Kieu_Xem == "HEN" | M_Loai_KH_SCC.Trim() == "1") // GJ
+      else
       {
+        if (M_Kieu_Xem != "HEN")
+          PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Tạo Kế hoạch sửa chữa",
+            new EventHandler(V_Tao_Tien_Do_KH_SCC), Shortcut.F4, ImageResourceCache.Default.GetImage("images/actions/apply_16x16.png"), true), false);
+
+        if (M_Kieu_Xem != "HEN")
+          PopupMenuSchedulerControl.ItemLinks.Add(
+            new CyberMenuPopup(sender, 0, "Khóa: Khoang/KTV/CVDV/Tổ",
+              new EventHandler(V_Lock_Khoang_Data), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/managedatasource_16x16.png"), true), false); // FrmCVDV_Lock_Detail
+
         PopupMenuSchedulerControl.ItemLinks.Add(
-          new CyberMenuPopup(sender, rowHandle, "Tạo kế hoạch hẹn", 
-            new EventHandler(V_Tao_Lich_Hen_KH_SCC), Shortcut.F6, ImageResourceCache.Default.GetImage("images/actions/showworktimeonly_16x16.png"), true), true);
-        
+          new CyberMenuPopup(sender, 0, "Làm tươi dữ liệu",
+            new EventHandler(V_RefreshData_KH_SCC), Shortcut.F5, ImageResourceCache.Default.GetImage("images/actions/refresh2_16x16.png"), true), false);
+
         PopupMenuSchedulerControl.ItemLinks.Add(
-          new CyberMenuPopup(sender, rowHandle, "Tạo đặt chỗ", 
-            new EventHandler(V_Tao_Dat_CHo_KH_SCC), Shortcut.F2, ImageResourceCache.Default.GetImage("images/actions/showworktimeonly_16x16.png"), true), false);
+          new CyberMenuPopup(sender, 0, "Quay về giao diện ban đầu",
+            new EventHandler(V_Refresh_Load_Default), Shortcut.ShiftF5, ImageResourceCache.Default.GetImage("images/actions/refresh2_16x16.png"), true), true);
+
+        PopupMenuSchedulerControl.ItemLinks.Add(
+          new CyberMenuPopup(sender, 0, "Quay ra",
+            new EventHandler(V_Quay_Ra), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true), true);
       }
 
-      if (M_Kieu_Xem != "HEN")
-        PopupMenuSchedulerControl.ItemLinks.Add(
-          new CyberMenuPopup(sender, rowHandle, "Chuyển lịch hẹn sang kế hoạch sửa chữa", 
-            new EventHandler(V_Hen_To_Kh), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/refresh2_16x16.png"), true), true); // FrmCVDV_Hen_To_KH
-
-      PopupMenuSchedulerControl.ItemLinks.Add(
-        new CyberMenuPopup(sender, rowHandle, "Xóa kế hoạch", 
-          new EventHandler(V_Xoa_KH_SCC), Shortcut.F8, ImageResourceCache.Default.GetImage("images/actions/deletedatasource_16x16.png"), true), true);
-      
-      if (M_Kieu_Xem != "HEN")
-        PopupMenuSchedulerControl.ItemLinks.Add(
-          new CyberMenuPopup(sender, rowHandle, "Xác nhận bắt đầu sửa chữa", 
-            new EventHandler(V_XN_BD_SCC), Shortcut.F10, ImageResourceCache.Default.GetImage("images/edit/edit_16x16.png"), true), true);
-
-      if (M_Kieu_Xem != "HEN")
-        PopupMenuSchedulerControl.ItemLinks.Add(
-          new CyberMenuPopup(sender, rowHandle, "Xác nhận kết thúc sửa chữa", 
-            new EventHandler(V_XN_KT_SCC), Shortcut.F11, ImageResourceCache.Default.GetImage("images/edit/edit_16x16.png"), true), false);
-
-      if (M_Kieu_Xem != "HEN")
-        PopupMenuSchedulerControl.ItemLinks.Add(
-          new CyberMenuPopup(sender, rowHandle, "Xác nhận bắt đầu và kết thúc theo - KTV", 
-            new EventHandler(V_XN_BD_KT_KTV), Shortcut.None, ImageResourceCache.Default.GetImage("images/edit/edit_16x16.png"), true), true); // FrmCVDV_XN_TGSC
-
-      if (M_Kieu_Xem != "HEN")
-        PopupMenuSchedulerControl.ItemLinks.Add(
-          new CyberMenuPopup(sender, 0, "Khóa: Khoang/KTV/CVDV/Tổ", 
-            new EventHandler(V_Lock_Khoang_Data), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/managedatasource_16x16.png"), true), false); // FrmCVDV_Lock_Detail
-
-      if (M_Kieu_Xem != "HEN")
-        PopupMenuSchedulerControl.ItemLinks.Add(
-          new CyberMenuPopup(sender, rowHandle, "Chuyển giao xe", 
-            new EventHandler(V_Giai_Phong), Shortcut.None, ImageResourceCache.Default.GetImage("images/edit/edit_16x16.png"), true), true);
-
-      if (M_Kieu_Xem != "HEN")
-        PopupMenuSchedulerControl.ItemLinks.Add(
-          new CyberMenuPopup(sender, rowHandle, "In phiếu giao việc", 
-            new EventHandler(V_Giao_Viec_Print), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/printernetwork_16x16.png"), true), false);
-
-      if (M_Kieu_Xem != "HEN")
-        PopupMenuSchedulerControl.ItemLinks.Add(
-          new CyberMenuPopup(sender, 0, "Xem lệnh", 
-            new EventHandler(V_Preview), Shortcut.F7, ImageResourceCache.Default.GetImage("images/actions/refresh2_16x16.png"), true), true);
-
-      PopupMenuSchedulerControl.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Làm tươi dữ liệu",
-          new EventHandler(V_RefreshData_KH_SCC), Shortcut.F5, ImageResourceCache.Default.GetImage("images/actions/refresh2_16x16.png"), true), false);
-
-      PopupMenuSchedulerControl.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Quay về giao diện ban đầu", 
-          new EventHandler(V_Refresh_Load_Default), Shortcut.ShiftF5, ImageResourceCache.Default.GetImage("images/actions/refresh2_16x16.png"), true), true);
-
-      PopupMenuSchedulerControl.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Tra cứu lệnh sửa chữa", 
-          new EventHandler(V_Xem_Lich_Su_SC), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/refresh2_16x16.png"), true), false); // FrmCVDV_Lich_Su_SC_Loc
-
-      if (M_Kieu_Xem != "HEN")
-        PopupMenuSchedulerControl.ItemLinks.Add(
-          new CyberMenuPopup(sender, rowHandle, "Cập nhật màu xe/Kiểu xe", 
-            new EventHandler(V_Cap_Nhap_Mau_Kx_Scheduler), Shortcut.None, null, true), true); // Frm_Mau_KX
-
-      if (M_Kieu_Xem != "HEN" & M_Loai_KH_SCC == "2") // BP
-        PopupMenuSchedulerControl.ItemLinks.Add(
-          new CyberMenuPopup(sender, rowHandle, "Cập nhật phát sinh/Ghi chú", 
-            new EventHandler(V_Update_Ghi_Chu_Scheduler), Shortcut.None,  null, true), true); // FrmCVDV_SCC_Note
-
-      PopupMenuSchedulerControl.ItemLinks.Add(
-        new CyberMenuPopup(sender, 0, "Quay ra", 
-          new EventHandler(V_Quay_Ra), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/cancel_16x16.png"), true), true);
-      
       if (e == null)
         return;
       
@@ -1928,6 +1833,51 @@ namespace TMV.UI.JPCB.JP
       ChkDu_kien_giaoCVDV.Checked = false;
       Fill_Cbb(0);
       V_Filter_KH_SCC(sender, e);
+    }
+    #endregion
+
+    #region "New_Menu"
+    private void V_Confirm_Plan(object sender, EventArgs e)
+    {
+      decimal? RO_Id = null;
+      DateTime? PlanToTime = null;
+      if (SchedulerControl_KH_SCC.SelectedAppointments.Count > 0)
+      {
+        RO_Id = Convert.ToDecimal(SchedulerControl_KH_SCC.SelectedAppointments[0].CustomFields["Stt_Rec_RO"]);
+        PlanToTime = SchedulerControl_KH_SCC.SelectedInterval.End;
+      }
+        
+      if (RO_Id == null || PlanToTime == null || !FormGlobals.Message_Confirm("Bạn có xác nhận kế hoạch không?", false))
+        return;
+
+      DataSet ds = JpcbJpBO.Instance().ConfirmPlan(RO_Id.Value, PlanToTime.Value, Globals.LoginUserID);
+      if (ds.Tables != null && ds.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS")
+        V_Load_DATA_KH_SCC("0", "", "");
+    }
+    private void V_Clone_Plan(object sender, EventArgs e)
+    {
+      decimal? RO_Id = null;
+      if (SchedulerControl_KH_SCC.SelectedAppointments.Count > 0)
+        RO_Id = Convert.ToDecimal(SchedulerControl_KH_SCC.SelectedAppointments[0].CustomFields["Stt_Rec_RO"]);
+
+      if (RO_Id == null)
+        return;
+
+      DataSet ds = JpcbJpBO.Instance().ClonePlan("GET", RO_Id.Value, DateTime.Now, DateTime.Now, Globals.LoginDlrId, Globals.LoginUserID);
+      if (ds.Tables != null)
+      {
+        var val = calcTime.CalcCloneRepairTime(Convert.ToInt32(ds.Tables[0].Rows[0]["Estimate_Time"]),
+                                               Convert.ToDateTime(ds.Tables[0].Rows[0]["From_Time"]));
+        DataSet ds2 = JpcbJpBO.Instance().ClonePlan("CLONE", RO_Id.Value, 
+                                                    val.StartPlanTime, val.EndPlanTime, 
+                                                    Globals.LoginDlrId, Globals.LoginUserID);
+        if (ds2.Tables != null && ds2.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS")
+          V_Load_DATA_KH_SCC("0", "", "");
+      }
+    }
+    private void V_Cancel_Plan(object sender, EventArgs e)
+    {
+
     }
     #endregion
 
@@ -3639,18 +3589,6 @@ namespace TMV.UI.JPCB.JP
 
       V_Tao_Moi_SDSALL("M", M_Ma_CT_PKH, _Stt_rec, _Stt_Rec_Ro, _So_Ro, start, end, _ma_khoang, _Ma_CVDV, _Ma_To, _Ma_Xe, _Ma_CD, _Ma_KTV);
     }
-    private void V_Hen_Call_KH_SCC(object sender, EventArgs e)
-    {
-      //TODO: open form (FrmCVDV_DLHen_Call)
-    }
-    private void V_KH_SCC_Chay_Thu(object sender, EventArgs e)
-    {
-      //TODO: open form (FrmCVDV_Chay_Thu)
-    }
-    private void V_KH_SCC_Chay_Thu_Stop(object sender, EventArgs e)
-    {
-      //TODO: CP_RO_CVDV_CHAY_THU_STOP
-    }
     private void V_KH_SCC_BD_Dung_SC(object sender, EventArgs e)
     {
       string _Stt_rec = "";
@@ -3736,10 +3674,6 @@ namespace TMV.UI.JPCB.JP
         return;
 
       V_Load_DATA_KH_SCC("0", "", str);
-    }
-    private void V_Chuyen_Tang(object sender, EventArgs e)
-    {
-      //TODO: open form (FrmChuyentang)
     }
     private void V_Tao_Lich_Hen_KH_SCC(object sender, EventArgs e)
     {

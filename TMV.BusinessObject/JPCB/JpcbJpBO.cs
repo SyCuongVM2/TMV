@@ -83,8 +83,7 @@ namespace TMV.BusinessObject.JPCB
         dateView
       );
     }
-    public DataSet UpdateKeothaResize(decimal userId, int tenantId, string roType, decimal id, string table,
-                                      DateTime from, DateTime to, int workshop)
+    public DataSet UpdateKeothaResize(decimal userId, int tenantId, string roType, decimal id, string table, DateTime from, DateTime to, int workshop)
     {
       return JpcbJpDAO.Instance().UpdateKeothaResize(
         userId,
@@ -95,6 +94,41 @@ namespace TMV.BusinessObject.JPCB
         from,
         to,
         workshop
+      );
+    }
+    public DataSet ConfirmPlan(decimal roId, DateTime planToTime, decimal userId)
+    {
+      return JpcbJpDAO.Instance().ConfirmPlan(
+        roId,
+        planToTime,
+        userId
+      );
+    }
+    public DataSet ClonePlan(string type, decimal roId, DateTime planFromTime, DateTime planToTime, int tenantId, decimal userId)
+    {
+      return JpcbJpDAO.Instance().ClonePlan(
+        type,
+        roId,
+        planFromTime,
+        planToTime,
+        tenantId,
+        userId
+      );
+    }
+    public DataSet CancelPlan(decimal planId, int tenantId, decimal userId)
+    {
+      return JpcbJpDAO.Instance().CancelPlan(
+        planId,
+        tenantId,
+        userId
+      );
+    }
+    public DataSet CancelPlanProgress(decimal roId, int tenantId, decimal userId)
+    {
+      return JpcbJpDAO.Instance().CancelPlanProgress(
+        roId,
+        tenantId,
+        userId
       );
     }
   }

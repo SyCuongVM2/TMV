@@ -124,8 +124,7 @@ namespace TMV.DataAccess.JPCB
         }
       );
     }
-    public DataSet UpdateKeothaResize(decimal userId, int tenantId, string roType, decimal id, string table, 
-                                      DateTime from, DateTime to, int workshop)
+    public DataSet UpdateKeothaResize(decimal userId, int tenantId, string roType, decimal id, string table, DateTime from, DateTime to, int workshop)
     {
       return SqlDataAccess.ExecuteDataset(
         SqlConnect.ConnectionString,
@@ -139,6 +138,57 @@ namespace TMV.DataAccess.JPCB
           Globals.DB_GetNull(from),
           Globals.DB_GetNull(to),
           Globals.DB_GetNull(workshop)
+        }
+      );
+    }
+    public DataSet ConfirmPlan(decimal roId, DateTime planToTime, decimal userId)
+    {
+      return SqlDataAccess.ExecuteDataset(
+        SqlConnect.ConnectionString,
+        Constants.Instance().AppJpcbPkgJPConfirmPlan,
+        new object[] {
+          Globals.DB_GetNull(roId),
+          Globals.DB_GetNull(planToTime),
+          Globals.DB_GetNull(userId)
+        }
+      );
+    }
+    public DataSet ClonePlan(string type, decimal roId, DateTime planFromTime, DateTime planToTime, int tenantId, decimal userId)
+    {
+      return SqlDataAccess.ExecuteDataset(
+        SqlConnect.ConnectionString,
+        Constants.Instance().AppJpcbPkgJPClonePlan,
+        new object[] {
+          Globals.DB_GetNull(type),
+          Globals.DB_GetNull(roId),
+          Globals.DB_GetNull(planFromTime),
+          Globals.DB_GetNull(planToTime),
+          Globals.DB_GetNull(tenantId),
+          Globals.DB_GetNull(userId)
+        }
+      );
+    }
+    public DataSet CancelPlan(decimal planId, int tenantId, decimal userId)
+    {
+      return SqlDataAccess.ExecuteDataset(
+        SqlConnect.ConnectionString,
+        Constants.Instance().AppJpcbPkgJPCancelPlan,
+        new object[] {
+          Globals.DB_GetNull(planId),
+          Globals.DB_GetNull(tenantId),
+          Globals.DB_GetNull(userId)
+        }
+      );
+    }
+    public DataSet CancelPlanProgress(decimal roId, int tenantId, decimal userId)
+    {
+      return SqlDataAccess.ExecuteDataset(
+        SqlConnect.ConnectionString,
+        Constants.Instance().AppJpcbPkgJPCancelPlanProgress,
+        new object[] {
+          Globals.DB_GetNull(roId),
+          Globals.DB_GetNull(tenantId),
+          Globals.DB_GetNull(userId)
         }
       );
     }
