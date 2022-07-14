@@ -168,27 +168,28 @@ namespace TMV.DataAccess.JPCB
         }
       );
     }
-    public DataSet CancelPlan(decimal planId, int tenantId, decimal userId)
+    public DataSet CancelPlan(string type, decimal planId, decimal roId, int tenantId, decimal userId)
     {
       return SqlDataAccess.ExecuteDataset(
         SqlConnect.ConnectionString,
         Constants.Instance().AppJpcbPkgJPCancelPlan,
         new object[] {
+          Globals.DB_GetNull(type),
           Globals.DB_GetNull(planId),
+          Globals.DB_GetNull(roId),
           Globals.DB_GetNull(tenantId),
           Globals.DB_GetNull(userId)
         }
       );
     }
-    public DataSet CancelPlanProgress(decimal roId, int tenantId, decimal userId)
+    public DataSet CheckPlans(int tenantId, decimal roId)
     {
       return SqlDataAccess.ExecuteDataset(
         SqlConnect.ConnectionString,
-        Constants.Instance().AppJpcbPkgJPCancelPlanProgress,
+        Constants.Instance().AppJpcbPkgJPCheckPlans,
         new object[] {
-          Globals.DB_GetNull(roId),
           Globals.DB_GetNull(tenantId),
-          Globals.DB_GetNull(userId)
+          Globals.DB_GetNull(roId)
         }
       );
     }

@@ -115,20 +115,21 @@ namespace TMV.BusinessObject.JPCB
         userId
       );
     }
-    public DataSet CancelPlan(decimal planId, int tenantId, decimal userId)
+    public DataSet CancelPlan(string type, decimal planId, decimal roId, int tenantId, decimal userId)
     {
       return JpcbJpDAO.Instance().CancelPlan(
+        type,
         planId,
+        roId,
         tenantId,
         userId
       );
     }
-    public DataSet CancelPlanProgress(decimal roId, int tenantId, decimal userId)
+    public DataSet CheckPlans(int tenantId, decimal roId)
     {
-      return JpcbJpDAO.Instance().CancelPlanProgress(
-        roId,
+      return JpcbJpDAO.Instance().CheckPlans(
         tenantId,
-        userId
+        roId
       );
     }
   }

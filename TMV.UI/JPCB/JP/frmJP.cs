@@ -1004,6 +1004,7 @@ namespace TMV.UI.JPCB.JP
       SchedulerStorage_KH_SCC.Appointments.CustomFieldMappings.Add(new AppointmentCustomFieldMapping("A_Status", Dt_Data_KH_SCC.Columns["A_Status"].ColumnName));
       SchedulerStorage_KH_SCC.Appointments.CustomFieldMappings.Add(new AppointmentCustomFieldMapping("Stt_Rec_RO", Dt_Data_KH_SCC.Columns["Stt_Rec_RO"].ColumnName));
       SchedulerStorage_KH_SCC.Appointments.CustomFieldMappings.Add(new AppointmentCustomFieldMapping("Wait_Id", Dt_Data_KH_SCC.Columns["Wait_Id"].ColumnName));
+      SchedulerStorage_KH_SCC.Appointments.CustomFieldMappings.Add(new AppointmentCustomFieldMapping("Count_Plan", Dt_Data_KH_SCC.Columns["Count_Plan"].ColumnName));
 
       SchedulerControl_KH_SCC.OptionsView.ToolTipVisibility = ToolTipVisibility.Always;
 
@@ -1166,6 +1167,7 @@ namespace TMV.UI.JPCB.JP
       string type = "";
       int? status = null;
       decimal? wait = null;
+      int count_plan = 0;
 
       SchedulerControl schedulerControl = (SchedulerControl)sender;
       if (schedulerControl.SelectedAppointments.Count > 0)
@@ -1176,6 +1178,7 @@ namespace TMV.UI.JPCB.JP
           type = schedulerControl.SelectedAppointments[0].CustomFields["T_Type"].ToString();
           status = Convert.ToInt32(schedulerControl.SelectedAppointments[0].CustomFields["A_Status"]);
           wait = Convert.ToDecimal(schedulerControl.SelectedAppointments[0].CustomFields["Wait_Id"]);
+          count_plan = Convert.ToInt32(schedulerControl.SelectedAppointments[0].CustomFields["Count_Plan"]);
         }
         catch (Exception ex)
         {
@@ -1204,6 +1207,10 @@ namespace TMV.UI.JPCB.JP
               new EventHandler(V_Clone_Plan), Shortcut.None, ImageResourceCache.Default.GetImage("images/actions/additem_16x16.png"), true), false);
             PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Hủy",
               new EventHandler(V_Cancel_Plan), Shortcut.F6, ImageResourceCache.Default.GetImage("images/edit/delete_16x16.png"), true), false);
+
+            if (count_plan > 1)
+              PopupMenuSchedulerControl.ItemLinks.Add(new CyberMenuPopup(sender, rowHandle, "Hủy tất cả",
+                new EventHandler(V_Cancel_All_Plan), Shortcut.F6, ImageResourceCache.Default.GetImage("images/edit/delete_16x16.png"), true), false);
           }
           else if (type == "A")
           {
@@ -1876,6 +1883,57 @@ namespace TMV.UI.JPCB.JP
       }
     }
     private void V_Cancel_Plan(object sender, EventArgs e)
+    {
+      decimal? Plan_Id = null;
+      decimal? RO_Id = null;
+      if (SchedulerControl_KH_SCC.SelectedAppointments.Count > 0)
+      {
+        Plan_Id = Convert.ToDecimal(SchedulerControl_KH_SCC.SelectedAppointments[0].Id);
+        RO_Id = Convert.ToDecimal(SchedulerControl_KH_SCC.SelectedAppointments[0].CustomFields["Stt_Rec_RO"]);
+      }
+
+      if (Plan_Id == null || RO_Id == null)
+        return;
+
+      DataSet ds = JpcbJpBO.Instance().CheckPlans(Globals.LoginDlrId, RO_Id.Value);
+      if (ds.Tables != null)
+      {
+        int plans = Convert.ToInt32(ds.Tables[0].Rows[0]["Plans"]);
+        int actuals = Convert.ToInt32(ds.Tables[0].Rows[0]["Actuals"]);
+
+        if (plans > 1)
+        {
+          DataSet ds2 = JpcbJpBO.Instance().CancelPlan("PLAN", Plan_Id.Value, RO_Id.Value, Globals.LoginDlrId, Globals.LoginUserID);
+          if (ds2.Tables != null && ds2.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS")
+            V_Load_DATA_KH_SCC("0", "", "");
+        }
+        else
+        {
+          if (actuals > 0)
+          {
+            if (MyMessageBox.Show("Bạn muốn đưa về xe chờ hay huỷ khỏi bảng tiến độ?", "Xác nhận", "Đưa về xe chờ", "Huỷ khỏi bảng tiến độ") == DialogResult.OK)
+            {
+              DataSet ds2 = JpcbJpBO.Instance().CancelPlan("PLAN", Plan_Id.Value, RO_Id.Value, Globals.LoginDlrId, Globals.LoginUserID);
+              if (ds2.Tables != null && ds2.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS")
+                V_Load_DATA_KH_SCC("0", "", "");
+            }
+            else
+            {
+              DataSet ds2 = JpcbJpBO.Instance().CancelPlan("PROGRESS", Plan_Id.Value, RO_Id.Value, Globals.LoginDlrId, Globals.LoginUserID);
+              if (ds2.Tables != null && ds2.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS")
+                V_Load_DATA_KH_SCC("0", "", "");
+            }
+          }
+          else
+          {
+            DataSet ds2 = JpcbJpBO.Instance().CancelPlan("PLAN", Plan_Id.Value, RO_Id.Value, Globals.LoginDlrId, Globals.LoginUserID);
+            if (ds2.Tables != null && ds2.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS")
+              V_Load_DATA_KH_SCC("0", "", "");
+          }
+        }
+      }
+    }
+    private void V_Cancel_All_Plan(object sender, EventArgs e)
     {
 
     }

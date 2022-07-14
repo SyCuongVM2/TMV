@@ -97,7 +97,7 @@ namespace TMV.UI.JPCB.Common
     }
     private static Stream GetResourceStream(string resourceName)
     {
-      Stream result = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(Application.ProductName + "." +resourceName);
+      Stream result = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(Application.ProductName + "." + resourceName);
       if (result != null)
         return result;
 

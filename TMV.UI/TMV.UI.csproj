@@ -86,6 +86,7 @@
     <Compile Include="JPCB\Common\CyberFuncs.cs" />
     <Compile Include="JPCB\Common\Enums.cs" />
     <Compile Include="JPCB\Common\GridviewDragDrop.cs" />
+    <Compile Include="JPCB\Common\MyMessageBox.cs" />
     <Compile Include="JPCB\Common\TimeRegionHelper.cs" />
     <Compile Include="JPCB\CW\frmCWPlan.cs">
       <SubType>Form</SubType>

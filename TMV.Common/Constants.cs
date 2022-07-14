@@ -81,6 +81,7 @@
     public string AppJpcbPkgJPClonePlan = "AppJpcbPkgJPClonePlan";
     public string AppJpcbPkgJPCancelPlan = "AppJpcbPkgJPCancelPlan";
     public string AppJpcbPkgJPCancelPlanProgress = "AppJpcbPkgJPCancelPlanProgress";
+    public string AppJpcbPkgJPCheckPlans = "AppJpcbPkgJPCheckPlans";
     #endregion
   }
 }
