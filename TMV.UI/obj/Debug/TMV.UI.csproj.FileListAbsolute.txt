@@ -149,3 +149,4 @@ D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.csproj.CopyComplete
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.exe
 D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.pdb
 D:\WIP\TMV\TMV.UI\bin\Debug\Resources\Images\Dinner.svg
+D:\WIP\TMV\TMV.UI\obj\Debug\TMV.UI.JPCB.JP.frmJpDetail.resources

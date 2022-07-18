@@ -2,9 +2,9 @@
 using DevExpress.Services;
 using DevExpress.Utils;
 using DevExpress.XtraBars;
+using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraScheduler;
 using DevExpress.XtraScheduler.Drawing;
@@ -396,7 +396,7 @@ namespace TMV.UI.JPCB.JP
       if (DmCVDV_Loc_KH_SCC != null)
         _DT_CVDV = DmCVDV_Loc_KH_SCC.Copy();
     }
-    private void V_EnabledTime(ref CheckBox Chk, ComboBox _Cbb, ref Timer _Timer, decimal _Value)
+    private void V_EnabledTime(ref CheckBox Chk, System.Windows.Forms.ComboBox _Cbb, ref Timer _Timer, decimal _Value)
     {
       bool flag = Chk.Checked;
       if (decimal.Compare(_Value, 0M) <= 0)
@@ -556,7 +556,7 @@ namespace TMV.UI.JPCB.JP
       decimal numeric = CyberFunc.V_StringToNumeric(CbbTime_Data_Dung);
       CheckBox chkAutoDataDung = ChkAuto_Data_Dung;
       ref CheckBox local1 = ref chkAutoDataDung;
-      ComboBox cbbTimeDataDung = CbbTime_Data_Dung;
+      System.Windows.Forms.ComboBox cbbTimeDataDung = CbbTime_Data_Dung;
       Timer timerDataDung = Timer_Data_Dung;
       ref Timer local2 = ref timerDataDung;
       decimal num = numeric;
@@ -1267,31 +1267,32 @@ namespace TMV.UI.JPCB.JP
     private void V_Lap_F3F4_KH_SCC(object sender, AppointmentFormEventArgs e) => e.Handled = true;
     private void V_Sua_Tien_Do_KH_SCC(object sender, EventArgs e)
     {
-      string _Stt_Rec_Ro = "";
-      string str = "";
-      if (SchedulerControl_KH_SCC.SelectedAppointments.Count > 0)
-        str = SchedulerControl_KH_SCC.SelectedAppointments[0].Id.ToString();
-      if (str.Trim() == "" || !V_ChkStt_Rec(str))
-        return;
+      new frmJpDetail().ShowForm();
+      //string _Stt_Rec_Ro = "";
+      //string str = "";
+      //if (SchedulerControl_KH_SCC.SelectedAppointments.Count > 0)
+      //  str = SchedulerControl_KH_SCC.SelectedAppointments[0].Id.ToString();
+      //if (str.Trim() == "" || !V_ChkStt_Rec(str))
+      //  return;
 
-      V_Set_Auto_Refresh(false);
+      //V_Set_Auto_Refresh(false);
 
-      if (V_GetMa_Ct(str) == "PKH" & M_Kieu_Xem == "HEN")
-        return;
+      //if (V_GetMa_Ct(str) == "PKH" & M_Kieu_Xem == "HEN")
+      //  return;
 
-      DateTime start = SchedulerControl_KH_SCC.SelectedInterval.Start;
-      DateTime end = SchedulerControl_KH_SCC.SelectedInterval.End;
-      string _So_Ro = "";
-      string maCt = V_GetMa_Ct(str);
-      string _ma_khoang = "";
-      string _Ma_CVDV = "";
-      string _Ma_To = "";
-      string _Ma_Xe = "";
-      string _Ma_CD = "";
-      string _Ma_KTV = "";
-      V_GetFromSetScheduler(ref start, ref end, ref _Stt_Rec_Ro, ref _So_Ro, ref _ma_khoang, ref _Ma_CVDV, ref _Ma_To, ref _Ma_Xe, ref _Ma_CD, ref _Ma_KTV);
-      V_Tao_Sua_Tien_Do_KH_SCC("S", maCt, str, _Stt_Rec_Ro, _So_Ro, start, end, _ma_khoang, _Ma_CVDV, _Ma_To, _Ma_Xe, _Ma_CD, _Ma_KTV);
-      V_Set_Auto_Refresh(true);
+      //DateTime start = SchedulerControl_KH_SCC.SelectedInterval.Start;
+      //DateTime end = SchedulerControl_KH_SCC.SelectedInterval.End;
+      //string _So_Ro = "";
+      //string maCt = V_GetMa_Ct(str);
+      //string _ma_khoang = "";
+      //string _Ma_CVDV = "";
+      //string _Ma_To = "";
+      //string _Ma_Xe = "";
+      //string _Ma_CD = "";
+      //string _Ma_KTV = "";
+      //V_GetFromSetScheduler(ref start, ref end, ref _Stt_Rec_Ro, ref _So_Ro, ref _ma_khoang, ref _Ma_CVDV, ref _Ma_To, ref _Ma_Xe, ref _Ma_CD, ref _Ma_KTV);
+      //V_Tao_Sua_Tien_Do_KH_SCC("S", maCt, str, _Stt_Rec_Ro, _So_Ro, start, end, _ma_khoang, _Ma_CVDV, _Ma_To, _Ma_Xe, _Ma_CD, _Ma_KTV);
+      //V_Set_Auto_Refresh(true);
     }
     private string V_GetMa_Ct(string _Stt_Rec)
     {
@@ -1935,7 +1936,43 @@ namespace TMV.UI.JPCB.JP
     }
     private void V_Cancel_All_Plan(object sender, EventArgs e)
     {
+      decimal? Plan_Id = null;
+      decimal? RO_Id = null;
+      if (SchedulerControl_KH_SCC.SelectedAppointments.Count > 0)
+      {
+        Plan_Id = Convert.ToDecimal(SchedulerControl_KH_SCC.SelectedAppointments[0].Id);
+        RO_Id = Convert.ToDecimal(SchedulerControl_KH_SCC.SelectedAppointments[0].CustomFields["Stt_Rec_RO"]);
+      }
 
+      if (Plan_Id == null || RO_Id == null)
+        return;
+
+      DataSet ds = JpcbJpBO.Instance().CheckPlans(Globals.LoginDlrId, RO_Id.Value);
+      if (ds.Tables != null)
+      {
+        int actuals = Convert.ToInt32(ds.Tables[0].Rows[0]["Actuals"]);
+        if (actuals > 0)
+        {
+          DataSet ds2 = JpcbJpBO.Instance().CancelPlan("ALL", Plan_Id.Value, RO_Id.Value, Globals.LoginDlrId, Globals.LoginUserID);
+          if (ds2.Tables != null && ds2.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS")
+            V_Load_DATA_KH_SCC("0", "", "");
+        }
+        else
+        {
+          if (MyMessageBox.Show("Bạn muốn đưa về xe chờ hay huỷ khỏi bảng tiến độ?", "Xác nhận", "Đưa về xe chờ", "Huỷ khỏi bảng tiến độ") == DialogResult.OK)
+          {
+            DataSet ds2 = JpcbJpBO.Instance().CancelPlan("ALL", Plan_Id.Value, RO_Id.Value, Globals.LoginDlrId, Globals.LoginUserID);
+            if (ds2.Tables != null && ds2.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS")
+              V_Load_DATA_KH_SCC("0", "", "");
+          }
+          else
+          {
+            DataSet ds2 = JpcbJpBO.Instance().CancelPlan("PROGRESS", Plan_Id.Value, RO_Id.Value, Globals.LoginDlrId, Globals.LoginUserID);
+            if (ds2.Tables != null && ds2.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS")
+              V_Load_DATA_KH_SCC("0", "", "");
+          }
+        }
+      }
     }
     #endregion
 

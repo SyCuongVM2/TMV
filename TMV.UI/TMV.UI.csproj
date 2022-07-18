@@ -87,12 +87,19 @@
     <Compile Include="JPCB\Common\Enums.cs" />
     <Compile Include="JPCB\Common\GridviewDragDrop.cs" />
     <Compile Include="JPCB\Common\MyMessageBox.cs" />
+    <Compile Include="JPCB\Common\ObjectDragDrop.cs" />
     <Compile Include="JPCB\Common\TimeRegionHelper.cs" />
     <Compile Include="JPCB\CW\frmCWPlan.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="JPCB\CW\frmCWPlan.Designer.cs">
       <DependentUpon>frmCWPlan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="JPCB\JP\frmJpDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JPCB\JP\frmJpDetail.Designer.cs">
+      <DependentUpon>frmJpDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="JPCB\JP\frmJP.cs">
       <SubType>Form</SubType>
@@ -147,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="JPCB\CW\frmCWPlan.resx">
       <DependentUpon>frmCWPlan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JPCB\JP\frmJpDetail.resx">
+      <DependentUpon>frmJpDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="JPCB\JP\frmJP.resx">
       <DependentUpon>frmJP.cs</DependentUpon>
