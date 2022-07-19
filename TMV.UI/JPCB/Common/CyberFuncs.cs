@@ -191,9 +191,29 @@ namespace TMV.UI.JPCB.Common
         string columnName = _Dr.Table.Columns[index].ColumnName;
         if (_Dt.Columns.Contains(columnName))
           _Dt.Rows[_Irow][columnName] = _Dr[columnName];
+
         checked { ++index; }
       }
       _Dt.Rows[_Irow].EndEdit();
+    }
+    public void V_UpdateRowtoRow(DataRow _Dr, DataView _Dv, int _Irow)
+    {
+      if (_Dr == null || _Dv == null || _Irow < 0)
+        return;
+
+      int num1 = checked(_Dr.Table.Columns.Count - 1);
+      _Dv[_Irow].BeginEdit();
+      int num2 = num1;
+      int index = 0;
+      while (index <= num2)
+      {
+        string columnName = _Dr.Table.Columns[index].ColumnName;
+        if (_Dv.Table.Columns.Contains(columnName))
+          _Dv[_Irow][columnName] = _Dr[columnName];
+
+        checked { ++index; }
+      }
+      _Dv[_Irow].EndEdit();
     }
     public void DeleteDatatable(ref DataTable _dt, string _key = "")
     {

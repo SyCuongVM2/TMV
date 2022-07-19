@@ -40,6 +40,18 @@ namespace TMV.UI.JPCB.JP
       this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
       this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
       this.SplitContainer1 = new System.Windows.Forms.SplitContainer();
+      this.SplitContainer2 = new System.Windows.Forms.SplitContainer();
+      this.masterKhoang = new DevExpress.XtraGrid.GridControl();
+      this.masterKhoangGRV = new DevExpress.XtraGrid.Views.Grid.GridView();
+      this.masterKTV = new DevExpress.XtraGrid.GridControl();
+      this.masterKTVGRV = new DevExpress.XtraGrid.Views.Grid.GridView();
+      this.TabHDK = new System.Windows.Forms.TabControl();
+      this.TabCv = new System.Windows.Forms.TabPage();
+      this.MasterCV = new DevExpress.XtraGrid.GridControl();
+      this.MasterCVGRV = new DevExpress.XtraGrid.Views.Grid.GridView();
+      this.TabVt = new System.Windows.Forms.TabPage();
+      this.MasterVt = new DevExpress.XtraGrid.GridControl();
+      this.MasterVtGRV = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.TxtCVDV = new System.Windows.Forms.TextBox();
       this.TxtKieu_Xe = new System.Windows.Forms.TextBox();
       this.TxtMa_Xe = new System.Windows.Forms.TextBox();
@@ -84,25 +96,29 @@ namespace TMV.UI.JPCB.JP
       this.ChkTE = new System.Windows.Forms.CheckBox();
       this.ChkTL = new System.Windows.Forms.CheckBox();
       this.ChkTA = new System.Windows.Forms.CheckBox();
-      this.TabHDK = new System.Windows.Forms.TabControl();
-      this.TabCv = new System.Windows.Forms.TabPage();
-      this.TabVt = new System.Windows.Forms.TabPage();
-      this.MasterCV = new DevExpress.XtraGrid.GridControl();
-      this.MasterCVGRV = new DevExpress.XtraGrid.Views.Grid.GridView();
-      this.MasterVt = new DevExpress.XtraGrid.GridControl();
-      this.MasterVtGRV = new DevExpress.XtraGrid.Views.Grid.GridView();
-      this.SplitContainer2 = new System.Windows.Forms.SplitContainer();
-      this.masterKhoang = new DevExpress.XtraGrid.GridControl();
-      this.masterKhoangGRV = new DevExpress.XtraGrid.Views.Grid.GridView();
-      this.masterKTV = new DevExpress.XtraGrid.GridControl();
-      this.masterKTVGRV = new DevExpress.XtraGrid.Views.Grid.GridView();
       this.TxtMa_KHoang = new System.Windows.Forms.TextBox();
       this.TxtStt_Rec = new System.Windows.Forms.TextBox();
+      this.PopupMenuMasterGrid = new DevExpress.XtraBars.PopupMenu(this.components);
       ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.SplitContainer1)).BeginInit();
       this.SplitContainer1.Panel1.SuspendLayout();
       this.SplitContainer1.Panel2.SuspendLayout();
       this.SplitContainer1.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.SplitContainer2)).BeginInit();
+      this.SplitContainer2.Panel1.SuspendLayout();
+      this.SplitContainer2.Panel2.SuspendLayout();
+      this.SplitContainer2.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.masterKhoang)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.masterKhoangGRV)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.masterKTV)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.masterKTVGRV)).BeginInit();
+      this.TabHDK.SuspendLayout();
+      this.TabCv.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.MasterCV)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.MasterCVGRV)).BeginInit();
+      this.TabVt.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.MasterVt)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.MasterVtGRV)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.deTGBD_KH.Properties.CalendarTimeProperties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.deTGBD_KH.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.deTGKT_KH.Properties.CalendarTimeProperties)).BeginInit();
@@ -113,21 +129,7 @@ namespace TMV.UI.JPCB.JP
       ((System.ComponentModel.ISupportInitialize)(this.deTGBD_TT.Properties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.deDKGX.Properties.CalendarTimeProperties)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.deDKGX.Properties)).BeginInit();
-      this.TabHDK.SuspendLayout();
-      this.TabCv.SuspendLayout();
-      this.TabVt.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.MasterCV)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.MasterCVGRV)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.MasterVt)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.MasterVtGRV)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.SplitContainer2)).BeginInit();
-      this.SplitContainer2.Panel1.SuspendLayout();
-      this.SplitContainer2.Panel2.SuspendLayout();
-      this.SplitContainer2.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.masterKhoang)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.masterKhoangGRV)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.masterKTV)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.masterKTVGRV)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.PopupMenuMasterGrid)).BeginInit();
       this.SuspendLayout();
       // 
       // barManager1
@@ -230,6 +232,244 @@ namespace TMV.UI.JPCB.JP
       this.SplitContainer1.Size = new System.Drawing.Size(1739, 627);
       this.SplitContainer1.SplitterDistance = 1218;
       this.SplitContainer1.TabIndex = 4;
+      // 
+      // SplitContainer2
+      // 
+      this.SplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.SplitContainer2.Location = new System.Drawing.Point(0, 0);
+      this.SplitContainer2.Name = "SplitContainer2";
+      // 
+      // SplitContainer2.Panel1
+      // 
+      this.SplitContainer2.Panel1.Controls.Add(this.masterKhoang);
+      // 
+      // SplitContainer2.Panel2
+      // 
+      this.SplitContainer2.Panel2.Controls.Add(this.masterKTV);
+      this.SplitContainer2.Size = new System.Drawing.Size(1218, 627);
+      this.SplitContainer2.SplitterDistance = 406;
+      this.SplitContainer2.TabIndex = 0;
+      // 
+      // masterKhoang
+      // 
+      this.masterKhoang.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.masterKhoang.Location = new System.Drawing.Point(0, 0);
+      this.masterKhoang.MainView = this.masterKhoangGRV;
+      this.masterKhoang.Name = "masterKhoang";
+      this.masterKhoang.Size = new System.Drawing.Size(406, 627);
+      this.masterKhoang.TabIndex = 2;
+      this.masterKhoang.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.masterKhoangGRV});
+      // 
+      // masterKhoangGRV
+      // 
+      this.masterKhoangGRV.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+      this.masterKhoangGRV.Appearance.FocusedRow.Options.UseBackColor = true;
+      this.masterKhoangGRV.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
+      this.masterKhoangGRV.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Blue;
+      this.masterKhoangGRV.Appearance.HeaderPanel.Options.UseFont = true;
+      this.masterKhoangGRV.Appearance.HeaderPanel.Options.UseForeColor = true;
+      this.masterKhoangGRV.Appearance.HeaderPanel.Options.UseTextOptions = true;
+      this.masterKhoangGRV.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      this.masterKhoangGRV.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+      this.masterKhoangGRV.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
+      this.masterKhoangGRV.Appearance.Row.ForeColor = System.Drawing.Color.Blue;
+      this.masterKhoangGRV.Appearance.Row.Options.UseFont = true;
+      this.masterKhoangGRV.Appearance.Row.Options.UseForeColor = true;
+      this.masterKhoangGRV.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
+      this.masterKhoangGRV.Appearance.SelectedRow.Options.UseBackColor = true;
+      this.masterKhoangGRV.Appearance.ViewCaption.Options.UseTextOptions = true;
+      this.masterKhoangGRV.Appearance.ViewCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      this.masterKhoangGRV.Appearance.ViewCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+      this.masterKhoangGRV.Appearance.ViewCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+      this.masterKhoangGRV.AppearancePrint.EvenRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.masterKhoangGRV.AppearancePrint.EvenRow.Options.UseFont = true;
+      this.masterKhoangGRV.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
+      this.masterKhoangGRV.ColumnPanelRowHeight = 50;
+      this.masterKhoangGRV.GridControl = this.masterKhoang;
+      this.masterKhoangGRV.GroupRowHeight = 30;
+      this.masterKhoangGRV.Name = "masterKhoangGRV";
+      this.masterKhoangGRV.OptionsClipboard.CopyColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
+      this.masterKhoangGRV.OptionsLayout.Columns.AddNewColumns = false;
+      this.masterKhoangGRV.OptionsSelection.CheckBoxSelectorColumnWidth = 20;
+      this.masterKhoangGRV.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
+      this.masterKhoangGRV.OptionsView.ColumnAutoWidth = false;
+      this.masterKhoangGRV.OptionsView.ShowGroupPanel = false;
+      this.masterKhoangGRV.RowHeight = 40;
+      // 
+      // masterKTV
+      // 
+      this.masterKTV.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.masterKTV.Location = new System.Drawing.Point(0, 0);
+      this.masterKTV.MainView = this.masterKTVGRV;
+      this.masterKTV.Name = "masterKTV";
+      this.masterKTV.Size = new System.Drawing.Size(808, 627);
+      this.masterKTV.TabIndex = 2;
+      this.masterKTV.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.masterKTVGRV});
+      // 
+      // masterKTVGRV
+      // 
+      this.masterKTVGRV.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+      this.masterKTVGRV.Appearance.FocusedRow.Options.UseBackColor = true;
+      this.masterKTVGRV.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
+      this.masterKTVGRV.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Blue;
+      this.masterKTVGRV.Appearance.HeaderPanel.Options.UseFont = true;
+      this.masterKTVGRV.Appearance.HeaderPanel.Options.UseForeColor = true;
+      this.masterKTVGRV.Appearance.HeaderPanel.Options.UseTextOptions = true;
+      this.masterKTVGRV.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      this.masterKTVGRV.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+      this.masterKTVGRV.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
+      this.masterKTVGRV.Appearance.Row.ForeColor = System.Drawing.Color.Blue;
+      this.masterKTVGRV.Appearance.Row.Options.UseFont = true;
+      this.masterKTVGRV.Appearance.Row.Options.UseForeColor = true;
+      this.masterKTVGRV.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
+      this.masterKTVGRV.Appearance.SelectedRow.Options.UseBackColor = true;
+      this.masterKTVGRV.Appearance.ViewCaption.Options.UseTextOptions = true;
+      this.masterKTVGRV.Appearance.ViewCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      this.masterKTVGRV.Appearance.ViewCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+      this.masterKTVGRV.Appearance.ViewCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+      this.masterKTVGRV.AppearancePrint.EvenRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.masterKTVGRV.AppearancePrint.EvenRow.Options.UseFont = true;
+      this.masterKTVGRV.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
+      this.masterKTVGRV.ColumnPanelRowHeight = 50;
+      this.masterKTVGRV.GridControl = this.masterKTV;
+      this.masterKTVGRV.GroupRowHeight = 30;
+      this.masterKTVGRV.Name = "masterKTVGRV";
+      this.masterKTVGRV.OptionsClipboard.CopyColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
+      this.masterKTVGRV.OptionsLayout.Columns.AddNewColumns = false;
+      this.masterKTVGRV.OptionsSelection.CheckBoxSelectorColumnWidth = 20;
+      this.masterKTVGRV.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
+      this.masterKTVGRV.OptionsView.ColumnAutoWidth = false;
+      this.masterKTVGRV.OptionsView.ShowGroupPanel = false;
+      this.masterKTVGRV.RowHeight = 40;
+      // 
+      // TabHDK
+      // 
+      this.TabHDK.Controls.Add(this.TabCv);
+      this.TabHDK.Controls.Add(this.TabVt);
+      this.TabHDK.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.TabHDK.Location = new System.Drawing.Point(0, 0);
+      this.TabHDK.Name = "TabHDK";
+      this.TabHDK.SelectedIndex = 0;
+      this.TabHDK.Size = new System.Drawing.Size(517, 627);
+      this.TabHDK.TabIndex = 0;
+      // 
+      // TabCv
+      // 
+      this.TabCv.Controls.Add(this.MasterCV);
+      this.TabCv.Location = new System.Drawing.Point(4, 28);
+      this.TabCv.Name = "TabCv";
+      this.TabCv.Padding = new System.Windows.Forms.Padding(3);
+      this.TabCv.Size = new System.Drawing.Size(509, 595);
+      this.TabCv.TabIndex = 0;
+      this.TabCv.Text = "Công việc/Job";
+      this.TabCv.UseVisualStyleBackColor = true;
+      // 
+      // MasterCV
+      // 
+      this.MasterCV.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.MasterCV.Location = new System.Drawing.Point(3, 3);
+      this.MasterCV.MainView = this.MasterCVGRV;
+      this.MasterCV.Name = "MasterCV";
+      this.MasterCV.Size = new System.Drawing.Size(503, 589);
+      this.MasterCV.TabIndex = 2;
+      this.MasterCV.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.MasterCVGRV});
+      // 
+      // MasterCVGRV
+      // 
+      this.MasterCVGRV.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+      this.MasterCVGRV.Appearance.FocusedRow.Options.UseBackColor = true;
+      this.MasterCVGRV.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
+      this.MasterCVGRV.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Blue;
+      this.MasterCVGRV.Appearance.HeaderPanel.Options.UseFont = true;
+      this.MasterCVGRV.Appearance.HeaderPanel.Options.UseForeColor = true;
+      this.MasterCVGRV.Appearance.HeaderPanel.Options.UseTextOptions = true;
+      this.MasterCVGRV.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      this.MasterCVGRV.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+      this.MasterCVGRV.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
+      this.MasterCVGRV.Appearance.Row.ForeColor = System.Drawing.Color.Blue;
+      this.MasterCVGRV.Appearance.Row.Options.UseFont = true;
+      this.MasterCVGRV.Appearance.Row.Options.UseForeColor = true;
+      this.MasterCVGRV.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
+      this.MasterCVGRV.Appearance.SelectedRow.Options.UseBackColor = true;
+      this.MasterCVGRV.Appearance.ViewCaption.Options.UseTextOptions = true;
+      this.MasterCVGRV.Appearance.ViewCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      this.MasterCVGRV.Appearance.ViewCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+      this.MasterCVGRV.Appearance.ViewCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+      this.MasterCVGRV.AppearancePrint.EvenRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.MasterCVGRV.AppearancePrint.EvenRow.Options.UseFont = true;
+      this.MasterCVGRV.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
+      this.MasterCVGRV.ColumnPanelRowHeight = 50;
+      this.MasterCVGRV.GridControl = this.MasterCV;
+      this.MasterCVGRV.GroupRowHeight = 30;
+      this.MasterCVGRV.Name = "MasterCVGRV";
+      this.MasterCVGRV.OptionsClipboard.CopyColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
+      this.MasterCVGRV.OptionsLayout.Columns.AddNewColumns = false;
+      this.MasterCVGRV.OptionsSelection.CheckBoxSelectorColumnWidth = 20;
+      this.MasterCVGRV.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
+      this.MasterCVGRV.OptionsView.ColumnAutoWidth = false;
+      this.MasterCVGRV.OptionsView.ShowGroupPanel = false;
+      this.MasterCVGRV.RowHeight = 40;
+      // 
+      // TabVt
+      // 
+      this.TabVt.Controls.Add(this.MasterVt);
+      this.TabVt.Location = new System.Drawing.Point(4, 28);
+      this.TabVt.Name = "TabVt";
+      this.TabVt.Padding = new System.Windows.Forms.Padding(3);
+      this.TabVt.Size = new System.Drawing.Size(509, 595);
+      this.TabVt.TabIndex = 1;
+      this.TabVt.Text = "Vật tư - phụ tùng/Spare Part";
+      this.TabVt.UseVisualStyleBackColor = true;
+      // 
+      // MasterVt
+      // 
+      this.MasterVt.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.MasterVt.Location = new System.Drawing.Point(3, 3);
+      this.MasterVt.MainView = this.MasterVtGRV;
+      this.MasterVt.Name = "MasterVt";
+      this.MasterVt.Size = new System.Drawing.Size(503, 589);
+      this.MasterVt.TabIndex = 2;
+      this.MasterVt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.MasterVtGRV});
+      // 
+      // MasterVtGRV
+      // 
+      this.MasterVtGRV.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+      this.MasterVtGRV.Appearance.FocusedRow.Options.UseBackColor = true;
+      this.MasterVtGRV.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
+      this.MasterVtGRV.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Blue;
+      this.MasterVtGRV.Appearance.HeaderPanel.Options.UseFont = true;
+      this.MasterVtGRV.Appearance.HeaderPanel.Options.UseForeColor = true;
+      this.MasterVtGRV.Appearance.HeaderPanel.Options.UseTextOptions = true;
+      this.MasterVtGRV.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      this.MasterVtGRV.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+      this.MasterVtGRV.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
+      this.MasterVtGRV.Appearance.Row.ForeColor = System.Drawing.Color.Blue;
+      this.MasterVtGRV.Appearance.Row.Options.UseFont = true;
+      this.MasterVtGRV.Appearance.Row.Options.UseForeColor = true;
+      this.MasterVtGRV.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
+      this.MasterVtGRV.Appearance.SelectedRow.Options.UseBackColor = true;
+      this.MasterVtGRV.Appearance.ViewCaption.Options.UseTextOptions = true;
+      this.MasterVtGRV.Appearance.ViewCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      this.MasterVtGRV.Appearance.ViewCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+      this.MasterVtGRV.Appearance.ViewCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+      this.MasterVtGRV.AppearancePrint.EvenRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.MasterVtGRV.AppearancePrint.EvenRow.Options.UseFont = true;
+      this.MasterVtGRV.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
+      this.MasterVtGRV.ColumnPanelRowHeight = 50;
+      this.MasterVtGRV.GridControl = this.MasterVt;
+      this.MasterVtGRV.GroupRowHeight = 30;
+      this.MasterVtGRV.Name = "MasterVtGRV";
+      this.MasterVtGRV.OptionsClipboard.CopyColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
+      this.MasterVtGRV.OptionsLayout.Columns.AddNewColumns = false;
+      this.MasterVtGRV.OptionsSelection.CheckBoxSelectorColumnWidth = 20;
+      this.MasterVtGRV.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
+      this.MasterVtGRV.OptionsView.ColumnAutoWidth = false;
+      this.MasterVtGRV.OptionsView.ShowGroupPanel = false;
+      this.MasterVtGRV.RowHeight = 40;
       // 
       // TxtCVDV
       // 
@@ -744,244 +984,6 @@ namespace TMV.UI.JPCB.JP
       this.ChkTA.Text = "Q/C 3";
       this.ChkTA.UseVisualStyleBackColor = true;
       // 
-      // TabHDK
-      // 
-      this.TabHDK.Controls.Add(this.TabCv);
-      this.TabHDK.Controls.Add(this.TabVt);
-      this.TabHDK.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.TabHDK.Location = new System.Drawing.Point(0, 0);
-      this.TabHDK.Name = "TabHDK";
-      this.TabHDK.SelectedIndex = 0;
-      this.TabHDK.Size = new System.Drawing.Size(517, 627);
-      this.TabHDK.TabIndex = 0;
-      // 
-      // TabCv
-      // 
-      this.TabCv.Controls.Add(this.MasterCV);
-      this.TabCv.Location = new System.Drawing.Point(4, 28);
-      this.TabCv.Name = "TabCv";
-      this.TabCv.Padding = new System.Windows.Forms.Padding(3);
-      this.TabCv.Size = new System.Drawing.Size(509, 595);
-      this.TabCv.TabIndex = 0;
-      this.TabCv.Text = "Công việc/Job";
-      this.TabCv.UseVisualStyleBackColor = true;
-      // 
-      // TabVt
-      // 
-      this.TabVt.Controls.Add(this.MasterVt);
-      this.TabVt.Location = new System.Drawing.Point(4, 28);
-      this.TabVt.Name = "TabVt";
-      this.TabVt.Padding = new System.Windows.Forms.Padding(3);
-      this.TabVt.Size = new System.Drawing.Size(509, 595);
-      this.TabVt.TabIndex = 1;
-      this.TabVt.Text = "Vật tư - phụ tùng/Spare Part";
-      this.TabVt.UseVisualStyleBackColor = true;
-      // 
-      // MasterCV
-      // 
-      this.MasterCV.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.MasterCV.Location = new System.Drawing.Point(3, 3);
-      this.MasterCV.MainView = this.MasterCVGRV;
-      this.MasterCV.Name = "MasterCV";
-      this.MasterCV.Size = new System.Drawing.Size(503, 589);
-      this.MasterCV.TabIndex = 2;
-      this.MasterCV.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.MasterCVGRV});
-      // 
-      // MasterCVGRV
-      // 
-      this.MasterCVGRV.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.MasterCVGRV.Appearance.FocusedRow.Options.UseBackColor = true;
-      this.MasterCVGRV.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
-      this.MasterCVGRV.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Blue;
-      this.MasterCVGRV.Appearance.HeaderPanel.Options.UseFont = true;
-      this.MasterCVGRV.Appearance.HeaderPanel.Options.UseForeColor = true;
-      this.MasterCVGRV.Appearance.HeaderPanel.Options.UseTextOptions = true;
-      this.MasterCVGRV.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-      this.MasterCVGRV.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-      this.MasterCVGRV.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
-      this.MasterCVGRV.Appearance.Row.ForeColor = System.Drawing.Color.Blue;
-      this.MasterCVGRV.Appearance.Row.Options.UseFont = true;
-      this.MasterCVGRV.Appearance.Row.Options.UseForeColor = true;
-      this.MasterCVGRV.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
-      this.MasterCVGRV.Appearance.SelectedRow.Options.UseBackColor = true;
-      this.MasterCVGRV.Appearance.ViewCaption.Options.UseTextOptions = true;
-      this.MasterCVGRV.Appearance.ViewCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-      this.MasterCVGRV.Appearance.ViewCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-      this.MasterCVGRV.Appearance.ViewCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
-      this.MasterCVGRV.AppearancePrint.EvenRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.MasterCVGRV.AppearancePrint.EvenRow.Options.UseFont = true;
-      this.MasterCVGRV.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
-      this.MasterCVGRV.ColumnPanelRowHeight = 50;
-      this.MasterCVGRV.GridControl = this.MasterCV;
-      this.MasterCVGRV.GroupRowHeight = 30;
-      this.MasterCVGRV.Name = "MasterCVGRV";
-      this.MasterCVGRV.OptionsClipboard.CopyColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
-      this.MasterCVGRV.OptionsLayout.Columns.AddNewColumns = false;
-      this.MasterCVGRV.OptionsSelection.CheckBoxSelectorColumnWidth = 20;
-      this.MasterCVGRV.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
-      this.MasterCVGRV.OptionsView.ColumnAutoWidth = false;
-      this.MasterCVGRV.OptionsView.ShowGroupPanel = false;
-      this.MasterCVGRV.RowHeight = 40;
-      // 
-      // MasterVt
-      // 
-      this.MasterVt.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.MasterVt.Location = new System.Drawing.Point(3, 3);
-      this.MasterVt.MainView = this.MasterVtGRV;
-      this.MasterVt.Name = "MasterVt";
-      this.MasterVt.Size = new System.Drawing.Size(503, 589);
-      this.MasterVt.TabIndex = 2;
-      this.MasterVt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.MasterVtGRV});
-      // 
-      // MasterVtGRV
-      // 
-      this.MasterVtGRV.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.MasterVtGRV.Appearance.FocusedRow.Options.UseBackColor = true;
-      this.MasterVtGRV.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
-      this.MasterVtGRV.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Blue;
-      this.MasterVtGRV.Appearance.HeaderPanel.Options.UseFont = true;
-      this.MasterVtGRV.Appearance.HeaderPanel.Options.UseForeColor = true;
-      this.MasterVtGRV.Appearance.HeaderPanel.Options.UseTextOptions = true;
-      this.MasterVtGRV.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-      this.MasterVtGRV.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-      this.MasterVtGRV.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
-      this.MasterVtGRV.Appearance.Row.ForeColor = System.Drawing.Color.Blue;
-      this.MasterVtGRV.Appearance.Row.Options.UseFont = true;
-      this.MasterVtGRV.Appearance.Row.Options.UseForeColor = true;
-      this.MasterVtGRV.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
-      this.MasterVtGRV.Appearance.SelectedRow.Options.UseBackColor = true;
-      this.MasterVtGRV.Appearance.ViewCaption.Options.UseTextOptions = true;
-      this.MasterVtGRV.Appearance.ViewCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-      this.MasterVtGRV.Appearance.ViewCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-      this.MasterVtGRV.Appearance.ViewCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
-      this.MasterVtGRV.AppearancePrint.EvenRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.MasterVtGRV.AppearancePrint.EvenRow.Options.UseFont = true;
-      this.MasterVtGRV.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
-      this.MasterVtGRV.ColumnPanelRowHeight = 50;
-      this.MasterVtGRV.GridControl = this.MasterVt;
-      this.MasterVtGRV.GroupRowHeight = 30;
-      this.MasterVtGRV.Name = "MasterVtGRV";
-      this.MasterVtGRV.OptionsClipboard.CopyColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
-      this.MasterVtGRV.OptionsLayout.Columns.AddNewColumns = false;
-      this.MasterVtGRV.OptionsSelection.CheckBoxSelectorColumnWidth = 20;
-      this.MasterVtGRV.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
-      this.MasterVtGRV.OptionsView.ColumnAutoWidth = false;
-      this.MasterVtGRV.OptionsView.ShowGroupPanel = false;
-      this.MasterVtGRV.RowHeight = 40;
-      // 
-      // SplitContainer2
-      // 
-      this.SplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.SplitContainer2.Location = new System.Drawing.Point(0, 0);
-      this.SplitContainer2.Name = "SplitContainer2";
-      // 
-      // SplitContainer2.Panel1
-      // 
-      this.SplitContainer2.Panel1.Controls.Add(this.masterKhoang);
-      // 
-      // SplitContainer2.Panel2
-      // 
-      this.SplitContainer2.Panel2.Controls.Add(this.masterKTV);
-      this.SplitContainer2.Size = new System.Drawing.Size(1218, 627);
-      this.SplitContainer2.SplitterDistance = 406;
-      this.SplitContainer2.TabIndex = 0;
-      // 
-      // masterKhoang
-      // 
-      this.masterKhoang.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.masterKhoang.Location = new System.Drawing.Point(0, 0);
-      this.masterKhoang.MainView = this.masterKhoangGRV;
-      this.masterKhoang.Name = "masterKhoang";
-      this.masterKhoang.Size = new System.Drawing.Size(406, 627);
-      this.masterKhoang.TabIndex = 2;
-      this.masterKhoang.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.masterKhoangGRV});
-      // 
-      // masterKhoangGRV
-      // 
-      this.masterKhoangGRV.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.masterKhoangGRV.Appearance.FocusedRow.Options.UseBackColor = true;
-      this.masterKhoangGRV.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
-      this.masterKhoangGRV.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Blue;
-      this.masterKhoangGRV.Appearance.HeaderPanel.Options.UseFont = true;
-      this.masterKhoangGRV.Appearance.HeaderPanel.Options.UseForeColor = true;
-      this.masterKhoangGRV.Appearance.HeaderPanel.Options.UseTextOptions = true;
-      this.masterKhoangGRV.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-      this.masterKhoangGRV.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-      this.masterKhoangGRV.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
-      this.masterKhoangGRV.Appearance.Row.ForeColor = System.Drawing.Color.Blue;
-      this.masterKhoangGRV.Appearance.Row.Options.UseFont = true;
-      this.masterKhoangGRV.Appearance.Row.Options.UseForeColor = true;
-      this.masterKhoangGRV.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
-      this.masterKhoangGRV.Appearance.SelectedRow.Options.UseBackColor = true;
-      this.masterKhoangGRV.Appearance.ViewCaption.Options.UseTextOptions = true;
-      this.masterKhoangGRV.Appearance.ViewCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-      this.masterKhoangGRV.Appearance.ViewCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-      this.masterKhoangGRV.Appearance.ViewCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
-      this.masterKhoangGRV.AppearancePrint.EvenRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.masterKhoangGRV.AppearancePrint.EvenRow.Options.UseFont = true;
-      this.masterKhoangGRV.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
-      this.masterKhoangGRV.ColumnPanelRowHeight = 50;
-      this.masterKhoangGRV.GridControl = this.masterKhoang;
-      this.masterKhoangGRV.GroupRowHeight = 30;
-      this.masterKhoangGRV.Name = "masterKhoangGRV";
-      this.masterKhoangGRV.OptionsClipboard.CopyColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
-      this.masterKhoangGRV.OptionsLayout.Columns.AddNewColumns = false;
-      this.masterKhoangGRV.OptionsSelection.CheckBoxSelectorColumnWidth = 20;
-      this.masterKhoangGRV.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
-      this.masterKhoangGRV.OptionsView.ColumnAutoWidth = false;
-      this.masterKhoangGRV.OptionsView.ShowGroupPanel = false;
-      this.masterKhoangGRV.RowHeight = 40;
-      // 
-      // masterKTV
-      // 
-      this.masterKTV.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.masterKTV.Location = new System.Drawing.Point(0, 0);
-      this.masterKTV.MainView = this.masterKTVGRV;
-      this.masterKTV.Name = "masterKTV";
-      this.masterKTV.Size = new System.Drawing.Size(808, 627);
-      this.masterKTV.TabIndex = 2;
-      this.masterKTV.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.masterKTVGRV});
-      // 
-      // masterKTVGRV
-      // 
-      this.masterKTVGRV.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.masterKTVGRV.Appearance.FocusedRow.Options.UseBackColor = true;
-      this.masterKTVGRV.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
-      this.masterKTVGRV.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Blue;
-      this.masterKTVGRV.Appearance.HeaderPanel.Options.UseFont = true;
-      this.masterKTVGRV.Appearance.HeaderPanel.Options.UseForeColor = true;
-      this.masterKTVGRV.Appearance.HeaderPanel.Options.UseTextOptions = true;
-      this.masterKTVGRV.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-      this.masterKTVGRV.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-      this.masterKTVGRV.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold);
-      this.masterKTVGRV.Appearance.Row.ForeColor = System.Drawing.Color.Blue;
-      this.masterKTVGRV.Appearance.Row.Options.UseFont = true;
-      this.masterKTVGRV.Appearance.Row.Options.UseForeColor = true;
-      this.masterKTVGRV.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
-      this.masterKTVGRV.Appearance.SelectedRow.Options.UseBackColor = true;
-      this.masterKTVGRV.Appearance.ViewCaption.Options.UseTextOptions = true;
-      this.masterKTVGRV.Appearance.ViewCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-      this.masterKTVGRV.Appearance.ViewCaption.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-      this.masterKTVGRV.Appearance.ViewCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
-      this.masterKTVGRV.AppearancePrint.EvenRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.masterKTVGRV.AppearancePrint.EvenRow.Options.UseFont = true;
-      this.masterKTVGRV.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
-      this.masterKTVGRV.ColumnPanelRowHeight = 50;
-      this.masterKTVGRV.GridControl = this.masterKTV;
-      this.masterKTVGRV.GroupRowHeight = 30;
-      this.masterKTVGRV.Name = "masterKTVGRV";
-      this.masterKTVGRV.OptionsClipboard.CopyColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
-      this.masterKTVGRV.OptionsLayout.Columns.AddNewColumns = false;
-      this.masterKTVGRV.OptionsSelection.CheckBoxSelectorColumnWidth = 20;
-      this.masterKTVGRV.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
-      this.masterKTVGRV.OptionsView.ColumnAutoWidth = false;
-      this.masterKTVGRV.OptionsView.ShowGroupPanel = false;
-      this.masterKTVGRV.RowHeight = 40;
-      // 
       // TxtMa_KHoang
       // 
       this.TxtMa_KHoang.BackColor = System.Drawing.Color.White;
@@ -1007,6 +1009,11 @@ namespace TMV.UI.JPCB.JP
       this.TxtStt_Rec.TabIndex = 71;
       this.TxtStt_Rec.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
       this.TxtStt_Rec.Visible = false;
+      // 
+      // PopupMenuMasterGrid
+      // 
+      this.PopupMenuMasterGrid.Manager = this.barManager1;
+      this.PopupMenuMasterGrid.Name = "PopupMenuMasterGrid";
       // 
       // frmJpDetail
       // 
@@ -1075,6 +1082,21 @@ namespace TMV.UI.JPCB.JP
       this.SplitContainer1.Panel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.SplitContainer1)).EndInit();
       this.SplitContainer1.ResumeLayout(false);
+      this.SplitContainer2.Panel1.ResumeLayout(false);
+      this.SplitContainer2.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.SplitContainer2)).EndInit();
+      this.SplitContainer2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.masterKhoang)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.masterKhoangGRV)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.masterKTV)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.masterKTVGRV)).EndInit();
+      this.TabHDK.ResumeLayout(false);
+      this.TabCv.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.MasterCV)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.MasterCVGRV)).EndInit();
+      this.TabVt.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.MasterVt)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.MasterVtGRV)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.deTGBD_KH.Properties.CalendarTimeProperties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.deTGBD_KH.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.deTGKT_KH.Properties.CalendarTimeProperties)).EndInit();
@@ -1085,21 +1107,7 @@ namespace TMV.UI.JPCB.JP
       ((System.ComponentModel.ISupportInitialize)(this.deTGBD_TT.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.deDKGX.Properties.CalendarTimeProperties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.deDKGX.Properties)).EndInit();
-      this.TabHDK.ResumeLayout(false);
-      this.TabCv.ResumeLayout(false);
-      this.TabVt.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.MasterCV)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.MasterCVGRV)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.MasterVt)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.MasterVtGRV)).EndInit();
-      this.SplitContainer2.Panel1.ResumeLayout(false);
-      this.SplitContainer2.Panel2.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.SplitContainer2)).EndInit();
-      this.SplitContainer2.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.masterKhoang)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.masterKhoangGRV)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.masterKTV)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.masterKTVGRV)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.PopupMenuMasterGrid)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -1174,5 +1182,6 @@ namespace TMV.UI.JPCB.JP
     private DevExpress.XtraGrid.Views.Grid.GridView masterKTVGRV;
     private System.Windows.Forms.TextBox TxtMa_KHoang;
     private System.Windows.Forms.TextBox TxtStt_Rec;
+    private DevExpress.XtraBars.PopupMenu PopupMenuMasterGrid;
   }
 }

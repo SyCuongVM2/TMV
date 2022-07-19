@@ -2,7 +2,6 @@
 using DevExpress.Services;
 using DevExpress.Utils;
 using DevExpress.XtraBars;
-using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
@@ -1267,7 +1266,8 @@ namespace TMV.UI.JPCB.JP
     private void V_Lap_F3F4_KH_SCC(object sender, AppointmentFormEventArgs e) => e.Handled = true;
     private void V_Sua_Tien_Do_KH_SCC(object sender, EventArgs e)
     {
-      new frmJpDetail().ShowForm();
+      frmJpDetail frm = new frmJpDetail();
+      frm.ShowForm();
       //string _Stt_Rec_Ro = "";
       //string str = "";
       //if (SchedulerControl_KH_SCC.SelectedAppointments.Count > 0)
