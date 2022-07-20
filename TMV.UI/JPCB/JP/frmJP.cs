@@ -1266,33 +1266,38 @@ namespace TMV.UI.JPCB.JP
     private void V_Lap_F3F4_KH_SCC(object sender, AppointmentFormEventArgs e) => e.Handled = true;
     private void V_Sua_Tien_Do_KH_SCC(object sender, EventArgs e)
     {
-      frmJpDetail frm = new frmJpDetail();
-      frm.ShowForm();
-      //string _Stt_Rec_Ro = "";
-      //string str = "";
-      //if (SchedulerControl_KH_SCC.SelectedAppointments.Count > 0)
-      //  str = SchedulerControl_KH_SCC.SelectedAppointments[0].Id.ToString();
-      //if (str.Trim() == "" || !V_ChkStt_Rec(str))
-      //  return;
+      decimal? Id = null;
+      decimal? RO_Id = null;
+      string _Stt_Rec_Ro = "";
+      string type = "";
+      
+      if (SchedulerControl_KH_SCC.SelectedAppointments.Count > 0)
+      {
+        Id = Convert.ToDecimal(SchedulerControl_KH_SCC.SelectedAppointments[0].Id);
+        RO_Id = Convert.ToDecimal(SchedulerControl_KH_SCC.SelectedAppointments[0].CustomFields["Stt_Rec_RO"]);
+        type = SchedulerControl_KH_SCC.SelectedAppointments[0].CustomFields["T_Type"].ToString();
+      }
 
-      //V_Set_Auto_Refresh(false);
+      if (Id == null || RO_Id == null || type == "")
+        return;
 
-      //if (V_GetMa_Ct(str) == "PKH" & M_Kieu_Xem == "HEN")
-      //  return;
+      V_Set_Auto_Refresh(false);
 
-      //DateTime start = SchedulerControl_KH_SCC.SelectedInterval.Start;
-      //DateTime end = SchedulerControl_KH_SCC.SelectedInterval.End;
-      //string _So_Ro = "";
-      //string maCt = V_GetMa_Ct(str);
-      //string _ma_khoang = "";
-      //string _Ma_CVDV = "";
-      //string _Ma_To = "";
-      //string _Ma_Xe = "";
-      //string _Ma_CD = "";
-      //string _Ma_KTV = "";
-      //V_GetFromSetScheduler(ref start, ref end, ref _Stt_Rec_Ro, ref _So_Ro, ref _ma_khoang, ref _Ma_CVDV, ref _Ma_To, ref _Ma_Xe, ref _Ma_CD, ref _Ma_KTV);
-      //V_Tao_Sua_Tien_Do_KH_SCC("S", maCt, str, _Stt_Rec_Ro, _So_Ro, start, end, _ma_khoang, _Ma_CVDV, _Ma_To, _Ma_Xe, _Ma_CD, _Ma_KTV);
-      //V_Set_Auto_Refresh(true);
+      if (M_Kieu_Xem == "HEN")
+        return;
+
+      DateTime start = SchedulerControl_KH_SCC.SelectedInterval.Start;
+      DateTime end = SchedulerControl_KH_SCC.SelectedInterval.End;
+      string _So_Ro = "";
+      string _ma_khoang = "";
+      string _Ma_CVDV = "";
+      string _Ma_To = "";
+      string _Ma_Xe = "";
+      string _Ma_CD = "";
+      string _Ma_KTV = "";
+      V_GetFromSetScheduler(ref start, ref end, ref _Stt_Rec_Ro, ref _So_Ro, ref _ma_khoang, ref _Ma_CVDV, ref _Ma_To, ref _Ma_Xe, ref _Ma_CD, ref _Ma_KTV);
+      V_Tao_Sua_Tien_Do_KH_SCC("S", Id.Value, RO_Id.Value, _Stt_Rec_Ro, type);
+      V_Set_Auto_Refresh(true);
     }
     private string V_GetMa_Ct(string _Stt_Rec)
     {
@@ -3271,7 +3276,7 @@ namespace TMV.UI.JPCB.JP
       if (Dt_Cho_Lap_KH.Columns.Contains("Ngay_KT0"))
         _Ngay_KT = Convert.ToDateTime(Dv_Cho_Lap_KH[dataSourceRowIndex]["Ngay_KT0"]);
 
-      V_Tao_Sua_Tien_Do_KH_SCC("M", M_Ma_CT_PKH, _Stt_rec, _Stt_rec_RO, _So_Ro, _Ngay_BD, _Ngay_KT, _ma_khoang, _Ma_CVDV, _Ma_To, _Ma_Xe, _Ma_CD, _Ma_KTV);
+      //V_Tao_Sua_Tien_Do_KH_SCC("M", M_Ma_CT_PKH, _Stt_rec, _Stt_rec_RO, _So_Ro, _Ngay_BD, _Ngay_KT, _ma_khoang, _Ma_CVDV, _Ma_To, _Ma_Xe, _Ma_CD, _Ma_KTV);
       V_Set_Auto_Refresh(true);
     }
     private void V_Tao_Tien_Do_Cho_Lap_KHALL(object sender, EventArgs e)
@@ -3405,35 +3410,20 @@ namespace TMV.UI.JPCB.JP
       // Save_OK = false;
       Close();
     }
-    private void V_Tao_Sua_Tien_Do_KH_SCC(string _Mode, string _ma_Ct, string _Stt_rec, string _Stt_rec_RO, string _So_Ro, DateTime _Ngay_BD, DateTime _Ngay_KT, string _ma_khoang, string _Ma_CVDV, string _Ma_To, string _Ma_Xe, string _Ma_CD, string _Ma_KTV)
+    private void V_Tao_Sua_Tien_Do_KH_SCC(string _Mode, decimal Id, decimal ROId, string _Stt_rec, string type)
     {
-      if (!V_ChkStt_Rec(_Stt_rec) || _ma_Ct.Trim() == "" || _Mode == "S" & !V_Chk_Righ(_Stt_rec, "SUA"))
-        return;
+      //if (!V_ChkStt_Rec(_Stt_rec) || _Mode == "S" & !V_Chk_Righ(_Stt_rec, "SUA"))
+      //  return;
 
-      DataTable dataTable = null;
-      string upper = _ma_Ct.ToString().Trim().ToUpper();
-      if (upper == M_Ma_CT_PKH.ToString().Trim().ToUpper())
-        dataTable = new DataTable(); // TODO
-      else if (upper == M_Ma_CT_DLH.ToString().Trim().ToUpper())
-        dataTable = new DataTable(); // TODO
-      else if (upper == M_Ma_CT_PDC.ToString().Trim().ToUpper())
-        dataTable = new DataTable(); // TODO
+      frmJpDetail frm = new frmJpDetail();
+      frm.ROId = ROId;
+      frm.EventId = Id;
+      frm.EventType = "GJ";
+      frm.TType = type;
+      frm.ShowForm();
 
-      if (dataTable == null || dataTable.Rows.Count == 0 || dataTable.Rows.Count == 0 || !dataTable.Columns.Contains("Stt_Rec_Ro_Load") | !dataTable.Columns.Contains("Stt_Rec_Load"))
-        return;
-
-      string str1 = dataTable.Rows[0]["Stt_Rec_Ro_Load"].ToString().Trim();
-      string str2 = dataTable.Rows[0]["Stt_Rec_Load"].ToString().Trim();
-
-      V_Load_DATA_KH_SCC("0", str1, str2);
-
-      //if (_ma_Ct.ToString().Trim().ToUpper() == M_Ma_CT_DLH.ToUpper().Trim() & Dt_Hen != null)
-      //  V_LoadData_Hen("0", str2); // TODO
-
-      if (_ma_Ct != M_Ma_CT_PKH.ToUpper().Trim() || M_Kieu_Xem == "HEN" || _ma_Ct.ToString().Trim().ToUpper() != M_Ma_CT_PKH)
-        return;
-
-      V_LoadData_Cho_Lap_KH("0", str1);
+      V_Load_DATA_KH_SCC("0", "", _Stt_rec);
+      V_LoadData_Cho_Lap_KH("0", "");
     }
     private bool V_ChkStt_Rec(string _Stt_rec) => (-(_Stt_rec.Trim().Substring(_Stt_rec.Trim().Length - 9, 9) == "_THUCHIEN" ? 1 : 0) | _Stt_rec.IndexOf("_FN")) == 0;
     private bool V_Chk_Righ(string _Stt_Rec, string _Loai)
@@ -3520,7 +3510,7 @@ namespace TMV.UI.JPCB.JP
       V_GetFromSetScheduler(ref start, ref end, ref _Stt_Rec_Ro, ref _So_Ro, ref _ma_khoang, ref _Ma_CVDV, ref _Ma_To, ref _Ma_Xe, ref _Ma_CD, ref _Ma_KTV);
 
       _Stt_Rec_Ro = _pStt_Rec_Ro;
-      V_Tao_Sua_Tien_Do_KH_SCC("M", M_Ma_CT_PKH, _Stt_rec, _Stt_Rec_Ro, _So_Ro, start, end, _ma_khoang, _Ma_CVDV, _Ma_To, _Ma_Xe, _Ma_CD, _Ma_KTV);
+      //V_Tao_Sua_Tien_Do_KH_SCC("M", M_Ma_CT_PKH, _Stt_rec, _Stt_Rec_Ro, _So_Ro, start, end, _ma_khoang, _Ma_CVDV, _Ma_To, _Ma_Xe, _Ma_CD, _Ma_KTV);
     }
     private void V_GetFromSetScheduler(ref DateTime _Ngay_BD, ref DateTime _Ngay_KT, ref string _Stt_Rec_Ro, ref string _So_Ro, ref string _ma_khoang, ref string _Ma_CVDV, ref string _Ma_To, ref string _Ma_Xe, ref string _Ma_CD, ref string _Ma_KTV, Appointment _Appointment = null)
     {
@@ -3660,7 +3650,7 @@ namespace TMV.UI.JPCB.JP
       if (_Stt_Rec_Ro == "" & M_Stt_Rec_Ro != "")
         _Stt_Rec_Ro = M_Stt_Rec_Ro;
 
-      V_Tao_Sua_Tien_Do_KH_SCC("M", M_Ma_CT_PKH, _Stt_rec, _Stt_Rec_Ro, _So_Ro, start, end, _ma_khoang, _Ma_CVDV, _Ma_To, _Ma_Xe, _Ma_CD, _Ma_KTV);
+      //V_Tao_Sua_Tien_Do_KH_SCC("M", M_Ma_CT_PKH, _Stt_rec, _Stt_Rec_Ro, _So_Ro, start, end, _ma_khoang, _Ma_CVDV, _Ma_To, _Ma_Xe, _Ma_CD, _Ma_KTV);
     }
     private void V_Tao_KH_ALLS(object sender, EventArgs e)
     {
@@ -3785,7 +3775,7 @@ namespace TMV.UI.JPCB.JP
       string _Ma_KTV = "";
 
       V_GetFromSetScheduler(ref start, ref end, ref _Stt_Rec_Ro, ref _So_Ro, ref _ma_khoang, ref _Ma_CVDV, ref _Ma_To, ref _Ma_Xe, ref _Ma_CD, ref _Ma_KTV);
-      V_Tao_Sua_Tien_Do_KH_SCC("M", M_Ma_CT_DLH, _Stt_rec, _Stt_Rec_Ro, _So_Ro, start, end, _ma_khoang, _Ma_CVDV, _Ma_To, _Ma_Xe, _Ma_CD, _Ma_KTV);
+      //V_Tao_Sua_Tien_Do_KH_SCC("M", M_Ma_CT_DLH, _Stt_rec, _Stt_Rec_Ro, _So_Ro, start, end, _ma_khoang, _Ma_CVDV, _Ma_To, _Ma_Xe, _Ma_CD, _Ma_KTV);
     }
     private void V_Tao_Dat_CHo_KH_SCC(object sender, EventArgs e)
     {
@@ -3802,7 +3792,7 @@ namespace TMV.UI.JPCB.JP
       string _Ma_KTV = "";
 
       V_GetFromSetScheduler(ref start, ref end, ref _Stt_Rec_Ro, ref _So_Ro, ref _ma_khoang, ref _Ma_CVDV, ref _Ma_To, ref _Ma_Xe, ref _Ma_CD, ref _Ma_KTV);
-      V_Tao_Sua_Tien_Do_KH_SCC("M", M_Ma_CT_PDC, _Stt_rec, _Stt_Rec_Ro, _So_Ro, start, end, _ma_khoang, _Ma_CVDV, _Ma_To, _Ma_Xe, _Ma_CD, _Ma_KTV);
+      //V_Tao_Sua_Tien_Do_KH_SCC("M", M_Ma_CT_PDC, _Stt_rec, _Stt_Rec_Ro, _So_Ro, start, end, _ma_khoang, _Ma_CVDV, _Ma_To, _Ma_Xe, _Ma_CD, _Ma_KTV);
     }
     private void V_Xoa_KH_SCC(object sender, EventArgs e)
     {

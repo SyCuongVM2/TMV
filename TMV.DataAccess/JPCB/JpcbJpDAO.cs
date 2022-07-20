@@ -193,5 +193,38 @@ namespace TMV.DataAccess.JPCB
         }
       );
     }
+    public DataSet DetailDefault(int tenantId, string type)
+    {
+      return SqlDataAccess.ExecuteDataset(
+        SqlConnect.ConnectionString,
+        Constants.Instance().AppJpcbPkgJPDetailDefault,
+        new object[] {
+          Globals.DB_GetNull(tenantId),
+          Globals.DB_GetNull(type) // GJ, BP
+        }
+      );
+    }
+    public DataSet Detail(int tenantId, decimal id, string eventType)
+    {
+      return SqlDataAccess.ExecuteDataset(
+        SqlConnect.ConnectionString,
+        Constants.Instance().AppJpcbPkgJPDetail,
+        new object[] {
+          Globals.DB_GetNull(tenantId),
+          Globals.DB_GetNull(id),
+          Globals.DB_GetNull(eventType)
+        }
+      );
+    }
+    public DataSet DetailJobsParts(decimal roId)
+    {
+      return SqlDataAccess.ExecuteDataset(
+        SqlConnect.ConnectionString,
+        Constants.Instance().AppJpcbPkgJPDetailJobsParts,
+        new object[] {
+          Globals.DB_GetNull(roId)
+        }
+      );
+    }
   }
 }

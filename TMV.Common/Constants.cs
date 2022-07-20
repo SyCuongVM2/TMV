@@ -82,6 +82,9 @@
     public string AppJpcbPkgJPCancelPlan = "AppJpcbPkgJPCancelPlan";
     public string AppJpcbPkgJPCancelPlanProgress = "AppJpcbPkgJPCancelPlanProgress";
     public string AppJpcbPkgJPCheckPlans = "AppJpcbPkgJPCheckPlans";
+    public string AppJpcbPkgJPDetailDefault = "AppJpcbPkgJPDetailDefault";
+    public string AppJpcbPkgJPDetail = "AppJpcbPkgJPDetail";
+    public string AppJpcbPkgJPDetailJobsParts = "AppJpcbPkgJPDetailJobsParts";
     #endregion
   }
 }

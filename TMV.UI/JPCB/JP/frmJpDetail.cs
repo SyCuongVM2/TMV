@@ -5,6 +5,7 @@ using System;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using TMV.BusinessObject.JPCB;
 using TMV.Common;
 using TMV.Common.Forms;
 using TMV.UI.JPCB.Common;
@@ -104,6 +105,10 @@ namespace TMV.UI.JPCB.JP
     #endregion
 
     public DataSet DsLoad { get; set; }
+    public decimal ROId { get; set; }
+    public decimal EventId { get; set; }
+    public string EventType { get; set; }
+    public string TType { get; set; }
 
     public frmJpDetail()
     {
@@ -147,7 +152,7 @@ namespace TMV.UI.JPCB.JP
     #region "Load"
     private void V_LoadNgamDinh()
     {
-      DataSet dataSet = new DataSet(); // TODO:
+      DataSet dataSet = JpcbJpBO.Instance().DetailDefault(Globals.LoginDlrId, "GJ"); // TODO:
       if (dataSet != null)
       {
         // Công đoạn cbb
@@ -156,7 +161,7 @@ namespace TMV.UI.JPCB.JP
 
         // Tổ sửa chữa cbb
         Dt_To = dataSet.Tables[1].Copy();
-        CyberFunc.V_FillComBoxDefaul(CbbMa_To, Dt_To, "ma_To", "Ten_To", "Ngam_Dinh");
+        CyberFunc.V_FillComBoxDefaul(CbbMa_To, Dt_To, "Ma_To", "Ten_To", "Ngam_Dinh");
 
         // Khoang grid
         Dt_khoang = dataSet.Tables[2].Copy();
@@ -187,7 +192,12 @@ namespace TMV.UI.JPCB.JP
     {
       TxtMa_Xe.Enabled = M_Mode == "M";
       TxtSo_Ro.Enabled = M_Mode == "M";
-      V_LoadFromDataset(DsLoad, "1");
+
+      DataSet dataSet = JpcbJpBO.Instance().Detail(Globals.LoginDlrId, EventId, TType); // TODO:
+      if (dataSet != null)
+      {
+        V_LoadVTCV("1");
+      }
     }
     private void V_Ma_TO(object sender, EventArgs e)
     {
@@ -206,7 +216,7 @@ namespace TMV.UI.JPCB.JP
         if (TxtMa_KHoang.Text.ToString().Trim() == Dv_khoang[recordIndex]["Ma_Khoang"].ToString().Trim())
         {
           Dv_khoang[recordIndex].BeginEdit();
-          Dv_khoang[recordIndex]["Tag"] = (object)"1";
+          Dv_khoang[recordIndex]["Tag"] = "1";
           Dv_khoang[recordIndex].EndEdit();
           break;
         }
@@ -336,77 +346,66 @@ namespace TMV.UI.JPCB.JP
       }
       Dt_CV.AcceptChanges();
     }
-    private void V_LoadFromDataset(DataSet DsTmp, string status)
-    {
-      DataSet dataSet = new DataSet(); // TODO:
-      if (dataSet != null)
-      {
-        V_LoadVTCV(status);
-      }
-      else
-      {
-        TxtSo_Ro.Text = "";
-        TxtStt_Rec.Text = "";
-        V_LoadVTCV(status);
-      }
-    }
     private void V_LoadVTCV(string status)
     {
-      DataSet dataSet = new DataSet(); // CP_RO_CVDV_KH_SCC_Load_VTCV
-      int num1 = checked(dataSet.Tables.Count - 1);
-      int index1 = 0;
-      while (index1 <= num1)
+      DataSet dataSet = JpcbJpBO.Instance().DetailJobsParts(ROId); // CP_RO_CVDV_KH_SCC_Load_VTCV
+      if (dataSet != null)
       {
-        CyberFunc.SetNotNullTable(dataSet.Tables[index1]);
-        checked { ++index1; }
-      }
-      if (status.ToUpper().Trim() == "1")
-      {
-        Dt_CV = dataSet.Tables[0].Copy();
-        Dt_VT = dataSet.Tables[1].Copy();
-        Dt_CVH = dataSet.Tables[2].Copy();
-        Dt_VTH = dataSet.Tables[3].Copy();
-        Dv_CV = new DataView(Dt_CV);
-        Dv_VT = new DataView(Dt_VT);
-        Dv_CVH = new DataView(Dt_CVH);
-        Dv_VTH = new DataView(Dt_VTH);
-        dataSet.Dispose();
-
-        MasterCV.DataSource = Dt_CV;
-        GridView masterCvgrv = MasterCVGRV;
-        DataView dvCvh = Dv_CVH;
-        DataView dvCv = Dv_CV;
-        CyberFunc.V_FillReports(ref masterCvgrv, dvCvh, dvCv);
-        MasterCVGRV = masterCvgrv;
-
-        MasterVt.DataSource = (object)Dt_VT;
-        GridView masterVtGrv = MasterVtGRV;
-        DataView dvVth = Dv_VTH;
-        DataView dvVt = Dv_VT;
-        CyberFunc.V_FillReports(ref masterVtGrv, dvVth, dvVt);
-        MasterVtGRV = masterVtGrv;
-      }
-      else
-      {
-        Dt_CV.Clear();
-        int num2 = checked(dataSet.Tables[0].Rows.Count - 1);
-        int index2 = 0;
-        while (index2 <= num2)
+        int num1 = checked(dataSet.Tables.Count - 1);
+        int index1 = 0;
+        while (index1 <= num1)
         {
-          Dt_CV.ImportRow(dataSet.Tables[0].Rows[index2]);
-          checked { ++index2; }
+          CyberFunc.SetNotNullTable(dataSet.Tables[index1]);
+          checked { ++index1; }
         }
-        Dt_CV.AcceptChanges();
-        Dt_VT.Clear();
-        int num3 = checked(dataSet.Tables[1].Rows.Count - 1);
-        int index3 = 0;
-        while (index3 <= num3)
+        if (status.ToUpper().Trim() == "1")
         {
-          Dt_VT.ImportRow(dataSet.Tables[1].Rows[index3]);
-          checked { ++index3; }
+          Dt_CV = dataSet.Tables[0].Copy();
+          Dt_VT = dataSet.Tables[1].Copy();
+          Dt_CVH = dataSet.Tables[2].Copy();
+          Dt_VTH = dataSet.Tables[3].Copy();
+          Dv_CV = new DataView(Dt_CV);
+          Dv_VT = new DataView(Dt_VT);
+          Dv_CVH = new DataView(Dt_CVH);
+          Dv_VTH = new DataView(Dt_VTH);
+          dataSet.Dispose();
+
+          MasterCV.DataSource = Dt_CV;
+          GridView masterCvgrv = MasterCVGRV;
+          DataView dvCvh = Dv_CVH;
+          DataView dvCv = Dv_CV;
+          CyberFunc.V_FillReports(ref masterCvgrv, dvCvh, dvCv);
+          MasterCVGRV = masterCvgrv;
+
+          MasterVt.DataSource = Dt_VT;
+          GridView masterVtGrv = MasterVtGRV;
+          DataView dvVth = Dv_VTH;
+          DataView dvVt = Dv_VT;
+          CyberFunc.V_FillReports(ref masterVtGrv, dvVth, dvVt);
+          MasterVtGRV = masterVtGrv;
         }
-        Dt_VT.AcceptChanges();
-        dataSet.Dispose();
+        else
+        {
+          Dt_CV.Clear();
+          int num2 = checked(dataSet.Tables[0].Rows.Count - 1);
+          int index2 = 0;
+          while (index2 <= num2)
+          {
+            Dt_CV.ImportRow(dataSet.Tables[0].Rows[index2]);
+            checked { ++index2; }
+          }
+          Dt_CV.AcceptChanges();
+          Dt_VT.Clear();
+          int num3 = checked(dataSet.Tables[1].Rows.Count - 1);
+          int index3 = 0;
+          while (index3 <= num3)
+          {
+            Dt_VT.ImportRow(dataSet.Tables[1].Rows[index3]);
+            checked { ++index3; }
+          }
+          Dt_VT.AcceptChanges();
+          dataSet.Dispose();
+        }
       }
     }
     private void Master_DragDrop(object sender, DragEventArgs e)

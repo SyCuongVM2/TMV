@@ -132,5 +132,17 @@ namespace TMV.BusinessObject.JPCB
         roId
       );
     }
+    public DataSet DetailDefault(int tenantId, string type)
+    {
+      return JpcbJpDAO.Instance().DetailDefault(tenantId, type);
+    }
+    public DataSet Detail(int tenantId, decimal id, string eventType)
+    {
+      return JpcbJpDAO.Instance().Detail(tenantId, id, eventType);
+    }
+    public DataSet DetailJobsParts(decimal roId)
+    {
+      return JpcbJpDAO.Instance().DetailJobsParts(roId);
+    }
   }
 }
