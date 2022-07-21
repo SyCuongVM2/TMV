@@ -247,7 +247,7 @@ namespace TMV.UI.JPCB.JP
       // 
       this.SplitContainer2.Panel2.Controls.Add(this.masterKTV);
       this.SplitContainer2.Size = new System.Drawing.Size(1218, 627);
-      this.SplitContainer2.SplitterDistance = 406;
+      this.SplitContainer2.SplitterDistance = 286;
       this.SplitContainer2.TabIndex = 0;
       // 
       // masterKhoang
@@ -256,7 +256,7 @@ namespace TMV.UI.JPCB.JP
       this.masterKhoang.Location = new System.Drawing.Point(0, 0);
       this.masterKhoang.MainView = this.masterKhoangGRV;
       this.masterKhoang.Name = "masterKhoang";
-      this.masterKhoang.Size = new System.Drawing.Size(406, 627);
+      this.masterKhoang.Size = new System.Drawing.Size(286, 627);
       this.masterKhoang.TabIndex = 2;
       this.masterKhoang.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.masterKhoangGRV});
@@ -303,7 +303,7 @@ namespace TMV.UI.JPCB.JP
       this.masterKTV.Location = new System.Drawing.Point(0, 0);
       this.masterKTV.MainView = this.masterKTVGRV;
       this.masterKTV.Name = "masterKTV";
-      this.masterKTV.Size = new System.Drawing.Size(808, 627);
+      this.masterKTV.Size = new System.Drawing.Size(928, 627);
       this.masterKTV.TabIndex = 2;
       this.masterKTV.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.masterKTVGRV});
@@ -473,7 +473,6 @@ namespace TMV.UI.JPCB.JP
       // 
       // TxtCVDV
       // 
-      this.TxtCVDV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.TxtCVDV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
       this.TxtCVDV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.TxtCVDV.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -486,7 +485,6 @@ namespace TMV.UI.JPCB.JP
       // 
       // TxtKieu_Xe
       // 
-      this.TxtKieu_Xe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.TxtKieu_Xe.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
       this.TxtKieu_Xe.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.TxtKieu_Xe.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -499,7 +497,6 @@ namespace TMV.UI.JPCB.JP
       // 
       // TxtMa_Xe
       // 
-      this.TxtMa_Xe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.TxtMa_Xe.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
       this.TxtMa_Xe.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.TxtMa_Xe.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -512,7 +509,6 @@ namespace TMV.UI.JPCB.JP
       // 
       // TxtNMXD
       // 
-      this.TxtNMXD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.TxtNMXD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
       this.TxtNMXD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.TxtNMXD.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -525,7 +521,6 @@ namespace TMV.UI.JPCB.JP
       // 
       // textBox4
       // 
-      this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
       this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.textBox4.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -538,7 +533,6 @@ namespace TMV.UI.JPCB.JP
       // 
       // CbbMa_CD
       // 
-      this.CbbMa_CD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.CbbMa_CD.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbMa_CD.FormattingEnabled = true;
       this.CbbMa_CD.Location = new System.Drawing.Point(742, 105);
@@ -548,7 +542,6 @@ namespace TMV.UI.JPCB.JP
       // 
       // CbbMa_To
       // 
-      this.CbbMa_To.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.CbbMa_To.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.CbbMa_To.FormattingEnabled = true;
       this.CbbMa_To.Location = new System.Drawing.Point(1034, 105);
@@ -558,7 +551,7 @@ namespace TMV.UI.JPCB.JP
       // 
       // CmdSave
       // 
-      this.CmdSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.CmdSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.CmdSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("CmdSave.ImageOptions.Image")));
       this.CmdSave.ImageOptions.ImageIndex = 1;
       this.CmdSave.Location = new System.Drawing.Point(1494, 785);
@@ -570,7 +563,7 @@ namespace TMV.UI.JPCB.JP
       // 
       // CmdClose
       // 
-      this.CmdClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.CmdClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.CmdClose.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("CmdClose.ImageOptions.Image")));
       this.CmdClose.ImageOptions.ImageIndex = 1;
       this.CmdClose.Location = new System.Drawing.Point(1626, 785);
@@ -582,6 +575,7 @@ namespace TMV.UI.JPCB.JP
       // 
       // CmdGoi_Y_Khoang
       // 
+      this.CmdGoi_Y_Khoang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.CmdGoi_Y_Khoang.Appearance.ForeColor = System.Drawing.Color.Red;
       this.CmdGoi_Y_Khoang.Appearance.Options.UseForeColor = true;
       this.CmdGoi_Y_Khoang.ImageOptions.ImageIndex = 1;
@@ -594,7 +588,7 @@ namespace TMV.UI.JPCB.JP
       // 
       // CmdXem_LSSC
       // 
-      this.CmdXem_LSSC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.CmdXem_LSSC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.CmdXem_LSSC.ImageOptions.ImageIndex = 1;
       this.CmdXem_LSSC.Location = new System.Drawing.Point(1328, 785);
       this.CmdXem_LSSC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -605,7 +599,7 @@ namespace TMV.UI.JPCB.JP
       // 
       // CmdXem_Giao_Xe
       // 
-      this.CmdXem_Giao_Xe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.CmdXem_Giao_Xe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.CmdXem_Giao_Xe.ImageOptions.ImageIndex = 1;
       this.CmdXem_Giao_Xe.Location = new System.Drawing.Point(1196, 785);
       this.CmdXem_Giao_Xe.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -678,7 +672,6 @@ namespace TMV.UI.JPCB.JP
       // 
       // TxtTen_KH
       // 
-      this.TxtTen_KH.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.TxtTen_KH.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
       this.TxtTen_KH.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.TxtTen_KH.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -711,7 +704,6 @@ namespace TMV.UI.JPCB.JP
       // 
       // deTGBD_KH
       // 
-      this.deTGBD_KH.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.deTGBD_KH.EditValue = null;
       this.deTGBD_KH.Location = new System.Drawing.Point(109, 72);
       this.deTGBD_KH.Name = "deTGBD_KH";
@@ -726,7 +718,6 @@ namespace TMV.UI.JPCB.JP
       // 
       // deTGKT_KH
       // 
-      this.deTGKT_KH.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.deTGKT_KH.EditValue = null;
       this.deTGKT_KH.Location = new System.Drawing.Point(109, 104);
       this.deTGKT_KH.Name = "deTGKT_KH";
@@ -781,7 +772,6 @@ namespace TMV.UI.JPCB.JP
       // 
       // deTGKT_TT
       // 
-      this.deTGKT_TT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.deTGKT_TT.EditValue = null;
       this.deTGKT_TT.Location = new System.Drawing.Point(430, 106);
       this.deTGKT_TT.Name = "deTGKT_TT";
@@ -796,7 +786,6 @@ namespace TMV.UI.JPCB.JP
       // 
       // deTGBD_TT
       // 
-      this.deTGBD_TT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.deTGBD_TT.EditValue = null;
       this.deTGBD_TT.Location = new System.Drawing.Point(430, 74);
       this.deTGBD_TT.Name = "deTGBD_TT";
@@ -821,7 +810,6 @@ namespace TMV.UI.JPCB.JP
       // 
       // deDKGX
       // 
-      this.deDKGX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.deDKGX.EditValue = null;
       this.deDKGX.Location = new System.Drawing.Point(109, 40);
       this.deDKGX.Name = "deDKGX";
@@ -846,7 +834,6 @@ namespace TMV.UI.JPCB.JP
       // 
       // TxtKM
       // 
-      this.TxtKM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.TxtKM.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
       this.TxtKM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.TxtKM.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -859,7 +846,6 @@ namespace TMV.UI.JPCB.JP
       // 
       // TxtYCSC
       // 
-      this.TxtYCSC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.TxtYCSC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
       this.TxtYCSC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.TxtYCSC.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -902,7 +888,7 @@ namespace TMV.UI.JPCB.JP
       // 
       // ChkIs_Wait
       // 
-      this.ChkIs_Wait.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.ChkIs_Wait.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.ChkIs_Wait.AutoSize = true;
       this.ChkIs_Wait.ForeColor = System.Drawing.Color.Blue;
       this.ChkIs_Wait.Location = new System.Drawing.Point(1507, 5);
@@ -914,7 +900,7 @@ namespace TMV.UI.JPCB.JP
       // 
       // chkRX
       // 
-      this.chkRX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.chkRX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.chkRX.AutoSize = true;
       this.chkRX.ForeColor = System.Drawing.Color.Blue;
       this.chkRX.Location = new System.Drawing.Point(1507, 30);
@@ -926,7 +912,7 @@ namespace TMV.UI.JPCB.JP
       // 
       // chkTake_Parts
       // 
-      this.chkTake_Parts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.chkTake_Parts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.chkTake_Parts.AutoSize = true;
       this.chkTake_Parts.ForeColor = System.Drawing.Color.Blue;
       this.chkTake_Parts.Location = new System.Drawing.Point(1507, 55);
@@ -938,7 +924,7 @@ namespace TMV.UI.JPCB.JP
       // 
       // chkIs_Priority
       // 
-      this.chkIs_Priority.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.chkIs_Priority.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.chkIs_Priority.AutoSize = true;
       this.chkIs_Priority.ForeColor = System.Drawing.Color.Blue;
       this.chkIs_Priority.Location = new System.Drawing.Point(1507, 79);
@@ -950,7 +936,7 @@ namespace TMV.UI.JPCB.JP
       // 
       // ChkTE
       // 
-      this.ChkTE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.ChkTE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.ChkTE.AutoSize = true;
       this.ChkTE.ForeColor = System.Drawing.Color.Blue;
       this.ChkTE.Location = new System.Drawing.Point(1650, 5);
@@ -962,7 +948,7 @@ namespace TMV.UI.JPCB.JP
       // 
       // ChkTL
       // 
-      this.ChkTL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.ChkTL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.ChkTL.AutoSize = true;
       this.ChkTL.ForeColor = System.Drawing.Color.Blue;
       this.ChkTL.Location = new System.Drawing.Point(1650, 30);
@@ -974,7 +960,7 @@ namespace TMV.UI.JPCB.JP
       // 
       // ChkTA
       // 
-      this.ChkTA.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.ChkTA.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.ChkTA.AutoSize = true;
       this.ChkTA.ForeColor = System.Drawing.Color.Blue;
       this.ChkTA.Location = new System.Drawing.Point(1650, 55);
@@ -1077,6 +1063,7 @@ namespace TMV.UI.JPCB.JP
       this.Name = "frmJpDetail";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "frmJpDetail";
+      this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
       ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
       this.SplitContainer1.Panel1.ResumeLayout(false);
       this.SplitContainer1.Panel2.ResumeLayout(false);

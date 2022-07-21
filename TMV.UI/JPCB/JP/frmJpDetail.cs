@@ -17,39 +17,19 @@ namespace TMV.UI.JPCB.JP
     #region "variables"
     private CyberColor CyberColor = new CyberColor();
     private CyberFuncs CyberFunc = new CyberFuncs();
-    private DataSet M_DsLoad;
-    private string M_Mode = "M";
-    private string M_Ma_Ct = "PKH";
-    private string M_Kieu_Xem = "TD";
-    private string M_Loai_SC = "1";
-    private DateTime M_Ngay_BD;
-    private DateTime M_Ngay_KT;
-    private string M_Ma_CVDV = "";
-    private string M_Ma_khoang = "";
-    private string M_Ma_To = "";
-    private string M_Ma_Xe = "";
-    private string M_Ma_CD = "";
-    private string M_Ma_KTV = "";
-    private CyberColumnGridView EditTime_KTV = new CyberColumnGridView();
-    private CyberColumnGridView EditNgay_BD = new CyberColumnGridView();
-    private CyberColumnGridView EditNgay_KT = new CyberColumnGridView();
-    private CyberColumnGridView EditNgay_BD_TH = new CyberColumnGridView();
-    private CyberColumnGridView EditNgay_KT_TH = new CyberColumnGridView();
     private CyberColumnGridView EditkhoangTAG = new CyberColumnGridView();
-    private CyberColumnGridView EditKhoangXem_Hen = new CyberColumnGridView();
     private CyberColumnGridView EditKTVTag = new CyberColumnGridView();
     private CyberColumnGridView EditKTVChinh_Phu = new CyberColumnGridView();
-    private CyberColumnGridView EditKTVXem_Hen = new CyberColumnGridView();
     private CyberColumnGridView EditKTVXN_BD = new CyberColumnGridView();
     private CyberColumnGridView EditKTVXN_KT = new CyberColumnGridView();
     private CyberColumnGridView EditCVTag = new CyberColumnGridView();
     private CyberColumnGridView EditVTTag = new CyberColumnGridView();
-    private CyberColumnGridView EditCVIs_GO = new CyberColumnGridView();
-    private CyberColumnGridView EditCVIs_SON = new CyberColumnGridView();
     private CyberColumnGridView EditCVMa_Ktv1 = new CyberColumnGridView();
     private CyberColumnGridView EditCVMa_Ktv2 = new CyberColumnGridView();
     private CyberColumnGridView EditCVTen_Ktv1 = new CyberColumnGridView();
     private CyberColumnGridView EditCVTen_KTV2 = new CyberColumnGridView();
+    private DataTable Dt_Detail;
+    private DataTable Dt_KH_KTV;
     private DataTable Dt_To;
     private DataTable Dt_Cd;
     private DataTable Dt_khoang;
@@ -104,7 +84,7 @@ namespace TMV.UI.JPCB.JP
     private ObjectDragDrop _keotha2Grid = new ObjectDragDrop();
     #endregion
 
-    public DataSet DsLoad { get; set; }
+    public string Mode { get; set; }
     public decimal ROId { get; set; }
     public decimal EventId { get; set; }
     public string EventType { get; set; }
@@ -122,7 +102,7 @@ namespace TMV.UI.JPCB.JP
     }
     private void InitForm()
     {
-      Text = (M_Mode != "M") ? "Tạo mới kế hoạch" : "Sửa kế hoạch";
+      Text = (Mode == "M") ? "Tạo mới kế hoạch" : "Sửa kế hoạch";
       barWSUser.Caption = Globals.LoginUserName + " (" + Globals.LoginFullName + ")";
       barWSDealer.Caption = Globals.LoginDealerName + " (" + Globals.LoginDealerAbbr + " - " + Globals.LoginDealerCode + ")";
 
@@ -145,8 +125,7 @@ namespace TMV.UI.JPCB.JP
       MasterVtGRV.ColumnPanelRowHeight = 30;
       V_DragDropGridview();
       V_Sub_SetColorCV();
-      V_UpdateKhoang_KTV(TxtMa_KHoang.Text.Trim());
-      V_UpdateKTV_CV_All(0);
+      V_UpdateKhoang_KTV();
     }
 
     #region "Load"
@@ -174,6 +153,7 @@ namespace TMV.UI.JPCB.JP
         CyberFunc.V_FillReports(ref masterKhoangGrv, dvKhoangH, dvKhoang);
         masterKhoangGRV = masterKhoangGrv;
         masterKhoang.DataSource = Dv_khoang;
+        masterKhoangGRV.GridControl = masterKhoang;
 
         // KTV grid
         Dt_KTV = dataSet.Tables[4].Copy();
@@ -186,16 +166,20 @@ namespace TMV.UI.JPCB.JP
         CyberFunc.V_FillReports(ref masterKtvgrv, dvKtvh, dvKtv);
         masterKTVGRV = masterKtvgrv;
         masterKTV.DataSource = Dv_KTV;
+        masterKTVGRV.GridControl = masterKTV;
       }
     }
     private void V_Load()
     {
-      TxtMa_Xe.Enabled = M_Mode == "M";
-      TxtSo_Ro.Enabled = M_Mode == "M";
+      TxtMa_Xe.Enabled = Mode == "M";
+      TxtSo_Ro.Enabled = Mode == "M";
 
-      DataSet dataSet = JpcbJpBO.Instance().Detail(Globals.LoginDlrId, EventId, TType); // TODO:
-      if (dataSet != null)
+      DataSet ds = JpcbJpBO.Instance().Detail(Globals.LoginDlrId, EventId, TType); // TODO:
+      if (ds != null)
       {
+        Dt_Detail = ds.Tables[0].Copy();
+        Dt_KH_KTV = ds.Tables[1].Copy();
+        TxtMa_KHoang.Text = ds.Tables[0].Rows[0]["Ma_Khoang"].ToString();
         V_LoadVTCV("1");
       }
     }
@@ -231,26 +215,14 @@ namespace TMV.UI.JPCB.JP
       CyberColumnGridView cyberColumnGridView3 = new CyberColumnGridView();
       CyberColumnGridView cyberColumnGridView4 = new CyberColumnGridView();
       CyberColumnGridView cyberColumnGridView5 = new CyberColumnGridView();
-      EditkhoangTAG.GetColumn(masterKhoangGRV, "TAG");
-      EditKTVTag.GetColumn(masterKTVGRV, "TAG");
-      EditKTVChinh_Phu.GetColumn(masterKTVGRV, "Chinh_Phu");
-      cyberColumnGridView1.GetColumn(masterKTVGRV, "Time_KTV");
-      cyberColumnGridView2.GetColumn(masterKTVGRV, "Ngay_DB");
-      cyberColumnGridView3.GetColumn(masterKTVGRV, "Ngay_KT");
-      cyberColumnGridView4.GetColumn(masterKTVGRV, "Ngay_DB_TH");
-      cyberColumnGridView5.GetColumn(masterKTVGRV, "Ngay_KT_TH");
-      EditCVTag.GetColumn(MasterCVGRV, "TAG");
+      EditkhoangTAG.GetColumn(masterKhoangGRV, "Tag");
+      EditKTVTag.GetColumn(masterKTVGRV, "Tag");
+      EditCVTag.GetColumn(MasterCVGRV, "Tag");
       EditCVMa_Ktv1.GetColumn(MasterCVGRV, "Ma_KTV1");
       EditCVMa_Ktv2.GetColumn(MasterCVGRV, "Ma_KTV2");
       EditCVTen_Ktv1.GetColumn(MasterCVGRV, "Ten_KTV1");
       EditCVTen_KTV2.GetColumn(MasterCVGRV, "Ten_KTV2");
-      EditCVIs_GO.GetColumn(MasterCVGRV, "IS_GO");
-      EditCVIs_SON.GetColumn(MasterCVGRV, "IS_SON");
-      EditVTTag.GetColumn(MasterVtGRV, "TAG");
-      EditKhoangXem_Hen.GetColumn(masterKhoangGRV, "Xem_Hen");
-      EditKTVXem_Hen.GetColumn(masterKTVGRV, "Xem_Hen");
-      EditKTVXN_BD.GetColumn(masterKTVGRV, "XN_BD");
-      EditKTVXN_KT.GetColumn(masterKTVGRV, "XN_KT");
+      EditVTTag.GetColumn(MasterVtGRV, "Tag");
       CmdSave.Click += new EventHandler(V_Nhan);
 
       if (cyberColumnGridView1.Column != null)
@@ -300,13 +272,14 @@ namespace TMV.UI.JPCB.JP
           if (Dt_CV.Rows[index]["Tag"].ToString().Trim() == "1")
           {
             Dt_CV.Rows[index]["Bold"] = "1";
-            if (Dt_CV.Columns.Contains("backColor"))
-              Dt_CV.Rows[index]["backColor"] = "Pink";
+            if (Dt_CV.Columns.Contains("BackColor"))
+              Dt_CV.Rows[index]["BackColor"] = "Pink";
           }
-          else if (Dt_CV.Columns.Contains("backColor"))
-            Dt_CV.Rows[index]["backColor"] = "";
+          else if (Dt_CV.Columns.Contains("BackColor"))
+            Dt_CV.Rows[index]["BackColor"] = "";
         }
         Dt_CV.Rows[index].EndEdit();
+
         Dt_CV.Rows[index].BeginEdit();
         if (Dt_CV.Columns.Contains("BackColor") & Dt_CV.Columns.Contains("Ma_KTV1"))
         {
@@ -323,28 +296,41 @@ namespace TMV.UI.JPCB.JP
       }
       Dt_CV.AcceptChanges();
     }
-    private void V_UpdateKhoang_KTV(string _ma_khoang)
+    private void V_UpdateKhoang_KTV()
     {
-
-    }
-    private void V_UpdateKTV_CV_All(int _Irow)
-    {
-      if (M_Loai_SC.Trim() != "1")
-        return;
-
-      int num = checked(Dv_CV.Count - 1);
-      int recordIndex = 0;
-      while (recordIndex <= num)
+      if (Dt_KH_KTV != null)
       {
-        Dv_CV[recordIndex].BeginEdit();
-        Dv_CV[recordIndex]["Tag"] = 1;
-        Dv_CV[recordIndex]["Ma_KTV1"] = Dv_KTV[0]["Ma_Hs"].ToString();
-        Dv_CV[recordIndex]["Ten_KTV1"] = Dv_KTV[0]["Ten_HS"].ToString();
-        Dv_CV[recordIndex].EndEdit();
-        MasterCVGRV.UpdateCurrentRow();
-        checked { ++recordIndex; }
+        string str1 = "";
+        if (Dt_Detail.Columns.Contains("Ma_TO"))
+          str1 = Dt_Detail.Rows[0]["Ma_TO"].ToString().Trim();
+        if (str1.Trim() != "")
+        {
+          ComboBox cbbMaTo = CbbMa_To;
+          CyberFunc.V_SetvalueCombox(ref cbbMaTo, str1);
+          CbbMa_To = cbbMaTo;
+        }
+
+        int num1 = checked(Dt_KH_KTV.Rows.Count - 1);
+        int index1 = 0;
+        while (index1 <= num1)
+        {
+          int num2 = checked(Dt_KTV.Rows.Count - 1);
+          int index2 = 0;
+          while (index2 <= num2)
+          {
+            if (Dt_KH_KTV.Rows[index1]["Id_Hs"].ToString().Trim().ToUpper() == Dt_KTV.Rows[index2]["Id_Hs"].ToString().Trim().ToUpper())
+            {
+              Dt_KTV.Rows[index2].BeginEdit();
+              Dt_KTV.Rows[index2]["Tag"] = "1";
+              Dt_KTV.Rows[index2].EndEdit();
+            }
+            checked { ++index2; }
+          }
+          checked { ++index1; }
+        }
+        Dv_KTV.RowFilter = "Tag = '1'";
+        Dt_KTV.AcceptChanges();
       }
-      Dt_CV.AcceptChanges();
     }
     private void V_LoadVTCV(string status)
     {
@@ -370,19 +356,21 @@ namespace TMV.UI.JPCB.JP
           Dv_VTH = new DataView(Dt_VTH);
           dataSet.Dispose();
 
-          MasterCV.DataSource = Dt_CV;
           GridView masterCvgrv = MasterCVGRV;
           DataView dvCvh = Dv_CVH;
           DataView dvCv = Dv_CV;
           CyberFunc.V_FillReports(ref masterCvgrv, dvCvh, dvCv);
           MasterCVGRV = masterCvgrv;
+          MasterCV.DataSource = Dt_CV;
+          MasterCVGRV.GridControl = MasterCV;
 
-          MasterVt.DataSource = Dt_VT;
           GridView masterVtGrv = MasterVtGRV;
           DataView dvVth = Dv_VTH;
           DataView dvVt = Dv_VT;
           CyberFunc.V_FillReports(ref masterVtGrv, dvVth, dvVt);
           MasterVtGRV = masterVtGrv;
+          MasterVt.DataSource = Dt_VT;
+          MasterVtGRV.GridControl = MasterVt;
         }
         else
         {
@@ -546,9 +534,9 @@ namespace TMV.UI.JPCB.JP
       if (dataSourceRowIndex >= 0)
         V_Update_Nggay_BD_Ngay_KT(dataSourceRowIndex);
       masterKTVGRV.UpdateCurrentRow();
-      V_UpdateKTV_CV(dataSourceRowIndex);
+      V_UpdateKTV_CV();
     }
-    private void V_UpdateKTV_CV(int _Irow)
+    private void V_UpdateKTV_CV()
     {
       int num1 = checked(Dv_KTV.Count - 1);
       int recordIndex1 = 0;
@@ -563,8 +551,8 @@ namespace TMV.UI.JPCB.JP
             if (Dv_CV[recordIndex2]["Tag"].ToString().Trim() == "1" & Dv_CV[recordIndex2]["Ma_KTV1"].ToString() == "")
             {
               Dv_CV[recordIndex2].BeginEdit();
-              Dv_CV[recordIndex2]["Ma_KTV1"] = (object)Dv_KTV[recordIndex1]["Ma_Hs"].ToString();
-              Dv_CV[recordIndex2]["Ten_KTV1"] = (object)Dv_KTV[recordIndex1]["Ten_HS"].ToString();
+              Dv_CV[recordIndex2]["Ma_KTV1"] = Dv_KTV[recordIndex1]["Ma_Hs"].ToString();
+              Dv_CV[recordIndex2]["Ten_KTV1"] = Dv_KTV[recordIndex1]["Ten_HS"].ToString();
               Dv_CV[recordIndex2].EndEdit();
             }
             MasterCVGRV.UpdateCurrentRow();
@@ -580,13 +568,11 @@ namespace TMV.UI.JPCB.JP
     {
       masterKTVGRV.PostEditor();
       masterKTVGRV.UpdateCurrentRow();
-      int dataSourceRowIndex = masterKTVGRV.GetFocusedDataSourceRowIndex();
-      masterKTVGRV.UpdateCurrentRow();
-      V_UpdateKTV_CV(dataSourceRowIndex);
+      V_UpdateKTV_CV();
     }
     private void V_Xac_nhan_BD(object sender, EventArgs e)
     {
-      if (M_Mode == "M")
+      if (Mode == "M")
         return;
 
       int dataSourceRowIndex = masterKTVGRV.GetFocusedDataSourceRowIndex();
@@ -598,10 +584,6 @@ namespace TMV.UI.JPCB.JP
       string _Ma_Hs = Dv_KTV[dataSourceRowIndex]["ma_HS"].ToString().Trim();
       if (_Ma_Hs.Trim() == "")
         return;
-
-      string _StrKTV = "INSERT DMKTVCYBER SELECT N'" + _Ma_Hs + "'";
-      string _Loai_XN = "BD";
-      string text2 = TxtStt_Rec.Text;
 
       V_Thuc_Hien_XN(TxtStt_Rec.Text, _Ma_Hs);
     }
@@ -648,7 +630,7 @@ namespace TMV.UI.JPCB.JP
     }
     private void V_Xac_nhan_KT(object sender, EventArgs e)
     {
-      if (M_Mode == "M")
+      if (Mode == "M")
         return;
 
       int dataSourceRowIndex = masterKTVGRV.GetFocusedDataSourceRowIndex();
@@ -660,10 +642,6 @@ namespace TMV.UI.JPCB.JP
       string _Ma_Hs = Dv_KTV[dataSourceRowIndex]["ma_HS"].ToString().Trim();
       if (_Ma_Hs.Trim() == "")
         return;
-
-      string _StrKTV = "INSERT DMKTVCYBER SELECT N'" + _Ma_Hs + "'";
-      string _Loai_XN = "KT";
-      string text2 = TxtStt_Rec.Text;
 
       V_Thuc_Hien_XN(TxtStt_Rec.Text, _Ma_Hs);
     }
@@ -707,8 +685,8 @@ namespace TMV.UI.JPCB.JP
         CyberFunc.V_UpdateRowtoRow(_Dr, Dt_khoang, dataSourceRowIndex);
         masterKhoangGRV.UpdateCurrentRow();
       }
-      V_UpdateKhoang_KTV(Dv_khoang[dataSourceRowIndex]["Ma_khoang"].ToString().Trim());
-      V_UpdateKTV_CV(-1);
+      V_UpdateKhoang_KTV();
+      V_UpdateKTV_CV();
     }
     private DataRow V_Goi_Y_Khoang(string _Strkhoang)
     {
@@ -915,7 +893,7 @@ namespace TMV.UI.JPCB.JP
         if (Dt_KTV.Columns.Contains("Tag"))
         {
           Dv_KTV[recordIndex].BeginEdit();
-          Dv_KTV[recordIndex]["Tag"] = (object)"1";
+          Dv_KTV[recordIndex]["Tag"] = "1";
           Dv_KTV[recordIndex].EndEdit();
           masterKTVGRV.UpdateCurrentRow();
         }
@@ -933,7 +911,7 @@ namespace TMV.UI.JPCB.JP
         if (Dt_KTV.Columns.Contains("Tag"))
         {
           Dv_KTV[recordIndex].BeginEdit();
-          Dv_KTV[recordIndex]["Tag"] = (object)"0";
+          Dv_KTV[recordIndex]["Tag"] = "0";
           Dv_KTV[recordIndex].EndEdit();
           masterKTVGRV.UpdateCurrentRow();
         }
@@ -944,7 +922,7 @@ namespace TMV.UI.JPCB.JP
     }
     private void V_Xac_nhan_BDAll(object sender, EventArgs e)
     {
-      if (M_Mode == "M" || !FormGlobals.Message_Confirm("Bạn có xác nhận bắt đầu không?", false))
+      if (Mode == "M" || !FormGlobals.Message_Confirm("Bạn có xác nhận bắt đầu không?", false))
         return;
 
       string _StrKTV = "";
@@ -958,9 +936,6 @@ namespace TMV.UI.JPCB.JP
       }
       if (_StrKTV.Trim() == "")
         return;
-
-      string _Loai_XN = "BD";
-      string text2 = TxtStt_Rec.Text;
 
       V_Thuc_Hien_XN(TxtStt_Rec.Text, "");
     }
@@ -981,9 +956,6 @@ namespace TMV.UI.JPCB.JP
       if (_StrKTV.Trim() == "")
         return;
 
-      string _Loai_XN = "KT";
-      string text2 = TxtStt_Rec.Text;
-
       V_Thuc_Hien_XN(TxtStt_Rec.Text, "");
     }
     private void V_SelectkhoangAll(object sender, EventArgs e)
@@ -995,7 +967,7 @@ namespace TMV.UI.JPCB.JP
         if (Dt_khoang.Columns.Contains("Tag"))
         {
           Dv_khoang[recordIndex].BeginEdit();
-          Dv_khoang[recordIndex]["Tag"] = (object)"1";
+          Dv_khoang[recordIndex]["Tag"] = "1";
           Dv_khoang[recordIndex].EndEdit();
           masterKhoangGRV.UpdateCurrentRow();
         }
@@ -1013,7 +985,7 @@ namespace TMV.UI.JPCB.JP
         if (Dt_khoang.Columns.Contains("Tag"))
         {
           Dv_khoang[recordIndex].BeginEdit();
-          Dv_khoang[recordIndex]["Tag"] = (object)"0";
+          Dv_khoang[recordIndex]["Tag"] = "0";
           Dv_khoang[recordIndex].EndEdit();
           masterKhoangGRV.UpdateCurrentRow();
         }

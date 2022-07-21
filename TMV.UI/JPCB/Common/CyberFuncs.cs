@@ -80,6 +80,17 @@ namespace TMV.UI.JPCB.Common
       }
       return str;
     }
+    public void V_SetvalueCombox(ref ComboBox _Cbb, string _value)
+    {
+      try
+      {
+        _Cbb.SelectedValue = _value.ToString().Trim();
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show("V_SetvalueCombox: " + ex.Message);
+      }
+    }
     public void V_DeleteRowEmpty(DataTable _Dt, string _Fieldname)
     {
       if (_Dt == null)

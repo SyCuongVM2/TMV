@@ -148,7 +148,6 @@ namespace TMV.UI.JPCB.JP
     private DataTable Dt_Khoang_H;
     private DataTable Dt_Xe_H;
     #endregion
-
     public frmJP()
     {
       InitializeComponent();
@@ -3416,10 +3415,11 @@ namespace TMV.UI.JPCB.JP
       //  return;
 
       frmJpDetail frm = new frmJpDetail();
+      frm.Mode = _Mode; // M, S
       frm.ROId = ROId;
       frm.EventId = Id;
-      frm.EventType = "GJ";
-      frm.TType = type;
+      frm.EventType = "GJ"; // GJ, BP
+      frm.TType = type; // P, A
       frm.ShowForm();
 
       V_Load_DATA_KH_SCC("0", "", _Stt_rec);

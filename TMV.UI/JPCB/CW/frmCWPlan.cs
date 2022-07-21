@@ -13,14 +13,7 @@ namespace TMV.UI.JPCB.CW
     #region "variables"
     private CyberFuncs CyberFunc = new CyberFuncs();
     private CalcTime calcTime = new CalcTime();
-    private int M_Tg_SC = 5;
     private string M_Loai_SC = "1";
-    private string M_Mode = "M";
-    private string M_Stt_rec = "";
-    private string M_ma_khoang = "";
-    private int M_id_khoang = 0;
-    private DateTime M_Ngay_BD;
-    private DateTime M_Ngay_KT;
     public DataTable Dt_Return;
     private DataTable Dt_Khoang;
 
@@ -30,23 +23,23 @@ namespace TMV.UI.JPCB.CW
     }
     #endregion
 
-    public bool ShowForm(string mode, string stt_rec, int _id_khoang, string _Ma_khoang, DateTime start, DateTime end, int BN)
-    {
-      M_Mode = mode;
-      M_Tg_SC = BN;
-      M_Stt_rec = stt_rec;
-      M_ma_khoang = _Ma_khoang;
-      M_id_khoang = _id_khoang;
-      M_Ngay_BD = start;
-      M_Ngay_KT = end;
+    public string Mode { get; set; }
+    public decimal Id { get; set; }
+    public int IdKhoang { get; set; }
+    public string MaKhoang { get; set; }
+    public DateTime StartTime { get; set; }
+    public DateTime EndTime { get; set; }
+    public int BuocNhay { get; set; }
 
+    public bool ShowForm()
+    {
       frmProgress.Instance().Thread = new MethodInvoker(InitForm);
       frmProgress.Instance().Show_Progress();
       return (ShowDialog() == DialogResult.OK);
     }
     private void InitForm()
     {
-      if (M_Mode.Trim() == "M")
+      if (Mode.Trim() == "M")
       {
         Text = "Tạo mới/New";
         V_SetDefault();
@@ -62,7 +55,7 @@ namespace TMV.UI.JPCB.CW
     {
       try
       {
-        DataSet ds = JpcbCwBO.Instance().GetCWDetail(Globals.LoginDlrId, Convert.ToDecimal(M_Stt_rec));
+        DataSet ds = JpcbCwBO.Instance().GetCWDetail(Globals.LoginDlrId, Id);
         if (ds.Tables != null & ds.Tables.Count > 0)
         {
           DateTime? date_kt_ro;
@@ -70,16 +63,16 @@ namespace TMV.UI.JPCB.CW
           Dt_Khoang = ds.Tables[0];
           Dt_Return = ds.Tables[1];
           CyberFunc.V_FillComBoxDefaul(CbbMa_khoang, Dt_Khoang, "Id_khoang", "Ma_khoang");
-          CbbMa_khoang.SelectedValue = M_id_khoang;
+          CbbMa_khoang.SelectedValue = IdKhoang;
 
           ChkDat_them.Enabled = false;
           ChkDat_them.Checked = false;
 
           TxtMa_Xe.Text = Dt_Return.Rows[0]["Ma_Xe"].ToString().Trim();
           TxtMa_Xe.Enabled = false;
-          TxtTG_SC.Value = M_Tg_SC;
-          TxtNgay_BD.EditValue = M_Ngay_BD;
-          TxtNgay_KT.EditValue = M_Ngay_KT;
+          TxtTG_SC.Value = BuocNhay;
+          TxtNgay_BD.EditValue = StartTime;
+          TxtNgay_KT.EditValue = EndTime;
 
           TxtNgay_BD_RO.EditValue = Convert.ToDateTime(Dt_Return.Rows[0]["Ngay_BD_Ro"].ToString().Trim());
           TxtNgay_BD_RO.Enabled = false;
@@ -113,16 +106,16 @@ namespace TMV.UI.JPCB.CW
       {
         Dt_Khoang = ds.Tables[0];
         CyberFunc.V_FillComBoxDefaul(CbbMa_khoang, Dt_Khoang, "Id_khoang", "Ma_khoang");
-        CbbMa_khoang.SelectedValue = M_id_khoang;
+        CbbMa_khoang.SelectedValue = IdKhoang;
       }
 
       ChkDat_them.Enabled = false;
       ChkDat_them.Checked = true;
 
       TxtMa_Xe.Focus();
-      TxtTG_SC.Value = M_Tg_SC;
-      TxtNgay_BD.EditValue = M_Ngay_BD;
-      var val = calcTime.CalcCloneRepairTime(Convert.ToInt32(TxtTG_SC.Value), M_Ngay_BD);
+      TxtTG_SC.Value = BuocNhay;
+      TxtNgay_BD.EditValue = StartTime;
+      var val = calcTime.CalcCloneRepairTime(Convert.ToInt32(TxtTG_SC.Value), StartTime);
       TxtNgay_KT.EditValue = val.EndPlanTime;
 
       TxtNgay_BD_RO.Visible = false;
@@ -178,7 +171,7 @@ namespace TMV.UI.JPCB.CW
     }
     private void V_Nhan(object sender, EventArgs e)
     {
-      if (M_Mode.Trim() == "M")
+      if (Mode.Trim() == "M")
       {
         TxtMa_Xe.Text = CyberFunc.V_FormatBien_So(TxtMa_Xe.Text, true);
         if (TxtMa_Xe.Text.Trim() != "")
@@ -194,7 +187,7 @@ namespace TMV.UI.JPCB.CW
 
         DataSet ds = JpcbCwBO.Instance().AddOrUpdateCW(Globals.LoginUserID, Globals.LoginDlrId, "N",
                                                        CyberFunc.V_FormatBien_So(TxtMa_Xe.Text, true),
-                                                       M_id_khoang,
+                                                       IdKhoang,
                                                        Convert.ToDateTime(TxtNgay_BD.EditValue),
                                                        Convert.ToDateTime(TxtNgay_KT.EditValue),
                                                        Convert.ToInt32(TxtTG_SC.Value),
@@ -207,11 +200,11 @@ namespace TMV.UI.JPCB.CW
       {
         DataSet ds = JpcbCwBO.Instance().AddOrUpdateCW(Globals.LoginUserID, Globals.LoginDlrId, "U",
                                                        CyberFunc.V_FormatBien_So(TxtMa_Xe.Text, true),
-                                                       M_id_khoang,
+                                                       IdKhoang,
                                                        Convert.ToDateTime(TxtNgay_BD.EditValue),
                                                        Convert.ToDateTime(TxtNgay_KT.EditValue),
                                                        Convert.ToInt32(TxtTG_SC.Value),
-                                                       Convert.ToDecimal(M_Stt_rec));
+                                                       Id);
         if (ds.Tables != null && ds.Tables[0].Rows[0]["Status_Code"].ToString() == "SUCCESS")
           Close();
       }

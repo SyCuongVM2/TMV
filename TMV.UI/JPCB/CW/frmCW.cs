@@ -269,7 +269,7 @@ namespace TMV.UI.JPCB.CW
       CyberFunc.V_FillComBoxDefaul(CbbCa_Ngay, Dt_Ca_Ngay, "Ca_Ngay", "Ten");
       CyberFunc.V_FillComBoxDefaul(CbbGio_Xem, Dt_Gio_Xem, "Gio_Xem", "Ten");
     }
-    private void V_Load() 
+    private void V_Load()
     {
       DataSet dataSet1 = JpcbCwBO.Instance().GetCWConfig(Globals.LoginDlrId, "CW"); // CP_RO_CW_ConFig
       Dt_Set_SCC = dataSet1.Tables[0].Copy();
@@ -1516,6 +1516,18 @@ namespace TMV.UI.JPCB.CW
     {
       toolTip1.Show((sender as Control).Name, (sender as Control));
     }
+    private void V_Form_Plan(string mode, decimal stt_rec, int id_khoang, string Ma_khoang, DateTime start, DateTime end, int BN)
+    {
+      frmCWPlan frm = new frmCWPlan();
+      frm.Mode = mode;
+      frm.Id = stt_rec;
+      frm.IdKhoang = id_khoang;
+      frm.MaKhoang = Ma_khoang;
+      frm.StartTime = start;
+      frm.EndTime = end;
+      frm.BuocNhay = BN;
+      frm.ShowForm();
+    }
     #endregion
 
     #region "V_PopupMenu_RX"
@@ -1574,7 +1586,6 @@ namespace TMV.UI.JPCB.CW
     private void V_Tao_KH_Scheduler(object sender, EventArgs e)
     {
       string _Mode = "M";
-      string _Stt_Rec = "";
       DateTime start = SchedulerControl.SelectedInterval.Start;
       DateTime end = SchedulerControl.SelectedInterval.End;
 
@@ -1583,7 +1594,7 @@ namespace TMV.UI.JPCB.CW
       V_GetFromSetScheduler(ref start, ref end, ref _Ma_khoang);
 
       int integer = Convert.ToInt32(CbbMa_BN.SelectedValue);
-      new frmCWPlan().ShowForm(_Mode, _Stt_Rec, _id_khoang, _Ma_khoang, start, end, integer);
+      V_Form_Plan(_Mode, 0, _id_khoang, _Ma_khoang, start, end, integer);
       V_LoadDatabases("0", "Stt_Rec");
     }
     private void V_Sua_KH_Scheduler(object sender, EventArgs e)
@@ -1619,7 +1630,7 @@ namespace TMV.UI.JPCB.CW
         _Ngay_KT = Convert.ToDateTime(dataRowArray[0]["Ngay_KT"]);
       }
       int integer = Convert.ToInt32(CbbMa_BN.SelectedValue);
-      new frmCWPlan().ShowForm(_Mode, _Stt_Rec, _id_khoang, _Ma_Khoang, _Ngay_BD, _Ngay_KT, integer);
+      V_Form_Plan(_Mode, Convert.ToDecimal(_Stt_Rec), _id_khoang, _Ma_Khoang, _Ngay_BD, _Ngay_KT, integer);
       V_LoadDatabases("0", "Stt_Rec");
     }
     private void V_Xoa_KH_Scheduler(object sender, EventArgs e)
@@ -1688,7 +1699,6 @@ namespace TMV.UI.JPCB.CW
     private void V_Tao_Cho_Rua(object sender, EventArgs e)
     {
       string _Mode = "M";
-      string _Stt_Rec = "";
       string _Ma_khoang = "";
       DateTime _Ngay_BD = default;
       DateTime _Ngay_KT1 = default;
@@ -1697,7 +1707,7 @@ namespace TMV.UI.JPCB.CW
       DateTime now = DateTime.Now;
       DateTime _Ngay_KT2 = now.AddMinutes(10.0);
       int integer = Convert.ToInt32(CbbMa_BN.SelectedValue);
-      new frmCWPlan().ShowForm(_Mode, _Stt_Rec, 0, _Ma_khoang, now, _Ngay_KT2, integer);
+      V_Form_Plan(_Mode, 0, 0, _Ma_khoang, now, _Ngay_KT2, integer);
       // V_LoadDatabases("0", dataTable.Rows[0]["Stt_Rec"].ToString().Trim());
     }
     private void V_Sua_Cho_Rua(object sender, EventArgs e)
@@ -1727,8 +1737,7 @@ namespace TMV.UI.JPCB.CW
         _Ngay_KT = Convert.ToDateTime(dataRowArray[0]["Ngay_KT"]);
       }
       int integer = Convert.ToInt32(CbbMa_BN.SelectedValue);
-      new frmCWPlan().ShowForm(_Mode, _Stt_Rec, _id_khoang, _Ma_Khoang, _Ngay_BD, _Ngay_KT, integer);
-
+      V_Form_Plan(_Mode, Convert.ToDecimal(_Stt_Rec), _id_khoang, _Ma_Khoang, _Ngay_BD, _Ngay_KT, integer);
       //V_LoadDatabases("0", dataTable.Rows[0]["Stt_Rec"].ToString().Trim());
     }
     private void V_Xoa_Cho_Rua(object sender, EventArgs e)
@@ -1934,7 +1943,7 @@ namespace TMV.UI.JPCB.CW
     #endregion
 
     #region "V_Load"
-    private void V_Kieu_Xem(string _Kieu_Xem) 
+    private void V_Kieu_Xem(string _Kieu_Xem)
     {
       if (_Kieu_Xem == "02")
         CbbGio_Xem.SelectedValue = "01";
